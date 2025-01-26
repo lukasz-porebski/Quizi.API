@@ -1,0 +1,6 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\..\Host\Common.Host.csproj"/>
+        <ProjectReference Include="..\TestsCore\Common.TestsCore.csproj"/>
+    </ItemGroup>
+</Project>

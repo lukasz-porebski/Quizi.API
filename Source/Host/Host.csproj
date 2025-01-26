@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+    <ItemGroup>
+        <ProjectReference Include="..\..\Common\Source\Host\Common.Host.csproj"/>
+        <ProjectReference Include="..\Application\Application\Application.csproj"/>
+        <ProjectReference Include="..\Infrastructure\Infrastructure.Database\Infrastructure.Database.csproj"/>
+        <ProjectReference Include="..\Infrastructure\Infrastructure.Endpoints\Infrastructure.Endpoints.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+</Project>

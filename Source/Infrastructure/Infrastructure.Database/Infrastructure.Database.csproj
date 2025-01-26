@@ -1,0 +1,6 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Common\Source\Infrastructure\Infrastructure.Database.EF\Common.Infrastructure.Database.EF.csproj"/>
+        <ProjectReference Include="..\..\Application\Application.Contracts\Application.Contracts.csproj"/>
+    </ItemGroup>
+</Project>

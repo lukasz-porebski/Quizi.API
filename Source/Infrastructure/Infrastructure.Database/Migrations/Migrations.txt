@@ -1,0 +1,3 @@
+dotnet ef migrations add MigrationName --context AppDbContext --output-dir Migrations --project Source/Infrastructure/Infrastructure.Database/Infrastructure.Database.csproj --startup-project Source/Host/Host.csproj
+
+dotnet ef database update --context AppDbContext --project Source/Infrastructure/Infrastructure.Database/Infrastructure.Database.csproj --startup-project Source/Host/Host.csproj
