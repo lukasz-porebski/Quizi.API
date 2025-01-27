@@ -36,6 +36,12 @@ public static class EntityTypeBuilderExtensions
             o =>
             {
                 o.Property(p => p.UserId).ConfigureAggregateId().HasColumnName($"{prefix}ByUserId");
+
+                const string ownerIdColumnName = "OwnerId";
+                o.Property<AggregateId>(ownerIdColumnName);
+                o.HasKey(ownerIdColumnName);
+                o.WithOwner().HasForeignKey(ownerIdColumnName);
+
                 o.Property(p => p.At).HasColumnName($"{prefix}At");
             });
 

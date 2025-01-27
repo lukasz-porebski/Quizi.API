@@ -122,4 +122,13 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
+    <data name="UserWithGivenEmailAlreadyExists" xml:space="preserve">
+        <value>Użytkownik o podanym adresie email już istnieje</value>
+    </data>
+    <data name="IncorrectEmailFormat" xml:space="preserve">
+        <value>Nieprawidłowy format adresu email</value>
+    </data>
+    <data name="IncorrectPasswordFormat" xml:space="preserve">
+        <value>Nieprawidłowy format hasła</value>
+    </data>
 </root>

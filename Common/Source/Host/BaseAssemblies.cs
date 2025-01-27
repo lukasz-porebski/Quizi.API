@@ -8,6 +8,7 @@ public abstract class BaseAssemblies
     public abstract Assembly ApplicationContracts { get; }
     public abstract Assembly Domain { get; }
     public abstract Assembly DomainContracts { get; }
+    public abstract Assembly? Infrastructure { get; }
     public abstract Assembly InfrastructureDatabaseEf { get; }
     public abstract Assembly InfrastructureEndpoints { get; }
     public abstract IReadOnlyCollection<Assembly> InfrastructureIntegrations { get; }
@@ -18,6 +19,7 @@ public abstract class BaseAssemblies
         bool excludeApplicationContracts = false,
         bool excludeDomain = false,
         bool excludeDomainContracts = false,
+        bool excludeInfrastructure = false,
         bool excludeInfrastructureDatabaseEf = false,
         bool excludeInfrastructureEndpoints = false,
         bool excludeInfrastructureIntegrations = false,
@@ -37,6 +39,9 @@ public abstract class BaseAssemblies
         if (!excludeDomainContracts)
             result.AddRange(DomainContracts.GetTypes());
 
+        if (!excludeInfrastructure)
+            result.AddRange(Infrastructure?.GetTypes() ?? []);
+        
         if (!excludeInfrastructureDatabaseEf)
             result.AddRange(InfrastructureDatabaseEf.GetTypes());
 

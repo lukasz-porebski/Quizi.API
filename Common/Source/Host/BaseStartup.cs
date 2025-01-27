@@ -68,6 +68,7 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
             .RegisterProviders(Assemblies)
             .RegisterRepositories(Assemblies)
             .RegisterServices(Assemblies)
+            .RegisterFactories(Assemblies)
             .RegisterLocalization();
     }
 }

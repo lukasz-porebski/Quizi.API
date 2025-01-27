@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using Common.Application.Contracts.Interfaces;
 using Common.Application.Exceptions;
 using Common.Domain.Entities;
@@ -30,16 +31,35 @@ public static class RepositoryExtensions
         return result;
     }
 
-    public static async Task ExistsOrThrowAsync<TAggregateRoot>(
+    public static async Task NotExistsOrThrowAsync<TAggregateRoot>(
         this IRepository<TAggregateRoot> source,
-        AggregateId id,
+        Expression<Func<TAggregateRoot, bool>> condition,
         string messageCode,
         CancellationToken cancellationToken)
         where TAggregateRoot : BaseAggregateRoot
     {
-        if (await source.ExistsAsync(e => e.Id == id, cancellationToken))
+        if (await source.ExistsAsync(condition, cancellationToken))
             throw new BusinessLogicException(messageCode);
     }
+    
+    public static async Task ExistsOrThrowAsync<TAggregateRoot>(
+        this IRepository<TAggregateRoot> source,
+        Expression<Func<TAggregateRoot, bool>> condition,
+        string messageCode,
+        CancellationToken cancellationToken)
+        where TAggregateRoot : BaseAggregateRoot
+    {
+        if (!await source.ExistsAsync(condition, cancellationToken))
+            throw new BusinessLogicException(messageCode);
+    }
+
+    public static Task ExistsOrThrowAsync<TAggregateRoot>(
+        this IRepository<TAggregateRoot> source,
+        AggregateId id,
+        string messageCode,
+        CancellationToken cancellationToken)
+        where TAggregateRoot : BaseAggregateRoot =>
+        source.ExistsOrThrowAsync(e => e.Id == id, messageCode, cancellationToken);
 
     public static async Task ExistsOrThrowAsync<TAggregateRoot>(
         this IRepository<TAggregateRoot> source,

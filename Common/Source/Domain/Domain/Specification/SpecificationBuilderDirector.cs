@@ -9,19 +9,22 @@ public class SpecificationBuilderDirector
     private SpecificationBuilderDirector(IReadOnlySet<string> failureMessageCodes) =>
         _failureMessageCodes = failureMessageCodes;
 
-    public void Validate()
+    public void ValidateAndThrow()
     {
         if (_failureMessageCodes.Any())
             throw new SpecificationException(_failureMessageCodes.Select(f => new ExceptionMessageData(f, [])).ToArray());
     }
 
-    public class SpecificationBuilder<TValidationProperty>(TValidationProperty validationData)
+    public class SpecificationBuilder<TData>(TData validationData)
     {
         private readonly HashSet<string> _failureMessageCodes = [];
         private bool _previousPass = true;
 
-        public SpecificationBuilder<TValidationProperty> And<T>(
-            ISpecification<T> specification, Func<TValidationProperty, T> validateProperty)
+        public SpecificationBuilder<TData> And(ISpecification<TData> specification) =>
+            And(specification, x => x);
+
+        public SpecificationBuilder<TData> And<TSubData>(
+            ISpecification<TSubData> specification, Func<TData, TSubData> validateProperty)
         {
             if (_previousPass && !specification.IsValid(validateProperty.Invoke(validationData)))
                 _failureMessageCodes.Add(specification.FailureMessageCode);
@@ -29,8 +32,8 @@ public class SpecificationBuilderDirector
             return this;
         }
 
-        public SpecificationBuilder<TValidationProperty> AndCollection<T>(
-            ISpecification<T> specification, Func<TValidationProperty, IEnumerable<T>> validateProperty)
+        public SpecificationBuilder<TData> AndCollection<TSubData>(
+            ISpecification<TSubData> specification, Func<TData, IEnumerable<TSubData>> validateProperty)
         {
             if (_previousPass &&
                 validateProperty.Invoke(validationData).Any(data => !specification.IsValid(data)))
@@ -39,8 +42,8 @@ public class SpecificationBuilderDirector
             return this;
         }
 
-        public SpecificationBuilder<TValidationProperty> AndNextIfThisPass<T>(
-            ISpecification<T> specification, Func<TValidationProperty, T> validateProperty)
+        public SpecificationBuilder<TData> AndNextIfThisPass<TSubData>(
+            ISpecification<TSubData> specification, Func<TData, TSubData> validateProperty)
         {
             if (!_previousPass || specification.IsValid(validateProperty.Invoke(validationData)))
                 return this;

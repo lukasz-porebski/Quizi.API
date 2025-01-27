@@ -1,13 +1,11 @@
 using Common.Infrastructure.Database.EF;
+using Domain.Modules.Users.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database;
 
-public class AppDbContext(DbContextOptions<AppDbContext> options) : BaseDbContext(options)
+public class AppDbContext(DbContextOptions<AppDbContext> options)
+    : BaseDbContext(options, typeof(AppDbContext).Assembly)
 {
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
-        modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
-    }
+    public DbSet<User> Users { get; set; } = null!;
 }

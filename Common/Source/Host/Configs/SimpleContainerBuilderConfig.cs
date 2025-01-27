@@ -45,4 +45,14 @@ internal static class SimpleContainerBuilderConfig
         builder.RegisterTypes(types).AsImplementedInterfaces();
         return builder;
     }
+
+    public static ContainerBuilder RegisterFactories(this ContainerBuilder builder, BaseAssemblies assemblies)
+    {
+        var types = assemblies.GetAllTypes()
+            .Where(t => t.IsFactory())
+            .Concat(typeof(DateTimeProvider).Assembly.GetTypes())
+            .ToArray();
+        builder.RegisterTypes(types).AsImplementedInterfaces();
+        return builder;
+    }
 }

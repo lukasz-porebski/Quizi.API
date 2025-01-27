@@ -15,6 +15,7 @@ public class CommonAssemblies : BaseAssemblies
     public override Assembly ApplicationContracts => typeof(ICommand).Assembly;
     public override Assembly Domain => typeof(BaseAggregateRoot).Assembly;
     public override Assembly DomainContracts => typeof(Marker).Assembly;
+    public override Assembly? Infrastructure => null;
     public override Assembly InfrastructureDatabaseEf => typeof(BaseDbContext).Assembly;
     public override Assembly InfrastructureEndpoints => typeof(BaseController).Assembly;
     public override IReadOnlyCollection<Assembly> InfrastructureIntegrations => [typeof(BaseApi).Assembly];

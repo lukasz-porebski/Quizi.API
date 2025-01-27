@@ -10,6 +10,8 @@ public abstract class BaseAggregateRootConfiguration<TAggregateRoot> : IEntityTy
 {
     public virtual void Configure(EntityTypeBuilder<TAggregateRoot> builder)
     {
+        builder.HasKey(x => x.Id);
+        
         builder.ConfigureAggregateRootId();
 
         builder.ConfigureAggregateStateChangeInfo(e => e.CreationInto, "Created");

@@ -32,4 +32,7 @@ public static class TypeRecognizer
 
     public static bool IsProvider(this Type source) =>
         source.IsRegistrable() && source.GetAttribute<ProviderAttribute>() != null;
+
+    public static bool IsFactory(this Type source) =>
+        source.IsRegistrable() && source.GetAttribute<FactoryAttribute>() != null;
 }
