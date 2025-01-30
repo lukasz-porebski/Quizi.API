@@ -1,5 +1,4 @@
 using Common.Domain.Specification;
-using Common.Shared.Extensions;
 using Domain.Modules.Users.Constants;
 using Domain.Modules.Users.Data;
 
@@ -10,7 +9,7 @@ internal class PasswordFormatSpecification : ISpecification<UserCreationData>
     public string FailureMessageCode => UserMessageCodes.IncorrectPasswordFormat;
 
     public bool IsValid(UserCreationData data) =>
-        !data.Password.IsEmpty() &&
+        data.Password.Any() &&
         ContainsLowercaseLetter(data.Password) &&
         ContainsUppercaseLetter(data.Password) &&
         ContainsNumber(data.Password) &&
