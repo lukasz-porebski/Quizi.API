@@ -2,7 +2,7 @@
 
 namespace Domain.Modules.Quizzes.Data.Questions;
 
-public abstract class QuizQuestionData
+public abstract record QuizQuestionData
 {
     public int OrderNumber { get; }
     public string Text { get; }

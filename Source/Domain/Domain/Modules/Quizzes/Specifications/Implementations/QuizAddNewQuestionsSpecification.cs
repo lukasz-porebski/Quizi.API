@@ -1,6 +1,6 @@
 ﻿using Common.Domain.Specification;
+using Domain.Modules.Quizzes.Data.Specifications.Questions;
 using Domain.Modules.Quizzes.Helpers;
-using Domain.Modules.Quizzes.Specifications.Data.Questions;
 
 namespace Domain.Modules.Quizzes.Specifications.Implementations;
 
@@ -10,7 +10,7 @@ internal class QuizAddNewQuestionsSpecification : ISpecification<QuizQuestionsFo
 
     public bool IsValid(QuizQuestionsForAddNewQuestionsSpecificationData data)
     {
-        var allQuestions = data.NewQuestions.Concat(data.OldQuestions);
+        var allQuestions = data.NewQuestions.Concat(data.OldQuestions).ToArray();
 
         var areQuestionsUnique = QuizSpecificationHelper.AreQuestionsUnique(allQuestions);
 

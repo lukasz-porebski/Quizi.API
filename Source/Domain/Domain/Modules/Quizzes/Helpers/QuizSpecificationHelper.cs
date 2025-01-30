@@ -1,16 +1,16 @@
 ﻿using Common.Shared.Extensions;
+using Domain.Modules.Quizzes.Data.Specifications.Questions;
 using Domain.Modules.Quizzes.Enums;
 using Domain.Modules.Quizzes.Models;
-using Domain.Modules.Quizzes.Specifications.Data.Questions;
 using Domain.Modules.Quizzes.ValueObjects;
 
 namespace Domain.Modules.Quizzes.Helpers;
 
 internal static class QuizSpecificationHelper
 {
-    internal static IEnumerable<QuizClosedEndedQuestionSpecificationData> GetClosedEndedQuestions(
-        IEnumerable<QuizSingleChoiceQuestionSpecificationData> singleChoiceQuestions,
-        IEnumerable<QuizMultipleChoiceQuestionSpecificationData> multipleChoiceQuestions)
+    internal static IReadOnlyCollection<QuizClosedEndedQuestionSpecificationData> GetClosedEndedQuestions(
+        IReadOnlyCollection<QuizSingleChoiceQuestionSpecificationData> singleChoiceQuestions,
+        IReadOnlyCollection<QuizMultipleChoiceQuestionSpecificationData> multipleChoiceQuestions)
     {
         var result = new List<QuizClosedEndedQuestionSpecificationData>();
 
@@ -36,44 +36,47 @@ internal static class QuizSpecificationHelper
         return result;
     }
 
-    internal static IEnumerable<QuizQuestionSpecificationData> GetQuestions(
-        IEnumerable<OpenEndedQuestionEntity> oldOpenEndedQuestions,
-        IEnumerable<SingleChoiceQuestionEntity> oldSingleChoiceQuestions,
-        IEnumerable<MultipleChoiceQuestionEntity> oldMultipleChoiceQuestions)
+    internal static IReadOnlyCollection<QuizQuestionSpecificationData> GetQuestions(
+        IReadOnlyCollection<OpenEndedQuestion> oldOpenEndedQuestions,
+        IReadOnlyCollection<SingleChoiceQuestion> oldSingleChoiceQuestions,
+        IReadOnlyCollection<MultipleChoiceQuestion> oldMultipleChoiceQuestions)
     {
-        var openEndedQuestions = oldOpenEndedQuestions.Select(q =>
-            new QuizOpenEndedQuestionSpecificationData(
-                orderNumber: q.OrderNumber,
-                text: q.Text,
-                correctAnswer: q.CorrectAnswer));
+        var openEndedQuestions = oldOpenEndedQuestions
+            .Select(q => new QuizOpenEndedQuestionSpecificationData(
+                OrderNumber: q.OrderNumber,
+                Text: q.Text,
+                CorrectAnswer: q.CorrectAnswer))
+            .ToArray();
 
-        var singleChoiceQuestions = oldSingleChoiceQuestions.Select(q =>
-            new QuizSingleChoiceQuestionSpecificationData(
-                orderNumber: q.OrderNumber,
-                text: q.Text,
-                correctAnswer: q.CorrectAnswer,
-                wrongAnswers: q.WrongAnswers.ToList()));
+        var singleChoiceQuestions = oldSingleChoiceQuestions
+            .Select(q => new QuizSingleChoiceQuestionSpecificationData(
+                OrderNumber: q.OrderNumber,
+                Text: q.Text,
+                CorrectAnswer: q.CorrectAnswer,
+                WrongAnswers: q.WrongAnswers.ToList()))
+            .ToArray();
 
-        var multipleChoiceQuestions = oldMultipleChoiceQuestions.Select(q =>
-            new QuizMultipleChoiceQuestionSpecificationData(
-                orderNumber: q.OrderNumber,
-                text: q.Text,
-                correctAnswers: q.CorrectAnswers.ToList(),
-                wrongAnswers: q.WrongAnswers.ToList()));
+        var multipleChoiceQuestions = oldMultipleChoiceQuestions
+            .Select(q => new QuizMultipleChoiceQuestionSpecificationData(
+                q.OrderNumber,
+                q.Text,
+                q.CorrectAnswers,
+                q.WrongAnswers))
+            .ToArray();
 
         return GetQuestions(openEndedQuestions, singleChoiceQuestions, multipleChoiceQuestions);
     }
 
-    internal static IEnumerable<QuizQuestionSpecificationData> GetQuestions(
-        IEnumerable<QuizOpenEndedQuestionSpecificationData> openEndedQuestions,
-        IEnumerable<QuizSingleChoiceQuestionSpecificationData> singleChoiceQuestions,
-        IEnumerable<QuizMultipleChoiceQuestionSpecificationData> multipleChoiceQuestions)
+    internal static IReadOnlyCollection<QuizQuestionSpecificationData> GetQuestions(
+        IReadOnlyCollection<QuizOpenEndedQuestionSpecificationData> openEndedQuestions,
+        IReadOnlyCollection<QuizSingleChoiceQuestionSpecificationData> singleChoiceQuestions,
+        IReadOnlyCollection<QuizMultipleChoiceQuestionSpecificationData> multipleChoiceQuestions)
     {
         var result = openEndedQuestions
             .Select(question => new QuizQuestionSpecificationData(
-                orderNumber: question.OrderNumber,
-                text: question.Text,
-                answers: new List<string>
+                OrderNumber: question.OrderNumber,
+                Text: question.Text,
+                Answers: new List<string>
                 {
                     question.CorrectAnswer
                 }))
@@ -85,9 +88,9 @@ internal static class QuizSpecificationHelper
             answers.AddRange(question.WrongAnswers);
 
             result.Add(new QuizQuestionSpecificationData(
-                orderNumber: question.OrderNumber,
-                text: question.Text,
-                answers: answers.Select(a => a.Text)));
+                OrderNumber: question.OrderNumber,
+                Text: question.Text,
+                Answers: answers.Select(a => a.Text).ToArray()));
         }
 
         foreach (var question in multipleChoiceQuestions)
@@ -97,15 +100,15 @@ internal static class QuizSpecificationHelper
             answers.AddRange(question.WrongAnswers);
 
             result.Add(new QuizQuestionSpecificationData(
-                orderNumber: question.OrderNumber,
-                text: question.Text,
-                answers: answers.Select(a => a.Text)));
+                OrderNumber: question.OrderNumber,
+                Text: question.Text,
+                Answers: answers.Select(a => a.Text).ToArray()));
         }
 
         return result;
     }
 
-    internal static bool AreQuestionsUnique(IEnumerable<QuizQuestionSpecificationData> data)
+    internal static bool AreQuestionsUnique(IReadOnlyCollection<QuizQuestionSpecificationData> data)
     {
         foreach (var (question, index) in data
                      .SkipLast(1)

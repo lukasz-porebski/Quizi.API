@@ -1,17 +1,9 @@
-﻿using System.Reflection;
+﻿namespace Domain.Modules.Quizzes;
 
-namespace Domain.Modules.Quizzes;
-
-internal class QuizMessages : MessagesBase
+internal class QuizMessages
 {
-    private static readonly string ProjectAbbreviation;
-    private static readonly string ModuleWord;
-
-    static QuizMessages()
-    {
-        ProjectAbbreviation = GetProjectAbbreviation(Project.DomainAggregateRoots);
-        ModuleWord = GetModuleWord(Module.Quiz);
-    }
+    private static readonly string ProjectAbbreviation = "";
+    private static readonly string ModuleWord = "";
 
     internal static string NonUniqueQuestions() =>
         Generate(1, "Questions have to be unique");

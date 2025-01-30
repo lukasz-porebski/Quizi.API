@@ -1,6 +1,6 @@
 ﻿using Common.Domain.Specification;
+using Domain.Modules.Quizzes.Data.Specifications;
 using Domain.Modules.Quizzes.Factories.Interfaces;
-using Domain.Modules.Quizzes.Specifications.Data;
 using Domain.Modules.Quizzes.Specifications.Implementations;
 using Domain.Modules.Quizzes.Specifications.Implementations.Questions;
 using Domain.Modules.Quizzes.Specifications.Implementations.Questions.QuestionAnswerOrderNumber;

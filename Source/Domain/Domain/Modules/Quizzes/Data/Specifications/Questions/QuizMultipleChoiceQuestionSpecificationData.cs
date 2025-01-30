@@ -1,10 +1,10 @@
 ﻿using Domain.Modules.Quizzes.ValueObjects;
 
-namespace Domain.Modules.Quizzes.Data.Questions.Create;
+namespace Domain.Modules.Quizzes.Data.Specifications.Questions;
 
-public record QuizMultipleChoiceQuestionCreateData(
+internal record QuizMultipleChoiceQuestionSpecificationData(
     int OrderNumber,
     string Text,
     IReadOnlyCollection<QuizQuestionOrderedAnswer> CorrectAnswers,
     IReadOnlyCollection<QuizQuestionOrderedAnswer> WrongAnswers
-) : QuizQuestionData(OrderNumber, Text);
+) : QuizQuestionBaseSpecificationData(OrderNumber, Text);

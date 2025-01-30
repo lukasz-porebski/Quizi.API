@@ -2,13 +2,5 @@
 
 namespace Domain.Modules.Quizzes.Data.Questions.Update;
 
-public abstract class QuizQuestionUpdateData : QuizQuestionData
-{
-    public EntityNo? EntityNo { get; }
-
-    protected QuizQuestionUpdateData(EntityNo? entityNo, int orderNumber, string text)
-        : base(orderNumber, text)
-    {
-        EntityNo = entityNo;
-    }
-}
+public abstract record QuizQuestionUpdateData(EntityNo? EntityNo, int OrderNumber, string Text)
+    : QuizQuestionData(OrderNumber, Text);

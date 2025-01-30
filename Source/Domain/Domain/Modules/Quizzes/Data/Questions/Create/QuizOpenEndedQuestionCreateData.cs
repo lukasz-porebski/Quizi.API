@@ -2,13 +2,8 @@
 
 namespace Domain.Modules.Quizzes.Data.Questions.Create;
 
-public class QuizOpenEndedQuestionCreateData : QuizQuestionData
+public record QuizOpenEndedQuestionCreateData(int OrderNumber, string Text, string CorrectAnswer)
+    : QuizQuestionData(OrderNumber, Text)
 {
-    public string CorrectAnswer { get; }
-
-    public QuizOpenEndedQuestionCreateData(int orderNumber, string text, string correctAnswer)
-        : base(orderNumber, text)
-    {
-        CorrectAnswer = correctAnswer.RemoveIllegalWhiteSpaces();
-    }
+    public string CorrectAnswer { get; } = CorrectAnswer.RemoveIllegalWhiteSpaces();
 }

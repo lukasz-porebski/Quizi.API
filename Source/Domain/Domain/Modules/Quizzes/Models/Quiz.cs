@@ -1,58 +1,58 @@
 ﻿using Common.Domain.Entities;
 using Common.Domain.ValueObjects;
 using Domain.Modules.Quizzes.Data;
+using Domain.Modules.Quizzes.Data.Specifications;
 using Domain.Modules.Quizzes.Factories.Interfaces;
 using Domain.Modules.Quizzes.Helpers;
-using Domain.Modules.Quizzes.Specifications.Data;
 using Domain.Modules.Quizzes.ValueObjects;
 
 namespace Domain.Modules.Quizzes.Models;
 
 public class Quiz : BaseAggregateRoot
 {
-    private IQuizSpecificationFactory _quizSpecificationFactory;
+    private IQuizSpecificationFactory _quizSpecificationFactory = null!;
     private readonly List<AggregateId> _users = [];
-    private List<OpenEndedQuestionEntity> _openEndedQuestions = [];
-    private List<SingleChoiceQuestionEntity> _singleChoiceQuestions = [];
-    private List<MultipleChoiceQuestionEntity> _multipleChoiceQuestions = [];
+    private List<OpenEndedQuestion> _openEndedQuestions = [];
+    private List<SingleChoiceQuestion> _singleChoiceQuestions = [];
+    private List<MultipleChoiceQuestion> _multipleChoiceQuestions = [];
 
-    public AggregateId OwnerId { get; }
-    public string Title { get; private set; }
-    public string Description { get; private set; }
+    public AggregateId OwnerId { get; } = null!;
+    public string Title { get; private set; } = null!;
+    public string Description { get; private set; } = null!;
     public Guid Code { get; private set; }
     public QuizSettings Settings { get; private set; }
     public IReadOnlyList<AggregateId> Users => _users;
-    public IReadOnlyList<OpenEndedQuestionEntity> OpenEndedQuestions => _openEndedQuestions;
-    public IReadOnlyList<SingleChoiceQuestionEntity> SingleChoiceQuestions => _singleChoiceQuestions;
-    public IReadOnlyList<MultipleChoiceQuestionEntity> MultipleChoiceQuestions => _multipleChoiceQuestions;
+    public IReadOnlyList<OpenEndedQuestion> OpenEndedQuestions => _openEndedQuestions;
+    public IReadOnlyList<SingleChoiceQuestion> SingleChoiceQuestions => _singleChoiceQuestions;
+    public IReadOnlyList<MultipleChoiceQuestion> MultipleChoiceQuestions => _multipleChoiceQuestions;
 
-    private QuizAggregateRoot()
-    {
-    }
-
-    internal QuizAggregateRoot(IQuizSpecificationFactory quizSpecificationFactory, QuizCreateData data)
+    internal Quiz(IQuizSpecificationFactory quizSpecificationFactory, QuizCreateData data)
+        : base(data.Id)
     {
         SetDependencies(quizSpecificationFactory);
 
         var specificationData = data.ToSpecificationData();
-        _quizSpecificationFactory.QuizPersist(specificationData).Validate();
+        _quizSpecificationFactory.QuizPersist(specificationData).ValidateAndThrow();
 
-        Id = data.Id;
         OwnerId = data.Owner;
         Title = data.Title;
         Description = data.Description;
         Code = Guid.NewGuid();
         Settings = data.Settings;
 
-        _users = new List<AggregateId> { OwnerId };
-        _openEndedQuestions = data.OpenEndedQuestions.ToEntities();
-        _singleChoiceQuestions = data.SingleChoiceQuestions.ToEntities();
-        _multipleChoiceQuestions = data.MultipleChoiceQuestions.ToEntities();
+        _users = [OwnerId];
+        _openEndedQuestions = data.OpenEndedQuestions.ToEntities(Id);
+        _singleChoiceQuestions = data.SingleChoiceQuestions.ToEntities(Id);
+        _multipleChoiceQuestions = data.MultipleChoiceQuestions.ToEntities(Id);
+    }
+
+    private Quiz()
+    {
     }
 
     public void Update(QuizUpdateData data)
     {
-        _quizSpecificationFactory.QuizPersist(data.ToSpecificationData(OwnerId)).Validate();
+        _quizSpecificationFactory.QuizPersist(data.ToSpecificationData(OwnerId)).ValidateAndThrow();
 
         Title = data.Title;
         Description = data.Description;
@@ -60,9 +60,9 @@ public class Quiz : BaseAggregateRoot
         if (!Settings.Equals(data.Settings))
             Settings = data.Settings;
 
-        _openEndedQuestions.Adjust(data.OpenEndedQuestions);
-        _singleChoiceQuestions.Adjust(data.SingleChoiceQuestions);
-        _multipleChoiceQuestions.Adjust(data.MultipleChoiceQuestions);
+        _openEndedQuestions.Adjust(Id, data.OpenEndedQuestions);
+        _singleChoiceQuestions.Adjust(Id, data.SingleChoiceQuestions);
+        _multipleChoiceQuestions.Adjust(Id, data.MultipleChoiceQuestions);
     }
 
     public void AddUser(AggregateId ownerId, AggregateId userId)
@@ -70,7 +70,7 @@ public class Quiz : BaseAggregateRoot
         var specificationData = new QuizAddUserSpecificationData(
             _users, userId, OwnerId, ownerId);
 
-        _quizSpecificationFactory.AddUser(specificationData).Validate();
+        _quizSpecificationFactory.AddUser(specificationData).ValidateAndThrow();
 
         _users.Add(userId);
     }
@@ -80,7 +80,7 @@ public class Quiz : BaseAggregateRoot
         var specificationData = new QuizRemoveUserSpecificationData(
             _users, OwnerId, ownerId, userIdToRemove);
 
-        _quizSpecificationFactory.RemoveUser(specificationData).Validate();
+        _quizSpecificationFactory.RemoveUser(specificationData).ValidateAndThrow();
 
         _users.Remove(userIdToRemove);
     }
@@ -90,7 +90,7 @@ public class Quiz : BaseAggregateRoot
         _quizSpecificationFactory
             .AddNewQuestions(data.ToSpecificationData(
                 OwnerId, OpenEndedQuestions, SingleChoiceQuestions, MultipleChoiceQuestions))
-            .Validate();
+            .ValidateAndThrow();
 
         if (!data.QuestionsCountInRunningQuiz.Equals(Settings.QuestionsCountInRunningQuiz))
             Settings = new QuizSettings(
@@ -101,9 +101,9 @@ public class Quiz : BaseAggregateRoot
                 negativePoints: Settings.NegativePoints,
                 quizCopyMode: Settings.QuizCopyMode);
 
-        _openEndedQuestions = OpenEndedQuestions.AddNewQuestions(data.OpenEndedQuestions);
-        _singleChoiceQuestions = SingleChoiceQuestions.AddNewQuestions(data.SingleChoiceQuestions);
-        _multipleChoiceQuestions = MultipleChoiceQuestions.AddNewQuestions(data.MultipleChoiceQuestions);
+        _openEndedQuestions = OpenEndedQuestions.AddNewQuestions(Id, data.OpenEndedQuestions);
+        _singleChoiceQuestions = SingleChoiceQuestions.AddNewQuestions(Id, data.SingleChoiceQuestions);
+        _multipleChoiceQuestions = MultipleChoiceQuestions.AddNewQuestions(Id, data.MultipleChoiceQuestions);
     }
 
     internal void SetDependencies(IQuizSpecificationFactory quizSpecificationFactory)

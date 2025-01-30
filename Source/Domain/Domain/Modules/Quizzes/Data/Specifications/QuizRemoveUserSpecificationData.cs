@@ -1,7 +1,7 @@
 ﻿using Common.Domain.ValueObjects;
 using Domain.Modules.Quizzes.Specifications.Interfaces;
 
-namespace Domain.Modules.Quizzes.Specifications.Data;
+namespace Domain.Modules.Quizzes.Data.Specifications;
 
 public class QuizRemoveUserSpecificationData : IQuizOwnerSpecification
 {

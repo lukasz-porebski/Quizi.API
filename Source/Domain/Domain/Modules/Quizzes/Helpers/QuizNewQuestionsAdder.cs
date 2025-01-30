@@ -1,4 +1,5 @@
 ﻿using Common.Domain.Extensions;
+using Common.Domain.ValueObjects;
 using Domain.Modules.Quizzes.Data.Questions.Create;
 using Domain.Modules.Quizzes.Models;
 
@@ -6,20 +7,22 @@ namespace Domain.Modules.Quizzes.Helpers;
 
 internal static class QuizNewQuestionsAdder
 {
-    internal static List<OpenEndedQuestionEntity> AddNewQuestions(
-        this IReadOnlyList<OpenEndedQuestionEntity> oldOpenEndedQuestions,
-        List<QuizOpenEndedQuestionCreateData> newOpenEndedQuestions)
+    internal static List<OpenEndedQuestion> AddNewQuestions(
+        this IReadOnlyCollection<OpenEndedQuestion> oldOpenEndedQuestions,
+        AggregateId id,
+        IReadOnlyCollection<QuizOpenEndedQuestionCreateData> newOpenEndedQuestions)
     {
         var nextEntityNo = oldOpenEndedQuestions.NextNo();
         var nextOrderNumber = oldOpenEndedQuestions.Max(q => q.OrderNumber) + 1;
 
         var result = oldOpenEndedQuestions.Concat(
-            newOpenEndedQuestions.Select(q => new OpenEndedQuestionEntity(
+            newOpenEndedQuestions.Select(q => new OpenEndedQuestion(
+                    id,
                     no: nextEntityNo++,
-                    createData: new QuizOpenEndedQuestionCreateData(
-                        orderNumber: nextOrderNumber++,
-                        text: q.Text,
-                        correctAnswer: q.CorrectAnswer)
+                    new QuizOpenEndedQuestionCreateData(
+                        OrderNumber: nextOrderNumber++,
+                        q.Text,
+                        q.CorrectAnswer)
                 )
             )
         );
@@ -27,21 +30,23 @@ internal static class QuizNewQuestionsAdder
         return result.ToList();
     }
 
-    internal static List<SingleChoiceQuestionEntity> AddNewQuestions(
-        this IReadOnlyList<SingleChoiceQuestionEntity> oldSingleChoiceQuestions,
-        List<QuizSingleChoiceQuestionCreateData> newSingleChoiceQuestions)
+    internal static List<SingleChoiceQuestion> AddNewQuestions(
+        this IReadOnlyCollection<SingleChoiceQuestion> oldSingleChoiceQuestions,
+        AggregateId id,
+        IReadOnlyCollection<QuizSingleChoiceQuestionCreateData> newSingleChoiceQuestions)
     {
         var nextEntityNo = oldSingleChoiceQuestions.NextNo();
         var nextOrderNumber = oldSingleChoiceQuestions.Max(q => q.OrderNumber) + 1;
 
         var result = oldSingleChoiceQuestions.Concat(
-            newSingleChoiceQuestions.Select(q => new SingleChoiceQuestionEntity(
+            newSingleChoiceQuestions.Select(q => new SingleChoiceQuestion(
+                    id,
                     no: nextEntityNo++,
-                    createData: new QuizSingleChoiceQuestionCreateData(
-                        orderNumber: nextOrderNumber++,
-                        text: q.Text,
-                        correctAnswer: q.CorrectAnswer,
-                        wrongAnswers: q.WrongAnswers)
+                    data: new QuizSingleChoiceQuestionCreateData(
+                        OrderNumber: nextOrderNumber++,
+                        q.Text,
+                        q.CorrectAnswer,
+                        q.WrongAnswers)
                 )
             )
         );
@@ -49,21 +54,23 @@ internal static class QuizNewQuestionsAdder
         return result.ToList();
     }
 
-    internal static List<MultipleChoiceQuestionEntity> AddNewQuestions(
-        this IReadOnlyList<MultipleChoiceQuestionEntity> oldMultipleChoiceQuestions,
-        List<QuizMultipleChoiceQuestionCreateData> newMultipleChoiceQuestions)
+    internal static List<MultipleChoiceQuestion> AddNewQuestions(
+        this IReadOnlyCollection<MultipleChoiceQuestion> oldMultipleChoiceQuestions,
+        AggregateId id,
+        IReadOnlyCollection<QuizMultipleChoiceQuestionCreateData> newMultipleChoiceQuestions)
     {
         var nextEntityNo = oldMultipleChoiceQuestions.NextNo();
         var nextOrderNumber = oldMultipleChoiceQuestions.Max(q => q.OrderNumber) + 1;
 
         var result = oldMultipleChoiceQuestions.Concat(
-            newMultipleChoiceQuestions.Select(q => new MultipleChoiceQuestionEntity(
+            newMultipleChoiceQuestions.Select(q => new MultipleChoiceQuestion(
+                    id,
                     no: nextEntityNo++,
-                    createData: new QuizMultipleChoiceQuestionCreateData(
-                        orderNumber: nextOrderNumber++,
-                        text: q.Text,
-                        correctAnswers: q.CorrectAnswers,
-                        wrongAnswers: q.WrongAnswers)
+                    new QuizMultipleChoiceQuestionCreateData(
+                        OrderNumber: nextOrderNumber++,
+                        q.Text,
+                        q.CorrectAnswers,
+                        q.WrongAnswers)
                 )
             )
         );

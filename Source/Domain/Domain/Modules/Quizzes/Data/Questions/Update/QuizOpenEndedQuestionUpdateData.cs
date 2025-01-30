@@ -3,14 +3,12 @@ using Domain.Modules.Quizzes.Extensions;
 
 namespace Domain.Modules.Quizzes.Data.Questions.Update;
 
-public class QuizOpenEndedQuestionUpdateData : QuizQuestionUpdateData
+public record QuizOpenEndedQuestionUpdateData(
+    EntityNo? EntityNo,
+    int OrderNumber,
+    string Text,
+    string CorrectAnswer
+) : QuizQuestionUpdateData(EntityNo, OrderNumber, Text)
 {
-    public string CorrectAnswer { get; }
-
-    public QuizOpenEndedQuestionUpdateData(EntityNo? entityNo, int orderNumber,
-        string text, string correctAnswer)
-        : base(entityNo, orderNumber, text)
-    {
-        CorrectAnswer = correctAnswer.RemoveIllegalWhiteSpaces();
-    }
+    public string CorrectAnswer { get; } = CorrectAnswer.RemoveIllegalWhiteSpaces();
 }

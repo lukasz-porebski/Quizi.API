@@ -1,11 +1,11 @@
 ﻿using Common.Domain.Specification;
-using Domain.Modules.Quizzes.Specifications.Data.Questions;
+using Domain.Modules.Quizzes.Data.Specifications.Questions;
 
 namespace Domain.Modules.Quizzes.Specifications.Implementations.Questions;
 
-internal class QuizHasAtLeastOneQuestionSpecification : ISpecification<IEnumerable<QuizQuestionSpecificationData>>
+internal class QuizHasAtLeastOneQuestionSpecification : ISpecification<IReadOnlyCollection<QuizQuestionSpecificationData>>
 {
     public string FailureMessageCode => QuizMessages.QuizHasNotDefinedAnyQuestion();
 
-    public bool IsValid(IEnumerable<QuizQuestionSpecificationData> data) => data.Any();
+    public bool IsValid(IReadOnlyCollection<QuizQuestionSpecificationData> data) => data.Any();
 }

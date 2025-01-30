@@ -4,6 +4,12 @@ namespace Common.Shared.Extensions;
 
 public static class CollectionExtensions
 {
+    public static void Set<T>(this ICollection<T> source, IEnumerable<T> collection)
+    {
+        source.Clear();
+        source.AddMany(collection);
+    }
+    
     public static void RemoveMany<T>(this ICollection<T> source, IEnumerable<T> collection)
     {
         foreach (var item in collection)

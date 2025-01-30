@@ -1,5 +1,5 @@
 ﻿using Common.Domain.Specification;
-using Domain.Modules.Quizzes.Specifications.Data;
+using Domain.Modules.Quizzes.Data.Specifications;
 
 namespace Domain.Modules.Quizzes.Factories.Interfaces;
 

@@ -1,13 +1,13 @@
 ﻿using Common.Domain.Specification;
+using Domain.Modules.Quizzes.Data.Specifications.Questions;
 using Domain.Modules.Quizzes.Helpers;
-using Domain.Modules.Quizzes.Specifications.Data.Questions;
 
 namespace Domain.Modules.Quizzes.Specifications.Implementations.Questions;
 
-internal class QuizQuestionsAreUniqueSpecification : ISpecification<IEnumerable<QuizQuestionSpecificationData>>
+internal class QuizQuestionsAreUniqueSpecification : ISpecification<IReadOnlyCollection<QuizQuestionSpecificationData>>
 {
     public string FailureMessageCode => QuizMessages.NonUniqueQuestions();
 
-    public bool IsValid(IEnumerable<QuizQuestionSpecificationData> data) =>
+    public bool IsValid(IReadOnlyCollection<QuizQuestionSpecificationData> data) =>
         QuizSpecificationHelper.AreQuestionsUnique(data);
 }

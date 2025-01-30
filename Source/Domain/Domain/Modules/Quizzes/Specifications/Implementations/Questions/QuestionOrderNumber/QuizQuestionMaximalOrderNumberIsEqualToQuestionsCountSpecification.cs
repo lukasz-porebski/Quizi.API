@@ -1,5 +1,5 @@
 ﻿using Common.Domain.Specification;
-using Domain.Modules.Quizzes.Specifications.Data.Questions;
+using Domain.Modules.Quizzes.Data.Specifications.Questions;
 
 namespace Domain.Modules.Quizzes.Specifications.Implementations.Questions.QuestionOrderNumber;
 

@@ -1,10 +1,10 @@
 ﻿using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Specifications.Data.Questions;
+using Domain.Modules.Quizzes.Data.Specifications.Questions;
 using Domain.Modules.Quizzes.Specifications.Interfaces;
 
-namespace Domain.Modules.Quizzes.Specifications.Data;
+namespace Domain.Modules.Quizzes.Data.Specifications;
 
-public class QuizAddNewQuestionsSpecificationData : IQuizOwnerSpecification, IQuizQuestionsCountSpecification
+public record QuizAddNewQuestionsSpecificationData : IQuizOwnerSpecification, IQuizQuestionsCountSpecification
 {
     public int QuestionsCount { get; }
     public int QuestionsCountInRunningQuiz { get; }
@@ -13,8 +13,10 @@ public class QuizAddNewQuestionsSpecificationData : IQuizOwnerSpecification, IQu
     public AggregateId UserId { get; }
 
     internal QuizAddNewQuestionsSpecificationData(
-        int declaredQuestionsCount, QuizQuestionsForAddNewQuestionsSpecificationData questions,
-        AggregateId ownerId, AggregateId userId)
+        int declaredQuestionsCount,
+        QuizQuestionsForAddNewQuestionsSpecificationData questions,
+        AggregateId ownerId,
+        AggregateId userId)
     {
         QuestionsCountInRunningQuiz = declaredQuestionsCount;
         OwnerId = ownerId;
