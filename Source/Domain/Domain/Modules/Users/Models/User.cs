@@ -1,4 +1,5 @@
 ﻿using Common.Domain.Entities;
+using Common.Shared.Utils;
 using Domain.Contracts.Modules.Users.Enums;
 using Domain.Modules.Users.Data;
 using Domain.Modules.Users.Interfaces;
@@ -10,14 +11,14 @@ public class User : BaseAggregateRoot
     public User(
         UserCreationData data,
         IUserSpecificationFactory specificationFactory,
-        IPasswordHasher passwordHasher)
+        IHasher hasher)
         : base(data.Id)
     {
         specificationFactory.CreateForCreation(data).ValidateAndThrow();
 
         Email = data.Email;
         Role = data.Role;
-        HashedPassword = passwordHasher.HashPassword(this, data.Password);
+        HashedPassword = hasher.Hash(data.Password);
     }
 
     private User() : base(null!)

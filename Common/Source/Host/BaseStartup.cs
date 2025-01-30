@@ -18,12 +18,12 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
     {
         Configuration = new ConfigurationBuilder()
             .SetBasePath(env.ContentRootPath)
-            .AddJsonFile("Configs/appsettings.Secrets.json", optional: false, reloadOnChange: true)
+            .AddEnvironmentVariables()
             .AddJsonFile(
                 env.IsDevelopment() ? $"Configs/appsettings.{env.EnvironmentName}.json" : "Configs/appsettings.json",
                 optional: false,
                 reloadOnChange: true)
-            .AddEnvironmentVariables()
+            .AddJsonFile("Configs/appsettings.Secrets.json", optional: false, reloadOnChange: true)
             .Build();
 
         Assemblies = assemblies;
@@ -41,6 +41,7 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
             .AddSwagger(Configuration)
             .AddMapper(Assemblies)
             .AddCqrs(Assemblies)
+            .AddIdentity(Configuration)
             .AddEf<TDbContext>(Configuration);
     }
 
@@ -58,6 +59,7 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
             .UseRouting()
             .UseCustomCors()
             .UseMiddleware<ErrorHandlerMiddleware>()
+            .UseIdentity()
             .UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
 
@@ -69,6 +71,8 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
             .RegisterRepositories(Assemblies)
             .RegisterServices(Assemblies)
             .RegisterFactories(Assemblies)
-            .RegisterLocalization();
+            .RegisterLocalization()
+            .RegisterIdentity<TDbContext>()
+            .RegisterUtils();
     }
 }

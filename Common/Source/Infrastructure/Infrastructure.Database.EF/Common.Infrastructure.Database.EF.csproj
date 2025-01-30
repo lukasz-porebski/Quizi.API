@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
         <ProjectReference Include="..\..\Application\Application.Contracts\Common.Application.Contracts.csproj"/>
+        <ProjectReference Include="..\..\Identity\Identity.EF\Common.Identity.EF.csproj"/>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0"/>

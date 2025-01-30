@@ -131,4 +131,7 @@
     <data name="IncorrectPasswordFormat" xml:space="preserve">
         <value>Nieprawidłowy format hasła</value>
     </data>
+    <data name="InvalidUserEmailOrPassword" xml:space="preserve">
+        <value>Nieprawidłowy adres email lub hasło</value>
+    </data>
 </root>

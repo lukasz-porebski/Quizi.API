@@ -17,6 +17,14 @@ public static class RepositoryExtensions
         where TAggregateRoot : BaseAggregateRoot =>
         await source.GetAsync(id, cancellationToken) ?? throw new BusinessLogicException(messageCode);
 
+    public static async Task<TAggregateRoot> GetOrThrowAsync<TAggregateRoot>(
+        this IRepository<TAggregateRoot> source,
+        Expression<Func<TAggregateRoot, bool>> condition,
+        string messageCode,
+        CancellationToken cancellationToken)
+        where TAggregateRoot : BaseAggregateRoot =>
+        await source.GetAsync(condition, cancellationToken) ?? throw new BusinessLogicException(messageCode);
+
     public static async Task<IReadOnlyDictionary<AggregateId, TAggregateRoot>> GetManyOrThrowAsync<TAggregateRoot>(
         this IRepository<TAggregateRoot> source,
         IReadOnlyCollection<AggregateId> ids,

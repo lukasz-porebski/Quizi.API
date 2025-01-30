@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
         <ProjectReference Include="..\Application\Application\Common.Application.csproj"/>
+        <ProjectReference Include="..\Identity\Identity\Common.Identity.csproj"/>
         <ProjectReference Include="..\Infrastructure\Infrastructure.Database.EF\Common.Infrastructure.Database.EF.csproj"/>
         <ProjectReference Include="..\Infrastructure\Infrastructure.Endpoints\Common.Infrastructure.Endpoints.csproj"/>
         <ProjectReference Include="..\Infrastructure\Infrastructure.Integration\Common.Infrastructure.Integration.csproj"/>
@@ -8,6 +9,7 @@
     <ItemGroup>
         <PackageReference Include="Autofac" Version="8.2.0"/>
         <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0"/>
+        <PackageReference Include="BCrypt.Net-Next" Version="4.0.3"/>
         <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="9.0.0"/>
         <PackageReference Include="Serilog.AspNetCore" Version="9.0.0"/>
         <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1"/>

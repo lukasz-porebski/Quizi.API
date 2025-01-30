@@ -55,4 +55,10 @@ internal static class SimpleContainerBuilderConfig
         builder.RegisterTypes(types).AsImplementedInterfaces();
         return builder;
     }
+
+    public static ContainerBuilder RegisterUtils(this ContainerBuilder builder)
+    {
+        builder.RegisterType<Hasher>().AsImplementedInterfaces();
+        return builder;
+    }
 }

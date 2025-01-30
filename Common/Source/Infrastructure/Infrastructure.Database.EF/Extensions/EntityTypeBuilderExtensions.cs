@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using Common.Domain.Entities;
 using Common.Domain.ValueObjects;
+using Common.Identity.EF.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -44,10 +45,6 @@ public static class EntityTypeBuilderExtensions
 
                 o.Property(p => p.At).HasColumnName($"{prefix}At");
             });
-
-    public static PropertyBuilder<AggregateId?> ConfigureAggregateId(this PropertyBuilder<AggregateId?> source) =>
-        source.HasConversion(v => v != null ? v.ToString() : null, v => v != null ? new AggregateId(v) : null)
-            .HasMaxLength(36);
 
     public static void ConfigureChildren<T, TChild>(
         this EntityTypeBuilder<T> builder, Expression<Func<T, IEnumerable<TChild>>> navigationExpression)

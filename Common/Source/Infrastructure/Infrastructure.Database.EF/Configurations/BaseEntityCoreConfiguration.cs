@@ -8,11 +8,9 @@ namespace Common.Infrastructure.Database.EF.Configurations;
 public abstract class BaseEntityCoreConfiguration<TEntity>(string entityKey) : IEntityTypeConfiguration<TEntity>
     where TEntity : BaseEntityCore
 {
-    private readonly string _entityKey = entityKey;
-
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
-        builder.HasKey(nameof(BaseAggregateRoot.Id), _entityKey);
+        builder.HasKey(nameof(BaseAggregateRoot.Id), entityKey);
 
         builder.ConfigureAggregateRootId();
     }
