@@ -1,4 +1,5 @@
 ﻿using Common.Domain.Exceptions;
+using Domain.Modules.Quizzes.Constants;
 
 namespace Domain.Modules.Quizzes.ValueObjects;
 
@@ -9,7 +10,7 @@ public readonly struct QuizQuestionsCountInRunningQuiz
     public QuizQuestionsCountInRunningQuiz(int questionsCountInRunningQuiz, int questionsCount)
     {
         if (questionsCountInRunningQuiz < 1 || questionsCountInRunningQuiz > questionsCount)
-            throw new DomainLogicException(QuizMessages.QuizIncorrectDefinedQuestionsCountInRunningQuiz());
+            throw new DomainLogicException(QuizMessageCodes.QuizIncorrectDefinedQuestionsCountInRunningQuiz);
 
         _questionsCountInRunningQuiz = questionsCountInRunningQuiz;
     }

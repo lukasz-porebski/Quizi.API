@@ -1,11 +1,12 @@
 ﻿using Common.Domain.Specification;
+using Domain.Modules.Quizzes.Constants;
 using Domain.Modules.Quizzes.ValueObjects;
 
 namespace Domain.Modules.Quizzes.Specifications.Implementations.Questions;
 
-internal class QuizSelectionQuestionHasAtLeastTwoAnswersSpecification : ISpecification<IEnumerable<QuizQuestionOrderedAnswer>>
+internal class QuizSelectionQuestionHasAtLeastTwoAnswersSpecification : ISpecification<IReadOnlyCollection<QuizQuestionOrderedAnswer>>
 {
-    public string FailureMessageCode => QuizMessages.SelectionQuestionHasNotAtLeastTwoAnswers();
+    public string FailureMessageCode => QuizMessageCodes.SelectionQuestionHasNotAtLeastTwoAnswers;
 
-    public bool IsValid(IEnumerable<QuizQuestionOrderedAnswer> data) => data.Count() >= 2;
+    public bool IsValid(IReadOnlyCollection<QuizQuestionOrderedAnswer> data) => data.Count >= 2;
 }

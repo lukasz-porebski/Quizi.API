@@ -1,6 +1,6 @@
 ﻿using Common.Domain.ValueObjects;
 
-namespace Domain.Modules.Quizzes.Specifications.Interfaces;
+namespace Domain.Modules.Quizzes.Interfaces;
 
 public interface IQuizOwnerSpecification
 {

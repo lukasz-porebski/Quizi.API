@@ -1,22 +1,14 @@
 ﻿using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Specifications.Interfaces;
+using Domain.Modules.Quizzes.Interfaces;
 
 namespace Domain.Modules.Quizzes.Data.Specifications;
 
-public class QuizRemoveUserSpecificationData : IQuizOwnerSpecification
+public record QuizRemoveUserSpecificationData(
+    IReadOnlyCollection<AggregateId> CurrentUserIds,
+    AggregateId OwnerId,
+    AggregateId IdDeclaredAsOwner,
+    AggregateId IdOfUserToRemove
+) : IQuizOwnerSpecification
 {
-    internal IEnumerable<AggregateId> CurrentUsersIds { get; }
-    public AggregateId OwnerId { get; }
-    public AggregateId UserId { get; }
-    internal AggregateId IdOfUserToRemove { get; }
-
-    internal QuizRemoveUserSpecificationData(
-        IEnumerable<AggregateId> currentUsers, AggregateId owner,
-        AggregateId idDeclaredAsOwner, AggregateId idOfUserToRemove)
-    {
-        CurrentUsersIds = currentUsers;
-        OwnerId = owner;
-        UserId = idDeclaredAsOwner;
-        IdOfUserToRemove = idOfUserToRemove;
-    }
+    AggregateId IQuizOwnerSpecification.UserId => IdDeclaredAsOwner;
 }

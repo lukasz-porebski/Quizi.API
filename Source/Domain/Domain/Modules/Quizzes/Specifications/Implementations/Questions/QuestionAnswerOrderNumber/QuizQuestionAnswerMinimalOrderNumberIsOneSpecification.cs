@@ -1,4 +1,5 @@
 ﻿using Common.Domain.Specification;
+using Domain.Modules.Quizzes.Constants;
 using Domain.Modules.Quizzes.Data.Specifications.Questions;
 
 namespace Domain.Modules.Quizzes.Specifications.Implementations.Questions.QuestionAnswerOrderNumber;
@@ -6,7 +7,7 @@ namespace Domain.Modules.Quizzes.Specifications.Implementations.Questions.Questi
 internal class QuizQuestionAnswerMinimalOrderNumberIsOneSpecification
     : ISpecification<QuizClosedEndedQuestionSpecificationData>
 {
-    public string FailureMessageCode => QuizMessages.QuestionAnswerMinimalOrderNumberIsNotOne();
+    public string FailureMessageCode => QuizMessageCodes.QuestionAnswerMinimalOrderNumberIsNotOne;
 
     public bool IsValid(QuizClosedEndedQuestionSpecificationData data) =>
         data.Answers.Min(q => q.OrderNumber).Equals(1);

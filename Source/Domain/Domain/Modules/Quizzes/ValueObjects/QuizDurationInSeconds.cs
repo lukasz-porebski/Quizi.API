@@ -1,4 +1,5 @@
 ﻿using Common.Domain.Exceptions;
+using Domain.Modules.Quizzes.Constants;
 
 namespace Domain.Modules.Quizzes.ValueObjects;
 
@@ -8,8 +9,8 @@ public readonly struct QuizDurationInSeconds
 
     public QuizDurationInSeconds(int durationInSeconds)
     {
-        if (durationInSeconds < 60 || durationInSeconds > 60 * 180)
-            throw new DomainLogicException(QuizMessages.IncorrectQuizDuration());
+        if (durationInSeconds is < 60 or > 60 * 180)
+            throw new DomainLogicException(QuizMessageCodes.IncorrectQuizDuration);
 
         _durationInSeconds = durationInSeconds;
     }

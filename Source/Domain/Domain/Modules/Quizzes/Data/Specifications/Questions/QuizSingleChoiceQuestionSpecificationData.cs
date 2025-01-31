@@ -1,10 +1,11 @@
-﻿using Domain.Modules.Quizzes.ValueObjects;
+﻿using Domain.Modules.Quizzes.Interfaces;
+using Domain.Modules.Quizzes.ValueObjects;
 
 namespace Domain.Modules.Quizzes.Data.Specifications.Questions;
 
-internal record QuizSingleChoiceQuestionSpecificationData(
+public record QuizSingleChoiceQuestionSpecificationData(
     int OrderNumber,
     string Text,
     QuizQuestionOrderedAnswer CorrectAnswer,
     IReadOnlyCollection<QuizQuestionOrderedAnswer> WrongAnswers
-) : QuizQuestionBaseSpecificationData(OrderNumber, Text);
+) : IQuizQuestionBaseSpecificationData;

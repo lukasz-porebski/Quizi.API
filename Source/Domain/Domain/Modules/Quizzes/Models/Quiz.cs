@@ -20,7 +20,7 @@ public class Quiz : BaseAggregateRoot
     public string Title { get; private set; } = null!;
     public string Description { get; private set; } = null!;
     public Guid Code { get; private set; }
-    public QuizSettings Settings { get; private set; }
+    public QuizSettings Settings { get; private set; } = null!;
     public IReadOnlyList<AggregateId> Users => _users;
     public IReadOnlyList<OpenEndedQuestion> OpenEndedQuestions => _openEndedQuestions;
     public IReadOnlyList<SingleChoiceQuestion> SingleChoiceQuestions => _singleChoiceQuestions;
@@ -94,12 +94,12 @@ public class Quiz : BaseAggregateRoot
 
         if (!data.QuestionsCountInRunningQuiz.Equals(Settings.QuestionsCountInRunningQuiz))
             Settings = new QuizSettings(
-                durationInSeconds: Settings.DurationInSeconds,
-                questionsCountInRunningQuiz: data.QuestionsCountInRunningQuiz,
-                randomAnswers: Settings.RandomAnswers,
-                randomQuestions: Settings.RandomQuestions,
-                negativePoints: Settings.NegativePoints,
-                quizCopyMode: Settings.QuizCopyMode);
+                Duration: Settings.Duration,
+                QuestionsCountInRunningQuiz: data.QuestionsCountInRunningQuiz,
+                RandomAnswers: Settings.RandomAnswers,
+                RandomQuestions: Settings.RandomQuestions,
+                NegativePoints: Settings.NegativePoints,
+                QuizCopyMode: Settings.QuizCopyMode);
 
         _openEndedQuestions = OpenEndedQuestions.AddNewQuestions(Id, data.OpenEndedQuestions);
         _singleChoiceQuestions = SingleChoiceQuestions.AddNewQuestions(Id, data.SingleChoiceQuestions);

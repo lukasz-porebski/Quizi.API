@@ -1,6 +1,6 @@
 ﻿using Common.Domain.ValueObjects;
 using Domain.Modules.Quizzes.Data.Specifications.Questions;
-using Domain.Modules.Quizzes.Specifications.Interfaces;
+using Domain.Modules.Quizzes.Interfaces;
 
 namespace Domain.Modules.Quizzes.Data.Specifications;
 
@@ -8,11 +8,11 @@ public record QuizAddNewQuestionsSpecificationData : IQuizOwnerSpecification, IQ
 {
     public int QuestionsCount { get; }
     public int QuestionsCountInRunningQuiz { get; }
-    internal QuizQuestionsForAddNewQuestionsSpecificationData Questions { get; }
+    public QuizQuestionsForAddNewQuestionsSpecificationData Questions { get; }
     public AggregateId OwnerId { get; }
     public AggregateId UserId { get; }
 
-    internal QuizAddNewQuestionsSpecificationData(
+    public QuizAddNewQuestionsSpecificationData(
         int declaredQuestionsCount,
         QuizQuestionsForAddNewQuestionsSpecificationData questions,
         AggregateId ownerId,

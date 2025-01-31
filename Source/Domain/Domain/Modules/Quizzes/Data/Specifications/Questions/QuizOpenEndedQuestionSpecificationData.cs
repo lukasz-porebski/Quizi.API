@@ -1,7 +1,9 @@
-﻿namespace Domain.Modules.Quizzes.Data.Specifications.Questions;
+﻿using Domain.Modules.Quizzes.Interfaces;
 
-internal record QuizOpenEndedQuestionSpecificationData(
+namespace Domain.Modules.Quizzes.Data.Specifications.Questions;
+
+public record QuizOpenEndedQuestionSpecificationData(
     int OrderNumber,
     string Text,
     string CorrectAnswer
-) : QuizQuestionBaseSpecificationData(OrderNumber, Text);
+) : IQuizQuestionBaseSpecificationData;

@@ -134,4 +134,76 @@
     <data name="InvalidUserEmailOrPassword" xml:space="preserve">
         <value>Nieprawidłowy adres email lub hasło</value>
     </data>
+    <data name="NonUniqueQuestions" xml:space="preserve">
+        <value>Questions have to be unique</value>
+    </data>
+    <data name="NonUniqueQuestionAnswers" xml:space="preserve">
+        <value>Question answers have to be unique</value>
+    </data>
+    <data name="UserHasThisQuiz" xml:space="preserve">
+        <value>User already has this quiz</value>
+    </data>
+    <data name="IncorrectDescriptionLength" xml:space="preserve">
+        <value>Maximum description length is 200 characters</value>
+    </data>
+    <data name="UserNotHasThisQuiz" xml:space="preserve">
+        <value>User does not have this quiz</value>
+    </data>
+    <data name="IncorrectTitleLength" xml:space="preserve">
+        <value>Number of characters in title have to be between 5-100</value>
+    </data>
+    <data name="AnswersContainsQuestionText" xml:space="preserve">
+        <value>Answers can't contains question text</value>
+    </data>
+    <data name="QuestionTextIsNotDefined" xml:space="preserve">
+        <value>Question text is not defined</value>
+    </data>
+    <data name="SelectionQuestionHasNotAtLeastTwoAnswers" xml:space="preserve">
+        <value>Closed ended question has to has at least two answers</value>
+    </data>
+    <data name="QuizHasNotDefinedAnyQuestion" xml:space="preserve">
+        <value>Quiz has to has defined at least one question</value>
+    </data>
+    <data name="QuizIncorrectDefinedQuestionsCountInRunningQuiz" xml:space="preserve">
+        <value>Questions count in running quiz has to be greater than 0 and less or equals to questions count</value>
+    </data>
+    <data name="IncorrectQuizDuration" xml:space="preserve">
+        <value>Quiz duration has to be greater than 0 and less or equals to 180 minutes</value>
+    </data>
+    <data name="AnswerOrderNumberLessThanOne" xml:space="preserve">
+        <value>Order number of question answer can't be less than one</value>
+    </data>
+    <data name="AnswerIsEmpty" xml:space="preserve">
+        <value>Question answer can't be empty</value>
+    </data>
+    <data name="QuestionMinimalOrderNumberIsNotOne" xml:space="preserve">
+        <value>Question minimal order number has to be one</value>
+    </data>
+    <data name="QuestionMaximalOrderNumberIsEqualToQuestionsCount" xml:space="preserve">
+        <value>Question maximal order number has to be equal to questions count</value>
+    </data>
+    <data name="QuestionOrderNumberIsUnique" xml:space="preserve">
+        <value>Question order number has to be unique</value>
+    </data>
+    <data name="QuestionAnswerMinimalOrderNumberIsNotOne" xml:space="preserve">
+        <value>Question answer minimal order number has to be one</value>
+    </data>
+    <data name="QuestionAnswerMaximalOrderNumberIsEqualToQuestionsCount" xml:space="preserve">
+        <value>Question answer maximal order number has to be equal to answers count</value>
+    </data>
+    <data name="QuestionAnswerOrderNumberIsUnique" xml:space="preserve">
+        <value>Question answer order number has to be unique</value>
+    </data>
+    <data name="AccessDenied" xml:space="preserve">
+        <value>You don't have access to this quiz</value>
+    </data>
+    <data name="UserToRemoveIsOwner" xml:space="preserve">
+        <value>You can't remove user that is owner</value>
+    </data>
+    <data name="IncorrectDeclaredQuestionsCount" xml:space="preserve">
+        <value>Declared questions count doesn't match to actual questions count</value>
+    </data>
+    <data name="OneOfNewQuestionsIsAlreadyAdded" xml:space="preserve">
+        <value>Quiz already has a question that is declared as new</value>
+    </data>
 </root>

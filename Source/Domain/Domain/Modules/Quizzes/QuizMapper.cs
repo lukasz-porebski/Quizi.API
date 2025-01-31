@@ -36,7 +36,7 @@ internal static class QuizMapper
 
     internal static QuizPersistSpecificationData ToSpecificationData(this QuizCreateData source) =>
         new(
-            questionsCountInRunningQuiz: source.Settings.QuestionsCountInRunningQuiz.ToInt(),
+            questionsCountInRunningQuiz: source.Settings.QuestionsCountInRunningQuiz,
             openEndedQuestions: source.OpenEndedQuestions.Select(q => q.ToSpecificationData()).ToArray(),
             singleChoiceQuestions: source.SingleChoiceQuestions.Select(q => q.ToSpecificationData()).ToArray(),
             multipleChoiceQuestions: source.MultipleChoiceQuestions.Select(q => q.ToSpecificationData()).ToArray(),
@@ -46,7 +46,7 @@ internal static class QuizMapper
     internal static QuizPersistSpecificationData ToSpecificationData(
         this QuizUpdateData source, AggregateId ownerId) =>
         new(
-            questionsCountInRunningQuiz: source.Settings.QuestionsCountInRunningQuiz.ToInt(),
+            questionsCountInRunningQuiz: source.Settings.QuestionsCountInRunningQuiz,
             openEndedQuestions: source.OpenEndedQuestions.Select(q => q.ToSpecificationData()).ToArray(),
             singleChoiceQuestions: source.SingleChoiceQuestions.Select(q => q.ToSpecificationData()).ToArray(),
             multipleChoiceQuestions: source.MultipleChoiceQuestions.Select(q => q.ToSpecificationData()).ToArray(),
@@ -99,7 +99,7 @@ internal static class QuizMapper
         IReadOnlyList<SingleChoiceQuestion> oldSingleChoiceQuestions,
         IReadOnlyList<MultipleChoiceQuestion> oldMultipleChoiceQuestions) =>
         new(
-            declaredQuestionsCount: source.QuestionsCountInRunningQuiz.ToInt(),
+            declaredQuestionsCount: source.QuestionsCountInRunningQuiz,
             questions: new QuizQuestionsForAddNewQuestionsSpecificationData(
                 newOpenEndedQuestions: source.OpenEndedQuestions.Select(q => q.ToSpecificationData()).ToArray(),
                 newSingleChoiceQuestions: source.SingleChoiceQuestions.Select(q => q.ToSpecificationData()).ToArray(),

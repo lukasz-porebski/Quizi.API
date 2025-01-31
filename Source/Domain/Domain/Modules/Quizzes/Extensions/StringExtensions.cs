@@ -6,11 +6,6 @@ namespace Domain.Modules.Quizzes.Extensions;
 
 public static class StringExtensions
 {
-    public static AggregateId ToAggregateId(this string source) => new(source);
-
-    public static AggregateId? ToNullableAggregateId(this string source) =>
-        source.Any() ? new AggregateId(source) : null;
-
     public static string RemoveIllegalWhiteSpaces(this string value)
     {
         if (value.IsEmpty())

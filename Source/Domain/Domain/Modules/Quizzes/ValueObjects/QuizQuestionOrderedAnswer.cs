@@ -1,5 +1,6 @@
 ﻿using Common.Domain.Exceptions;
 using Common.Shared.Extensions;
+using Domain.Modules.Quizzes.Constants;
 using Domain.Modules.Quizzes.Extensions;
 
 namespace Domain.Modules.Quizzes.ValueObjects;
@@ -14,10 +15,10 @@ public readonly struct QuizQuestionOrderedAnswer
     public QuizQuestionOrderedAnswer(int orderNumber, string text)
     {
         if (orderNumber < MinValue)
-            throw new DomainLogicException(QuizMessages.AnswerOrderNumberLessThanOne());
+            throw new DomainLogicException(QuizMessageCodes.AnswerOrderNumberLessThanOne);
 
         if (text.IsEmpty())
-            throw new DomainLogicException(QuizMessages.AnswerIsEmpty());
+            throw new DomainLogicException(QuizMessageCodes.AnswerIsEmpty);
 
         OrderNumber = orderNumber;
         Text = text.RemoveIllegalWhiteSpaces();

@@ -1,7 +1,7 @@
 ﻿using Common.Domain.ValueObjects;
 using Domain.Modules.Quizzes.Data.Specifications.Questions;
 using Domain.Modules.Quizzes.Helpers;
-using Domain.Modules.Quizzes.Specifications.Interfaces;
+using Domain.Modules.Quizzes.Interfaces;
 
 namespace Domain.Modules.Quizzes.Data.Specifications;
 

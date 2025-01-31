@@ -3,7 +3,7 @@ using Domain.Modules.Quizzes.Models;
 
 namespace Domain.Modules.Quizzes.Data.Specifications.Questions;
 
-internal record QuizQuestionsForAddNewQuestionsSpecificationData
+public record QuizQuestionsForAddNewQuestionsSpecificationData
 {
     public QuizQuestionsForAddNewQuestionsSpecificationData(
         IReadOnlyCollection<QuizOpenEndedQuestionSpecificationData> newOpenEndedQuestions,
