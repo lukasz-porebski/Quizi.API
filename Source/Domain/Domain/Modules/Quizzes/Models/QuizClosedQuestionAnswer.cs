@@ -1,6 +1,6 @@
 using Common.Domain.Entities;
 using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Data.Questions.Create;
+using Domain.Modules.Quizzes.Data.Models.Questions.Create;
 using Domain.Modules.Quizzes.Interfaces;
 
 namespace Domain.Modules.Quizzes.Models;

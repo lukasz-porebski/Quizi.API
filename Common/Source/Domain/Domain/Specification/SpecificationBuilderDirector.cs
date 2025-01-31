@@ -42,6 +42,9 @@ public class SpecificationBuilderDirector
             return this;
         }
 
+        public SpecificationBuilder<TData> AndNextIfThisPass(ISpecification<TData> specification) =>
+            AndNextIfThisPass(specification, x => x);
+        
         public SpecificationBuilder<TData> AndNextIfThisPass<TSubData>(
             ISpecification<TSubData> specification, Func<TData, TSubData> validateProperty)
         {

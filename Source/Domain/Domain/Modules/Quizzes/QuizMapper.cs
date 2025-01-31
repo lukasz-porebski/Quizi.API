@@ -1,7 +1,7 @@
 ﻿using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Data;
-using Domain.Modules.Quizzes.Data.Questions.Create;
-using Domain.Modules.Quizzes.Data.Questions.Update;
+using Domain.Modules.Quizzes.Data.Models;
+using Domain.Modules.Quizzes.Data.Models.Questions.Create;
+using Domain.Modules.Quizzes.Data.Models.Questions.Update;
 using Domain.Modules.Quizzes.Data.Specifications;
 using Domain.Modules.Quizzes.Data.Specifications.Questions;
 using Domain.Modules.Quizzes.Models;
@@ -36,6 +36,8 @@ internal static class QuizMapper
 
     internal static QuizPersistSpecificationData ToSpecificationData(this QuizCreateData source) =>
         new(source.Settings.QuestionsCountInRunningQuiz,
+            source.Description,
+            source.Settings.Duration,
             source.OpenQuestions.Select(q => q.ToSpecificationData()).ToArray(),
             source.SingleChoiceQuestions.Select(q => q.ToSpecificationData()).ToArray(),
             source.MultipleChoiceQuestions.Select(q => q.ToSpecificationData()).ToArray(),
@@ -46,6 +48,8 @@ internal static class QuizMapper
     internal static QuizPersistSpecificationData ToSpecificationData(
         this QuizUpdateData source, AggregateId ownerId) =>
         new(source.Settings.QuestionsCountInRunningQuiz,
+            source.Description,
+            source.Settings.Duration,
             source.OpenQuestions.Select(q => q.ToSpecificationData()).ToArray(),
             source.SingleChoiceQuestions.Select(q => q.ToSpecificationData()).ToArray(),
             source.MultipleChoiceQuestions.Select(q => q.ToSpecificationData()).ToArray(),

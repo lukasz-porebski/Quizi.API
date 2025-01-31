@@ -1,9 +1,9 @@
 ﻿using Common.Domain.Entities;
 using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Data;
+using Domain.Modules.Quizzes.Data.Models;
 using Domain.Modules.Quizzes.Data.Specifications;
-using Domain.Modules.Quizzes.Factories.Interfaces;
 using Domain.Modules.Quizzes.Helpers;
+using Domain.Modules.Quizzes.Interfaces;
 using Domain.Modules.Quizzes.ValueObjects;
 
 namespace Domain.Modules.Quizzes.Models;
@@ -42,7 +42,7 @@ public class Quiz : BaseAggregateRoot
 
     public AggregateId OwnerId { get; } = null!;
     public string Title { get; private set; } = null!;
-    public string Description { get; private set; } = null!;
+    public string? Description { get; private set; }
     public Guid Code { get; private set; }
     public QuizSettings Settings { get; private set; } = null!;
     public IReadOnlyList<AggregateId> Users => _users;
