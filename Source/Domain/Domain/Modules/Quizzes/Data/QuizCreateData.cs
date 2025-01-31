@@ -10,7 +10,7 @@ public record QuizCreateData(
     string Title,
     string Description,
     QuizSettings Settings,
-    IReadOnlyCollection<QuizOpenEndedQuestionCreateData> OpenEndedQuestions,
+    IReadOnlyCollection<QuizOpenQuestionCreateData> OpenQuestions,
     IReadOnlyCollection<QuizSingleChoiceQuestionCreateData> SingleChoiceQuestions,
     IReadOnlyCollection<QuizMultipleChoiceQuestionCreateData> MultipleChoiceQuestions
 );

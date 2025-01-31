@@ -12,19 +12,9 @@ public class Quiz : BaseAggregateRoot
 {
     private IQuizSpecificationFactory _quizSpecificationFactory = null!;
     private readonly List<AggregateId> _users = [];
-    private List<OpenEndedQuestion> _openEndedQuestions = [];
-    private List<SingleChoiceQuestion> _singleChoiceQuestions = [];
-    private List<MultipleChoiceQuestion> _multipleChoiceQuestions = [];
-
-    public AggregateId OwnerId { get; } = null!;
-    public string Title { get; private set; } = null!;
-    public string Description { get; private set; } = null!;
-    public Guid Code { get; private set; }
-    public QuizSettings Settings { get; private set; } = null!;
-    public IReadOnlyList<AggregateId> Users => _users;
-    public IReadOnlyList<OpenEndedQuestion> OpenEndedQuestions => _openEndedQuestions;
-    public IReadOnlyList<SingleChoiceQuestion> SingleChoiceQuestions => _singleChoiceQuestions;
-    public IReadOnlyList<MultipleChoiceQuestion> MultipleChoiceQuestions => _multipleChoiceQuestions;
+    private List<QuizOpenQuestion> _openQuestions = [];
+    private List<QuizSingleChoiceQuestion> _singleChoiceQuestions = [];
+    private List<QuizMultipleChoiceQuestion> _multipleChoiceQuestions = [];
 
     internal Quiz(IQuizSpecificationFactory quizSpecificationFactory, QuizCreateData data)
         : base(data.Id)
@@ -41,7 +31,7 @@ public class Quiz : BaseAggregateRoot
         Settings = data.Settings;
 
         _users = [OwnerId];
-        _openEndedQuestions = data.OpenEndedQuestions.ToEntities(Id);
+        _openQuestions = data.OpenQuestions.ToEntities(Id);
         _singleChoiceQuestions = data.SingleChoiceQuestions.ToEntities(Id);
         _multipleChoiceQuestions = data.MultipleChoiceQuestions.ToEntities(Id);
     }
@@ -49,6 +39,16 @@ public class Quiz : BaseAggregateRoot
     private Quiz()
     {
     }
+
+    public AggregateId OwnerId { get; } = null!;
+    public string Title { get; private set; } = null!;
+    public string Description { get; private set; } = null!;
+    public Guid Code { get; private set; }
+    public QuizSettings Settings { get; private set; } = null!;
+    public IReadOnlyList<AggregateId> Users => _users;
+    public IReadOnlyList<QuizOpenQuestion> OpenQuestions => _openQuestions;
+    public IReadOnlyList<QuizSingleChoiceQuestion> SingleChoiceQuestions => _singleChoiceQuestions;
+    public IReadOnlyList<QuizMultipleChoiceQuestion> MultipleChoiceQuestions => _multipleChoiceQuestions;
 
     public void Update(QuizUpdateData data)
     {
@@ -60,7 +60,7 @@ public class Quiz : BaseAggregateRoot
         if (!Settings.Equals(data.Settings))
             Settings = data.Settings;
 
-        _openEndedQuestions.Adjust(Id, data.OpenEndedQuestions);
+        _openQuestions.Adjust(Id, data.OpenQuestions);
         _singleChoiceQuestions.Adjust(Id, data.SingleChoiceQuestions);
         _multipleChoiceQuestions.Adjust(Id, data.MultipleChoiceQuestions);
     }
@@ -89,7 +89,7 @@ public class Quiz : BaseAggregateRoot
     {
         _quizSpecificationFactory
             .AddNewQuestions(data.ToSpecificationData(
-                OwnerId, OpenEndedQuestions, SingleChoiceQuestions, MultipleChoiceQuestions))
+                OwnerId, OpenQuestions, SingleChoiceQuestions, MultipleChoiceQuestions))
             .ValidateAndThrow();
 
         if (!data.QuestionsCountInRunningQuiz.Equals(Settings.QuestionsCountInRunningQuiz))
@@ -101,7 +101,7 @@ public class Quiz : BaseAggregateRoot
                 NegativePoints: Settings.NegativePoints,
                 QuizCopyMode: Settings.QuizCopyMode);
 
-        _openEndedQuestions = OpenEndedQuestions.AddNewQuestions(Id, data.OpenEndedQuestions);
+        _openQuestions = OpenQuestions.AddNewQuestions(Id, data.OpenQuestions);
         _singleChoiceQuestions = SingleChoiceQuestions.AddNewQuestions(Id, data.SingleChoiceQuestions);
         _multipleChoiceQuestions = MultipleChoiceQuestions.AddNewQuestions(Id, data.MultipleChoiceQuestions);
     }

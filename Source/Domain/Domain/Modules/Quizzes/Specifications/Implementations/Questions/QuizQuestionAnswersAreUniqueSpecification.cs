@@ -5,10 +5,10 @@ using Domain.Modules.Quizzes.Data.Specifications.Questions;
 
 namespace Domain.Modules.Quizzes.Specifications.Implementations.Questions;
 
-internal class QuizQuestionAnswersAreUniqueSpecification : ISpecification<QuizClosedEndedQuestionSpecificationData>
+internal class QuizQuestionAnswersAreUniqueSpecification : ISpecification<QuizClosedQuestionSpecificationData>
 {
     public string FailureMessageCode => QuizMessageCodes.NonUniqueQuestionAnswers;
 
-    public bool IsValid(QuizClosedEndedQuestionSpecificationData data) =>
+    public bool IsValid(QuizClosedQuestionSpecificationData data) =>
         !data.Answers.ContainsDuplicates();
 }

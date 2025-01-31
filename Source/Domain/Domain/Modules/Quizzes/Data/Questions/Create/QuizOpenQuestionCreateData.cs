@@ -2,7 +2,7 @@
 
 namespace Domain.Modules.Quizzes.Data.Questions.Create;
 
-public record QuizOpenEndedQuestionCreateData(
+public record QuizOpenQuestionCreateData(
     int OrderNumber,
     string Text,
     string CorrectAnswer

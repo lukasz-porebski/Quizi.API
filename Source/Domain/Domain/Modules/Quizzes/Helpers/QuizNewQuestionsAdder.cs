@@ -7,22 +7,19 @@ namespace Domain.Modules.Quizzes.Helpers;
 
 internal static class QuizNewQuestionsAdder
 {
-    internal static List<OpenEndedQuestion> AddNewQuestions(
-        this IReadOnlyCollection<OpenEndedQuestion> oldOpenEndedQuestions,
+    internal static List<QuizOpenQuestion> AddNewQuestions(
+        this IReadOnlyCollection<QuizOpenQuestion> oldOpenQuestions,
         AggregateId id,
-        IReadOnlyCollection<QuizOpenEndedQuestionCreateData> newOpenEndedQuestions)
+        IReadOnlyCollection<QuizOpenQuestionCreateData> newOpenQuestions)
     {
-        var nextEntityNo = oldOpenEndedQuestions.NextNo();
-        var nextOrderNumber = oldOpenEndedQuestions.Max(q => q.OrderNumber) + 1;
+        var nextEntityNo = oldOpenQuestions.NextNo();
+        var nextOrderNumber = oldOpenQuestions.Max(q => q.OrderNumber) + 1;
 
-        var result = oldOpenEndedQuestions.Concat(
-            newOpenEndedQuestions.Select(q => new OpenEndedQuestion(
+        var result = oldOpenQuestions.Concat(
+            newOpenQuestions.Select(q => new QuizOpenQuestion(
                     id,
                     no: nextEntityNo++,
-                    new QuizOpenEndedQuestionCreateData(
-                        OrderNumber: nextOrderNumber++,
-                        q.Text,
-                        q.CorrectAnswer)
+                    data: q with { OrderNumber = nextOrderNumber++ }
                 )
             )
         );
@@ -30,8 +27,8 @@ internal static class QuizNewQuestionsAdder
         return result.ToList();
     }
 
-    internal static List<SingleChoiceQuestion> AddNewQuestions(
-        this IReadOnlyCollection<SingleChoiceQuestion> oldSingleChoiceQuestions,
+    internal static List<QuizSingleChoiceQuestion> AddNewQuestions(
+        this IReadOnlyCollection<QuizSingleChoiceQuestion> oldSingleChoiceQuestions,
         AggregateId id,
         IReadOnlyCollection<QuizSingleChoiceQuestionCreateData> newSingleChoiceQuestions)
     {
@@ -39,14 +36,10 @@ internal static class QuizNewQuestionsAdder
         var nextOrderNumber = oldSingleChoiceQuestions.Max(q => q.OrderNumber) + 1;
 
         var result = oldSingleChoiceQuestions.Concat(
-            newSingleChoiceQuestions.Select(q => new SingleChoiceQuestion(
+            newSingleChoiceQuestions.Select(q => new QuizSingleChoiceQuestion(
                     id,
                     no: nextEntityNo++,
-                    data: new QuizSingleChoiceQuestionCreateData(
-                        OrderNumber: nextOrderNumber++,
-                        q.Text,
-                        q.CorrectAnswer,
-                        q.WrongAnswers)
+                    data: q with { OrderNumber = nextOrderNumber++ }
                 )
             )
         );
@@ -54,8 +47,8 @@ internal static class QuizNewQuestionsAdder
         return result.ToList();
     }
 
-    internal static List<MultipleChoiceQuestion> AddNewQuestions(
-        this IReadOnlyCollection<MultipleChoiceQuestion> oldMultipleChoiceQuestions,
+    internal static List<QuizMultipleChoiceQuestion> AddNewQuestions(
+        this IReadOnlyCollection<QuizMultipleChoiceQuestion> oldMultipleChoiceQuestions,
         AggregateId id,
         IReadOnlyCollection<QuizMultipleChoiceQuestionCreateData> newMultipleChoiceQuestions)
     {
@@ -63,14 +56,10 @@ internal static class QuizNewQuestionsAdder
         var nextOrderNumber = oldMultipleChoiceQuestions.Max(q => q.OrderNumber) + 1;
 
         var result = oldMultipleChoiceQuestions.Concat(
-            newMultipleChoiceQuestions.Select(q => new MultipleChoiceQuestion(
+            newMultipleChoiceQuestions.Select(q => new QuizMultipleChoiceQuestion(
                     id,
                     no: nextEntityNo++,
-                    new QuizMultipleChoiceQuestionCreateData(
-                        OrderNumber: nextOrderNumber++,
-                        q.Text,
-                        q.CorrectAnswers,
-                        q.WrongAnswers)
+                    data: q with { OrderNumber = nextOrderNumber++ }
                 )
             )
         );

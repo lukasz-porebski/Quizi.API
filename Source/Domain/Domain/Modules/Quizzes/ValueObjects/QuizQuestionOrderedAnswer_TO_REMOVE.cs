@@ -5,14 +5,14 @@ using Domain.Modules.Quizzes.Extensions;
 
 namespace Domain.Modules.Quizzes.ValueObjects;
 
-public readonly struct QuizQuestionOrderedAnswer
+public readonly struct QuizQuestionOrderedAnswer_TO_REMOVE
 {
     public int OrderNumber { get; }
     public string Text { get; }
 
     private const int MinValue = 1;
 
-    public QuizQuestionOrderedAnswer(int orderNumber, string text)
+    public QuizQuestionOrderedAnswer_TO_REMOVE(int orderNumber, string text)
     {
         if (orderNumber < MinValue)
             throw new DomainLogicException(QuizMessageCodes.AnswerOrderNumberLessThanOne);

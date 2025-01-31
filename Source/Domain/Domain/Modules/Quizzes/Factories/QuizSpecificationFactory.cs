@@ -15,18 +15,18 @@ internal class QuizSpecificationFactory : IQuizSpecificationFactory
             .AndNextIfThisPass(new QuizOwnerSpecification(), v => v)
             .And(new QuizDeclaredQuestionsCountSpecification(), v => v)
             .AndNextIfThisPass(new QuizHasAtLeastOneQuestionSpecification(), v => v.Questions)
-            .AndCollection(new QuizQuestionAnswerMaximalOrderNumberIsEqualToQuestionsCountSpecification(), v => v.ClosedEndedQuestions)
-            .AndCollection(new QuizQuestionAnswerMinimalOrderNumberIsOneSpecification(), v => v.ClosedEndedQuestions)
-            .AndCollection(new QuizQuestionAnswerOrderNumberIsUniqueSpecification(), v => v.ClosedEndedQuestions)
-            .AndCollection(new QuizQuestionAnswersAreUniqueSpecification(), v => v.ClosedEndedQuestions)
+            .AndCollection(new QuizQuestionAnswerMaximalOrderNumberIsEqualToQuestionsCountSpecification(), v => v.ClosedQuestions)
+            .AndCollection(new QuizQuestionAnswerMinimalOrderNumberIsOneSpecification(), v => v.ClosedQuestions)
+            .AndCollection(new QuizQuestionAnswerOrderNumberIsUniqueSpecification(), v => v.ClosedQuestions)
+            .AndCollection(new QuizQuestionAnswersAreUniqueSpecification(), v => v.ClosedQuestions)
             .AndCollection(new QuizQuestionAnswersNotContainsQuestionTextSpecification(), v => v.Questions)
             .And(new QuizQuestionMaximalOrderNumberIsEqualToQuestionsCountSpecification(), v => v.Questions)
             .And(new QuizQuestionMinimalOrderNumberIsOneSpecification(), v => v.Questions)
             .And(new QuizQuestionOrderNumberIsUniqueSpecification(), v => v.Questions)
             .And(new QuizQuestionsAreUniqueSpecification(), v => v.Questions)
-            .AndCollection(new QuizQuestionTextSpecification(), v => v.ClosedEndedQuestions.Select(q => q.Text))
+            .AndCollection(new QuizQuestionTextSpecification(), v => v.ClosedQuestions.Select(q => q.Text))
             .AndCollection(new QuizSelectionQuestionHasAtLeastTwoAnswersSpecification(),
-                v => v.ClosedEndedQuestions.Select(q => q.Answers))
+                v => v.ClosedQuestions.Select(q => q.Answers))
             .Build();
 
     public SpecificationBuilderDirector AddUser(QuizAddUserSpecificationData specificationData) =>

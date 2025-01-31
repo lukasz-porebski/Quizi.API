@@ -1,10 +1,10 @@
-﻿using Domain.Modules.Quizzes.Data.Questions.Create;
+﻿using Domain.Modules.Quizzes.Enums;
 using Domain.Modules.Quizzes.Interfaces;
 
 namespace Domain.Modules.Quizzes.Data.Specifications.Questions;
 
-public record QuizSingleChoiceQuestionSpecificationData(
-    int OrderNumber,
+public record QuizClosedQuestionSpecificationData(
+    QuizClosedQuestionType Type,
     string Text,
     IReadOnlyCollection<IQuizClosedQuestionAnswer> Answers
-) : IQuizQuestionBaseSpecificationData;
+);

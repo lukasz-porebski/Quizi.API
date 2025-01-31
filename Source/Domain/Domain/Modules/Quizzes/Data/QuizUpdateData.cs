@@ -8,7 +8,7 @@ public record QuizUpdateData(
     string Title,
     string Description,
     QuizSettings Settings,
-    IReadOnlyCollection<QuizOpenEndedQuestionUpdateData> OpenEndedQuestions,
+    IReadOnlyCollection<QuizOpenQuestionUpdateData> OpenQuestions,
     IReadOnlyCollection<QuizSingleChoiceQuestionUpdateData> SingleChoiceQuestions,
     IReadOnlyCollection<QuizMultipleChoiceQuestionUpdateData> MultipleChoiceQuestions,
     AggregateId OwnerId

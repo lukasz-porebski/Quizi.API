@@ -6,22 +6,22 @@ namespace Domain.Modules.Quizzes.Data.Specifications.Questions;
 public record QuizQuestionsForAddNewQuestionsSpecificationData
 {
     public QuizQuestionsForAddNewQuestionsSpecificationData(
-        IReadOnlyCollection<QuizOpenEndedQuestionSpecificationData> newOpenEndedQuestions,
+        IReadOnlyCollection<QuizOpenQuestionSpecificationData> newOpenQuestions,
         IReadOnlyCollection<QuizSingleChoiceQuestionSpecificationData> newSingleChoiceQuestions,
         IReadOnlyCollection<QuizMultipleChoiceQuestionSpecificationData> newMultipleChoiceQuestions,
-        IReadOnlyCollection<OpenEndedQuestion> oldOpenEndedQuestions,
-        IReadOnlyCollection<SingleChoiceQuestion> oldSingleChoiceQuestions,
-        IReadOnlyCollection<MultipleChoiceQuestion> oldMultipleChoiceQuestions)
+        IReadOnlyCollection<QuizOpenQuestion> oldOpenQuestions,
+        IReadOnlyCollection<QuizSingleChoiceQuestion> oldSingleChoiceQuestions,
+        IReadOnlyCollection<QuizMultipleChoiceQuestion> oldMultipleChoiceQuestions)
     {
         NewQuestions = QuizSpecificationHelper.GetQuestions(
-            newOpenEndedQuestions, newSingleChoiceQuestions, newMultipleChoiceQuestions);
+            newOpenQuestions, newSingleChoiceQuestions, newMultipleChoiceQuestions);
         OldQuestions = QuizSpecificationHelper.GetQuestions(
-            oldOpenEndedQuestions, oldSingleChoiceQuestions, oldMultipleChoiceQuestions);
+            oldOpenQuestions, oldSingleChoiceQuestions, oldMultipleChoiceQuestions);
         NewClosedEndedQuestions = QuizSpecificationHelper.GetClosedEndedQuestions(
             newSingleChoiceQuestions, newMultipleChoiceQuestions);
     }
 
-    public IReadOnlyCollection<QuizClosedEndedQuestionSpecificationData> NewClosedEndedQuestions { get; }
+    public IReadOnlyCollection<QuizClosedQuestionSpecificationData> NewClosedEndedQuestions { get; }
     public IReadOnlyCollection<QuizQuestionSpecificationData> NewQuestions { get; }
     public IReadOnlyCollection<QuizQuestionSpecificationData> OldQuestions { get; }
 

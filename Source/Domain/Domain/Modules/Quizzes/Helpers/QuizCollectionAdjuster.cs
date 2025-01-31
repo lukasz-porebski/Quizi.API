@@ -10,10 +10,10 @@ namespace Domain.Modules.Quizzes.Helpers;
 
 internal static class QuizCollectionAdjuster
 {
-    internal static List<OpenEndedQuestion> Adjust(
-        this List<OpenEndedQuestion> current,
+    internal static List<QuizOpenQuestion> Adjust(
+        this List<QuizOpenQuestion> current,
         AggregateId id,
-        IReadOnlyCollection<QuizOpenEndedQuestionUpdateData> target)
+        IReadOnlyCollection<QuizOpenQuestionUpdateData> target)
     {
         var nextNo = current.NextNo();
 
@@ -26,14 +26,14 @@ internal static class QuizCollectionAdjuster
 
         current.AddRange(target
             .Where(t => t.EntityNo == null)
-            .Select(data => new OpenEndedQuestion(
-                id, nextNo++, new QuizOpenEndedQuestionCreateData(data.OrderNumber, data.Text, data.CorrectAnswer))));
+            .Select(data => new QuizOpenQuestion(
+                id, nextNo++, new QuizOpenQuestionCreateData(data.OrderNumber, data.Text, data.CorrectAnswer))));
 
         return current;
     }
 
-    internal static List<SingleChoiceQuestion> Adjust(
-        this List<SingleChoiceQuestion> current,
+    internal static List<QuizSingleChoiceQuestion> Adjust(
+        this List<QuizSingleChoiceQuestion> current,
         AggregateId id,
         IReadOnlyCollection<QuizSingleChoiceQuestionUpdateData> target)
     {
@@ -48,15 +48,23 @@ internal static class QuizCollectionAdjuster
 
         current.AddRange(target
             .Where(t => t.EntityNo == null)
-            .Select(data => new SingleChoiceQuestion(
-                id, nextNo++, new QuizSingleChoiceQuestionCreateData(
-                    data.OrderNumber, data.Text, data.CorrectAnswer, data.WrongAnswers))));
+            .Select(data =>
+                new QuizSingleChoiceQuestion(
+                    id,
+                    nextNo++,
+                    new QuizSingleChoiceQuestionCreateData(
+                        data.OrderNumber,
+                        data.Text,
+                        data.Answers.Select(a => new QuizClosedQuestionAnswerCreateData(a.OrderNumber, a.Text, a.IsCorrect)).ToArray()
+                    )
+                )
+            ));
 
         return current;
     }
 
-    internal static List<MultipleChoiceQuestion> Adjust(
-        this List<MultipleChoiceQuestion> current,
+    internal static List<QuizMultipleChoiceQuestion> Adjust(
+        this List<QuizMultipleChoiceQuestion> current,
         AggregateId id,
         IReadOnlyCollection<QuizMultipleChoiceQuestionUpdateData> target)
     {
@@ -71,9 +79,18 @@ internal static class QuizCollectionAdjuster
 
         current.AddRange(target
             .Where(t => t.EntityNo == null)
-            .Select(data => new MultipleChoiceQuestion(
-                id, nextNo++, new QuizMultipleChoiceQuestionCreateData(
-                    data.OrderNumber, data.Text, data.CorrectAnswers, data.WrongAnswers))));
+            .Select(data =>
+                new QuizMultipleChoiceQuestion(
+                    id,
+                    nextNo++,
+                    new QuizMultipleChoiceQuestionCreateData(
+                        data.OrderNumber,
+                        data.Text,
+                        data.Answers.Select(a => new QuizClosedQuestionAnswerCreateData(a.OrderNumber, a.Text, a.IsCorrect)).ToArray()
+                    )
+                )
+            )
+        );
 
         return current;
     }

@@ -3,7 +3,7 @@ using Domain.Modules.Quizzes.Interfaces;
 
 namespace Domain.Modules.Quizzes.Data.Questions.Update;
 
-public record QuizOpenEndedQuestionUpdateData(
+public record QuizOpenQuestionUpdateData(
     EntityNo? EntityNo,
     int OrderNumber,
     string Text,

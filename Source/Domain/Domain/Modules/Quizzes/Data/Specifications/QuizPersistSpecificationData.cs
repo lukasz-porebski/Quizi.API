@@ -11,12 +11,12 @@ public class QuizPersistSpecificationData : IQuizOwnerSpecification, IQuizQuesti
     public int QuestionsCountInRunningQuiz { get; }
     public AggregateId OwnerId { get; }
     public AggregateId UserId { get; }
-    public IReadOnlyCollection<QuizClosedEndedQuestionSpecificationData> ClosedEndedQuestions { get; }
+    public IReadOnlyCollection<QuizClosedQuestionSpecificationData> ClosedQuestions { get; }
     public IReadOnlyCollection<QuizQuestionSpecificationData> Questions { get; }
 
     internal QuizPersistSpecificationData(
         int questionsCountInRunningQuiz,
-        IReadOnlyCollection<QuizOpenEndedQuestionSpecificationData> openEndedQuestions,
+        IReadOnlyCollection<QuizOpenQuestionSpecificationData> openQuestions,
         IReadOnlyCollection<QuizSingleChoiceQuestionSpecificationData> singleChoiceQuestions,
         IReadOnlyCollection<QuizMultipleChoiceQuestionSpecificationData> multipleChoiceQuestions,
         AggregateId owner,
@@ -25,10 +25,10 @@ public class QuizPersistSpecificationData : IQuizOwnerSpecification, IQuizQuesti
         QuestionsCountInRunningQuiz = questionsCountInRunningQuiz;
         OwnerId = owner;
         UserId = userDeclaredAsOwner;
-        ClosedEndedQuestions = QuizSpecificationHelper.GetClosedEndedQuestions(
+        ClosedQuestions = QuizSpecificationHelper.GetClosedEndedQuestions(
             singleChoiceQuestions, multipleChoiceQuestions);
         Questions = QuizSpecificationHelper.GetQuestions(
-            openEndedQuestions, singleChoiceQuestions, multipleChoiceQuestions);
+            openQuestions, singleChoiceQuestions, multipleChoiceQuestions);
         QuestionsCount = Questions.Count;
     }
 }

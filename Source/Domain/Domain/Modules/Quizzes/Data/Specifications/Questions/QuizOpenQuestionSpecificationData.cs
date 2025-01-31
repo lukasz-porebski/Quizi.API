@@ -2,7 +2,7 @@
 
 namespace Domain.Modules.Quizzes.Data.Specifications.Questions;
 
-public record QuizOpenEndedQuestionSpecificationData(
+public record QuizOpenQuestionSpecificationData(
     int OrderNumber,
     string Text,
     string CorrectAnswer

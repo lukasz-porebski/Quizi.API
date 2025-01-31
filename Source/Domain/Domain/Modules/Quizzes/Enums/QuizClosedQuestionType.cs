@@ -1,6 +1,6 @@
 ﻿namespace Domain.Modules.Quizzes.Enums;
 
-public enum QuizClosedEndedQuestionType
+public enum QuizClosedQuestionType
 {
     SingleChoice = 1,
     MultipleChoice

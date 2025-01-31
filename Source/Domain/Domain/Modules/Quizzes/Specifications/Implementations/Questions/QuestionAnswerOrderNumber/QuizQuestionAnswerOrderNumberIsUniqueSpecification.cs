@@ -5,11 +5,11 @@ using Domain.Modules.Quizzes.Data.Specifications.Questions;
 
 namespace Domain.Modules.Quizzes.Specifications.Implementations.Questions.QuestionAnswerOrderNumber;
 
-internal class QuizQuestionAnswerOrderNumberIsUniqueSpecification : ISpecification<QuizClosedEndedQuestionSpecificationData>
+internal class QuizQuestionAnswerOrderNumberIsUniqueSpecification : ISpecification<QuizClosedQuestionSpecificationData>
 {
     public string FailureMessageCode => QuizMessageCodes.QuestionAnswerOrderNumberIsUnique;
 
-    public bool IsValid(QuizClosedEndedQuestionSpecificationData data) =>
+    public bool IsValid(QuizClosedQuestionSpecificationData data) =>
         !data.Answers
             .Select(q => q.OrderNumber)
             .ContainsDuplicates();
