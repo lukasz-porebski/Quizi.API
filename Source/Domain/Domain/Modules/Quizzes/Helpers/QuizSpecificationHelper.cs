@@ -7,7 +7,7 @@ namespace Domain.Modules.Quizzes.Helpers;
 
 internal static class QuizSpecificationHelper
 {
-    internal static IReadOnlyCollection<QuizClosedQuestionSpecificationData> GetClosedEndedQuestions(
+    internal static IReadOnlyCollection<QuizClosedQuestionSpecificationData> GetClosedQuestions(
         IReadOnlyCollection<QuizSingleChoiceQuestionSpecificationData> singleChoiceQuestions,
         IReadOnlyCollection<QuizMultipleChoiceQuestionSpecificationData> multipleChoiceQuestions) =>
         singleChoiceQuestions

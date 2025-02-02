@@ -10,8 +10,7 @@ namespace Domain.Modules.Quizzes;
 
 internal static class QuizMapper
 {
-    internal static List<QuizOpenQuestion> ToEntities(
-        this IReadOnlyCollection<QuizOpenQuestionCreateData> source, AggregateId id)
+    internal static List<QuizOpenQuestion> ToEntities(this IReadOnlyCollection<QuizOpenQuestionCreateData> source, AggregateId id)
     {
         var firstEntityId = EntityNo.Generate();
 

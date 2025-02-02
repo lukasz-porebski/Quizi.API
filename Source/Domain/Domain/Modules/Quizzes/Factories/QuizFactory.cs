@@ -4,14 +4,8 @@ using Domain.Modules.Quizzes.Models;
 
 namespace Domain.Modules.Quizzes.Factories;
 
-public class QuizFactory : IQuizFactory
+public class QuizFactory(IQuizSpecificationFactory specificationFactory) : IQuizFactory
 {
-    private readonly IQuizSpecificationFactory _quizSpecificationFactory;
-
-    public QuizFactory(IQuizSpecificationFactory quizSpecificationFactory)
-    {
-        _quizSpecificationFactory = quizSpecificationFactory;
-    }
-
-    public Quiz Create(QuizCreateData data) => new(_quizSpecificationFactory, data);
+    public Quiz Create(QuizCreateData data) =>
+        new(data, specificationFactory);
 }

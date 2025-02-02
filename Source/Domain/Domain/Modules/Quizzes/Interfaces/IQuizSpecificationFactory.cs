@@ -5,8 +5,6 @@ namespace Domain.Modules.Quizzes.Interfaces;
 
 public interface IQuizSpecificationFactory
 {
-    SpecificationBuilderDirector QuizPersist(QuizPersistSpecificationData specificationData);
-    SpecificationBuilderDirector AddUser(QuizAddUserSpecificationData specificationData);
-    SpecificationBuilderDirector RemoveUser(QuizRemoveUserSpecificationData specificationData);
-    SpecificationBuilderDirector AddNewQuestions(QuizAddNewQuestionsSpecificationData specificationData);
+    SpecificationBuilderDirector QuizPersist(QuizPersistSpecificationData data);
+    SpecificationBuilderDirector AddNewQuestions(QuizAddNewQuestionsSpecificationData data);
 }

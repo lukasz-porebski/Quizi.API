@@ -4,9 +4,7 @@ internal static class QuizMessageCodes
 {
     public const string NonUniqueQuestions = nameof(NonUniqueQuestions);
     public const string NonUniqueQuestionAnswers = nameof(NonUniqueQuestionAnswers);
-    public const string UserHasThisQuiz = nameof(UserHasThisQuiz);
     public const string IncorrectDescriptionLength = nameof(IncorrectDescriptionLength);
-    public const string UserNotHasThisQuiz = nameof(UserNotHasThisQuiz);
     public const string IncorrectTitleLength = nameof(IncorrectTitleLength);
     public const string AnswersContainsQuestionText = nameof(AnswersContainsQuestionText);
     public const string QuestionTextIsNotDefined = nameof(QuestionTextIsNotDefined);
@@ -20,13 +18,11 @@ internal static class QuizMessageCodes
     public const string QuestionMaximalOrderNumberIsEqualToQuestionsCount = nameof(QuestionMaximalOrderNumberIsEqualToQuestionsCount);
     public const string QuestionOrderNumberIsUnique = nameof(QuestionOrderNumberIsUnique);
     public const string QuestionAnswerMinimalOrderNumberIsNotOne = nameof(QuestionAnswerMinimalOrderNumberIsNotOne);
+    public const string QuestionAnswerOrderNumberIsUnique = nameof(QuestionAnswerOrderNumberIsUnique);
+    public const string AccessDenied = nameof(AccessDenied);
+    public const string IncorrectDeclaredQuestionsCount = nameof(IncorrectDeclaredQuestionsCount);
+    public const string OneOfNewQuestionsIsAlreadyAdded = nameof(OneOfNewQuestionsIsAlreadyAdded);
 
     public const string QuestionAnswerMaximalOrderNumberIsEqualToQuestionsCount =
         nameof(QuestionAnswerMaximalOrderNumberIsEqualToQuestionsCount);
-
-    public const string QuestionAnswerOrderNumberIsUnique = nameof(QuestionAnswerOrderNumberIsUnique);
-    public const string AccessDenied = nameof(AccessDenied);
-    public const string UserToRemoveIsOwner = nameof(UserToRemoveIsOwner);
-    public const string IncorrectDeclaredQuestionsCount = nameof(IncorrectDeclaredQuestionsCount);
-    public const string OneOfNewQuestionsIsAlreadyAdded = nameof(OneOfNewQuestionsIsAlreadyAdded);
 }

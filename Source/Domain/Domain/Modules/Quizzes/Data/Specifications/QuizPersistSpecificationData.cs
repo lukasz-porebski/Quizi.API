@@ -2,10 +2,11 @@
 using Domain.Modules.Quizzes.Data.Specifications.Questions;
 using Domain.Modules.Quizzes.Helpers;
 using Domain.Modules.Quizzes.Interfaces;
+using Domain.Shared.Interfaces;
 
 namespace Domain.Modules.Quizzes.Data.Specifications;
 
-public class QuizPersistSpecificationData : IQuizOwnerSpecification, IQuizQuestionsCountSpecification
+public class QuizPersistSpecificationData : IOwnerSpecification, IQuizQuestionsCountSpecification
 {
     public int QuestionsCount { get; }
     public int QuestionsCountInRunningQuiz { get; }
@@ -31,7 +32,7 @@ public class QuizPersistSpecificationData : IQuizOwnerSpecification, IQuizQuesti
         UserId = userDeclaredAsOwner;
         Description = description;
         Duration = duration;
-        ClosedQuestions = QuizSpecificationHelper.GetClosedEndedQuestions(singleChoiceQuestions, multipleChoiceQuestions);
+        ClosedQuestions = QuizSpecificationHelper.GetClosedQuestions(singleChoiceQuestions, multipleChoiceQuestions);
         Questions = QuizSpecificationHelper.GetQuestions(openQuestions, singleChoiceQuestions, multipleChoiceQuestions);
         QuestionsCount = Questions.Count;
     }

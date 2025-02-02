@@ -1,8 +1,8 @@
 ﻿using Common.Domain.ValueObjects;
 
-namespace Domain.Modules.Quizzes.Interfaces;
+namespace Domain.Shared.Interfaces;
 
-public interface IQuizOwnerSpecification
+public interface IOwnerSpecification
 {
     AggregateId OwnerId { get; }
     AggregateId UserId { get; }

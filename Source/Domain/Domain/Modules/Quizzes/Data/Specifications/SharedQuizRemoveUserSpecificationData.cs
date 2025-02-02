@@ -1,14 +1,14 @@
 ﻿using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Interfaces;
+using Domain.Shared.Interfaces;
 
 namespace Domain.Modules.Quizzes.Data.Specifications;
 
-public record QuizRemoveUserSpecificationData(
+public record SharedQuizRemoveUserSpecificationData(
     IReadOnlyCollection<AggregateId> CurrentUserIds,
     AggregateId OwnerId,
     AggregateId IdDeclaredAsOwner,
     AggregateId IdOfUserToRemove
-) : IQuizOwnerSpecification
+) : IOwnerSpecification
 {
-    AggregateId IQuizOwnerSpecification.UserId => IdDeclaredAsOwner;
+    AggregateId IOwnerSpecification.UserId => IdDeclaredAsOwner;
 }

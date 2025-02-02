@@ -17,11 +17,11 @@ public record QuizQuestionsForAddNewQuestionsSpecificationData
             newOpenQuestions, newSingleChoiceQuestions, newMultipleChoiceQuestions);
         OldQuestions = QuizSpecificationHelper.GetQuestions(
             oldOpenQuestions, oldSingleChoiceQuestions, oldMultipleChoiceQuestions);
-        NewClosedEndedQuestions = QuizSpecificationHelper.GetClosedEndedQuestions(
+        NewClosedQuestions = QuizSpecificationHelper.GetClosedQuestions(
             newSingleChoiceQuestions, newMultipleChoiceQuestions);
     }
 
-    public IReadOnlyCollection<QuizClosedQuestionSpecificationData> NewClosedEndedQuestions { get; }
+    public IReadOnlyCollection<QuizClosedQuestionSpecificationData> NewClosedQuestions { get; }
     public IReadOnlyCollection<QuizQuestionSpecificationData> NewQuestions { get; }
     public IReadOnlyCollection<QuizQuestionSpecificationData> OldQuestions { get; }
 

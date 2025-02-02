@@ -1,11 +1,11 @@
 ﻿using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Interfaces;
+using Domain.Shared.Interfaces;
 
 namespace Domain.Modules.Quizzes.Data.Specifications;
 
-public record QuizAddUserSpecificationData(
+public record SharedQuizAddUserSpecificationData(
     IReadOnlyCollection<AggregateId> CurrentUsers,
     AggregateId NewUser,
     AggregateId OwnerId,
     AggregateId UserId
-) : IQuizOwnerSpecification;
+) : IOwnerSpecification;
