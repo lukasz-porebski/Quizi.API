@@ -9,5 +9,5 @@ internal class QuizQuestionAnswerMinOrderNumberIsOneSpecification : ISpecificati
     public string FailureMessageCode => QuizMessageCodes.QuestionAnswerMinimalOrderNumberIsNotOne;
 
     public bool IsValid(QuizClosedQuestionPersistData data) =>
-        data.Answers.Min(q => q.OrderNumber).Equals(1);
+        data.Answers.Min(q => q.Data.OrderNumber).Equals(1);
 }

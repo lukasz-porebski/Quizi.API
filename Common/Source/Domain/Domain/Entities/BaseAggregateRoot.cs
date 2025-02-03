@@ -15,7 +15,7 @@ public abstract class BaseAggregateRoot : IEquatable<BaseAggregateRoot>
     {
     }
 
-    public AggregateId Id { get; }
+    public AggregateId Id { get; private set; }
     public AggregateStateChangeInfo CreationInto { get; private set; } = AggregateStateChangeInfo.Empty;
     public AggregateStateChangeInfo? UpdateInfo { get; private set; }
     public AggregateStateChangeInfo? RemovalInfo { get; private set; }

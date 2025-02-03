@@ -46,15 +46,27 @@ public static class EntityTypeBuilderExtensions
                 o.Property(p => p.At).HasColumnName($"{prefix}At");
             });
 
-    public static void ConfigureChildren<T, TChild>(
+    public static void ConfigureEntities<T, TChild>(
         this EntityTypeBuilder<T> builder, Expression<Func<T, IEnumerable<TChild>>> navigationExpression)
         where T : BaseAggregateRoot
         where TChild : BaseEntityCore =>
-        builder.HasMany(navigationExpression!).WithOne().HasForeignKey(nameof(BaseAggregateRoot.Id)).HasPrincipalKey(e => e.Id);
+        builder.HasMany(navigationExpression!)
+            .WithOne()
+            .HasForeignKey(nameof(BaseAggregateRoot.Id))
+            .HasPrincipalKey(nameof(BaseAggregateRoot.Id));
+
+    public static void ConfigureSubEntities<T, TChild>(
+        this EntityTypeBuilder<T> builder, Expression<Func<T, IEnumerable<TChild>>> navigationExpression)
+        where T : BaseEntity
+        where TChild : BaseSubEntity =>
+        builder.HasMany(navigationExpression!)
+            .WithOne()
+            .HasForeignKey(nameof(BaseAggregateRoot.Id), nameof(BaseEntity.No))
+            .HasPrincipalKey(nameof(BaseAggregateRoot.Id), nameof(BaseEntity.No));
 
     public static void ConfigureOneToMany<TOne, TMany>(
         this EntityTypeBuilder<TOne> builder, Expression<Func<TOne, object?>> foreignKeyExpression)
         where TOne : class
         where TMany : class =>
-        builder.HasOne<TMany>().WithMany().HasForeignKey(foreignKeyExpression);
+        builder.HasOne<TMany>().WithMany().HasForeignKey(foreignKeyExpression).OnDelete(DeleteBehavior.Restrict);
 }

@@ -30,7 +30,8 @@ public class QuizSpecificationFactory : IQuizSpecificationFactory
             .And(new QuizQuestionOrderNumberIsUniqueSpecification(), v => v.Questions)
             .And(new QuizQuestionsAreUniqueSpecification(), v => v.Questions)
             .AndCollection(new QuizQuestionTextSpecification(), v => v.ClosedQuestions.Select(q => q.Text))
-            .AndCollection(new QuizSelectionQuestionHasAtLeastTwoAnswersSpecification(), v => v.ClosedQuestions.Select(q => q.Answers))
+            .AndCollection(new QuizSelectionQuestionHasAtLeastTwoAnswersSpecification(),
+                v => v.ClosedQuestions.Select(q => q.Answers.Select(a => a.Data).ToArray()))
             .AndCollection(new QuizQuestionAnswerTextSpecification(), v => v.Questions.SelectMany(q => q.Answers))
             .Build();
 
@@ -51,7 +52,7 @@ public class QuizSpecificationFactory : IQuizSpecificationFactory
             .And(new QuizQuestionsAreUniqueSpecification(), v => v.Questions.NewQuestions)
             .And(new QuizAddNewQuestionsSpecification(), v => v.Questions)
             .AndCollection(new QuizQuestionTextSpecification(), v => v.Questions.NewClosedQuestions.Select(q => q.Text))
-            .AndCollection(new QuizSelectionQuestionHasAtLeastTwoAnswersSpecification(), 
-                v => v.Questions.NewClosedQuestions.Select(q => q.Answers))
+            .AndCollection(new QuizSelectionQuestionHasAtLeastTwoAnswersSpecification(),
+                v => v.Questions.NewClosedQuestions.Select(q => q.Answers.Select(a => a.Data).ToArray()))
             .Build();
 }

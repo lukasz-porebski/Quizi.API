@@ -3,6 +3,7 @@ using Common.Shared.Extensions;
 using Domain.Modules.Quizzes.Data.Models.Sub;
 using Domain.Modules.Quizzes.Data.Specifications.Sub;
 using Domain.Modules.Quizzes.Models;
+using Domain.Modules.Quizzes.Models.Base;
 
 namespace Domain.Modules.Quizzes.Helpers;
 
@@ -14,7 +15,7 @@ internal static class QuizSpecificationHelper
         IReadOnlyCollection<QuizMultipleChoiceQuestion> oldMultipleChoiceQuestions)
     {
         var openQuestions = oldOpenQuestions
-            .Select(q => new QuizOpenQuestionPersistData(q.OrderNumber, q.Text, q.CorrectAnswer))
+            .Select(q => new QuizOpenQuestionPersistData(q.OrderNumber, q.Text, q.Answer))
             .ToArray();
 
         var singleChoiceQuestions = oldSingleChoiceQuestions
@@ -38,7 +39,7 @@ internal static class QuizSpecificationHelper
             .Select(question => new QuizQuestionSpecificationData(
                 question.OrderNumber,
                 question.Text,
-                new List<string> { question.CorrectAnswer }))
+                new List<string> { question.Answer }))
             .Concat(singleChoiceQuestions.Select(question => new QuizQuestionSpecificationData(
                 question.OrderNumber,
                 question.Text,
@@ -66,6 +67,6 @@ internal static class QuizSpecificationHelper
         return true;
     }
 
-    private static EntityPersistData<QuizClosedQuestionAnswerPersistData> ToPersistData(this QuizClosedQuestionAnswer source) =>
+    private static EntityPersistData<QuizClosedQuestionAnswerPersistData> ToPersistData(this BaseQuizClosedQuestionAnswer source) =>
         new(source.SubNo, new QuizClosedQuestionAnswerPersistData(source.OrderNumber, source.Text, source.IsCorrect));
 }

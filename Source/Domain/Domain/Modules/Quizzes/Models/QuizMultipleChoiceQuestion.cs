@@ -8,14 +8,14 @@ namespace Domain.Modules.Quizzes.Models;
 
 public class QuizMultipleChoiceQuestion : BaseEntity
 {
-    private readonly List<QuizClosedQuestionAnswer> _answers = [];
+    private readonly List<QuizMultipleChoiceQuestionAnswer> _answers = [];
 
     internal QuizMultipleChoiceQuestion(AggregateId id, EntityNo no, QuizClosedQuestionPersistData data) : base(id, no)
     {
         OrderNumber = data.OrderNumber;
         Text = data.Text;
         var subNo = EntityNo.Generate();
-        _answers.Set(data.Answers.Select(a => new QuizClosedQuestionAnswer(id, no, subNo++, a.Data)));
+        _answers.Set(data.Answers.Select(a => new QuizMultipleChoiceQuestionAnswer(id, no, subNo++, a.Data)));
     }
 
     private QuizMultipleChoiceQuestion()
@@ -24,7 +24,7 @@ public class QuizMultipleChoiceQuestion : BaseEntity
 
     public int OrderNumber { get; private set; }
     public string Text { get; private set; } = null!;
-    public IReadOnlyList<QuizClosedQuestionAnswer> Answers => _answers;
+    public IReadOnlyList<QuizMultipleChoiceQuestionAnswer> Answers => _answers;
 
     internal void Update(QuizClosedQuestionPersistData data)
     {
@@ -33,7 +33,7 @@ public class QuizMultipleChoiceQuestion : BaseEntity
 
         _answers.ApplyChanges(
             data.Answers,
-            (subNo, d) => new QuizClosedQuestionAnswer(Id, No, subNo, d.Data),
+            (subNo, d) => new QuizMultipleChoiceQuestionAnswer(Id, No, subNo, d.Data),
             (a, d) => a.Update(d.Data)
         );
     }

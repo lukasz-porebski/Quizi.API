@@ -11,6 +11,6 @@ internal class QuizQuestionAnswerOrderNumberIsUniqueSpecification : ISpecificati
 
     public bool IsValid(QuizClosedQuestionPersistData data) =>
         !data.Answers
-            .Select(q => q.OrderNumber)
+            .Select(q => q.Data.OrderNumber)
             .ContainsDuplicates();
 }

@@ -10,7 +10,7 @@ public class QuizOpenQuestion : BaseEntity
     {
         OrderNumber = data.OrderNumber;
         Text = data.Text;
-        CorrectAnswer = data.CorrectAnswer;
+        Answer = data.Answer;
     }
 
     private QuizOpenQuestion()
@@ -19,15 +19,15 @@ public class QuizOpenQuestion : BaseEntity
 
     public int OrderNumber { get; private set; }
     public string Text { get; private set; } = null!;
-    public string CorrectAnswer { get; private set; } = null!;
+    public string Answer { get; private set; } = null!;
 
     internal void Update(QuizOpenQuestionPersistData data)
     {
         if (OrderNumber.Equals(data.OrderNumber)
             && Text.Equals(data.Text)
-            && CorrectAnswer.Equals(data.CorrectAnswer))
+            && Answer.Equals(data.Answer))
             return;
 
-        CorrectAnswer = data.CorrectAnswer;
+        Answer = data.Answer;
     }
 }

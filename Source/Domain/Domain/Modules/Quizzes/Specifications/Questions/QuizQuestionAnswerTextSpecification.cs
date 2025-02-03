@@ -5,8 +5,8 @@ namespace Domain.Modules.Quizzes.Specifications.Questions;
 
 internal class QuizQuestionAnswerTextSpecification : ISpecification<string>
 {
-    public string FailureMessageCode => QuizMessageCodes.AnswerIsEmpty;
+    public string FailureMessageCode => QuizMessageCodes.IncorrectQuestionAnswerTextLength;
 
     public bool IsValid(string data) =>
-        data.Any();
+        data.Length is >= 1 and <= QuizConstants.MaxQuestionTextLength;
 }

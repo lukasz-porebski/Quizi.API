@@ -10,5 +10,5 @@ internal class QuizQuestionAnswerMaxOrderNumberIsEqualToQuestionsCountSpecificat
     public string FailureMessageCode => QuizMessageCodes.QuestionAnswerMaximalOrderNumberIsEqualToQuestionsCount;
 
     public bool IsValid(QuizClosedQuestionPersistData data) =>
-        data.Answers.Max(q => q.OrderNumber).Equals(data.Answers.Count);
+        data.Answers.Max(q => q.Data.OrderNumber).Equals(data.Answers.Count);
 }

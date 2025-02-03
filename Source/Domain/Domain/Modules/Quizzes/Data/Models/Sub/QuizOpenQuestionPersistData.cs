@@ -3,5 +3,5 @@
 public record QuizOpenQuestionPersistData(
     int OrderNumber,
     string Text,
-    string CorrectAnswer
+    string Answer
 );

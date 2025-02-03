@@ -10,5 +10,5 @@ public record QuizSettings(
     bool RandomQuestions,
     bool RandomAnswers,
     bool NegativePoints,
-    QuizCopyMode QuizCopyMode
+    QuizCopyMode CopyMode
 );
