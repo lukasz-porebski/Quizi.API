@@ -1,5 +1,4 @@
 using Common.Domain.Entities;
-using Common.Domain.Extensions;
 using Common.Domain.ValueObjects;
 using Domain.Modules.SharedQuizzes.Data;
 using Domain.Modules.SharedQuizzes.Interfaces;
@@ -35,7 +34,7 @@ public class SharedQuiz : BaseAggregateRoot
             _users.Select(u => u.UserId).ToArray(), userId, OwnerId, ownerId);
         _specificationFactory.AddUser(specificationData).ValidateAndThrow();
 
-        _users.Add(new SharedQuizUser(Id, _users.NextNo(), userId));
+        _users.Add(new SharedQuizUser(Id, userId));
     }
 
     public void RemoveUser(AggregateId ownerId, AggregateId userIdToRemove)

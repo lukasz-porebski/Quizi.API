@@ -3,9 +3,9 @@ using Common.Domain.ValueObjects;
 
 namespace Domain.Modules.SharedQuizzes.Models;
 
-public class SharedQuizUser : BaseEntity
+public class SharedQuizUser : BaseEntityCore
 {
-    internal SharedQuizUser(AggregateId id, EntityNo no, AggregateId userId) : base(id, no)
+    internal SharedQuizUser(AggregateId id, AggregateId userId) : base(id)
     {
         UserId = userId;
     }
