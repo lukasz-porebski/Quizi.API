@@ -8,7 +8,7 @@ namespace Domain.Modules.Users.Models;
 
 public class User : BaseAggregateRoot
 {
-    public User(
+    internal User(
         UserCreationData data,
         IUserSpecificationFactory specificationFactory,
         IHasher hasher)
