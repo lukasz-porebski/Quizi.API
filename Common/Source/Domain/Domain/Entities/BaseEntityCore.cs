@@ -8,5 +8,5 @@ public abstract class BaseEntityCore(AggregateId id)
     {
     }
 
-    private AggregateId Id { get; set; } = id;
+    protected AggregateId Id { get; private set; } = id;
 }

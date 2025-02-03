@@ -1,4 +1,5 @@
-﻿using Domain.Modules.Quizzes.Data.Models;
+﻿using Common.Domain.ValueObjects;
+using Domain.Modules.Quizzes.Data.Models;
 using Domain.Modules.Quizzes.Interfaces;
 using Domain.Modules.Quizzes.Models;
 
@@ -6,6 +7,6 @@ namespace Domain.Modules.Quizzes.Factories;
 
 public class QuizFactory(IQuizSpecificationFactory specificationFactory) : IQuizFactory
 {
-    public Quiz Create(QuizCreateData data) =>
-        new(data, specificationFactory);
+    public Quiz Create(AggregateId id, QuizPersistData data) =>
+        new(id, data, specificationFactory);
 }

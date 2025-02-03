@@ -1,13 +1,12 @@
 ﻿using Common.Domain.Entities;
 using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Data.Models.Questions.Create;
-using Domain.Modules.Quizzes.Data.Models.Questions.Update;
+using Domain.Modules.Quizzes.Data.Models.Sub;
 
 namespace Domain.Modules.Quizzes.Models;
 
 public class QuizOpenQuestion : BaseEntity
 {
-    internal QuizOpenQuestion(AggregateId id, EntityNo no, QuizOpenQuestionCreateData data) : base(id, no)
+    internal QuizOpenQuestion(AggregateId id, EntityNo no, QuizOpenQuestionPersistData data) : base(id, no)
     {
         OrderNumber = data.OrderNumber;
         Text = data.Text;
@@ -22,7 +21,7 @@ public class QuizOpenQuestion : BaseEntity
     public string Text { get; private set; } = null!;
     public string CorrectAnswer { get; private set; } = null!;
 
-    internal void Update(QuizOpenQuestionUpdateData data)
+    internal void Update(QuizOpenQuestionPersistData data)
     {
         if (OrderNumber.Equals(data.OrderNumber)
             && Text.Equals(data.Text)

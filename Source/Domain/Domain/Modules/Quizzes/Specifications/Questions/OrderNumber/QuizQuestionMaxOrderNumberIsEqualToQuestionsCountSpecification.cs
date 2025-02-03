@@ -1,6 +1,6 @@
 ﻿using Common.Domain.Specification;
 using Domain.Modules.Quizzes.Constants;
-using Domain.Modules.Quizzes.Data.Specifications.Questions;
+using Domain.Modules.Quizzes.Data.Specifications.Sub;
 
 namespace Domain.Modules.Quizzes.Specifications.Questions.OrderNumber;
 

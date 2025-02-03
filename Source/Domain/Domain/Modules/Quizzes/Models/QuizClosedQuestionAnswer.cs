@@ -1,17 +1,16 @@
 using Common.Domain.Entities;
 using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Data.Models.Questions.Create;
-using Domain.Modules.Quizzes.Interfaces;
+using Domain.Modules.Quizzes.Data.Models.Sub;
 
 namespace Domain.Modules.Quizzes.Models;
 
-public class QuizClosedQuestionAnswer : BaseEntity, IQuizClosedQuestionAnswer
+public class QuizClosedQuestionAnswer : BaseEntity
 {
     internal QuizClosedQuestionAnswer(
         AggregateId id,
         EntityNo no,
         EntityNo subNo,
-        QuizClosedQuestionAnswerCreateData data
+        QuizClosedQuestionAnswerPersistData data
     ) : base(id, no)
     {
         SubNo = subNo;
@@ -28,4 +27,11 @@ public class QuizClosedQuestionAnswer : BaseEntity, IQuizClosedQuestionAnswer
     public int OrderNumber { get; private set; }
     public string Text { get; private set; } = null!;
     public bool IsCorrect { get; private set; }
+
+    internal void Update(QuizClosedQuestionAnswerPersistData data)
+    {
+        OrderNumber = data.OrderNumber;
+        Text = data.Text;
+        IsCorrect = data.IsCorrect;
+    }
 }
