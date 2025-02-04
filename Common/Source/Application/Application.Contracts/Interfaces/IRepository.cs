@@ -20,7 +20,7 @@ public interface IRepository<TAggregateRoot>
     Task<IReadOnlyDictionary<AggregateId, bool>> ExistsAsync(IReadOnlyCollection<AggregateId> ids, CancellationToken cancellationToken);
     Task PersistAsync(IReadOnlyCollection<TAggregateRoot> aggregateRoots, CancellationToken cancellationToken, bool save = true);
     Task PersistAsync(TAggregateRoot aggregateRoot, CancellationToken cancellationToken, bool save = true);
-    Task Remove(IReadOnlyCollection<TAggregateRoot> aggregateRoots, CancellationToken cancellationToken, bool save = true);
-    Task Remove(TAggregateRoot aggregateRoot, CancellationToken cancellationToken, bool save = true);
+    Task RemoveAsync(IReadOnlyCollection<TAggregateRoot> aggregateRoots, CancellationToken cancellationToken, bool save = true);
+    Task RemoveAsync(TAggregateRoot aggregateRoot, CancellationToken cancellationToken, bool save = true);
     Task SaveAsync(CancellationToken cancellationToken);
 }

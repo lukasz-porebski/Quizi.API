@@ -121,14 +121,14 @@ public abstract class BaseRepository<TAggregateRoot> : IRepository<TAggregateRoo
         await TrySaveAsync(save, cancellationToken);
     }
 
-    public Task Remove(IReadOnlyCollection<TAggregateRoot> aggregateRoots, CancellationToken cancellationToken, bool save = true)
+    public Task RemoveAsync(IReadOnlyCollection<TAggregateRoot> aggregateRoots, CancellationToken cancellationToken, bool save = true)
     {
         aggregateRoots.ForEach(root => root.Remove(new AggregateStateChangeInfo(null, _dateTimeProvider.Now())));
         _aggregateRootContext.RemoveRange(aggregateRoots);
         return TrySaveAsync(save, cancellationToken);
     }
 
-    public Task Remove(TAggregateRoot aggregateRoot, CancellationToken cancellationToken, bool save = true)
+    public Task RemoveAsync(TAggregateRoot aggregateRoot, CancellationToken cancellationToken, bool save = true)
     {
         aggregateRoot.Remove(new AggregateStateChangeInfo(null, _dateTimeProvider.Now()));
         _aggregateRootContext.Remove(aggregateRoot);
