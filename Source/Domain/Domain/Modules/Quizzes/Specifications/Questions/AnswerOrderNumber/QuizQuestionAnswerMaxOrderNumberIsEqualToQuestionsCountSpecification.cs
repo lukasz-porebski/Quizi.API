@@ -5,10 +5,10 @@ using Domain.Modules.Quizzes.Data.Models.Sub;
 namespace Domain.Modules.Quizzes.Specifications.Questions.AnswerOrderNumber;
 
 internal class QuizQuestionAnswerMaxOrderNumberIsEqualToQuestionsCountSpecification
-    : ISpecification<QuizClosedQuestionPersistData>
+    : ISpecification<QuizClosedQuestionCreateData>
 {
     public string FailureMessageCode => QuizMessageCodes.QuestionAnswerMaximalOrderNumberIsEqualToQuestionsCount;
 
-    public bool IsValid(QuizClosedQuestionPersistData data) =>
-        data.Answers.Max(q => q.Data.OrderNumber).Equals(data.Answers.Count);
+    public bool IsValid(QuizClosedQuestionCreateData data) =>
+        data.Answers.Max(q => q.OrderNumber).Equals(data.Answers.Count);
 }

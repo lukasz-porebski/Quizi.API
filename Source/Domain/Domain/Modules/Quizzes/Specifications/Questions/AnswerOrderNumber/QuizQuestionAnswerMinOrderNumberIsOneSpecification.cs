@@ -4,10 +4,10 @@ using Domain.Modules.Quizzes.Data.Models.Sub;
 
 namespace Domain.Modules.Quizzes.Specifications.Questions.AnswerOrderNumber;
 
-internal class QuizQuestionAnswerMinOrderNumberIsOneSpecification : ISpecification<QuizClosedQuestionPersistData>
+internal class QuizQuestionAnswerMinOrderNumberIsOneSpecification : ISpecification<QuizClosedQuestionCreateData>
 {
     public string FailureMessageCode => QuizMessageCodes.QuestionAnswerMinimalOrderNumberIsNotOne;
 
-    public bool IsValid(QuizClosedQuestionPersistData data) =>
-        data.Answers.Min(q => q.Data.OrderNumber).Equals(1);
+    public bool IsValid(QuizClosedQuestionCreateData data) =>
+        data.Answers.Min(q => q.OrderNumber).Equals(1);
 }

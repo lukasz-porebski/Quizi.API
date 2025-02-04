@@ -5,12 +5,12 @@ using Domain.Modules.Quizzes.Data.Models.Sub;
 
 namespace Domain.Modules.Quizzes.Specifications.Questions.AnswerOrderNumber;
 
-internal class QuizQuestionAnswerOrderNumberIsUniqueSpecification : ISpecification<QuizClosedQuestionPersistData>
+internal class QuizQuestionAnswerOrderNumberIsUniqueSpecification : ISpecification<QuizClosedQuestionCreateData>
 {
     public string FailureMessageCode => QuizMessageCodes.QuestionAnswerOrderNumberIsUnique;
 
-    public bool IsValid(QuizClosedQuestionPersistData data) =>
+    public bool IsValid(QuizClosedQuestionCreateData data) =>
         !data.Answers
-            .Select(q => q.Data.OrderNumber)
+            .Select(q => q.OrderNumber)
             .ContainsDuplicates();
 }

@@ -15,8 +15,8 @@ public class QuizPersistSpecificationData : IOwnerSpecification, IQuizQuestionsC
         string? description,
         TimeSpan duration,
         IReadOnlyCollection<QuizOpenQuestionPersistData> openQuestions,
-        IReadOnlyCollection<QuizClosedQuestionPersistData> singleChoiceQuestions,
-        IReadOnlyCollection<QuizClosedQuestionPersistData> multipleChoiceQuestions,
+        IReadOnlyCollection<QuizClosedQuestionCreateData> singleChoiceQuestions,
+        IReadOnlyCollection<QuizClosedQuestionCreateData> multipleChoiceQuestions,
         AggregateId owner,
         AggregateId userDeclaredAsOwner)
     {
@@ -38,6 +38,6 @@ public class QuizPersistSpecificationData : IOwnerSpecification, IQuizQuestionsC
     public string Title { get; }
     public string? Description { get; }
     public TimeSpan Duration { get; }
-    public IReadOnlyCollection<QuizClosedQuestionPersistData> ClosedQuestions { get; }
+    public IReadOnlyCollection<QuizClosedQuestionCreateData> ClosedQuestions { get; }
     public IReadOnlyCollection<QuizQuestionSpecificationData> Questions { get; }
 }

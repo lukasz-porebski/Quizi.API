@@ -18,7 +18,7 @@ public class Quiz : BaseAggregateRoot
 
     internal Quiz(
         AggregateId id,
-        QuizPersistData data,
+        QuizCreateData data,
         IQuizSpecificationFactory specificationFactory)
         : base(id)
     {
@@ -34,13 +34,13 @@ public class Quiz : BaseAggregateRoot
         Settings = data.Settings;
 
         var no = EntityNo.Generate();
-        _openQuestions.Set(data.OpenQuestions.Select(q => new QuizOpenQuestion(id, no++, q.Data)));
+        _openQuestions.Set(data.OpenQuestions.Select(q => new QuizOpenQuestion(id, no++, q)));
 
         no = EntityNo.Generate();
-        _singleChoiceQuestions.Set(data.SingleChoiceQuestions.Select(q => new QuizSingleChoiceQuestion(id, no++, q.Data)));
+        _singleChoiceQuestions.Set(data.SingleChoiceQuestions.Select(q => new QuizSingleChoiceQuestion(id, no++, q)));
 
         no = EntityNo.Generate();
-        _multipleChoiceQuestions.Set(data.MultipleChoiceQuestions.Select(q => new QuizMultipleChoiceQuestion(id, no++, q.Data)));
+        _multipleChoiceQuestions.Set(data.MultipleChoiceQuestions.Select(q => new QuizMultipleChoiceQuestion(id, no++, q)));
     }
 
     private Quiz()
@@ -56,7 +56,7 @@ public class Quiz : BaseAggregateRoot
     public IReadOnlyList<QuizSingleChoiceQuestion> SingleChoiceQuestions => _singleChoiceQuestions;
     public IReadOnlyList<QuizMultipleChoiceQuestion> MultipleChoiceQuestions => _multipleChoiceQuestions;
 
-    public void Update(QuizPersistData data)
+    public void Update(QuizUpdateData data)
     {
         _specificationFactory.QuizPersist(data.ToSpecificationData(OwnerId)).ValidateAndThrow();
 
@@ -72,11 +72,11 @@ public class Quiz : BaseAggregateRoot
             (q, d) => q.Update(d.Data));
         _singleChoiceQuestions.ApplyChanges(
             data.SingleChoiceQuestions,
-            (no, d) => new QuizSingleChoiceQuestion(Id, no, d.Data),
+            (no, d) => new QuizSingleChoiceQuestion(Id, no, d.Data.ToCreateData()),
             (q, d) => q.Update(d.Data));
         _multipleChoiceQuestions.ApplyChanges(
             data.MultipleChoiceQuestions,
-            (no, d) => new QuizMultipleChoiceQuestion(Id, no, d.Data),
+            (no, d) => new QuizMultipleChoiceQuestion(Id, no, d.Data.ToCreateData()),
             (q, d) => q.Update(d.Data));
     }
 
@@ -89,29 +89,17 @@ public class Quiz : BaseAggregateRoot
         if (!data.QuestionsCountInRunningQuiz.Equals(Settings.QuestionsCountInRunningQuiz))
             Settings = Settings with { QuestionsCountInRunningQuiz = data.QuestionsCountInRunningQuiz };
 
-        var nextOpenQuestionOrderNumber = _openQuestions.Max(q => q.OrderNumber) + 1;
         _openQuestions.ApplyNew(
             data.OpenQuestions,
-            (no, persistData) => new QuizOpenQuestion(Id, no, persistData with
-            {
-                OrderNumber = nextOpenQuestionOrderNumber++
-            }));
+            (no, persistData) => new QuizOpenQuestion(Id, no, persistData));
 
-        var nextSingleChoiceQuestionOrderNumber = _singleChoiceQuestions.Max(q => q.OrderNumber) + 1;
         _singleChoiceQuestions.ApplyNew(
             data.SingleChoiceQuestions,
-            (no, persistData) => new QuizSingleChoiceQuestion(Id, no, persistData with
-            {
-                OrderNumber = nextSingleChoiceQuestionOrderNumber++
-            }));
+            (no, persistData) => new QuizSingleChoiceQuestion(Id, no, persistData));
 
-        var nextMultipleChoiceQuestionOrderNumber = _multipleChoiceQuestions.Max(q => q.OrderNumber) + 1;
         _multipleChoiceQuestions.ApplyNew(
             data.SingleChoiceQuestions,
-            (no, persistData) => new QuizMultipleChoiceQuestion(Id, no, persistData with
-            {
-                OrderNumber = nextMultipleChoiceQuestionOrderNumber++
-            }));
+            (no, persistData) => new QuizMultipleChoiceQuestion(Id, no, persistData));
     }
 
     internal void SetDependencies(IQuizSpecificationFactory specificationFactory)

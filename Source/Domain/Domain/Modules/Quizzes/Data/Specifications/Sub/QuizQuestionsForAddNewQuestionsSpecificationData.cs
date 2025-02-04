@@ -8,8 +8,8 @@ public record QuizQuestionsForAddNewQuestionsSpecificationData
 {
     public QuizQuestionsForAddNewQuestionsSpecificationData(
         IReadOnlyCollection<QuizOpenQuestionPersistData> newOpenQuestions,
-        IReadOnlyCollection<QuizClosedQuestionPersistData> newSingleChoiceQuestions,
-        IReadOnlyCollection<QuizClosedQuestionPersistData> newMultipleChoiceQuestions,
+        IReadOnlyCollection<QuizClosedQuestionCreateData> newSingleChoiceQuestions,
+        IReadOnlyCollection<QuizClosedQuestionCreateData> newMultipleChoiceQuestions,
         IReadOnlyCollection<QuizOpenQuestion> oldOpenQuestions,
         IReadOnlyCollection<QuizSingleChoiceQuestion> oldSingleChoiceQuestions,
         IReadOnlyCollection<QuizMultipleChoiceQuestion> oldMultipleChoiceQuestions)
@@ -19,7 +19,7 @@ public record QuizQuestionsForAddNewQuestionsSpecificationData
         NewClosedQuestions = newSingleChoiceQuestions.Concat(newMultipleChoiceQuestions).ToArray();
     }
 
-    public IReadOnlyCollection<QuizClosedQuestionPersistData> NewClosedQuestions { get; }
+    public IReadOnlyCollection<QuizClosedQuestionCreateData> NewClosedQuestions { get; }
     public IReadOnlyCollection<QuizQuestionSpecificationData> NewQuestions { get; }
     public IReadOnlyCollection<QuizQuestionSpecificationData> OldQuestions { get; }
 }

@@ -10,12 +10,12 @@ public class QuizSingleChoiceQuestion : BaseEntity
 {
     private readonly List<QuizSingleChoiceQuestionAnswer> _answers = [];
 
-    internal QuizSingleChoiceQuestion(AggregateId id, EntityNo no, QuizClosedQuestionPersistData data) : base(id, no)
+    internal QuizSingleChoiceQuestion(AggregateId id, EntityNo no, QuizClosedQuestionCreateData data) : base(id, no)
     {
         OrderNumber = data.OrderNumber;
         Text = data.Text;
         var subNo = EntityNo.Generate();
-        _answers.Set(data.Answers.Select(a => new QuizSingleChoiceQuestionAnswer(id, no, subNo++, a.Data)));
+        _answers.Set(data.Answers.Select(a => new QuizSingleChoiceQuestionAnswer(id, no, subNo++, a)));
     }
 
     private QuizSingleChoiceQuestion()

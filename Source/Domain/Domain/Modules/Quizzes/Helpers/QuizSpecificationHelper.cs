@@ -1,9 +1,7 @@
-﻿using Common.Domain.Data;
-using Common.Shared.Extensions;
+﻿using Common.Shared.Extensions;
 using Domain.Modules.Quizzes.Data.Models.Sub;
 using Domain.Modules.Quizzes.Data.Specifications.Sub;
 using Domain.Modules.Quizzes.Models;
-using Domain.Modules.Quizzes.Models.Base;
 
 namespace Domain.Modules.Quizzes.Helpers;
 
@@ -19,12 +17,12 @@ internal static class QuizSpecificationHelper
             .ToArray();
 
         var singleChoiceQuestions = oldSingleChoiceQuestions
-            .Select(q => new QuizClosedQuestionPersistData(
+            .Select(q => new QuizClosedQuestionCreateData(
                 q.OrderNumber, q.Text, q.Answers.Select(a => a.ToPersistData()).ToArray()))
             .ToArray();
 
         var multipleChoiceQuestions = oldMultipleChoiceQuestions
-            .Select(q => new QuizClosedQuestionPersistData(
+            .Select(q => new QuizClosedQuestionCreateData(
                 q.OrderNumber, q.Text, q.Answers.Select(a => a.ToPersistData()).ToArray()))
             .ToArray();
 
@@ -33,8 +31,8 @@ internal static class QuizSpecificationHelper
 
     public static IReadOnlyCollection<QuizQuestionSpecificationData> GetQuestions(
         IReadOnlyCollection<QuizOpenQuestionPersistData> openQuestions,
-        IReadOnlyCollection<QuizClosedQuestionPersistData> singleChoiceQuestions,
-        IReadOnlyCollection<QuizClosedQuestionPersistData> multipleChoiceQuestions) =>
+        IReadOnlyCollection<QuizClosedQuestionCreateData> singleChoiceQuestions,
+        IReadOnlyCollection<QuizClosedQuestionCreateData> multipleChoiceQuestions) =>
         openQuestions
             .Select(question => new QuizQuestionSpecificationData(
                 question.OrderNumber,
@@ -43,11 +41,11 @@ internal static class QuizSpecificationHelper
             .Concat(singleChoiceQuestions.Select(question => new QuizQuestionSpecificationData(
                 question.OrderNumber,
                 question.Text,
-                question.Answers.Select(a => a.Data.Text).ToArray())))
+                question.Answers.Select(a => a.Text).ToArray())))
             .Concat(multipleChoiceQuestions.Select(question => new QuizQuestionSpecificationData(
                 question.OrderNumber,
                 question.Text,
-                question.Answers.Select(a => a.Data.Text).ToArray())))
+                question.Answers.Select(a => a.Text).ToArray())))
             .ToArray();
 
     public static bool AreQuestionsUnique(IReadOnlyCollection<QuizQuestionSpecificationData> data)

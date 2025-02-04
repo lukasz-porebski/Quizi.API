@@ -7,6 +7,6 @@ namespace Domain.Modules.Quizzes.Factories;
 
 public class QuizFactory(IQuizSpecificationFactory specificationFactory) : IQuizFactory
 {
-    public Quiz Create(AggregateId id, QuizPersistData data) =>
+    public Quiz Create(AggregateId id, QuizCreateData data) =>
         new(id, data, specificationFactory);
 }

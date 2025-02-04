@@ -5,7 +5,6 @@ using Application.Modules.Quizzes.Constants;
 using Application.Modules.Quizzes.Extensions;
 using Common.Application.CQRS;
 using Common.Application.Exceptions;
-using Common.Domain.Data;
 using Common.Domain.ValueObjects;
 using Domain.Modules.Quizzes;
 using Domain.Modules.Quizzes.Data.Models;
@@ -51,23 +50,22 @@ public class CopyQuizCommandHandler(
         }
     }
 
-    private static QuizPersistData GetQuizPersistData(Quiz quiz, AggregateId userId) =>
+    private static QuizCreateData GetQuizPersistData(Quiz quiz, AggregateId userId) =>
         new(OwnerId: userId,
             quiz.Title,
             quiz.Description,
             quiz.Settings,
-            quiz.OpenQuestions.Select(q => new EntityPersistData<QuizOpenQuestionPersistData>(
-                q.No, new QuizOpenQuestionPersistData(q.OrderNumber, q.Text, q.Answer))).ToArray(),
+            quiz.OpenQuestions.Select(q => new QuizOpenQuestionPersistData(q.OrderNumber, q.Text, q.Answer)).ToArray(),
             quiz.SingleChoiceQuestions
-                .Select(q => new EntityPersistData<QuizClosedQuestionPersistData>(q.No, new QuizClosedQuestionPersistData(
+                .Select(q => new QuizClosedQuestionCreateData(
                     q.OrderNumber,
                     q.Text,
-                    q.Answers.Select(a => a.ToPersistData()).ToArray())))
+                    q.Answers.Select(a => a.ToPersistData()).ToArray()))
                 .ToArray(),
             quiz.MultipleChoiceQuestions
-                .Select(q => new EntityPersistData<QuizClosedQuestionPersistData>(q.No, new QuizClosedQuestionPersistData(
+                .Select(q => new QuizClosedQuestionCreateData(
                     q.OrderNumber,
                     q.Text,
-                    q.Answers.Select(a => a.ToPersistData()).ToArray())))
+                    q.Answers.Select(a => a.ToPersistData()).ToArray()))
                 .ToArray());
 }

@@ -6,5 +6,5 @@ namespace Domain.Modules.Quizzes.Interfaces;
 
 public interface IQuizFactory
 {
-    Quiz Create(AggregateId id, QuizPersistData data);
+    Quiz Create(AggregateId id, QuizCreateData data);
 }
