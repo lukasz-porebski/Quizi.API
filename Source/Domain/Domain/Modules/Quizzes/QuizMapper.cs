@@ -1,14 +1,20 @@
-﻿using Common.Domain.ValueObjects;
+﻿using Common.Domain.Data;
+using Common.Domain.ValueObjects;
 using Domain.Modules.Quizzes.Data.Models;
+using Domain.Modules.Quizzes.Data.Models.Sub;
 using Domain.Modules.Quizzes.Data.Specifications;
 using Domain.Modules.Quizzes.Data.Specifications.Sub;
 using Domain.Modules.Quizzes.Models;
+using Domain.Modules.Quizzes.Models.Base;
 
 namespace Domain.Modules.Quizzes;
 
-internal static class QuizMapper
+public static class QuizMapper
 {
-    public static QuizPersistSpecificationData ToSpecificationData(this QuizPersistData source, AggregateId ownerId) =>
+    public static EntityPersistData<QuizClosedQuestionAnswerPersistData> ToPersistData(this BaseQuizClosedQuestionAnswer source) =>
+        new(source.SubNo, new QuizClosedQuestionAnswerPersistData(source.OrderNumber, source.Text, source.IsCorrect));
+
+    internal static QuizPersistSpecificationData ToSpecificationData(this QuizPersistData source, AggregateId ownerId) =>
         new(source.Settings.QuestionsCountInRunningQuiz,
             source.Title,
             source.Description,
@@ -20,7 +26,7 @@ internal static class QuizMapper
             source.OwnerId
         );
 
-    public static QuizAddNewQuestionsSpecificationData ToSpecificationData(
+    internal static QuizAddNewQuestionsSpecificationData ToSpecificationData(
         this QuizAddNewQuestionsData source,
         AggregateId ownerId,
         IReadOnlyList<QuizOpenQuestion> oldOpenQuestions,

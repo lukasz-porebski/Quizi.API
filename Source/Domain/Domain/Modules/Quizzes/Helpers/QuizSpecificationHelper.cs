@@ -66,7 +66,4 @@ internal static class QuizSpecificationHelper
 
         return true;
     }
-
-    private static EntityPersistData<QuizClosedQuestionAnswerPersistData> ToPersistData(this BaseQuizClosedQuestionAnswer source) =>
-        new(source.SubNo, new QuizClosedQuestionAnswerPersistData(source.OrderNumber, source.Text, source.IsCorrect));
 }
