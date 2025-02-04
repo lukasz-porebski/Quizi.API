@@ -9,5 +9,5 @@ internal class SharedQuizAddUserSpecification : ISpecification<SharedQuizAddUser
     public string FailureMessageCode => SharedQuizMessageCodes.UserHasThisQuiz;
 
     public bool IsValid(SharedQuizAddUserSpecificationData data) =>
-        !data.CurrentUsers.Contains(data.NewUser);
+        !data.CurrentUsers.Contains(data.NewUserId);
 }

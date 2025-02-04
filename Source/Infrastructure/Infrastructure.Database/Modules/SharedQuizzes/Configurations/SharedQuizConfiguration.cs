@@ -1,7 +1,7 @@
 using Common.Infrastructure.Database.EF.Configurations;
 using Common.Infrastructure.Database.EF.Extensions;
+using Domain.Modules.Quizzes.Models;
 using Domain.Modules.SharedQuizzes.Models;
-using Domain.Modules.Users.Models;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Database.Modules.SharedQuizzes.Configurations;
@@ -12,7 +12,9 @@ public class SharedQuizConfiguration : BaseAggregateRootConfiguration<SharedQuiz
     {
         base.Configure(builder);
 
-        builder.ConfigureOneToMany<SharedQuiz, User>(e => e.OwnerId);
+        builder.HasIndex(e => e.QuizId).IsUnique();
+
+        builder.ConfigureOneToMany<SharedQuiz, Quiz>(e => e.QuizId);
 
         builder.ConfigureEntities(e => e.Users);
     }

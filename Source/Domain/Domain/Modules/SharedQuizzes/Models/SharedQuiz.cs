@@ -12,35 +12,33 @@ public class SharedQuiz : BaseAggregateRoot
     private ISharedQuizSpecificationFactory _specificationFactory = null!;
 
     internal SharedQuiz(
-        AggregateId id, AggregateId ownerId, AggregateId userId, ISharedQuizSpecificationFactory specificationFactory)
+        AggregateId id, AggregateId quizId, AggregateId userId, ISharedQuizSpecificationFactory specificationFactory)
         : base(id)
     {
         SetDependencies(specificationFactory);
 
-        OwnerId = ownerId;
-        AddUser(ownerId, userId);
+        QuizId = quizId;
+        AddUser(userId);
     }
 
     private SharedQuiz()
     {
     }
 
-    public AggregateId OwnerId { get; private set; } = null!;
+    public AggregateId QuizId { get; private set; } = null!;
     public IReadOnlyList<SharedQuizUser> Users => _users;
 
-    public void AddUser(AggregateId ownerId, AggregateId userId)
+    public void AddUser(AggregateId userId)
     {
-        var specificationData = new SharedQuizAddUserSpecificationData(
-            _users.Select(u => u.UserId).ToArray(), userId, OwnerId, ownerId);
+        var specificationData = new SharedQuizAddUserSpecificationData(_users.Select(u => u.UserId).ToArray(), userId);
         _specificationFactory.AddUser(specificationData).ValidateAndThrow();
 
         _users.Add(new SharedQuizUser(Id, userId));
     }
 
-    public void RemoveUser(AggregateId ownerId, AggregateId userIdToRemove)
+    public void RemoveUser(AggregateId userIdToRemove)
     {
-        var specificationData = new SharedQuizRemoveUserSpecificationData(
-            _users.Select(u => u.UserId).ToArray(), OwnerId, ownerId, userIdToRemove);
+        var specificationData = new SharedQuizRemoveUserSpecificationData(_users.Select(u => u.UserId).ToArray(), userIdToRemove);
         _specificationFactory.RemoveUser(specificationData).ValidateAndThrow();
 
         _users.RemoveAll(u => u.UserId == userIdToRemove);

@@ -17,4 +17,8 @@ internal static class QuizRepositoryExtensions
 
     public static Task<Quiz> GetOrThrowAsync(this IQuizRepository source, Guid code, CancellationToken cancellationToken) =>
         source.GetOrThrowAsync(s => s.Code == code, QuizMessageCodes.QuizNotFound, cancellationToken);
+
+    public static Task ExistsOrThrowAsync(
+        this IQuizRepository source, AggregateId id, AggregateId ownerId, CancellationToken cancellationToken) =>
+        source.ExistsOrThrowAsync(s => s.Id == id && s.OwnerId == ownerId, QuizMessageCodes.QuizNotFound, cancellationToken);
 }

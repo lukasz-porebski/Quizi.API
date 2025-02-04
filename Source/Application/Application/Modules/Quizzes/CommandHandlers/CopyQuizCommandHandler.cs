@@ -23,11 +23,11 @@ public class CopyQuizCommandHandler(
 {
     public async Task Handle(CopyQuizCommand command, CancellationToken cancellationToken)
     {
-        var userId = AggregateId.Generate(); //TODO: Zamienić na użytkownika z contextu
+        var ownerId = AggregateId.Generate(); //TODO: Zamienić na użytkownika z contextu
         var quiz = await quizRepository.GetOrThrowAsync(command.Code, cancellationToken);
-        await Validate(quiz, userId, cancellationToken);
+        await Validate(quiz, ownerId, cancellationToken);
 
-        var newQuiz = factory.Create(command.NewQuizId, GetQuizPersistData(quiz, userId));
+        var newQuiz = factory.Create(command.NewQuizId, GetQuizPersistData(quiz, ownerId));
         await quizRepository.PersistAsync(newQuiz, cancellationToken);
     }
 
@@ -39,7 +39,7 @@ public class CopyQuizCommandHandler(
                 throw new BusinessLogicException(QuizMessageCodes.CopyDenied);
             case QuizCopyMode.OnlyForAddedUsers:
                 var existsSharedQuiz = await sharedQuizRepository.ExistsAsync(q =>
-                    q.OwnerId == userId || q.Users.Any(u => u.UserId == userId), cancellationToken);
+                    q.QuizId == userId || q.Users.Any(u => u.UserId == userId), cancellationToken);
                 if (existsSharedQuiz)
                     throw new BusinessLogicException(QuizMessageCodes.CopyDenied);
                 break;
