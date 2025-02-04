@@ -26,6 +26,12 @@ public class QuizSingleChoiceQuestion : BaseEntity
     public string Text { get; private set; } = null!;
     public IReadOnlyList<QuizSingleChoiceQuestionAnswer> Answers => _answers;
 
+    public QuizSingleChoiceQuestionAnswer GetCorrectAnswer() =>
+        Answers.First(a => a.IsCorrect);
+
+    public IReadOnlyCollection<QuizSingleChoiceQuestionAnswer> GetWrongAnswers() =>
+        Answers.Where(a => !a.IsCorrect).ToArray();
+    
     internal void Update(QuizClosedQuestionPersistData data)
     {
         OrderNumber = data.OrderNumber;

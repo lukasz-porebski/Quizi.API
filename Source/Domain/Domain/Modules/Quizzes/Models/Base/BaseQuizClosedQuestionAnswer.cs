@@ -1,10 +1,11 @@
 using Common.Domain.Entities;
 using Common.Domain.ValueObjects;
 using Domain.Modules.Quizzes.Data.Models.Sub;
+using Domain.Modules.VerifyQuiz.ValueObjects;
 
 namespace Domain.Modules.Quizzes.Models.Base;
 
-public class BaseQuizClosedQuestionAnswer : BaseSubEntity
+public class BaseQuizClosedQuestionAnswer : BaseSubEntity, IQuizQuestionAnswer
 {
     protected BaseQuizClosedQuestionAnswer(
         AggregateId id,
