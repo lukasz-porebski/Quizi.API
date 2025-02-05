@@ -4,5 +4,5 @@ namespace Domain.Modules.VerifyQuiz;
 
 public interface IVerifyQuizDomainService
 {
-    Task VerifyQuiz(VerifyQuizData data);
+    Task VerifyQuiz(QuizVerificationData data);
 }

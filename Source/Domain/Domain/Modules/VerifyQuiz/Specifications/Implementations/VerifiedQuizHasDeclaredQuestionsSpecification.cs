@@ -1,7 +1,6 @@
 ﻿using Common.Domain.Specification;
-using Common.Shared.Extensions;
 using Domain.Modules.Quizzes.Models;
-using Domain.Modules.VerifyQuiz.MethodData.Questions;
+using Domain.Modules.VerifyQuiz.MethodData.Sub;
 using Domain.Modules.VerifyQuiz.Specifications.Data;
 
 namespace Domain.Modules.VerifyQuiz.Specifications.Implementations;
@@ -11,23 +10,22 @@ internal class VerifiedQuizHasDeclaredQuestionsSpecification : ISpecification<Ve
     public string FailureMessageCode => VerifyQuizMessages.VerifiedQuizHasDeclaredQuestions;
 
     public bool IsValid(VerifiedQuizSpecificationData data) =>
-        VerifiedQuizHasDeclaredOpenEndedQuestions(data.OpenEndedQuestions, data.VerifiedOpenEndedQuestions) &&
+        VerifiedQuizHasDeclaredOpenQuestions(data.OpenQuestions, data.VerifiedOpenQuestions) &&
         VerifiedQuizHasDeclaredSingleChoiceQuestions(data.SingleChoiceQuestions, data.VerifiedSingleChoiceQuestions) &&
         VerifiedQuizHasDeclaredMultipleChoiceQuestions(data.MultipleChoiceQuestions, data.VerifiedMultipleChoiceQuestions);
 
-    private static bool VerifiedQuizHasDeclaredOpenEndedQuestions(
-        List<QuizOpenQuestion> openEndedQuestions,
-        IEnumerable<VerifyQuizOpenEndedQuestionData> verifiedOpenEndedQuestions) =>
-        !verifiedOpenEndedQuestions.Any(verifiedQuestion => openEndedQuestions.NotExists(q => q.No.Equals(verifiedQuestion.No)));
+    private static bool VerifiedQuizHasDeclaredOpenQuestions(
+        IReadOnlyCollection<QuizOpenQuestion> questions,
+        IReadOnlyCollection<QuizOpenQuestionVerificationData> verifiedQuestions) =>
+        !verifiedQuestions.Any(verifiedQuestion => questions.Any(q => q.No.Equals(verifiedQuestion.No)));
 
     private static bool VerifiedQuizHasDeclaredSingleChoiceQuestions(
-        List<QuizSingleChoiceQuestion> singleChoiceQuestions,
-        IEnumerable<VerifyQuizSingleChoiceQuestionData> verifiedSingleChoiceQuestions) =>
-        !verifiedSingleChoiceQuestions.Any(verifiedQuestion => singleChoiceQuestions.NotExists(q => q.No.Equals(verifiedQuestion.No)));
+        IReadOnlyCollection<QuizSingleChoiceQuestion> questions,
+        IReadOnlyCollection<QuizSingleChoiceQuestionVerificationData> verifiedQuestions) =>
+        !verifiedQuestions.Any(verifiedQuestion => questions.Any(q => q.No.Equals(verifiedQuestion.No)));
 
     private static bool VerifiedQuizHasDeclaredMultipleChoiceQuestions(
-        List<QuizMultipleChoiceQuestion> multiplyChoiceQuestions,
-        IEnumerable<VerifyQuizMultipleChoiceQuestionData> verifiedMultiplyChoiceQuestions) =>
-        !verifiedMultiplyChoiceQuestions.Any(verifiedQuestion =>
-            multiplyChoiceQuestions.NotExists(q => q.No.Equals(verifiedQuestion.No)));
+        IReadOnlyCollection<QuizMultipleChoiceQuestion> questions,
+        IReadOnlyCollection<QuizMultipleChoiceQuestionVerificationData> verifiedQuestions) =>
+        !verifiedQuestions.Any(verifiedQuestion => questions.Any(q => q.No.Equals(verifiedQuestion.No)));
 }

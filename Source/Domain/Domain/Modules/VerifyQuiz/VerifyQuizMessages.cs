@@ -10,9 +10,6 @@ internal static class VerifyQuizMessages
     public const string VerifiedQuestionAnswerOrderNumberIsUnique = nameof(VerifiedQuestionAnswerOrderNumberIsUnique);
     public const string QuizNotFound = nameof(QuizNotFound);
 
-    public const string VerifiedQuestionAnswerMaximalOrderNumberIsEqualToVerifiedQuestionsCount =
-        nameof(VerifiedQuestionAnswerMaximalOrderNumberIsEqualToVerifiedQuestionsCount);
-
     public const string VerifiedQuestionMaximalOrderNumberIsEqualToVerifiedQuestionsCount =
         nameof(VerifiedQuestionMaximalOrderNumberIsEqualToVerifiedQuestionsCount);
 }

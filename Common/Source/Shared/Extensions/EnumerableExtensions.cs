@@ -22,14 +22,8 @@ public static class EnumerableExtensions
         return source.Any(element => !hashSet.Add(element));
     }
 
-    public static List<T> CreateList<T>(this IEnumerable<T>? source) =>
-        source is null ? [] : source.ToList();
-
     public static IEnumerable<T> EmptyIfNull<T>(this IEnumerable<T>? source) =>
         source ?? [];
-
-    public static bool NotExists<T>(this List<T> source, Predicate<T> match) =>
-        !source.Exists(match);
 
     public static UniqueCollection<TKey, TValue> ToUniqueCollection<TKey, TValue>(
         this IEnumerable<TValue> source,

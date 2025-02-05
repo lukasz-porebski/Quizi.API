@@ -1,69 +1,52 @@
 ﻿using Domain.Modules.Quizzes.Models;
-using Domain.Modules.VerifyQuiz.History.MethodData.Questions;
-using Domain.Modules.VerifyQuiz.MethodData.Questions;
+using Domain.Modules.VerifyQuiz.Enums;
+using Domain.Modules.VerifyQuiz.MethodData;
+using Domain.Modules.VerifyQuiz.MethodData.Sub;
 using Domain.Modules.VerifyQuiz.Policies.Core;
 
 namespace Domain.Modules.VerifyQuiz.Policies;
 
 internal class NegativePointsQuestionVerificationPolicy : QuestionVerificationBase, IQuestionVerificationPolicy
 {
-    public QuizResultHistoryOpenEndedQuestionData VerifyOpenEndedQuestion(
-        VerifyQuizOpenEndedQuestionData userAnswer, QuizOpenQuestion question)
+    public QuizQuestionVerificationResultData VerifyOpenEndedQuestion(
+        QuizOpenQuestionVerificationData userAnswer, QuizOpenQuestion question)
     {
         var points = 0;
-
         if (userAnswer.IsCorrect.HasValue)
             points = userAnswer.IsCorrect.Value ? 1 : -1;
 
-        return new QuizResultHistoryOpenEndedQuestionData(
-            Text: question.Text,
-            OrderNumber: userAnswer.OrderNumber,
+        return new QuizQuestionVerificationResultData(
+            question.No,
             ScoredPoints: points,
-            PointsPossibleToGet: 1,
-            IsCorrect: userAnswer.IsCorrect,
-            CorrectAnswer: question.Answer,
-            UserAnswer: userAnswer.Answer);
+            PointsPossibleToGet: 1);
     }
 
-    public QuizResultHistorySingleChoiceQuestionData VerifySingleChoiceQuestion(
-        VerifyQuizSingleChoiceQuestionData userAnswer, QuizSingleChoiceQuestion question)
+    public QuizQuestionVerificationResultData VerifySingleChoiceQuestion(
+        QuizSingleChoiceQuestionVerificationData userAnswer, QuizSingleChoiceQuestion question)
     {
         var verifiedQuestion = GetVerifiedSingleChoiceQuestion(userAnswer, question);
+        var points = verifiedQuestion switch
+        {
+            SingleChoiceQuestionVerificationResultType.MarkedCorrectAnswer => 1,
+            SingleChoiceQuestionVerificationResultType.MarkedWrongAnswer => -1,
+            _ => 0
+        };
 
-        var points = 0;
-
-        if (verifiedQuestion.CorrectAnswerThatIsMarked != null)
-            points = 1;
-        else if (verifiedQuestion.WrongAnswerThatIsMarked != null)
-            points = -1;
-
-        return new QuizResultHistorySingleChoiceQuestionData(
-            Text: question.Text,
-            OrderNumber: userAnswer.OrderNumber,
+        return new QuizQuestionVerificationResultData(
+            question.No,
             ScoredPoints: points,
-            PointsPossibleToGet: 1,
-            CorrectAnswerThatIsMarked: verifiedQuestion.CorrectAnswerThatIsMarked,
-            CorrectAnswerThatIsNotMarked: verifiedQuestion.CorrectAnswerThatIsNotMarked,
-            WrongAnswerThatIsMarked: verifiedQuestion.WrongAnswerThatIsMarked,
-            WrongAnswersThatAreNotMarked: verifiedQuestion.WrongAnswersThatAreNotMarked);
+            PointsPossibleToGet: 1);
     }
 
-    public QuizResultHistoryMultipleChoiceQuestionData VerifyMultipleChoiceQuestion(
-        VerifyQuizMultipleChoiceQuestionData userAnswers, QuizMultipleChoiceQuestion question)
+    public QuizQuestionVerificationResultData VerifyMultipleChoiceQuestion(
+        QuizMultipleChoiceQuestionVerificationData userAnswers, QuizMultipleChoiceQuestion question)
     {
         var verifiedQuestion = GetVerifiedMultipleChoiceQuestion(userAnswers, question);
+        var points = verifiedQuestion.NumberOfCorrectAnswersMarked - verifiedQuestion.NumberOfWrongAnswersMarked;
 
-        var points = verifiedQuestion.CorrectAnswersThatAreMarked.Count
-                     - verifiedQuestion.WrongAnswersThatAreMarked.Count;
-
-        return new QuizResultHistoryMultipleChoiceQuestionData(
-            Text: question.Text,
-            OrderNumber: userAnswers.OrderNumber,
+        return new QuizQuestionVerificationResultData(
+            question.No,
             ScoredPoints: points,
-            PointsPossibleToGet: question.GetCorrectAnswers().Count,
-            CorrectAnswersThatAreMarked: verifiedQuestion.CorrectAnswersThatAreMarked,
-            CorrectAnswersThatAreNotMarked: verifiedQuestion.CorrectAnswersThatAreNotMarked,
-            WrongAnswersThatAreMarked: verifiedQuestion.WrongAnswersThatAreMarked,
-            WrongAnswersThatAreNotMarked: verifiedQuestion.WrongAnswersThatAreNotMarked);
+            PointsPossibleToGet: question.GetCorrectAnswers().Count);
     }
 }

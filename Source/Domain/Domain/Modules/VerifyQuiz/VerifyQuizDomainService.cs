@@ -76,9 +76,7 @@
 //     }
 //
 //     private static int GetAllQuestionsCount(Quiz quiz) =>
-//         quiz.OpenQuestions.Count
-//         + quiz.SingleChoiceQuestions.Count
-//         + quiz.MultipleChoiceQuestions.Count;
+//         quiz.OpenQuestions.Count + quiz.SingleChoiceQuestions.Count + quiz.MultipleChoiceQuestions.Count;
 //
 //     private static VerifiedQuizSpecificationData ToSpecificationData(VerifyQuizData data, Quiz quiz) => new(
 //         openEndedQuestions: quiz.OpenQuestions,
@@ -88,4 +86,4 @@
 //         verifiedSingleChoiceQuestions: data.SingleChoiceQuestions,
 //         verifiedMultipleChoiceQuestions: data.MultipleChoiceQuestions);
 // }
-
+//
