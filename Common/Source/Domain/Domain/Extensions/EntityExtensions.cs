@@ -7,19 +7,13 @@ namespace Common.Domain.Extensions;
 
 public static class EntityExtensions
 {
-    public static EntityNo NextNo(this IEnumerable<BaseEntity> source)
-    {
-        var array = source.ToArray();
-        return array.Any() ? array.Max(t => t.No) + EntityNo.Generate() : EntityNo.Generate();
-    }
-
     public static void ApplyChanges<TCurrent, TTarget>(
         this List<TCurrent> current,
         IReadOnlyCollection<TTarget> target,
         Func<EntityNo, TTarget, TCurrent> adding,
         Action<TCurrent, TTarget> updating,
         Func<TCurrent, TTarget, bool>? requireUpdate = null)
-        where TCurrent : BaseEntity
+        where TCurrent : IUpdateableEntity
         where TTarget : IPersistableEntity
     {
         var nextNo = current.NextNo();
@@ -47,5 +41,12 @@ public static class EntityExtensions
         var nextNo = current.NextNo();
 
         current.AddRange(newData.Select(q => adding(nextNo++, q)));
+    }
+
+    private static EntityNo NextNo<TEntity>(this IEnumerable<TEntity> source)
+        where TEntity : IUpdateableEntity
+    {
+        var array = source.ToArray();
+        return array.Any() ? array.Max(t => t.No) + EntityNo.Generate() : EntityNo.Generate();
     }
 }

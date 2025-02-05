@@ -24,10 +24,17 @@ public static class EntityTypeBuilderExtensions
         where T : class =>
         source.Property<AggregateId?>(columnName).ConfigureAggregateId();
 
+    public static PropertyBuilder<EntityNo> ConfigureEntityNo<T>(this EntityTypeBuilder<T> source, string columnName)
+        where T : class =>
+        source.Property<EntityNo>(columnName).ConfigureEntityNo();
+
     public static PropertyBuilder<EntityNo> ConfigureEntityNo<T>(
         this EntityTypeBuilder<T> source, Expression<Func<T, EntityNo>> expression)
         where T : class =>
         source.Property(expression).HasConversion(v => v.ToInt(), v => new EntityNo(v));
+
+    public static PropertyBuilder<EntityNo> ConfigureEntityNo(this PropertyBuilder<EntityNo> source) =>
+        source.HasConversion(v => v.ToInt(), v => new EntityNo(v));
 
     public static EntityTypeBuilder<T> ConfigureAggregateStateChangeInfo<T>(
         this EntityTypeBuilder<T> source, Expression<Func<T, AggregateStateChangeInfo?>> expression, string prefix)
