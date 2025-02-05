@@ -1,11 +1,10 @@
 ﻿using Common.Domain.Entities;
 using Common.Domain.ValueObjects;
 using Domain.Modules.Quizzes.Data.Models.Sub;
-using Domain.Modules.VerifyQuiz.ValueObjects;
 
 namespace Domain.Modules.Quizzes.Models;
 
-public class QuizOpenQuestion : BaseEntity, IQuizQuestionAnswer
+public class QuizOpenQuestion : BaseEntity
 {
     internal QuizOpenQuestion(AggregateId id, EntityNo no, QuizOpenQuestionPersistData data) : base(id, no)
     {

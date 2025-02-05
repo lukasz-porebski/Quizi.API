@@ -1,0 +1,25 @@
+using Domain.Modules.Quizzes.Models;
+using Domain.Modules.QuizzesVerification.Constants;
+using Domain.Modules.QuizzesVerification.Data.Sub;
+using Domain.Modules.QuizzesVerification.Interfaces;
+
+namespace Domain.Modules.QuizzesVerification.Policies.MultipleChoiceQuestion;
+
+public class QuizMultipleChoiceQuestionDefaultPointsVerificationPolicy
+    : BaseQuizMultipleChoiceQuestionVerificationPolicy, IQuizMultipleChoiceQuestionVerificationPolicy
+{
+    public QuizQuestionVerificationResultData Verify(
+        QuizMultipleChoiceQuestionVerificationData userAnswer, QuizMultipleChoiceQuestion question)
+    {
+        var verifiedQuestion = GetVerifiedQuestion(userAnswer, question);
+        var points = verifiedQuestion.NumberOfCorrectAnswersMarked - verifiedQuestion.NumberOfWrongAnswersMarked;
+
+        return new QuizQuestionVerificationResultData(
+            question.No,
+            ScoredPoints: points > 0
+                ? (float)points / question.GetCorrectAnswers().Count
+                : QuizVerificationConstants.PointsForNoAnswer,
+            PointsPossibleToGet: QuizVerificationConstants.PointsForCorrectAnswer
+        );
+    }
+}
