@@ -170,29 +170,29 @@
     <data name="IncorrectQuizDuration" xml:space="preserve">
         <value>Quiz duration has to be greater than 0 and less or equals to 180 minutes</value>
     </data>
-    <data name="AnswerOrderNumberLessThanOne" xml:space="preserve">
-        <value>Order number of question answer can't be less than one</value>
+    <data name="AnswerOrdinalNumberLessThanOne" xml:space="preserve">
+        <value>Ordinal number of question answer can't be less than one</value>
     </data>
     <data name="AnswerIsEmpty" xml:space="preserve">
         <value>Question answer can't be empty</value>
     </data>
-    <data name="QuestionMinimalOrderNumberIsNotOne" xml:space="preserve">
-        <value>Question minimal order number has to be one</value>
+    <data name="QuestionMinimalOrdinalNumberIsNotOne" xml:space="preserve">
+        <value>Question minimal ordinal number has to be one</value>
     </data>
-    <data name="QuestionMaximalOrderNumberIsEqualToQuestionsCount" xml:space="preserve">
-        <value>Question maximal order number has to be equal to questions count</value>
+    <data name="QuestionMaximalOrdinalNumberIsEqualToQuestionsCount" xml:space="preserve">
+        <value>Question maximal ordinal number has to be equal to questions count</value>
     </data>
-    <data name="QuestionOrderNumberIsUnique" xml:space="preserve">
-        <value>Question order number has to be unique</value>
+    <data name="QuestionOrdinalNumberIsUnique" xml:space="preserve">
+        <value>Question ordinal number has to be unique</value>
     </data>
-    <data name="QuestionAnswerMinimalOrderNumberIsNotOne" xml:space="preserve">
-        <value>Question answer minimal order number has to be one</value>
+    <data name="QuestionAnswerMinimalOrdinalNumberIsNotOne" xml:space="preserve">
+        <value>Question answer minimal ordinal number has to be one</value>
     </data>
-    <data name="QuestionAnswerMaximalOrderNumberIsEqualToQuestionsCount" xml:space="preserve">
-        <value>Question answer maximal order number has to be equal to answers count</value>
+    <data name="QuestionAnswerMaximalOrdinalNumberIsEqualToQuestionsCount" xml:space="preserve">
+        <value>Question answer maximal ordinal number has to be equal to answers count</value>
     </data>
-    <data name="QuestionAnswerOrderNumberIsUnique" xml:space="preserve">
-        <value>Question answer order number has to be unique</value>
+    <data name="QuestionAnswerOrdinalNumberIsUnique" xml:space="preserve">
+        <value>Question answer ordinal number has to be unique</value>
     </data>
     <data name="AccessDenied" xml:space="preserve">
         <value>You don't have access to this quiz</value>

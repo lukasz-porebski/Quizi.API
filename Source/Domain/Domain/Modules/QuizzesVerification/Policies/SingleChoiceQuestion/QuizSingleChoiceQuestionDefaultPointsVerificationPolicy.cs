@@ -16,7 +16,7 @@ public class QuizSingleChoiceQuestionDefaultPointsVerificationPolicy
 
         return new QuizQuestionVerificationResultData(
             question.No,
-            ScoredPoints: verifiedQuestion == QuizSingleChoiceQuestionVerificationResultType.MarkedCorrectAnswer
+            ScoredPoints: verifiedQuestion == QuizSingleChoiceQuestionVerificationResultType.SelectedCorrectAnswer
                 ? QuizVerificationConstants.PointsForCorrectAnswer
                 : QuizVerificationConstants.PointsForNoAnswer,
             PointsPossibleToGet: QuizVerificationConstants.PointsForCorrectAnswer

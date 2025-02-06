@@ -3,7 +3,7 @@
 namespace Domain.Modules.Quizzes.Data.Models.Sub;
 
 public record QuizClosedQuestionPersistData(
-    int OrderNumber,
+    int OrdinalNumber,
     string Text,
     IReadOnlyCollection<EntityPersistData<QuizClosedQuestionAnswerPersistData>> Answers
 );

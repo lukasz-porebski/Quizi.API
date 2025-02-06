@@ -1,5 +1,4 @@
-﻿using Common.Domain.Entities;
-using Common.Domain.Interfaces;
+﻿using Common.Domain.Interfaces;
 using Common.Domain.ValueObjects;
 using Common.Shared.Extensions;
 
@@ -36,7 +35,7 @@ public static class EntityExtensions
         this List<TCurrent> current,
         IReadOnlyCollection<TTarget> newData,
         Func<EntityNo, TTarget, TCurrent> adding)
-        where TCurrent : BaseEntity
+        where TCurrent : IUpdateableEntity
     {
         var nextNo = current.NextNo();
 

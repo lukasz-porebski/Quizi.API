@@ -1,7 +1,6 @@
 ﻿using Common.Domain.Entities;
 using Common.Domain.Extensions;
 using Common.Domain.ValueObjects;
-using Common.Shared.Extensions;
 using Domain.Modules.Quizzes.Data.Models.Sub;
 
 namespace Domain.Modules.Quizzes.Models;
@@ -12,17 +11,16 @@ public class QuizSingleChoiceQuestion : BaseEntity
 
     internal QuizSingleChoiceQuestion(AggregateId id, EntityNo no, QuizClosedQuestionCreateData data) : base(id, no)
     {
-        OrderNumber = data.OrderNumber;
+        OrdinalNumber = data.OrdinalNumber;
         Text = data.Text;
-        var subNo = EntityNo.Generate();
-        _answers.Set(data.Answers.Select(a => new QuizSingleChoiceQuestionAnswer(id, no, subNo++, a)));
+        _answers.ApplyNew(data.Answers, (subNo, a) => new QuizSingleChoiceQuestionAnswer(id, no, subNo, a));
     }
 
     private QuizSingleChoiceQuestion()
     {
     }
 
-    public int OrderNumber { get; private set; }
+    public int OrdinalNumber { get; private set; }
     public string Text { get; private set; } = null!;
     public IReadOnlyList<QuizSingleChoiceQuestionAnswer> Answers => _answers;
 
@@ -34,7 +32,7 @@ public class QuizSingleChoiceQuestion : BaseEntity
     
     internal void Update(QuizClosedQuestionPersistData data)
     {
-        OrderNumber = data.OrderNumber;
+        OrdinalNumber = data.OrdinalNumber;
         Text = data.Text;
 
         _answers.ApplyChanges(

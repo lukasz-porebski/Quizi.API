@@ -15,8 +15,8 @@ public class QuizSingleChoiceQuestionNegativePointsVerificationPolicy
         var verifiedQuestion = GetVerifiedQuestion(userAnswer, question);
         var points = verifiedQuestion switch
         {
-            QuizSingleChoiceQuestionVerificationResultType.MarkedCorrectAnswer => QuizVerificationConstants.PointsForCorrectAnswer,
-            QuizSingleChoiceQuestionVerificationResultType.MarkedWrongAnswer => QuizVerificationConstants.PointsForWrongAnswer,
+            QuizSingleChoiceQuestionVerificationResultType.SelectedCorrectAnswer => QuizVerificationConstants.PointsForCorrectAnswer,
+            QuizSingleChoiceQuestionVerificationResultType.SelectedWrongAnswer => QuizVerificationConstants.PointsForWrongAnswer,
             _ => QuizVerificationConstants.PointsForNoAnswer
         };
 

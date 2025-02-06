@@ -8,11 +8,11 @@ public abstract class BaseQuizMultipleChoiceQuestionVerificationPolicy
     protected MultipleChoiceQuestionVerificationResultData GetVerifiedQuestion(
         QuizMultipleChoiceQuestionVerificationData userAnswers, QuizMultipleChoiceQuestion question)
     {
-        var numberOfCorrectAnswersMarked = userAnswers.SelectedAnswerNos.Count(a =>
+        var numberOfSelectedCorrectAnswers = userAnswers.SelectedAnswerNos.Count(a =>
             question.GetCorrectAnswers().Any(c => c.SubNo == a));
         return new MultipleChoiceQuestionVerificationResultData(
-            numberOfCorrectAnswersMarked,
-            NumberOfWrongAnswersMarked: question.Answers.Count - numberOfCorrectAnswersMarked
+            numberOfSelectedCorrectAnswers,
+            NumberOfSelectedWrongAnswers: question.Answers.Count - numberOfSelectedCorrectAnswers
         );
     }
 }

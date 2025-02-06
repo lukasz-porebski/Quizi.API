@@ -21,9 +21,9 @@ public record QuizUpdateData(
 
     IReadOnlyCollection<QuizClosedQuestionCreateData> IQuizPersistData.SingleChoiceQuestions =>
         SingleChoiceQuestions.Select(o => new QuizClosedQuestionCreateData(
-            o.Data.OrderNumber, o.Data.Text, o.Data.Answers.Select(a => a.Data).ToArray())).ToArray();
+            o.Data.OrdinalNumber, o.Data.Text, o.Data.Answers.Select(a => a.Data).ToArray())).ToArray();
 
     IReadOnlyCollection<QuizClosedQuestionCreateData> IQuizPersistData.MultipleChoiceQuestions =>
         MultipleChoiceQuestions.Select(o => new QuizClosedQuestionCreateData(
-            o.Data.OrderNumber, o.Data.Text, o.Data.Answers.Select(a => a.Data).ToArray())).ToArray();
+            o.Data.OrdinalNumber, o.Data.Text, o.Data.Answers.Select(a => a.Data).ToArray())).ToArray();
 }

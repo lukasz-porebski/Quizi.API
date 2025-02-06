@@ -93,7 +93,7 @@ namespace Infrastructure.Database.Migrations
                     b.Property<int>("No")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderNumber")
+                    b.Property<int>("OrdinalNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -116,13 +116,13 @@ namespace Infrastructure.Database.Migrations
                     b.Property<int>("No")
                         .HasColumnType("int");
 
+                    b.Property<int>("SubNo")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("bit");
 
-                    b.Property<int>("OrderNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubNo")
+                    b.Property<int>("OrdinalNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -130,7 +130,7 @@ namespace Infrastructure.Database.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.HasKey("Id", "No");
+                    b.HasKey("Id", "No", "SubNo");
 
                     b.ToTable("QuizMultipleChoiceQuestionAnswers");
                 });
@@ -150,7 +150,7 @@ namespace Infrastructure.Database.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<int>("OrderNumber")
+                    b.Property<int>("OrdinalNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -173,7 +173,7 @@ namespace Infrastructure.Database.Migrations
                     b.Property<int>("No")
                         .HasColumnType("int");
 
-                    b.Property<int>("OrderNumber")
+                    b.Property<int>("OrdinalNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -196,13 +196,13 @@ namespace Infrastructure.Database.Migrations
                     b.Property<int>("No")
                         .HasColumnType("int");
 
+                    b.Property<int>("SubNo")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsCorrect")
                         .HasColumnType("bit");
 
-                    b.Property<int>("OrderNumber")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubNo")
+                    b.Property<int>("OrdinalNumber")
                         .HasColumnType("int");
 
                     b.Property<string>("Text")
@@ -210,7 +210,7 @@ namespace Infrastructure.Database.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.HasKey("Id", "No");
+                    b.HasKey("Id", "No", "SubNo");
 
                     b.ToTable("QuizSingleChoiceQuestionAnswers");
                 });
@@ -222,7 +222,7 @@ namespace Infrastructure.Database.Migrations
                         .HasColumnType("nvarchar(36)")
                         .HasColumnName("Id");
 
-                    b.Property<string>("OwnerId")
+                    b.Property<string>("QuizId")
                         .IsRequired()
                         .HasColumnType("nvarchar(36)");
 
@@ -232,7 +232,8 @@ namespace Infrastructure.Database.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId");
+                    b.HasIndex("QuizId")
+                        .IsUnique();
 
                     b.ToTable("SharedQuizzes");
                 });
@@ -453,9 +454,9 @@ namespace Infrastructure.Database.Migrations
 
             modelBuilder.Entity("Domain.Modules.SharedQuizzes.Models.SharedQuiz", b =>
                 {
-                    b.HasOne("Domain.Modules.Users.Models.User", null)
+                    b.HasOne("Domain.Modules.Quizzes.Models.Quiz", null)
                         .WithMany()
-                        .HasForeignKey("OwnerId")
+                        .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

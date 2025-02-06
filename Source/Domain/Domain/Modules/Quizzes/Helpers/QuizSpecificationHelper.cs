@@ -13,17 +13,17 @@ internal static class QuizSpecificationHelper
         IReadOnlyCollection<QuizMultipleChoiceQuestion> oldMultipleChoiceQuestions)
     {
         var openQuestions = oldOpenQuestions
-            .Select(q => new QuizOpenQuestionPersistData(q.OrderNumber, q.Text, q.Answer))
+            .Select(q => new QuizOpenQuestionPersistData(q.OrdinalNumber, q.Text, q.Answer))
             .ToArray();
 
         var singleChoiceQuestions = oldSingleChoiceQuestions
             .Select(q => new QuizClosedQuestionCreateData(
-                q.OrderNumber, q.Text, q.Answers.Select(a => a.ToPersistData()).ToArray()))
+                q.OrdinalNumber, q.Text, q.Answers.Select(a => a.ToPersistData()).ToArray()))
             .ToArray();
 
         var multipleChoiceQuestions = oldMultipleChoiceQuestions
             .Select(q => new QuizClosedQuestionCreateData(
-                q.OrderNumber, q.Text, q.Answers.Select(a => a.ToPersistData()).ToArray()))
+                q.OrdinalNumber, q.Text, q.Answers.Select(a => a.ToPersistData()).ToArray()))
             .ToArray();
 
         return GetQuestions(openQuestions, singleChoiceQuestions, multipleChoiceQuestions);
@@ -35,15 +35,15 @@ internal static class QuizSpecificationHelper
         IReadOnlyCollection<QuizClosedQuestionCreateData> multipleChoiceQuestions) =>
         openQuestions
             .Select(question => new QuizQuestionSpecificationData(
-                question.OrderNumber,
+                question.OrdinalNumber,
                 question.Text,
                 new List<string> { question.Answer }))
             .Concat(singleChoiceQuestions.Select(question => new QuizQuestionSpecificationData(
-                question.OrderNumber,
+                question.OrdinalNumber,
                 question.Text,
                 question.Answers.Select(a => a.Text).ToArray())))
             .Concat(multipleChoiceQuestions.Select(question => new QuizQuestionSpecificationData(
-                question.OrderNumber,
+                question.OrdinalNumber,
                 question.Text,
                 question.Answers.Select(a => a.Text).ToArray())))
             .ToArray();

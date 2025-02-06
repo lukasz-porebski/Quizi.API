@@ -4,7 +4,7 @@ namespace Application.Contracts.Modules.QuizzesVerification.Commands.Data;
 
 public record VerifyQuizOpenQuestionCommandData(
     EntityNo No,
-    int OrderNumber,
+    int OrdinalNumber,
     string Answer,
     bool? IsCorrect
 );

@@ -1,7 +1,7 @@
 ﻿namespace Domain.Modules.Quizzes.Data.Models.Sub;
 
 public record QuizOpenQuestionPersistData(
-    int OrderNumber,
+    int OrdinalNumber,
     string Text,
     string Answer
 );

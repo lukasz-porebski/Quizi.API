@@ -12,7 +12,7 @@ public class QuizMultipleChoiceQuestionDefaultPointsVerificationPolicy
         QuizMultipleChoiceQuestionVerificationData userAnswer, QuizMultipleChoiceQuestion question)
     {
         var verifiedQuestion = GetVerifiedQuestion(userAnswer, question);
-        var points = verifiedQuestion.NumberOfCorrectAnswersMarked - verifiedQuestion.NumberOfWrongAnswersMarked;
+        var points = verifiedQuestion.NumberOfSelectedCorrectAnswers - verifiedQuestion.NumberOfSelectedWrongAnswers;
 
         return new QuizQuestionVerificationResultData(
             question.No,

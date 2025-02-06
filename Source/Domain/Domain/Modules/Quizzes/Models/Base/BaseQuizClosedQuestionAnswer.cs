@@ -13,7 +13,7 @@ public class BaseQuizClosedQuestionAnswer : BaseSubEntity
         QuizClosedQuestionAnswerPersistData data
     ) : base(id, no, subNo)
     {
-        OrderNumber = data.OrderNumber;
+        OrdinalNumber = data.OrdinalNumber;
         Text = data.Text;
         IsCorrect = data.IsCorrect;
     }
@@ -22,13 +22,13 @@ public class BaseQuizClosedQuestionAnswer : BaseSubEntity
     {
     }
 
-    public int OrderNumber { get; private set; }
+    public int OrdinalNumber { get; private set; }
     public string Text { get; private set; } = null!;
     public bool IsCorrect { get; private set; }
 
     internal void Update(QuizClosedQuestionAnswerPersistData data)
     {
-        OrderNumber = data.OrderNumber;
+        OrdinalNumber = data.OrdinalNumber;
         Text = data.Text;
         IsCorrect = data.IsCorrect;
     }

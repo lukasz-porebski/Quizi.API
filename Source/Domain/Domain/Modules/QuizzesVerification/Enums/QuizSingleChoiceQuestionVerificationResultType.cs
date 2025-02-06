@@ -2,7 +2,7 @@ namespace Domain.Modules.QuizzesVerification.Enums;
 
 public enum QuizSingleChoiceQuestionVerificationResultType
 {
-    MarkedCorrectAnswer = 1,
-    MarkedWrongAnswer,
-    NoAnswerMarked
+    SelectedCorrectAnswer = 1,
+    SelectedWrongAnswer,
+    NoAnswerSelected
 }

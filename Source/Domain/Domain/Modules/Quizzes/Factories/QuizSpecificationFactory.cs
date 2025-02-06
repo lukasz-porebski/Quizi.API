@@ -3,8 +3,8 @@ using Domain.Modules.Quizzes.Data.Specifications;
 using Domain.Modules.Quizzes.Interfaces;
 using Domain.Modules.Quizzes.Specifications;
 using Domain.Modules.Quizzes.Specifications.Questions;
-using Domain.Modules.Quizzes.Specifications.Questions.AnswerOrderNumber;
-using Domain.Modules.Quizzes.Specifications.Questions.OrderNumber;
+using Domain.Modules.Quizzes.Specifications.Questions.AnswerOrdinalNumber;
+using Domain.Modules.Quizzes.Specifications.Questions.OrdinalNumber;
 using Domain.Shared.Specifications;
 
 namespace Domain.Modules.Quizzes.Factories;
@@ -20,14 +20,14 @@ public class QuizSpecificationFactory : IQuizSpecificationFactory
             .And(new QuizDeclaredQuestionsCountSpecification())
             .And(new QuizQuestionsCountInRunningQuizSpecification())
             .AndNextIfThisPass(new QuizHasAtLeastOneQuestionSpecification(), v => v.Questions)
-            .AndCollection(new QuizQuestionAnswerMaxOrderNumberIsEqualToQuestionsCountSpecification(), v => v.ClosedQuestions)
-            .AndCollection(new QuizQuestionAnswerMinOrderNumberIsOneSpecification(), v => v.ClosedQuestions)
-            .AndCollection(new QuizQuestionAnswerOrderNumberIsUniqueSpecification(), v => v.ClosedQuestions)
+            .AndCollection(new QuizQuestionAnswerMaxOrdinalNumberIsEqualToQuestionsCountSpecification(), v => v.ClosedQuestions)
+            .AndCollection(new QuizQuestionAnswerMinOrdinalNumberIsOneSpecification(), v => v.ClosedQuestions)
+            .AndCollection(new QuizQuestionAnswerOrdinalNumberIsUniqueSpecification(), v => v.ClosedQuestions)
             .AndCollection(new QuizQuestionAnswersAreUniqueSpecification(), v => v.ClosedQuestions)
             .AndCollection(new QuizQuestionAnswersNotContainsQuestionTextSpecification(), v => v.Questions)
-            .And(new QuizQuestionMaxOrderNumberIsEqualToQuestionsCountSpecification(), v => v.Questions)
-            .And(new QuizQuestionMinOrderNumberIsOneSpecification(), v => v.Questions)
-            .And(new QuizQuestionOrderNumberIsUniqueSpecification(), v => v.Questions)
+            .And(new QuizQuestionMaxOrdinalNumberIsEqualToQuestionsCountSpecification(), v => v.Questions)
+            .And(new QuizQuestionMinOrdinalNumberIsOneSpecification(), v => v.Questions)
+            .And(new QuizQuestionOrdinalNumberIsUniqueSpecification(), v => v.Questions)
             .And(new QuizQuestionsAreUniqueSpecification(), v => v.Questions)
             .AndCollection(new QuizQuestionTextSpecification(), v => v.ClosedQuestions.Select(q => q.Text))
             .AndCollection(new QuizSelectionQuestionHasAtLeastTwoAnswersSpecification(), v => v.ClosedQuestions.Select(q => q.Answers))
@@ -39,15 +39,15 @@ public class QuizSpecificationFactory : IQuizSpecificationFactory
             .AndNextIfThisPass(new OwnerSpecification())
             .And(new QuizDeclaredQuestionsCountSpecification())
             .AndNextIfThisPass(new QuizHasAtLeastOneQuestionSpecification(), v => v.Questions.NewQuestions)
-            .AndCollection(new QuizQuestionAnswerMaxOrderNumberIsEqualToQuestionsCountSpecification(),
+            .AndCollection(new QuizQuestionAnswerMaxOrdinalNumberIsEqualToQuestionsCountSpecification(),
                 v => v.Questions.NewClosedQuestions)
-            .AndCollection(new QuizQuestionAnswerMinOrderNumberIsOneSpecification(), v => v.Questions.NewClosedQuestions)
-            .AndCollection(new QuizQuestionAnswerOrderNumberIsUniqueSpecification(), v => v.Questions.NewClosedQuestions)
+            .AndCollection(new QuizQuestionAnswerMinOrdinalNumberIsOneSpecification(), v => v.Questions.NewClosedQuestions)
+            .AndCollection(new QuizQuestionAnswerOrdinalNumberIsUniqueSpecification(), v => v.Questions.NewClosedQuestions)
             .AndCollection(new QuizQuestionAnswersAreUniqueSpecification(), v => v.Questions.NewClosedQuestions)
             .AndCollection(new QuizQuestionAnswersNotContainsQuestionTextSpecification(), v => v.Questions.NewQuestions)
-            .And(new QuizQuestionMaxOrderNumberIsEqualToQuestionsCountSpecification(), v => v.Questions.NewQuestions)
-            .And(new QuizQuestionMinOrderNumberIsOneSpecification(), v => v.Questions.NewQuestions)
-            .And(new QuizQuestionOrderNumberIsUniqueSpecification(), v => v.Questions.NewQuestions)
+            .And(new QuizQuestionMaxOrdinalNumberIsEqualToQuestionsCountSpecification(), v => v.Questions.NewQuestions)
+            .And(new QuizQuestionMinOrdinalNumberIsOneSpecification(), v => v.Questions.NewQuestions)
+            .And(new QuizQuestionOrdinalNumberIsUniqueSpecification(), v => v.Questions.NewQuestions)
             .And(new QuizQuestionsAreUniqueSpecification(), v => v.Questions.NewQuestions)
             .And(new QuizAddNewQuestionsSpecification(), v => v.Questions)
             .AndCollection(new QuizQuestionTextSpecification(), v => v.Questions.NewClosedQuestions.Select(q => q.Text))

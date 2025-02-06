@@ -13,13 +13,13 @@ internal static class QuizMessageCodes
     public const string QuizIncorrectDefinedQuestionsCountInRunningQuiz = nameof(QuizIncorrectDefinedQuestionsCountInRunningQuiz);
     public const string IncorrectQuizDuration = nameof(IncorrectQuizDuration);
     public const string IncorrectQuestionAnswerTextLength = nameof(IncorrectQuestionAnswerTextLength);
-    public const string QuestionMinimalOrderNumberIsNotOne = nameof(QuestionMinimalOrderNumberIsNotOne);
-    public const string QuestionMaximalOrderNumberIsEqualToQuestionsCount = nameof(QuestionMaximalOrderNumberIsEqualToQuestionsCount);
-    public const string QuestionOrderNumberIsUnique = nameof(QuestionOrderNumberIsUnique);
-    public const string QuestionAnswerMinimalOrderNumberIsNotOne = nameof(QuestionAnswerMinimalOrderNumberIsNotOne);
-    public const string QuestionAnswerOrderNumberIsUnique = nameof(QuestionAnswerOrderNumberIsUnique);
+    public const string QuestionMinimalOrdinalNumberIsNotOne = nameof(QuestionMinimalOrdinalNumberIsNotOne);
+    public const string QuestionMaximalOrdinalNumberIsEqualToQuestionsCount = nameof(QuestionMaximalOrdinalNumberIsEqualToQuestionsCount);
+    public const string QuestionOrdinalNumberIsUnique = nameof(QuestionOrdinalNumberIsUnique);
+    public const string QuestionAnswerMinimalOrdinalNumberIsNotOne = nameof(QuestionAnswerMinimalOrdinalNumberIsNotOne);
+    public const string QuestionAnswerOrdinalNumberIsUnique = nameof(QuestionAnswerOrdinalNumberIsUnique);
     public const string OneOfNewQuestionsIsAlreadyAdded = nameof(OneOfNewQuestionsIsAlreadyAdded);
 
-    public const string QuestionAnswerMaximalOrderNumberIsEqualToQuestionsCount =
-        nameof(QuestionAnswerMaximalOrderNumberIsEqualToQuestionsCount);
+    public const string QuestionAnswerMaximalOrdinalNumberIsEqualToQuestionsCount =
+        nameof(QuestionAnswerMaximalOrdinalNumberIsEqualToQuestionsCount);
 }

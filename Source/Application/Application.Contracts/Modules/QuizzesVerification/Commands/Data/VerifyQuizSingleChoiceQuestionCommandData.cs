@@ -4,7 +4,7 @@ namespace Application.Contracts.Modules.QuizzesVerification.Commands.Data;
 
 public record VerifyQuizSingleChoiceQuestionCommandData(
     EntityNo No,
-    int OrderNumber,
+    int OrdinalNumber,
     VerifyQuizClosedQuestionAnswerCommandData? SelectedAnswer,
     IReadOnlyCollection<VerifyQuizClosedQuestionAnswerCommandData> UnselectedAnswers
 );

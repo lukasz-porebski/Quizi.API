@@ -10,10 +10,10 @@ public abstract class BaseQuizSingleChoiceQuestionVerificationPolicy
         QuizSingleChoiceQuestionVerificationData userAnswer, QuizSingleChoiceQuestion question)
     {
         if (userAnswer.SelectedAnswerNo == null)
-            return QuizSingleChoiceQuestionVerificationResultType.NoAnswerMarked;
+            return QuizSingleChoiceQuestionVerificationResultType.NoAnswerSelected;
 
         return question.GetCorrectAnswer().SubNo == userAnswer.SelectedAnswerNo
-            ? QuizSingleChoiceQuestionVerificationResultType.MarkedCorrectAnswer
-            : QuizSingleChoiceQuestionVerificationResultType.MarkedWrongAnswer;
+            ? QuizSingleChoiceQuestionVerificationResultType.SelectedCorrectAnswer
+            : QuizSingleChoiceQuestionVerificationResultType.SelectedWrongAnswer;
     }
 }

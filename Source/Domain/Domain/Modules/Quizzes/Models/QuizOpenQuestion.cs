@@ -8,7 +8,7 @@ public class QuizOpenQuestion : BaseEntity
 {
     internal QuizOpenQuestion(AggregateId id, EntityNo no, QuizOpenQuestionPersistData data) : base(id, no)
     {
-        OrderNumber = data.OrderNumber;
+        OrdinalNumber = data.OrdinalNumber;
         Text = data.Text;
         Answer = data.Answer;
     }
@@ -17,13 +17,13 @@ public class QuizOpenQuestion : BaseEntity
     {
     }
 
-    public int OrderNumber { get; private set; }
+    public int OrdinalNumber { get; private set; }
     public string Text { get; private set; } = null!;
     public string Answer { get; private set; } = null!;
 
     internal void Update(QuizOpenQuestionPersistData data)
     {
-        if (OrderNumber.Equals(data.OrderNumber)
+        if (OrdinalNumber.Equals(data.OrdinalNumber)
             && Text.Equals(data.Text)
             && Answer.Equals(data.Answer))
             return;

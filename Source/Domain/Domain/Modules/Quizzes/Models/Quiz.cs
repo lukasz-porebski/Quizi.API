@@ -1,7 +1,6 @@
 ﻿using Common.Domain.Entities;
 using Common.Domain.Extensions;
 using Common.Domain.ValueObjects;
-using Common.Shared.Extensions;
 using Domain.Modules.Quizzes.Data.Models;
 using Domain.Modules.Quizzes.Interfaces;
 using Domain.Modules.Quizzes.ValueObjects;
@@ -32,15 +31,9 @@ public class Quiz : BaseAggregateRoot
         Description = data.Description;
         Code = Guid.NewGuid();
         Settings = data.Settings;
-
-        var no = EntityNo.Generate();
-        _openQuestions.Set(data.OpenQuestions.Select(q => new QuizOpenQuestion(id, no++, q)));
-
-        no = EntityNo.Generate();
-        _singleChoiceQuestions.Set(data.SingleChoiceQuestions.Select(q => new QuizSingleChoiceQuestion(id, no++, q)));
-
-        no = EntityNo.Generate();
-        _multipleChoiceQuestions.Set(data.MultipleChoiceQuestions.Select(q => new QuizMultipleChoiceQuestion(id, no++, q)));
+        _openQuestions.ApplyNew(data.OpenQuestions, (no, a) => new QuizOpenQuestion(id, no, a));
+        _singleChoiceQuestions.ApplyNew(data.SingleChoiceQuestions, (no, a) => new QuizSingleChoiceQuestion(id, no, a));
+        _multipleChoiceQuestions.ApplyNew(data.MultipleChoiceQuestions, (no, a) => new QuizMultipleChoiceQuestion(id, no, a));
     }
 
     private Quiz()
