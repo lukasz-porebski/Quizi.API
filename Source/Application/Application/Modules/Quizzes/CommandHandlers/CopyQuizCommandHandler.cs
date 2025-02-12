@@ -3,6 +3,7 @@ using Application.Contracts.Modules.Quizzes.Interfaces;
 using Application.Contracts.Modules.SharedQuizzes.Interfaces;
 using Application.Modules.Quizzes.Constants;
 using Application.Modules.Quizzes.Extensions;
+using Common.Application.Contracts.User;
 using Common.Application.CQRS;
 using Common.Application.Exceptions;
 using Common.Domain.ValueObjects;
@@ -18,12 +19,13 @@ namespace Application.Modules.Quizzes.CommandHandlers;
 public class CopyQuizCommandHandler(
     IQuizRepository quizRepository,
     ISharedQuizRepository sharedQuizRepository,
-    IQuizFactory factory
+    IQuizFactory factory,
+    IUserContextProvider userContextProvider
 ) : ICommandHandler<CopyQuizCommand>
 {
     public async Task Handle(CopyQuizCommand command, CancellationToken cancellationToken)
     {
-        var ownerId = AggregateId.Generate(); //TODO: Zamienić na użytkownika z contextu
+        var ownerId = userContextProvider.GetOrThrow().UserId;
         var quiz = await quizRepository.GetOrThrowAsync(command.Code, cancellationToken);
         await Validate(quiz, ownerId, cancellationToken);
 
