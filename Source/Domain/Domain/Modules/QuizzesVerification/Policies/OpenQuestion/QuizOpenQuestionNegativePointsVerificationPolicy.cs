@@ -7,11 +7,11 @@ namespace Domain.Modules.QuizzesVerification.Policies.OpenQuestion;
 
 public class QuizOpenQuestionNegativePointsVerificationPolicy : IQuizOpenQuestionVerificationPolicy
 {
-    public QuizQuestionVerificationResultData Verify(QuizOpenQuestionVerificationData userAnswer, QuizOpenQuestion question)
+    public QuizQuestionVerificationResultData Verify(QuizOpenQuestionVerificationData givenAnswer, QuizOpenQuestion question)
     {
         var points = QuizVerificationConstants.PointsForNoAnswer;
-        if (userAnswer.IsCorrect.HasValue)
-            points = userAnswer.IsCorrect.Value
+        if (givenAnswer.IsCorrect.HasValue)
+            points = givenAnswer.IsCorrect.Value
                 ? QuizVerificationConstants.PointsForCorrectAnswer
                 : QuizVerificationConstants.PointsForWrongAnswer;
 

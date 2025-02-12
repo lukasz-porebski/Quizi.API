@@ -20,7 +20,7 @@ public class QuizResult : BaseAggregateRoot
         UserId = data.UserId;
         Title = data.Title;
         QuizRunningPeriod = data.QuizRunningPeriod;
-        Duration = data.Duration;
+        MaxDuration = data.MaxDuration;
         NegativePoints = data.NegativePoints;
         RandomQuestions = data.RandomQuestions;
         RandomAnswers = data.RandomAnswers;
@@ -37,7 +37,7 @@ public class QuizResult : BaseAggregateRoot
     public AggregateId UserId { get; private set; } = null!;
     public string Title { get; private set; } = null!;
     public Period<DateTime> QuizRunningPeriod { get; private set; } = null!;
-    public TimeSpan Duration { get; private set; }
+    public TimeSpan MaxDuration { get; private set; }
     public bool NegativePoints { get; private set; }
     public bool RandomQuestions { get; private set; }
     public bool RandomAnswers { get; private set; }

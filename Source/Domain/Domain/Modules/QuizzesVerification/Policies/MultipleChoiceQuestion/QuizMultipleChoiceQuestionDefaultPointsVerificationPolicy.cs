@@ -9,9 +9,9 @@ public class QuizMultipleChoiceQuestionDefaultPointsVerificationPolicy
     : BaseQuizMultipleChoiceQuestionVerificationPolicy, IQuizMultipleChoiceQuestionVerificationPolicy
 {
     public QuizQuestionVerificationResultData Verify(
-        QuizMultipleChoiceQuestionVerificationData userAnswer, QuizMultipleChoiceQuestion question)
+        QuizMultipleChoiceQuestionVerificationData givenAnswer, QuizMultipleChoiceQuestion question)
     {
-        var verifiedQuestion = GetVerifiedQuestion(userAnswer, question);
+        var verifiedQuestion = GetVerifiedQuestion(givenAnswer, question);
         var points = verifiedQuestion.NumberOfSelectedCorrectAnswers - verifiedQuestion.NumberOfSelectedWrongAnswers;
 
         return new QuizQuestionVerificationResultData(

@@ -2,6 +2,7 @@
 using Common.Domain.Entities;
 using Common.Domain.ValueObjects;
 using Common.Identity.EF.Extensions;
+using Common.Shared.DataStructures;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -51,6 +52,19 @@ public static class EntityTypeBuilderExtensions
                 o.WithOwner().HasForeignKey(ownerIdColumnName);
 
                 o.Property(p => p.At).HasColumnName($"{prefix}At");
+            });
+
+    public static EntityTypeBuilder<T> ConfigurePeriod<T, TPeriod>(
+        this EntityTypeBuilder<T> source, Expression<Func<T, Period<TPeriod>?>> expression, string? prefix = null)
+        where T : class
+        where TPeriod : struct =>
+        source.OwnsOne(
+            expression,
+            o =>
+            {
+                var namePrefix = prefix ?? "";
+                o.Property(p => p.Start).HasColumnName($"{namePrefix}PeriodStart");
+                o.Property(p => p.End).HasColumnName($"{namePrefix}PeriodEnd");
             });
 
     public static void ConfigureEntities<T, TChild>(

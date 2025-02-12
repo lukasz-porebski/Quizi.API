@@ -10,7 +10,7 @@ public record QuizResultCreateData(
     AggregateId UserId,
     string Title,
     Period<DateTime> QuizRunningPeriod,
-    TimeSpan Duration,
+    TimeSpan MaxDuration,
     bool NegativePoints,
     bool RandomQuestions,
     bool RandomAnswers,

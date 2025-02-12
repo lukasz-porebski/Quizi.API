@@ -1,4 +1,5 @@
 using Common.Infrastructure.Database.EF;
+using Domain.Modules.QuizResults.Models;
 using Domain.Modules.Quizzes.Models;
 using Domain.Modules.SharedQuizzes.Models;
 using Domain.Modules.Users.Models;
@@ -20,4 +21,11 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
 
     public DbSet<SharedQuiz> SharedQuizzes { get; set; }
     public DbSet<SharedQuizUser> SharedQuizUsers { get; set; }
+
+    public DbSet<QuizResult> QuizResults { get; set; }
+    public DbSet<QuizResultOpenQuestion> QuizResultOpenQuestions { get; set; }
+    public DbSet<QuizResultSingleChoiceQuestion> QuizResultSingleChoiceQuestions { get; set; }
+    public DbSet<QuizResultSingleChoiceQuestionAnswer> QuizResultSingleChoiceQuestionAnswers { get; set; }
+    public DbSet<QuizResultMultipleChoiceQuestion> QuizResultMultipleChoiceQuestions { get; set; }
+    public DbSet<QuizResultMultipleChoiceQuestionAnswer> QuizResultMultipleChoiceQuestionAnswers { get; set; }
 }

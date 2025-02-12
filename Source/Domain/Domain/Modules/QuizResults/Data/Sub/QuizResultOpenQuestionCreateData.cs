@@ -4,7 +4,7 @@ public record QuizResultOpenQuestionCreateData(
     int OrdinalNumber,
     string Text,
     string CorrectAnswer,
-    string UserAnswer,
+    string GivenAnswer,
     float ScoredPoints,
     float PointsPossibleToGet,
     bool? IsCorrect

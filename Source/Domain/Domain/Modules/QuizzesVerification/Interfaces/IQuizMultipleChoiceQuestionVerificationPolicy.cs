@@ -6,5 +6,5 @@ namespace Domain.Modules.QuizzesVerification.Interfaces;
 public interface IQuizMultipleChoiceQuestionVerificationPolicy
 {
     QuizQuestionVerificationResultData Verify(
-        QuizMultipleChoiceQuestionVerificationData userAnswer, QuizMultipleChoiceQuestion question);
+        QuizMultipleChoiceQuestionVerificationData givenAnswer, QuizMultipleChoiceQuestion question);
 }

@@ -7,7 +7,7 @@ using Domain.Modules.QuizResults.Models;
 namespace Domain.Modules.QuizResults.Factories;
 
 [Factory]
-public class QuizResultHistoryFactory : IQuizResultHistoryFactory
+public class QuizResultFactory : IQuizResultFactory
 {
     public QuizResult Create(AggregateId id, QuizResultCreateData data) =>
         new(id, data);

@@ -7,9 +7,9 @@ namespace Domain.Modules.QuizzesVerification.Policies.OpenQuestion;
 
 public class QuizOpenQuestionDefaultPointsVerificationPolicy : IQuizOpenQuestionVerificationPolicy
 {
-    public QuizQuestionVerificationResultData Verify(QuizOpenQuestionVerificationData userAnswer, QuizOpenQuestion question) =>
+    public QuizQuestionVerificationResultData Verify(QuizOpenQuestionVerificationData givenAnswer, QuizOpenQuestion question) =>
         new(question.No,
-            ScoredPoints: userAnswer.IsCorrect.HasValue && userAnswer.IsCorrect.Value
+            ScoredPoints: givenAnswer.IsCorrect.HasValue && givenAnswer.IsCorrect.Value
                 ? QuizVerificationConstants.PointsForCorrectAnswer
                 : QuizVerificationConstants.PointsForNoAnswer,
             PointsPossibleToGet: QuizVerificationConstants.PointsForCorrectAnswer

@@ -6,9 +6,9 @@ namespace Domain.Modules.QuizzesVerification.Policies.MultipleChoiceQuestion;
 public abstract class BaseQuizMultipleChoiceQuestionVerificationPolicy
 {
     protected MultipleChoiceQuestionVerificationResultData GetVerifiedQuestion(
-        QuizMultipleChoiceQuestionVerificationData userAnswers, QuizMultipleChoiceQuestion question)
+        QuizMultipleChoiceQuestionVerificationData givenAnswers, QuizMultipleChoiceQuestion question)
     {
-        var numberOfSelectedCorrectAnswers = userAnswers.SelectedAnswerNos.Count(a =>
+        var numberOfSelectedCorrectAnswers = givenAnswers.SelectedAnswerNos.Count(a =>
             question.GetCorrectAnswers().Any(c => c.SubNo == a));
         return new MultipleChoiceQuestionVerificationResultData(
             numberOfSelectedCorrectAnswers,

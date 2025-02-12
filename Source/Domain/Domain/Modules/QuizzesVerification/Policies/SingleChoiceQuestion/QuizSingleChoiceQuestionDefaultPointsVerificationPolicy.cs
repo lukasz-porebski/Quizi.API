@@ -10,9 +10,9 @@ public class QuizSingleChoiceQuestionDefaultPointsVerificationPolicy
     : BaseQuizSingleChoiceQuestionVerificationPolicy, IQuizSingleChoiceQuestionVerificationPolicy
 {
     public QuizQuestionVerificationResultData Verify(
-        QuizSingleChoiceQuestionVerificationData userAnswer, QuizSingleChoiceQuestion question)
+        QuizSingleChoiceQuestionVerificationData givenAnswer, QuizSingleChoiceQuestion question)
     {
-        var verifiedQuestion = GetVerifiedQuestion(userAnswer, question);
+        var verifiedQuestion = GetVerifiedQuestion(givenAnswer, question);
 
         return new QuizQuestionVerificationResultData(
             question.No,

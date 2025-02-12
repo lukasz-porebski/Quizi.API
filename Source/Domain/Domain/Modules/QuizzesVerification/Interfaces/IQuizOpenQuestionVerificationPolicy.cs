@@ -5,5 +5,5 @@ namespace Domain.Modules.QuizzesVerification.Interfaces;
 
 public interface IQuizOpenQuestionVerificationPolicy
 {
-    QuizQuestionVerificationResultData Verify(QuizOpenQuestionVerificationData userAnswer, QuizOpenQuestion question);
+    QuizQuestionVerificationResultData Verify(QuizOpenQuestionVerificationData givenAnswer, QuizOpenQuestion question);
 }

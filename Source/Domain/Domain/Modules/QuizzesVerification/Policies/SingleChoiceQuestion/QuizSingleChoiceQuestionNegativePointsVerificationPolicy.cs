@@ -10,9 +10,9 @@ public class QuizSingleChoiceQuestionNegativePointsVerificationPolicy
     : BaseQuizSingleChoiceQuestionVerificationPolicy, IQuizSingleChoiceQuestionVerificationPolicy
 {
     public QuizQuestionVerificationResultData Verify(
-        QuizSingleChoiceQuestionVerificationData userAnswer, QuizSingleChoiceQuestion question)
+        QuizSingleChoiceQuestionVerificationData givenAnswer, QuizSingleChoiceQuestion question)
     {
-        var verifiedQuestion = GetVerifiedQuestion(userAnswer, question);
+        var verifiedQuestion = GetVerifiedQuestion(givenAnswer, question);
         var points = verifiedQuestion switch
         {
             QuizSingleChoiceQuestionVerificationResultType.SelectedCorrectAnswer => QuizVerificationConstants.PointsForCorrectAnswer,

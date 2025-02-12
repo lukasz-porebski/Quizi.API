@@ -7,12 +7,12 @@ namespace Domain.Modules.QuizzesVerification.Policies.SingleChoiceQuestion;
 public abstract class BaseQuizSingleChoiceQuestionVerificationPolicy
 {
     protected QuizSingleChoiceQuestionVerificationResultType GetVerifiedQuestion(
-        QuizSingleChoiceQuestionVerificationData userAnswer, QuizSingleChoiceQuestion question)
+        QuizSingleChoiceQuestionVerificationData givenAnswer, QuizSingleChoiceQuestion question)
     {
-        if (userAnswer.SelectedAnswerNo == null)
+        if (givenAnswer.SelectedAnswerNo == null)
             return QuizSingleChoiceQuestionVerificationResultType.NoAnswerSelected;
 
-        return question.GetCorrectAnswer().SubNo == userAnswer.SelectedAnswerNo
+        return question.GetCorrectAnswer().SubNo == givenAnswer.SelectedAnswerNo
             ? QuizSingleChoiceQuestionVerificationResultType.SelectedCorrectAnswer
             : QuizSingleChoiceQuestionVerificationResultType.SelectedWrongAnswer;
     }

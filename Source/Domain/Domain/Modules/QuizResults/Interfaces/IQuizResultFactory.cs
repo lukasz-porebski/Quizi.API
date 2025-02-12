@@ -4,7 +4,7 @@ using Domain.Modules.QuizResults.Models;
 
 namespace Domain.Modules.QuizResults.Interfaces;
 
-public interface IQuizResultHistoryFactory
+public interface IQuizResultFactory
 {
     QuizResult Create(AggregateId id, QuizResultCreateData data);
 }
