@@ -2,7 +2,7 @@ using Application.Contracts.Modules.Users.Commands;
 using AutoMapper;
 using Common.Domain.ValueObjects;
 using Domain.Modules.Users.Data;
-using PublishedLanguage.Modules.Users;
+using PublishedLanguage.Modules.Users.Requests;
 
 namespace Infrastructure.Endpoints.Modules.Users;
 

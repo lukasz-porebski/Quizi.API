@@ -2,7 +2,7 @@
 
 namespace Domain.Modules.Quizzes.Data.Models.Sub;
 
-public record QuizClosedQuestionPersistData(
+public record QuizClosedQuestionUpdateData(
     int OrdinalNumber,
     string Text,
     IReadOnlyCollection<EntityPersistData<QuizClosedQuestionAnswerPersistData>> Answers

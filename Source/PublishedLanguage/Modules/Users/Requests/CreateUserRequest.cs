@@ -1,6 +1,6 @@
 using Domain.Contracts.Modules.Users.Enums;
 
-namespace PublishedLanguage.Modules.Users;
+namespace PublishedLanguage.Modules.Users.Requests;
 
 public record CreateUserRequest(
     string Email,

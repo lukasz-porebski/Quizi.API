@@ -29,8 +29,8 @@ public class QuizSingleChoiceQuestion : BaseEntity
 
     public IReadOnlyCollection<QuizSingleChoiceQuestionAnswer> GetWrongAnswers() =>
         Answers.Where(a => !a.IsCorrect).ToArray();
-    
-    internal void Update(QuizClosedQuestionPersistData data)
+
+    internal void Update(QuizClosedQuestionUpdateData data)
     {
         OrdinalNumber = data.OrdinalNumber;
         Text = data.Text;

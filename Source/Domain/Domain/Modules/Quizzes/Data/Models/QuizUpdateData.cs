@@ -12,8 +12,8 @@ public record QuizUpdateData(
     string? Description,
     QuizSettings Settings,
     IReadOnlyCollection<EntityPersistData<QuizOpenQuestionPersistData>> OpenQuestions,
-    IReadOnlyCollection<EntityPersistData<QuizClosedQuestionPersistData>> SingleChoiceQuestions,
-    IReadOnlyCollection<EntityPersistData<QuizClosedQuestionPersistData>> MultipleChoiceQuestions
+    IReadOnlyCollection<EntityPersistData<QuizClosedQuestionUpdateData>> SingleChoiceQuestions,
+    IReadOnlyCollection<EntityPersistData<QuizClosedQuestionUpdateData>> MultipleChoiceQuestions
 ) : IQuizPersistData
 {
     IReadOnlyCollection<QuizOpenQuestionPersistData> IQuizPersistData.OpenQuestions =>

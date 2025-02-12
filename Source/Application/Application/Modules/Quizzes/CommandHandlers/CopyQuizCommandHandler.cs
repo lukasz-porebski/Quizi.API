@@ -6,10 +6,10 @@ using Application.Modules.Quizzes.Extensions;
 using Common.Application.CQRS;
 using Common.Application.Exceptions;
 using Common.Domain.ValueObjects;
+using Domain.Contracts.Modules.Quizzes.Enums;
 using Domain.Modules.Quizzes;
 using Domain.Modules.Quizzes.Data.Models;
 using Domain.Modules.Quizzes.Data.Models.Sub;
-using Domain.Modules.Quizzes.Enums;
 using Domain.Modules.Quizzes.Interfaces;
 using Domain.Modules.Quizzes.Models;
 

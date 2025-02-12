@@ -1,5 +1,8 @@
 using AutoMapper;
+using Common.Domain.Data;
 using Common.Domain.ValueObjects;
+using Common.PublishedLanguage.Requests;
+using Common.Shared.DataStructures;
 
 namespace Common.Infrastructure.Endpoints;
 
@@ -18,5 +21,9 @@ public class SharedProfile : Profile
 
         CreateMap<EntityNo, int>()
             .ConstructUsing(no => no.ToInt());
+
+        CreateMap(typeof(EntityPersistRequest<>), typeof(EntityPersistData<>));
+
+        CreateMap<PeriodRequest, Period<DateTime>>();
     }
 }

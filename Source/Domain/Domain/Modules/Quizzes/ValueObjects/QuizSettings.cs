@@ -1,5 +1,5 @@
 ﻿using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Enums;
+using Domain.Contracts.Modules.Quizzes.Enums;
 
 namespace Domain.Modules.Quizzes.ValueObjects;
 

@@ -1,4 +1,4 @@
-﻿namespace Domain.Modules.Quizzes.Enums;
+﻿namespace Domain.Contracts.Modules.Quizzes.Enums;
 
 public enum QuizCopyMode
 {

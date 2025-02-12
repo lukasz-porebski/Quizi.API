@@ -1,7 +1,7 @@
 using Application.Contracts.Modules.Users.Commands;
 using Common.Infrastructure.Endpoints;
 using Microsoft.AspNetCore.Mvc;
-using PublishedLanguage.Modules.Users;
+using PublishedLanguage.Modules.Users.Requests;
 
 namespace Infrastructure.Endpoints.Modules.Users;
 

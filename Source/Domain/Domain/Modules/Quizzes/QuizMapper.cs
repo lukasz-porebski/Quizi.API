@@ -15,7 +15,7 @@ public static class QuizMapper
         new(source.OrdinalNumber, source.Text, source.IsCorrect);
 
     public static QuizClosedQuestionCreateData ToCreateData(
-        this QuizClosedQuestionPersistData source, int? ordinalNumber = null) =>
+        this QuizClosedQuestionUpdateData source, int? ordinalNumber = null) =>
         new(ordinalNumber ?? source.OrdinalNumber, source.Text, source.Answers.Select(a => a.Data).ToArray());
 
     internal static QuizPersistSpecificationData ToSpecificationData(this IQuizPersistData source, AggregateId ownerId) =>

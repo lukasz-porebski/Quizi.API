@@ -11,12 +11,6 @@ namespace Common.Host.Configs;
 
 internal static class SimpleServiceCollectionConfig
 {
-    public static IServiceCollection AddMapper(this IServiceCollection services, BaseAssemblies assemblies)
-    {
-        services.AddAutoMapper(typeof(SharedProfile).Assembly, assemblies.InfrastructureEndpoints);
-        return services;
-    }
-
     public static IServiceCollection AddEf<TDbContext>(this IServiceCollection services, IConfiguration configuration)
         where TDbContext : BaseDbContext
     {
