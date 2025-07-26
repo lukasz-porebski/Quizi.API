@@ -1,0 +1,10 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\..\Application\Application.Contracts\Common.Application.Contracts.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Dapper" Version="2.1.66"/>
+        <PackageReference Include="Dapper.SqlBuilder" Version="2.1.66"/>
+        <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.6"/>
+    </ItemGroup>
+</Project>

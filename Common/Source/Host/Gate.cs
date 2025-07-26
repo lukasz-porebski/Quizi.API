@@ -28,4 +28,13 @@ public class Gate(IMediator mediator, IMapper mapper) : IGate
         var dto = await mediator.Send(query, cancellationToken);
         return mapper.Map<TDto, TResult>(dto);
     }
+
+    public Task<TResult> DispatchQueryAsync<TRequest, TQuery, TDto, TResult>(
+        TRequest request,
+        CancellationToken cancellationToken)
+        where TQuery : IQuery<TDto>
+    {
+        var query = mapper.Map<TRequest, TQuery>(request);
+        return DispatchQueryAsync<TQuery, TDto, TResult>(query, cancellationToken);
+    }
 }

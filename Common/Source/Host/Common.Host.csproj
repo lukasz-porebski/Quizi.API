@@ -5,6 +5,7 @@
         <ProjectReference Include="..\Infrastructure\Infrastructure.Database.EF\Common.Infrastructure.Database.EF.csproj"/>
         <ProjectReference Include="..\Infrastructure\Infrastructure.Endpoints\Common.Infrastructure.Endpoints.csproj"/>
         <ProjectReference Include="..\Infrastructure\Infrastructure.Integration\Common.Infrastructure.Integration.csproj"/>
+        <ProjectReference Include="..\Infrastructure\Infrastructure.ReadModels.Dapper\Common.Infrastructure.ReadModels.Dapper.csproj"/>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Autofac" Version="8.2.0"/>

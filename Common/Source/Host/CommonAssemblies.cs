@@ -6,6 +6,7 @@ using Common.Domain.Entities;
 using Common.Infrastructure.Database.EF;
 using Common.Infrastructure.Endpoints;
 using Common.Infrastructure.Integration;
+using Common.Infrastructure.ReadModels.Dapper;
 
 namespace Common.Host;
 
@@ -19,5 +20,6 @@ public class CommonAssemblies : BaseAssemblies
     public override Assembly InfrastructureDatabaseEf => typeof(BaseDbContext).Assembly;
     public override Assembly InfrastructureEndpoints => typeof(BaseController).Assembly;
     public override IReadOnlyCollection<Assembly> InfrastructureIntegrations => [typeof(BaseApi).Assembly];
+    public override Assembly InfrastructureReadModels => typeof(IDatabaseConnectionStringProvider).Assembly;
     public override Assembly Host => typeof(BaseAssemblies).Assembly;
 }

@@ -7,6 +7,7 @@ using Domain.Modules.Users.Models;
 using Infrastructure;
 using Infrastructure.Database;
 using Infrastructure.Endpoints.Modules.Users;
+using Infrastructure.ReadModels.Modules.Quizzes;
 
 namespace Host;
 
@@ -20,5 +21,6 @@ public class Assemblies : BaseAssemblies
     public override Assembly InfrastructureDatabaseEf => typeof(AppDbContext).Assembly;
     public override Assembly InfrastructureEndpoints => typeof(UserController).Assembly;
     public override IReadOnlyCollection<Assembly> InfrastructureIntegrations => [];
+    public override Assembly InfrastructureReadModels => typeof(QuizzesReadModel).Assembly;
     public override Assembly Host => typeof(Program).Assembly;
 }

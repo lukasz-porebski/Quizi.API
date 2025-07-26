@@ -1,9 +1,13 @@
 using Application.Contracts.Modules.Quizzes.Commands;
+using Application.Contracts.Modules.Quizzes.Dtos;
+using Application.Contracts.Modules.Quizzes.Queries;
 using Application.Contracts.Modules.SharedQuizzes.Commands;
+using Common.Application.Contracts.ReadModel;
 using Common.Domain.Extensions;
 using Common.Infrastructure.Endpoints;
 using Microsoft.AspNetCore.Mvc;
 using PublishedLanguage.Modules.Quizzes.Requests;
+using PublishedLanguage.Shared.Requests;
 
 namespace Infrastructure.Endpoints.Modules.Quizzes;
 
@@ -43,5 +47,18 @@ public class QuizController(IGate gate) : BaseController(gate)
     {
         await Gate.DispatchCommandAsync<RemoveQuizUserRequest, RemoveQuizUserCommand>(request, cancellationToken);
         return Ok();
+    }
+
+    [HttpGet("list")]
+    public async Task<ActionResult<PaginatedListDto<QuizzesListItemDto>>> GetList(
+        PaginationRequest request, CancellationToken cancellationToken)
+    {
+        var result = await Gate.DispatchQueryAsync<
+            PaginationRequest,
+            GetQuizzesQuery,
+            PaginatedListDto<QuizzesListItemDto>,
+            PaginatedListDto<QuizzesListItemDto>>(
+            request, cancellationToken);
+        return Ok(result);
     }
 }

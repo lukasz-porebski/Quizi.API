@@ -1,4 +1,5 @@
 using Application.Contracts.Modules.Quizzes.Commands;
+using Application.Contracts.Modules.Quizzes.Queries;
 using Application.Contracts.Modules.SharedQuizzes.Commands;
 using AutoMapper;
 using Common.Domain.ValueObjects;
@@ -6,6 +7,7 @@ using Domain.Modules.Quizzes.Data.Models.Sub;
 using Domain.Modules.Quizzes.ValueObjects;
 using PublishedLanguage.Modules.Quizzes.Requests;
 using PublishedLanguage.Modules.Quizzes.Requests.Sub;
+using PublishedLanguage.Shared.Requests;
 
 namespace Infrastructure.Endpoints.Modules.Quizzes;
 
@@ -27,5 +29,8 @@ public class QuizProfile : Profile
         CreateMap<AddQuizUserRequest, AddQuizUserCommand>();
 
         CreateMap<RemoveQuizUserRequest, RemoveQuizUserCommand>();
+
+        CreateMap<PaginationRequest, GetQuizzesQuery>()
+            .ForCtorParam(nameof(GetQuizzesQuery.Pagination), e => e.MapFrom(request => request));
     }
 }

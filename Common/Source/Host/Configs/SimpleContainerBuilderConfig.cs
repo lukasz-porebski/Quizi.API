@@ -39,8 +39,9 @@ internal static class SimpleContainerBuilderConfig
     public static ContainerBuilder RegisterProviders(this ContainerBuilder builder, BaseAssemblies assemblies)
     {
         var types = assemblies.GetAllTypes()
-            .Where(t => t.IsProvider())
             .Concat(typeof(DateTimeProvider).Assembly.GetTypes())
+            .Except([typeof(MessageProvider)])
+            .Where(t => t.IsProvider())
             .ToArray();
         builder.RegisterTypes(types).AsImplementedInterfaces();
         return builder;
@@ -49,8 +50,8 @@ internal static class SimpleContainerBuilderConfig
     public static ContainerBuilder RegisterFactories(this ContainerBuilder builder, BaseAssemblies assemblies)
     {
         var types = assemblies.GetAllTypes()
-            .Where(t => t.IsFactory())
             .Concat(typeof(DateTimeProvider).Assembly.GetTypes())
+            .Where(t => t.IsFactory())
             .ToArray();
         builder.RegisterTypes(types).AsImplementedInterfaces();
         return builder;
@@ -59,6 +60,16 @@ internal static class SimpleContainerBuilderConfig
     public static ContainerBuilder RegisterUtils(this ContainerBuilder builder)
     {
         builder.RegisterType<Hasher>().AsImplementedInterfaces();
+        return builder;
+    }
+
+    public static ContainerBuilder RegisterReadModels(this ContainerBuilder builder, BaseAssemblies assemblies)
+    {
+        var types = assemblies.InfrastructureReadModels
+            .GetExportedTypes()
+            .Where(t => t.IsReadModel())
+            .ToArray();
+        builder.RegisterTypes(types).AsImplementedInterfaces();
         return builder;
     }
 }

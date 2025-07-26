@@ -73,6 +73,7 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
             .RegisterFactories(Assemblies)
             .RegisterLocalization()
             .RegisterIdentity<TDbContext>()
-            .RegisterUtils();
+            .RegisterUtils()
+            .RegisterReadModels(Assemblies);
     }
 }

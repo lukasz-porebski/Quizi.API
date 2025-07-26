@@ -15,4 +15,8 @@ public interface IGate
 
     public Task<TResult> DispatchQueryAsync<TQuery, TDto, TResult>(TQuery query, CancellationToken cancellationToken)
         where TQuery : IQuery<TDto>;
+
+    public Task<TResult> DispatchQueryAsync<TRequest, TQuery, TDto, TResult>(
+        TRequest request, CancellationToken cancellationToken)
+        where TQuery : IQuery<TDto>;
 }

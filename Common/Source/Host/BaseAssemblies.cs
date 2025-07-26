@@ -12,6 +12,7 @@ public abstract class BaseAssemblies
     public abstract Assembly InfrastructureDatabaseEf { get; }
     public abstract Assembly InfrastructureEndpoints { get; }
     public abstract IReadOnlyCollection<Assembly> InfrastructureIntegrations { get; }
+    public abstract Assembly InfrastructureReadModels { get; }
     public abstract Assembly Host { get; }
 
     public IReadOnlyList<Type> GetAllTypes(
@@ -23,6 +24,7 @@ public abstract class BaseAssemblies
         bool excludeInfrastructureDatabaseEf = false,
         bool excludeInfrastructureEndpoints = false,
         bool excludeInfrastructureIntegrations = false,
+        bool excludeInfrastructureReadModels = false,
         bool excludeHost = false)
     {
         var result = new List<Type>();
@@ -41,7 +43,7 @@ public abstract class BaseAssemblies
 
         if (!excludeInfrastructure)
             result.AddRange(Infrastructure?.GetTypes() ?? []);
-        
+
         if (!excludeInfrastructureDatabaseEf)
             result.AddRange(InfrastructureDatabaseEf.GetTypes());
 
@@ -50,6 +52,9 @@ public abstract class BaseAssemblies
 
         if (!excludeInfrastructureIntegrations)
             result.AddRange(InfrastructureIntegrations.SelectMany(i => i.GetTypes()));
+
+        if (!excludeInfrastructureReadModels)
+            result.AddRange(InfrastructureReadModels.GetTypes());
 
         if (!excludeHost)
             result.AddRange(Host.GetTypes());

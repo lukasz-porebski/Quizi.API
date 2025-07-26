@@ -2,6 +2,7 @@ using Common.Application.Contracts.CQRS;
 using Common.Application.Contracts.Interfaces;
 using Common.Application.CQRS;
 using Common.Host.Extensions;
+using Common.Infrastructure.ReadModels.Dapper;
 using Common.Shared.Attributes;
 using RestSharp.Extensions;
 
@@ -35,4 +36,7 @@ public static class TypeRecognizer
 
     public static bool IsFactory(this Type source) =>
         source.IsRegistrable() && source.GetAttribute<FactoryAttribute>() != null;
+
+    public static bool IsReadModel(this Type source) =>
+        source.IsSubclassOf(typeof(BaseReadModel));
 }
