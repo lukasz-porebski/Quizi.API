@@ -1,4 +1,5 @@
 using Application.Contracts.Modules.Quizzes.Commands;
+using Application.Contracts.Modules.Quizzes.Dtos;
 using Application.Contracts.Modules.Quizzes.Queries;
 using Application.Contracts.Modules.SharedQuizzes.Commands;
 using AutoMapper;
@@ -7,6 +8,7 @@ using Domain.Modules.Quizzes.Data.Models.Sub;
 using Domain.Modules.Quizzes.ValueObjects;
 using PublishedLanguage.Modules.Quizzes.Requests;
 using PublishedLanguage.Modules.Quizzes.Requests.Sub;
+using PublishedLanguage.Modules.Quizzes.Responses;
 using PublishedLanguage.Shared.Requests;
 
 namespace Infrastructure.Endpoints.Modules.Quizzes;
@@ -32,5 +34,7 @@ public class QuizProfile : Profile
 
         CreateMap<PaginationRequest, GetQuizzesQuery>()
             .ForCtorParam(nameof(GetQuizzesQuery.Pagination), e => e.MapFrom(request => request));
+
+        CreateMap<QuizzesListItemDto, QuizzesListItemResponse>();
     }
 }

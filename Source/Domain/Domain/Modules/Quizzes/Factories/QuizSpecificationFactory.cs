@@ -1,4 +1,5 @@
 ﻿using Common.Domain.Specification;
+using Common.Shared.Attributes;
 using Domain.Modules.Quizzes.Data.Specifications;
 using Domain.Modules.Quizzes.Interfaces;
 using Domain.Modules.Quizzes.Specifications;
@@ -9,6 +10,7 @@ using Domain.Shared.Specifications;
 
 namespace Domain.Modules.Quizzes.Factories;
 
+[Factory]
 public class QuizSpecificationFactory : IQuizSpecificationFactory
 {
     public SpecificationBuilderDirector QuizPersist(QuizPersistSpecificationData data) =>
@@ -30,7 +32,8 @@ public class QuizSpecificationFactory : IQuizSpecificationFactory
             .And(new QuizQuestionOrdinalNumberIsUniqueSpecification(), v => v.Questions)
             .And(new QuizQuestionsAreUniqueSpecification(), v => v.Questions)
             .AndCollection(new QuizQuestionTextSpecification(), v => v.ClosedQuestions.Select(q => q.Text))
-            .AndCollection(new QuizSelectionQuestionHasAtLeastTwoAnswersSpecification(), v => v.ClosedQuestions.Select(q => q.Answers))
+            .AndCollection(new QuizSelectionQuestionHasAtLeastTwoAnswersSpecification(),
+                v => v.ClosedQuestions.Select(q => q.Answers))
             .AndCollection(new QuizQuestionAnswerTextSpecification(), v => v.Questions.SelectMany(q => q.Answers))
             .Build();
 

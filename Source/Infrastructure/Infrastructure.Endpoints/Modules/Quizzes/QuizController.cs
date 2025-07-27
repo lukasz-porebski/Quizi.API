@@ -7,7 +7,9 @@ using Common.Domain.Extensions;
 using Common.Infrastructure.Endpoints;
 using Microsoft.AspNetCore.Mvc;
 using PublishedLanguage.Modules.Quizzes.Requests;
+using PublishedLanguage.Modules.Quizzes.Responses;
 using PublishedLanguage.Shared.Requests;
+using PublishedLanguage.Shared.Responses;
 
 namespace Infrastructure.Endpoints.Modules.Quizzes;
 
@@ -57,7 +59,7 @@ public class QuizController(IGate gate) : BaseController(gate)
             PaginationRequest,
             GetQuizzesQuery,
             PaginatedListDto<QuizzesListItemDto>,
-            PaginatedListDto<QuizzesListItemDto>>(
+            PaginatedListResponse<QuizzesListItemResponse>>(
             request, cancellationToken);
         return Ok(result);
     }

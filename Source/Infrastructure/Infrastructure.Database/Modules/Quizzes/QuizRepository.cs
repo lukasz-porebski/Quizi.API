@@ -1,4 +1,5 @@
 using Application.Contracts.Modules.Quizzes.Interfaces;
+using Common.Application.Contracts.User;
 using Common.Infrastructure.Database.EF;
 using Common.Shared.Providers;
 using Domain.Modules.Quizzes.Models;
@@ -7,11 +8,13 @@ using Microsoft.EntityFrameworkCore;
 namespace Infrastructure.Database.Modules.Quizzes;
 
 public class QuizRepository(
-    BaseDbContext context,
-    IDateTimeProvider dateTimeProvider
+    AppDbContext context,
+    IDateTimeProvider dateTimeProvider,
+    IUserContextProvider userContextProvider
 ) : BaseRepository<Quiz>(
     context,
     dateTimeProvider,
+    userContextProvider,
     q => q.Include(e => e.OpenQuestions)
         .Include(e => e.SingleChoiceQuestions)
         .ThenInclude(e => e.Answers)

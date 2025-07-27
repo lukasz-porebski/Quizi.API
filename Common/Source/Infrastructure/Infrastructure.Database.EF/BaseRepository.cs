@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using Common.Application.Contracts.Interfaces;
+using Common.Application.Contracts.User;
 using Common.Domain.Entities;
 using Common.Domain.ValueObjects;
 using Common.Shared.Extensions;
@@ -16,14 +17,17 @@ public abstract class BaseRepository<TAggregateRoot> : IRepository<TAggregateRoo
     private readonly IDateTimeProvider _dateTimeProvider;
     private readonly DbSet<TAggregateRoot> _aggregateRootContext;
     private readonly IQueryable<TAggregateRoot> _aggregateRootQuery;
+    private readonly IUserContextProvider _userContextProvider;
 
     protected BaseRepository(
         BaseDbContext context,
         IDateTimeProvider dateTimeProvider,
+        IUserContextProvider userContextProvider,
         Func<IQueryable<TAggregateRoot>, IQueryable<TAggregateRoot>>? query = null)
     {
         _context = context;
         _dateTimeProvider = dateTimeProvider;
+        _userContextProvider = userContextProvider;
         _aggregateRootContext = _context.Set<TAggregateRoot>();
         _aggregateRootQuery = query?.Invoke(_aggregateRootContext) ?? _aggregateRootContext;
     }
@@ -102,16 +106,18 @@ public abstract class BaseRepository<TAggregateRoot> : IRepository<TAggregateRoo
     public async Task PersistAsync(TAggregateRoot aggregateRoot, CancellationToken cancellationToken, bool save = true)
     {
         var entry = _context.Entry(aggregateRoot);
+        var userId = _userContextProvider.Get()?.UserId;
+
         switch (entry.State)
         {
             case EntityState.Modified:
             {
-                aggregateRoot.Update(new AggregateStateChangeInfo(null, _dateTimeProvider.Now()));
+                aggregateRoot.Update(new AggregateStateChangeInfo(userId, _dateTimeProvider.Now()));
                 break;
             }
             case EntityState.Detached:
             {
-                aggregateRoot.Init(new AggregateStateChangeInfo(null, _dateTimeProvider.Now()));
+                aggregateRoot.Init(new AggregateStateChangeInfo(userId, _dateTimeProvider.Now()));
                 await _aggregateRootContext.AddAsync(aggregateRoot, cancellationToken);
                 break;
             }
@@ -125,14 +131,15 @@ public abstract class BaseRepository<TAggregateRoot> : IRepository<TAggregateRoo
     public Task RemoveAsync(
         IReadOnlyCollection<TAggregateRoot> aggregateRoots, CancellationToken cancellationToken, bool save = true)
     {
-        aggregateRoots.ForEach(root => root.Remove(new AggregateStateChangeInfo(null, _dateTimeProvider.Now())));
+        aggregateRoots.ForEach(root =>
+            root.Remove(new AggregateStateChangeInfo(_userContextProvider.Get()?.UserId, _dateTimeProvider.Now())));
         _aggregateRootContext.RemoveRange(aggregateRoots);
         return TrySaveAsync(save, cancellationToken);
     }
 
     public Task RemoveAsync(TAggregateRoot aggregateRoot, CancellationToken cancellationToken, bool save = true)
     {
-        aggregateRoot.Remove(new AggregateStateChangeInfo(null, _dateTimeProvider.Now()));
+        aggregateRoot.Remove(new AggregateStateChangeInfo(_userContextProvider.Get()?.UserId, _dateTimeProvider.Now()));
         _aggregateRootContext.Remove(aggregateRoot);
         return TrySaveAsync(save, cancellationToken);
     }

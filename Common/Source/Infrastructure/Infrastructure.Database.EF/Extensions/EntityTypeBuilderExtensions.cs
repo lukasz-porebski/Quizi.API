@@ -44,7 +44,10 @@ public static class EntityTypeBuilderExtensions
             expression,
             o =>
             {
-                o.Property(p => p.UserId).ConfigureAggregateId().HasColumnName($"{prefix}ByUserId");
+                o.Property(p => p.UserId)
+                    .ConfigureAggregateId()
+                    .HasColumnName($"{prefix}ByUserId")
+                    .IsRequired(false);
 
                 const string ownerIdColumnName = "OwnerId";
                 o.Property<AggregateId>(ownerIdColumnName);
