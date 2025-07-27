@@ -15,5 +15,9 @@ public class UserConfiguration : BaseAggregateRootConfiguration<User>
 
         builder.Property(u => u.HashedPassword)
             .HasMaxLength(150);
+
+        //Tylko w przypadku encji User pole CreatedByUserId ciągle jest generowane w nowych migracjach. 
+        //Poniże ustawienie naprawia ten problem kosztem ustawienia nullable na polu CreatedAt
+        builder.Navigation(u => u.CreationInto).IsRequired(false);
     }
 }
