@@ -31,7 +31,8 @@ public abstract class BaseRepository<TAggregateRoot> : IRepository<TAggregateRoo
     public async Task<TAggregateRoot?> GetAsync(AggregateId id, CancellationToken cancellationToken) =>
         await GetAsync(root => root.Id == id, cancellationToken);
 
-    public async Task<TAggregateRoot?> GetAsync(Expression<Func<TAggregateRoot, bool>> condition, CancellationToken cancellationToken)
+    public async Task<TAggregateRoot?> GetAsync(
+        Expression<Func<TAggregateRoot, bool>> condition, CancellationToken cancellationToken)
     {
         var aggregateRoot = GetFromLocal(condition.Compile()) ??
                             await _aggregateRootQuery.FirstOrDefaultAsync(condition, cancellationToken);
@@ -48,7 +49,8 @@ public abstract class BaseRepository<TAggregateRoot> : IRepository<TAggregateRoo
 
         var missingIds = uniqueIds.Except(aggregateRoots.Select(a => a.Id)).ToHashSet();
         if (missingIds.Any())
-            aggregateRoots.AddRange(await _aggregateRootContext.Where(a => missingIds.Contains(a.Id)).ToListAsync(cancellationToken));
+            aggregateRoots.AddRange(await _aggregateRootContext.Where(a => missingIds.Contains(a.Id))
+                .ToListAsync(cancellationToken));
 
         foreach (var aggregateRoot in aggregateRoots)
             SetDependencies(aggregateRoot);
@@ -105,7 +107,6 @@ public abstract class BaseRepository<TAggregateRoot> : IRepository<TAggregateRoo
             case EntityState.Modified:
             {
                 aggregateRoot.Update(new AggregateStateChangeInfo(null, _dateTimeProvider.Now()));
-                _aggregateRootContext.Update(aggregateRoot);
                 break;
             }
             case EntityState.Detached:
@@ -121,7 +122,8 @@ public abstract class BaseRepository<TAggregateRoot> : IRepository<TAggregateRoo
         await TrySaveAsync(save, cancellationToken);
     }
 
-    public Task RemoveAsync(IReadOnlyCollection<TAggregateRoot> aggregateRoots, CancellationToken cancellationToken, bool save = true)
+    public Task RemoveAsync(
+        IReadOnlyCollection<TAggregateRoot> aggregateRoots, CancellationToken cancellationToken, bool save = true)
     {
         aggregateRoots.ForEach(root => root.Remove(new AggregateStateChangeInfo(null, _dateTimeProvider.Now())));
         _aggregateRootContext.RemoveRange(aggregateRoots);
