@@ -26,7 +26,11 @@ public abstract class BaseReadModel(IDatabaseConnectionStringProvider connection
         var builder = new SqlBuilder();
         var selector = builder.AddTemplate(query, parameters);
 
-        builder.OrderBy(orderByQuery);
+        var orderBy = orderByQuery;
+        if (pagination.Sort is not null)
+            orderBy = $"{pagination.Sort.ColumnName} {(pagination.Sort.IsAscending ? "ASC" : "DESC")}";
+
+        builder.OrderBy(orderBy);
 
         await using var connection = new SqlConnection(_connectionString);
         await connection.OpenAsync(cancellationToken);

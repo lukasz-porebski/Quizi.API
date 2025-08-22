@@ -33,5 +33,9 @@ public class SharedProfile : Profile
         CreateMap(typeof(PaginatedListDto<>), typeof(PaginatedListResponse<>));
 
         CreateMap<PaginationData, PaginationResponse>();
+
+        CreateMap<SortRequest, SortData>();
+
+        CreateMap<SortData, SortResponse>();
     }
 }
