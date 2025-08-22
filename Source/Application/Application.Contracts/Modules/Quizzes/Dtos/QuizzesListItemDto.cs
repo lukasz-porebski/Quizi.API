@@ -1,5 +1,12 @@
-﻿namespace Application.Contracts.Modules.Quizzes.Dtos;
+﻿using Domain.Contracts.Modules.Quizzes.Enums;
+
+namespace Application.Contracts.Modules.Quizzes.Dtos;
 
 public record QuizzesListItemDto(
-    string Id
+    string Id,
+    string Title,
+    TimeSpan Duration,
+    QuizCopyMode CopyMode,
+    int QuestionsCount,
+    int QuestionsCountInRunningQuiz
 );

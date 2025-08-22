@@ -4,12 +4,12 @@ using Application.Contracts.Modules.Quizzes.Queries;
 using Application.Contracts.Modules.SharedQuizzes.Commands;
 using AutoMapper;
 using Common.Domain.ValueObjects;
+using Common.PublishedLanguage.Requests;
 using Domain.Modules.Quizzes.Data.Models.Sub;
 using Domain.Modules.Quizzes.ValueObjects;
 using PublishedLanguage.Modules.Quizzes.Requests;
 using PublishedLanguage.Modules.Quizzes.Requests.Sub;
 using PublishedLanguage.Modules.Quizzes.Responses;
-using PublishedLanguage.Shared.Requests;
 
 namespace Infrastructure.Endpoints.Modules.Quizzes;
 

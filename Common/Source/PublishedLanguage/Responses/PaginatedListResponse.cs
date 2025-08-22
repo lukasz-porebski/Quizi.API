@@ -1,4 +1,4 @@
-﻿namespace PublishedLanguage.Shared.Responses;
+﻿namespace Common.PublishedLanguage.Responses;
 
 public record PaginatedListResponse<T>(
     IReadOnlyCollection<T> Items,

@@ -5,11 +5,11 @@ using Application.Contracts.Modules.SharedQuizzes.Commands;
 using Common.Application.Contracts.ReadModel;
 using Common.Domain.Extensions;
 using Common.Infrastructure.Endpoints;
+using Common.PublishedLanguage.Requests;
+using Common.PublishedLanguage.Responses;
 using Microsoft.AspNetCore.Mvc;
 using PublishedLanguage.Modules.Quizzes.Requests;
 using PublishedLanguage.Modules.Quizzes.Responses;
-using PublishedLanguage.Shared.Requests;
-using PublishedLanguage.Shared.Responses;
 
 namespace Infrastructure.Endpoints.Modules.Quizzes;
 
@@ -53,7 +53,7 @@ public class QuizController(IGate gate) : BaseController(gate)
 
     [HttpGet("list")]
     public async Task<ActionResult<PaginatedListDto<QuizzesListItemDto>>> GetList(
-        PaginationRequest request, CancellationToken cancellationToken)
+        [FromQuery] PaginationRequest request, CancellationToken cancellationToken)
     {
         var result = await Gate.DispatchQueryAsync<
             PaginationRequest,

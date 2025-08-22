@@ -1,3 +1,3 @@
-﻿namespace PublishedLanguage.Shared.Requests;
+﻿namespace Common.PublishedLanguage.Requests;
 
 public record PaginationRequest(int PageNumber, int PageSize);
