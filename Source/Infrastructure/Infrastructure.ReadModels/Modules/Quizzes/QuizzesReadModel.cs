@@ -11,7 +11,7 @@ public class QuizzesReadModel(IDatabaseConnectionStringProvider connectionString
 {
     public Task<PaginatedListDto<QuizzesListItemDto>> Get(GetQuizzesQuery query, CancellationToken cancellationToken)
     {
-        var sqlQuery = @$"
+        const string sqlQuery = @$"
 SELECT
     Q.Id AS {nameof(QuizzesListItemDto.Id)},
     Q.Title AS {nameof(QuizzesListItemDto.Title)},
@@ -29,7 +29,8 @@ FROM Quizzes Q
             sqlQuery,
             orderByQuery: nameof(QuizzesListItemDto.Id),
             readItems: async reader => (await reader.ReadAsync<QuizzesListItemDto>()).ToArray(),
-            cancellationToken
+            cancellationToken,
+            searchColumns: [nameof(QuizzesListItemDto.Title)]
         );
     }
 }

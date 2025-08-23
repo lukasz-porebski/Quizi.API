@@ -1,4 +1,5 @@
 ﻿using Common.Application.Contracts.ReadModel;
+using Common.Shared.Extensions;
 using Dapper;
 using Microsoft.Data.SqlClient;
 
@@ -15,22 +16,32 @@ public abstract class BaseReadModel(IDatabaseConnectionStringProvider connection
         Func<SqlMapper.GridReader, Task<IReadOnlyCollection<T>>> readItems,
         CancellationToken cancellationToken,
         string? elementsQuery = null,
-        DynamicParameters? parameters = null)
+        DynamicParameters? parameters = null,
+        IReadOnlyCollection<string>? searchColumns = null)
         where T : notnull
     {
         var query = new ReadModelSqlBuilder()
-            .AddPaginatedQuery(pagination, paginatedQuery)
+            .AddPaginatedQuery(pagination, paginatedQuery, searchColumns)
             .AddQuery(elementsQuery ?? string.Empty)
             .Build();
 
         var builder = new SqlBuilder();
         var selector = builder.AddTemplate(query, parameters);
 
-        var orderBy = orderByQuery;
-        if (pagination.Sort is not null)
-            orderBy = $"{pagination.Sort.ColumnName} {(pagination.Sort.IsAscending ? "ASC" : "DESC")}";
+        if (!searchColumns.IsEmpty() && !pagination.Search.IsEmpty())
+            builder.Where($"{ReadModelSqlBuilder.SearchColumnName} LIKE @SerachValue", new
+            {
+                SerachValue = $"%{pagination.Search}%"
+            });
 
-        builder.OrderBy(orderBy);
+        if (pagination.Sort is not null)
+        {
+            var orderBy = $"@SortColumnName {(pagination.Sort.IsAscending ? "ASC" : "DESC")}";
+            builder.OrderBy(orderBy, new { SortColumnName = pagination.Sort.ColumnName });
+        }
+        else
+            builder.OrderBy(orderByQuery);
+
 
         await using var connection = new SqlConnection(_connectionString);
         await connection.OpenAsync(cancellationToken);
