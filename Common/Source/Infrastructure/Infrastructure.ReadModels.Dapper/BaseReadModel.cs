@@ -17,7 +17,8 @@ public abstract class BaseReadModel(IDatabaseConnectionStringProvider connection
         CancellationToken cancellationToken,
         string? elementsQuery = null,
         DynamicParameters? parameters = null,
-        IReadOnlyCollection<string>? searchColumns = null)
+        IReadOnlyCollection<string>? searchColumns = null,
+        IReadOnlyCollection<string>? sortColumns = null)
         where T : notnull
     {
         var query = new ReadModelSqlBuilder()
@@ -36,12 +37,15 @@ public abstract class BaseReadModel(IDatabaseConnectionStringProvider connection
 
         if (pagination.Sort is not null)
         {
-            var orderBy = $"@SortColumnName {(pagination.Sort.IsAscending ? "ASC" : "DESC")}";
-            builder.OrderBy(orderBy, new { SortColumnName = pagination.Sort.ColumnName });
+            var allowedSortColumns = sortColumns ?? typeof(T).GetProperties().Select(p => p.Name.ToLower()).ToArray();
+            if (!allowedSortColumns.Contains(pagination.Sort.ColumnName.ToLower()))
+                throw new ArgumentException($"{pagination.Sort.ColumnName} column is not allowed.");
+
+            var orderBy = $"{pagination.Sort.ColumnName} {(pagination.Sort.IsAscending ? "ASC" : "DESC")}";
+            builder.OrderBy(orderBy);
         }
         else
             builder.OrderBy(orderByQuery);
-
 
         await using var connection = new SqlConnection(_connectionString);
         await connection.OpenAsync(cancellationToken);
