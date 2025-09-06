@@ -36,5 +36,10 @@ public class QuizProfile : Profile
             .ForCtorParam(nameof(GetQuizzesQuery.Pagination), e => e.MapFrom(request => request));
 
         CreateMap<QuizzesListItemDto, QuizzesListItemResponse>();
+
+        CreateMap<QuizDetailsDto, QuizDetailsViewModel>();
+        CreateMap<QuizDetailsOpenQuestionDto, QuizDetailsOpenQuestionViewModel>();
+        CreateMap<QuizDetailsChoiceQuestionDto, QuizDetailsChoiceQuestionViewModel>();
+        CreateMap<QuizDetailsChoiceQuestionAnswerDto, QuizDetailsChoiceQuestionAnswerViewModel>();
     }
 }

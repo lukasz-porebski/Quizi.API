@@ -57,4 +57,25 @@ public abstract class BaseReadModel(IDatabaseConnectionStringProvider connection
 
         return new PaginatedListDto<T>(items, totalCount, pagination);
     }
+
+    protected async Task<T> GetDetailsWithElements<T>(
+        string sqlQuery,
+        Func<SqlMapper.GridReader, T, Task> setDetails,
+        CancellationToken cancellationToken,
+        object? parameters = null)
+        where T : notnull
+    {
+        var builder = new SqlBuilder();
+        var selector = builder.AddTemplate(sqlQuery, parameters);
+
+        await using var connection = new SqlConnection(_connectionString);
+        await connection.OpenAsync(cancellationToken);
+
+        await using var multi = await connection.QueryMultipleAsync(selector.RawSql, selector.Parameters);
+
+        var details = await multi.ReadFirstAsync<T>();
+        await setDetails(multi, details);
+
+        return details;
+    }
 }

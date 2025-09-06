@@ -9,8 +9,6 @@ namespace Application.Modules.Quizzes.QueryHandlers;
 public class GetQuizzesQueryHandler(IQuizzesReadModel readModel)
     : IQueryHandler<GetQuizzesQuery, PaginatedListDto<QuizzesListItemDto>>
 {
-    public Task<PaginatedListDto<QuizzesListItemDto>> Handle(GetQuizzesQuery query, CancellationToken cancellationToken)
-    {
-        return readModel.Get(query, cancellationToken);
-    }
+    public Task<PaginatedListDto<QuizzesListItemDto>> Handle(GetQuizzesQuery query, CancellationToken cancellationToken) =>
+        readModel.Get(query, cancellationToken);
 }

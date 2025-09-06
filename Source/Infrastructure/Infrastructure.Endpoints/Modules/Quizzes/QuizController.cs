@@ -4,6 +4,7 @@ using Application.Contracts.Modules.Quizzes.Queries;
 using Application.Contracts.Modules.SharedQuizzes.Commands;
 using Common.Application.Contracts.ReadModel;
 using Common.Domain.Extensions;
+using Common.Domain.ValueObjects;
 using Common.Infrastructure.Endpoints;
 using Common.PublishedLanguage.Requests;
 using Common.PublishedLanguage.Responses;
@@ -61,6 +62,20 @@ public class QuizController(IGate gate) : BaseController(gate)
             PaginatedListDto<QuizzesListItemDto>,
             PaginatedListResponse<QuizzesListItemResponse>>(
             request, cancellationToken);
+        return Ok(result);
+    }
+
+    [HttpGet("details/{id}")]
+    public async Task<ActionResult<QuizDetailsViewModel>> GetDetails(string id, CancellationToken cancellationToken)
+    {
+        if (!AggregateId.TryParse(id, out var aggregateId))
+            return BadRequest();
+
+        var result = await Gate.DispatchQueryAsync<
+            GetQuizDetailsQuery,
+            QuizDetailsDto,
+            QuizDetailsViewModel>(
+            new GetQuizDetailsQuery(aggregateId!), cancellationToken);
         return Ok(result);
     }
 }
