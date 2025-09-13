@@ -53,7 +53,7 @@ SELECT
     No AS {nameof(QuizDetailsChoiceQuestionDto.No)},
     OrdinalNumber AS {nameof(QuizDetailsChoiceQuestionDto.OrdinalNumber)},
     Text AS {nameof(QuizDetailsChoiceQuestionDto.Text)}
-FROM QuizSingleChoiceQuestions
+FROM QuizMultipleChoiceQuestions
 WHERE Id = @{nameof(parameters.Id)};
 
 SELECT
@@ -61,7 +61,7 @@ SELECT
     OrdinalNumber AS {nameof(QuizDetailsChoiceQuestionAnswerDto.OrdinalNumber)},
     Text AS {nameof(QuizDetailsChoiceQuestionAnswerDto.Text)},
     IsCorrect AS {nameof(QuizDetailsChoiceQuestionAnswerDto.IsCorrect)}
-FROM QuizSingleChoiceQuestionAnswers
+FROM QuizMultipleChoiceQuestionAnswers
 WHERE Id = @{nameof(parameters.Id)};
 ";
 
