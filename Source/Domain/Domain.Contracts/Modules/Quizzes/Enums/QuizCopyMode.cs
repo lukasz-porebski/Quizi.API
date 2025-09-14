@@ -2,7 +2,7 @@
 
 public enum QuizCopyMode
 {
-    Disable = 1,
+    Disabled = 1,
     OnlyForAddedUsers,
     ForAll
 }

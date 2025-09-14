@@ -37,7 +37,7 @@ public class CopyQuizCommandHandler(
     {
         switch (quiz.Settings.CopyMode)
         {
-            case QuizCopyMode.Disable:
+            case QuizCopyMode.Disabled:
                 throw new BusinessLogicException(QuizMessageCodes.CopyDenied);
             case QuizCopyMode.OnlyForAddedUsers:
                 var existsSharedQuiz = await sharedQuizRepository.ExistsAsync(q =>
