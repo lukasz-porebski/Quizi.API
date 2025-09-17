@@ -17,6 +17,7 @@ public class QuizDetailsReadModel(IDatabaseConnectionStringProvider connectionSt
 SELECT
     Id AS {nameof(QuizDetailsDto.Id)},
     Title AS {nameof(QuizDetailsDto.Title)},
+    Description AS {nameof(QuizDetailsDto.Description)},
     Duration AS {nameof(QuizDetailsDto.Duration)},
     QuestionsCountInRunningQuiz AS {nameof(QuizDetailsDto.QuestionsCountInRunningQuiz)},
     RandomQuestions AS {nameof(QuizDetailsDto.RandomQuestions)},
@@ -28,6 +29,7 @@ FROM Quizzes
 WHERE Id = @{nameof(parameters.Id)};
 
 SELECT
+    No AS {nameof(QuizDetailsOpenQuestionDto.No)},
     OrdinalNumber AS {nameof(QuizDetailsOpenQuestionDto.OrdinalNumber)},
     Text AS {nameof(QuizDetailsOpenQuestionDto.Text)},
     Answer AS {nameof(QuizDetailsOpenQuestionDto.Answer)}
@@ -35,32 +37,34 @@ FROM QuizOpenQuestions
 WHERE Id = @{nameof(parameters.Id)};
 
 SELECT
-    No AS {nameof(QuizDetailsChoiceQuestionDto.No)},
-    OrdinalNumber AS {nameof(QuizDetailsChoiceQuestionDto.OrdinalNumber)},
-    Text AS {nameof(QuizDetailsChoiceQuestionDto.Text)}
+    No AS {nameof(QuizDetailsClosedQuestionDto.No)},
+    OrdinalNumber AS {nameof(QuizDetailsClosedQuestionDto.OrdinalNumber)},
+    Text AS {nameof(QuizDetailsClosedQuestionDto.Text)}
 FROM QuizSingleChoiceQuestions
 WHERE Id = @{nameof(parameters.Id)};
 
 SELECT
-    No AS {nameof(QuizDetailsChoiceQuestionAnswerDto.No)},
-    OrdinalNumber AS {nameof(QuizDetailsChoiceQuestionAnswerDto.OrdinalNumber)},
-    Text AS {nameof(QuizDetailsChoiceQuestionAnswerDto.Text)},
-    IsCorrect AS {nameof(QuizDetailsChoiceQuestionAnswerDto.IsCorrect)}
+    No AS {nameof(QuizDetailsClosedQuestionAnswerDto.No)},
+    SubNo AS {nameof(QuizDetailsClosedQuestionAnswerDto.SubNo)},
+    OrdinalNumber AS {nameof(QuizDetailsClosedQuestionAnswerDto.OrdinalNumber)},
+    Text AS {nameof(QuizDetailsClosedQuestionAnswerDto.Text)},
+    IsCorrect AS {nameof(QuizDetailsClosedQuestionAnswerDto.IsCorrect)}
 FROM QuizSingleChoiceQuestionAnswers
 WHERE Id = @{nameof(parameters.Id)};
 
 SELECT
-    No AS {nameof(QuizDetailsChoiceQuestionDto.No)},
-    OrdinalNumber AS {nameof(QuizDetailsChoiceQuestionDto.OrdinalNumber)},
-    Text AS {nameof(QuizDetailsChoiceQuestionDto.Text)}
+    No AS {nameof(QuizDetailsClosedQuestionDto.No)},
+    OrdinalNumber AS {nameof(QuizDetailsClosedQuestionDto.OrdinalNumber)},
+    Text AS {nameof(QuizDetailsClosedQuestionDto.Text)}
 FROM QuizMultipleChoiceQuestions
 WHERE Id = @{nameof(parameters.Id)};
 
 SELECT
-    No AS {nameof(QuizDetailsChoiceQuestionAnswerDto.No)},
-    OrdinalNumber AS {nameof(QuizDetailsChoiceQuestionAnswerDto.OrdinalNumber)},
-    Text AS {nameof(QuizDetailsChoiceQuestionAnswerDto.Text)},
-    IsCorrect AS {nameof(QuizDetailsChoiceQuestionAnswerDto.IsCorrect)}
+    No AS {nameof(QuizDetailsClosedQuestionAnswerDto.No)},
+    SubNo AS {nameof(QuizDetailsClosedQuestionAnswerDto.SubNo)},
+    OrdinalNumber AS {nameof(QuizDetailsClosedQuestionAnswerDto.OrdinalNumber)},
+    Text AS {nameof(QuizDetailsClosedQuestionAnswerDto.Text)},
+    IsCorrect AS {nameof(QuizDetailsClosedQuestionAnswerDto.IsCorrect)}
 FROM QuizMultipleChoiceQuestionAnswers
 WHERE Id = @{nameof(parameters.Id)};
 ";
@@ -70,10 +74,10 @@ WHERE Id = @{nameof(parameters.Id)};
             setDetails: async (reader, dto) =>
             {
                 var openQuestionsTask = reader.ReadAsync<QuizDetailsOpenQuestionDto>();
-                var singleChoiceQuestionsTask = reader.ReadAsync<QuizDetailsChoiceQuestionDto>();
-                var singleChoiceQuestionAnswersTask = reader.ReadAsync<QuizDetailsChoiceQuestionAnswerDto>();
-                var multipleChoiceQuestionsTask = reader.ReadAsync<QuizDetailsChoiceQuestionDto>();
-                var multipleChoiceQuestionAnswersTask = reader.ReadAsync<QuizDetailsChoiceQuestionAnswerDto>();
+                var singleChoiceQuestionsTask = reader.ReadAsync<QuizDetailsClosedQuestionDto>();
+                var singleChoiceQuestionAnswersTask = reader.ReadAsync<QuizDetailsClosedQuestionAnswerDto>();
+                var multipleChoiceQuestionsTask = reader.ReadAsync<QuizDetailsClosedQuestionDto>();
+                var multipleChoiceQuestionAnswersTask = reader.ReadAsync<QuizDetailsClosedQuestionAnswerDto>();
 
                 await Task.WhenAll(
                     openQuestionsTask,

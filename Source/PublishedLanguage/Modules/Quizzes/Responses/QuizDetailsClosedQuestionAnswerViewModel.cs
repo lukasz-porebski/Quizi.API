@@ -1,6 +1,6 @@
 namespace PublishedLanguage.Modules.Quizzes.Responses;
 
-public class QuizDetailsChoiceQuestionAnswerViewModel
+public class QuizDetailsClosedQuestionAnswerViewModel
 {
     public int No { get; init; }
     public int OrdinalNumber { get; init; }

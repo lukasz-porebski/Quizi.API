@@ -39,7 +39,8 @@ public class QuizProfile : Profile
 
         CreateMap<QuizDetailsDto, QuizDetailsViewModel>();
         CreateMap<QuizDetailsOpenQuestionDto, QuizDetailsOpenQuestionViewModel>();
-        CreateMap<QuizDetailsChoiceQuestionDto, QuizDetailsChoiceQuestionViewModel>();
-        CreateMap<QuizDetailsChoiceQuestionAnswerDto, QuizDetailsChoiceQuestionAnswerViewModel>();
+        CreateMap<QuizDetailsClosedQuestionDto, QuizDetailsClosedQuestionViewModel>();
+        CreateMap<QuizDetailsClosedQuestionAnswerDto, QuizDetailsClosedQuestionAnswerViewModel>()
+            .ForMember(vm => vm.No, o => o.MapFrom(d => d.SubNo));
     }
 }

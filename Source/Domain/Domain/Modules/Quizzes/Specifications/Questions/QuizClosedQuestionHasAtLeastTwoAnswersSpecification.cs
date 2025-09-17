@@ -4,7 +4,7 @@ using Domain.Modules.Quizzes.Data.Models.Sub;
 
 namespace Domain.Modules.Quizzes.Specifications.Questions;
 
-internal class QuizSelectionQuestionHasAtLeastTwoAnswersSpecification
+internal class QuizClosedQuestionHasAtLeastTwoAnswersSpecification
     : ISpecification<IReadOnlyCollection<QuizClosedQuestionAnswerPersistData>>
 {
     public string FailureMessageCode => QuizMessageCodes.ClosedQuestionHasToHasAtLeastTwoAnswers;
