@@ -7,7 +7,7 @@ namespace Domain.Modules.Quizzes.Specifications.Questions;
 internal class QuizSelectionQuestionHasAtLeastTwoAnswersSpecification
     : ISpecification<IReadOnlyCollection<QuizClosedQuestionAnswerPersistData>>
 {
-    public string FailureMessageCode => QuizMessageCodes.SelectionQuestionHasNotAtLeastTwoAnswers;
+    public string FailureMessageCode => QuizMessageCodes.ClosedQuestionHasToHasAtLeastTwoAnswers;
 
     public bool IsValid(IReadOnlyCollection<QuizClosedQuestionAnswerPersistData> data) =>
         data.Count >= 2;

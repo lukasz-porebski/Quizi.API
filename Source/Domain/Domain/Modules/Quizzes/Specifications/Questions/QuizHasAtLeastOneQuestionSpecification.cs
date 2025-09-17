@@ -6,7 +6,7 @@ namespace Domain.Modules.Quizzes.Specifications.Questions;
 
 internal class QuizHasAtLeastOneQuestionSpecification : ISpecification<IReadOnlyCollection<QuizQuestionSpecificationData>>
 {
-    public string FailureMessageCode => QuizMessageCodes.QuizHasNotDefinedAnyQuestion;
+    public string FailureMessageCode => QuizMessageCodes.QuizHasToHasAtLeastOneQuestion;
 
     public bool IsValid(IReadOnlyCollection<QuizQuestionSpecificationData> data) =>
         data.Any();

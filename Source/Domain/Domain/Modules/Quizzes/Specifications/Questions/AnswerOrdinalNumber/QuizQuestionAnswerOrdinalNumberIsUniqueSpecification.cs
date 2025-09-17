@@ -7,7 +7,7 @@ namespace Domain.Modules.Quizzes.Specifications.Questions.AnswerOrdinalNumber;
 
 internal class QuizQuestionAnswerOrdinalNumberIsUniqueSpecification : ISpecification<QuizClosedQuestionCreateData>
 {
-    public string FailureMessageCode => QuizMessageCodes.QuestionAnswerOrdinalNumberIsUnique;
+    public string FailureMessageCode => QuizMessageCodes.QuestionAnswerOrdinalNumberHasToBeUnique;
 
     public bool IsValid(QuizClosedQuestionCreateData data) =>
         !data.Answers

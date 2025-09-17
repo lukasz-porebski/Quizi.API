@@ -7,7 +7,7 @@ namespace Domain.Modules.Quizzes.Specifications.Questions;
 
 internal class QuizQuestionAnswersAreUniqueSpecification : ISpecification<QuizClosedQuestionCreateData>
 {
-    public string FailureMessageCode => QuizMessageCodes.NonUniqueQuestionAnswers;
+    public string FailureMessageCode => QuizMessageCodes.QuestionAnswersHaveToBeUnique;
 
     public bool IsValid(QuizClosedQuestionCreateData data) =>
         !data.Answers.ContainsDuplicates();

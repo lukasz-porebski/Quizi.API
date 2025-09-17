@@ -59,8 +59,9 @@
               : using a System.ComponentModel.TypeConverter
               : and then encoded with base64 encoding.
       -->
-    <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+                id="root"
+                xmlns="">
         <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
         <xsd:element name="root" msdata:IsDataSet="true">
             <xsd:complexType>
@@ -134,76 +135,61 @@
     <data name="InvalidUserEmailOrPassword" xml:space="preserve">
         <value>Nieprawidłowy adres email lub hasło</value>
     </data>
-    <data name="NonUniqueQuestions" xml:space="preserve">
-        <value>Questions have to be unique</value>
+    <data name="QuestionsHaveToBeUnique" xml:space="preserve">
+        <value>Pytania muszą być unikalne</value>
     </data>
-    <data name="NonUniqueQuestionAnswers" xml:space="preserve">
-        <value>Question answers have to be unique</value>
+    <data name="QuestionAnswersHaveToBeUnique" xml:space="preserve">
+        <value>Odpowiedzi pytania muszą być unikalne</value>
     </data>
-    <data name="UserHasThisQuiz" xml:space="preserve">
-        <value>User already has this quiz</value>
+    <data name="UserAlreadyHasThisQuiz" xml:space="preserve">
+        <value>Użytkownik ma już ten quiz</value>
     </data>
-    <data name="IncorrectDescriptionLength" xml:space="preserve">
-        <value>Maximum description length is 200 characters</value>
+    <data name="DescriptionLengthIsTooLong" xml:space="preserve">
+        <value>Maksymalna długość opisu to 200 znaków</value>
     </data>
     <data name="UserNotHasThisQuiz" xml:space="preserve">
-        <value>User does not have this quiz</value>
+        <value>Użytkownik nie ma tego quizu</value>
     </data>
     <data name="IncorrectTitleLength" xml:space="preserve">
-        <value>Number of characters in title have to be between 5-100</value>
-    </data>
-    <data name="AnswersContainsQuestionText" xml:space="preserve">
-        <value>Answers can't contains question text</value>
+        <value>Tytuł musi mieć między 5 a 100 znaków</value>
     </data>
     <data name="QuestionTextIsNotDefined" xml:space="preserve">
-        <value>Question text is not defined</value>
+        <value>Tekst pytania nie jest zdefiniowany</value>
     </data>
-    <data name="SelectionQuestionHasNotAtLeastTwoAnswers" xml:space="preserve">
-        <value>Closed ended question has to has at least two answers</value>
+    <data name="ClosedQuestionHasToHasAtLeastTwoAnswers" xml:space="preserve">
+        <value>Pytanie zamknięte musi mieć co najmniej dwie odpowiedzi</value>
     </data>
-    <data name="QuizHasNotDefinedAnyQuestion" xml:space="preserve">
-        <value>Quiz has to has defined at least one question</value>
+    <data name="QuizHasToHasAtLeastOneQuestion" xml:space="preserve">
+        <value>Quiz musi mieć co najmniej jedno pytanie</value>
     </data>
-    <data name="QuizIncorrectDefinedQuestionsCountInRunningQuiz" xml:space="preserve">
-        <value>Questions count in running quiz has to be greater than 0 and less or equals to questions count</value>
+    <data name="QuizQuestionsCountInRunningQuizIsOutOfRange" xml:space="preserve">
+        <value>Liczba pytań w uruchomionym quizie musi być w przedziale od 1 do liczby pytań w quizie</value>
     </data>
-    <data name="IncorrectQuizDuration" xml:space="preserve">
-        <value>Quiz duration has to be greater than 0 and less or equals to 180 minutes</value>
+    <data name="QuizDurationIsOutOfRange" xml:space="preserve">
+        <value>Czas trwania quizu musi być w przedziale od 1 do 180 minut</value>
     </data>
-    <data name="AnswerOrdinalNumberLessThanOne" xml:space="preserve">
-        <value>Ordinal number of question answer can't be less than one</value>
+    <data name="QuestionMinOrdinalNumberHasToBeOne" xml:space="preserve">
+        <value>Minimalny numer porządkowy pytania musi być 1</value>
     </data>
-    <data name="AnswerIsEmpty" xml:space="preserve">
-        <value>Question answer can't be empty</value>
+    <data name="QuestionMaxOrdinalNumberHasToBeQuestionsCount" xml:space="preserve">
+        <value>Maksymalny numer porządkowy pytania musi być równy liczbie pytań</value>
     </data>
-    <data name="QuestionMinimalOrdinalNumberIsNotOne" xml:space="preserve">
-        <value>Question minimal ordinal number has to be one</value>
+    <data name="QuestionOrdinalNumberHasToBeUnique" xml:space="preserve">
+        <value>Numer porządkowy pytania musi być unikalny</value>
     </data>
-    <data name="QuestionMaximalOrdinalNumberIsEqualToQuestionsCount" xml:space="preserve">
-        <value>Question maximal ordinal number has to be equal to questions count</value>
+    <data name="QuestionAnswerMinOrdinalNumberHasToBeOne" xml:space="preserve">
+        <value>Minimalny numer porządkowy odpowiedzi pytania musi być 1</value>
     </data>
-    <data name="QuestionOrdinalNumberIsUnique" xml:space="preserve">
-        <value>Question ordinal number has to be unique</value>
+    <data name="QuestionAnswerMaxOrdinalNumberHasToBeQuestionsCount" xml:space="preserve">
+        <value>Maksymalny numer porządkowy odpowiedzi pytania musi być równy liczbie pytań</value>
     </data>
-    <data name="QuestionAnswerMinimalOrdinalNumberIsNotOne" xml:space="preserve">
-        <value>Question answer minimal ordinal number has to be one</value>
-    </data>
-    <data name="QuestionAnswerMaximalOrdinalNumberIsEqualToQuestionsCount" xml:space="preserve">
-        <value>Question answer maximal ordinal number has to be equal to answers count</value>
-    </data>
-    <data name="QuestionAnswerOrdinalNumberIsUnique" xml:space="preserve">
-        <value>Question answer ordinal number has to be unique</value>
+    <data name="QuestionAnswerOrdinalNumberHasToBeUnique" xml:space="preserve">
+        <value>Numer porządkowy odpowiedzi pytania musi być unikalny</value>
     </data>
     <data name="AccessDenied" xml:space="preserve">
-        <value>You don't have access to this quiz</value>
-    </data>
-    <data name="UserToRemoveIsOwner" xml:space="preserve">
-        <value>You can't remove user that is owner</value>
-    </data>
-    <data name="IncorrectDeclaredQuestionsCount" xml:space="preserve">
-        <value>Declared questions count doesn't match to actual questions count</value>
+        <value>Odmowa dostępu</value>
     </data>
     <data name="OneOfNewQuestionsIsAlreadyAdded" xml:space="preserve">
-        <value>Quiz already has a question that is declared as new</value>
+        <value>Quiz już posiada pytanie, które jest deklarowane jako nowe</value>
     </data>
 </root>

@@ -7,7 +7,7 @@ namespace Domain.Modules.Quizzes.Specifications.Questions;
 
 internal class QuizQuestionsAreUniqueSpecification : ISpecification<IReadOnlyCollection<QuizQuestionSpecificationData>>
 {
-    public string FailureMessageCode => QuizMessageCodes.NonUniqueQuestions;
+    public string FailureMessageCode => QuizMessageCodes.QuestionsHaveToBeUnique;
 
     public bool IsValid(IReadOnlyCollection<QuizQuestionSpecificationData> data) =>
         QuizSpecificationHelper.AreQuestionsUnique(data);

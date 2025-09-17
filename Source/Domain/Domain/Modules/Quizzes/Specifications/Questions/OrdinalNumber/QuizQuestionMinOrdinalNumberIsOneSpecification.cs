@@ -6,7 +6,7 @@ namespace Domain.Modules.Quizzes.Specifications.Questions.OrdinalNumber;
 
 internal class QuizQuestionMinOrdinalNumberIsOneSpecification : ISpecification<IReadOnlyCollection<QuizQuestionSpecificationData>>
 {
-    public string FailureMessageCode => QuizMessageCodes.QuestionMinimalOrdinalNumberIsNotOne;
+    public string FailureMessageCode => QuizMessageCodes.QuestionMinOrdinalNumberHasToBeOne;
 
     public bool IsValid(IReadOnlyCollection<QuizQuestionSpecificationData> data) =>
         data.Min(q => q.OrdinalNumber).Equals(1);

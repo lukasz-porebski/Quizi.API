@@ -7,7 +7,7 @@ namespace Domain.Modules.Quizzes.Specifications.Questions.OrdinalNumber;
 
 internal class QuizQuestionOrdinalNumberIsUniqueSpecification : ISpecification<IReadOnlyCollection<QuizQuestionSpecificationData>>
 {
-    public string FailureMessageCode => QuizMessageCodes.QuestionOrdinalNumberIsUnique;
+    public string FailureMessageCode => QuizMessageCodes.QuestionOrdinalNumberHasToBeUnique;
 
     public bool IsValid(IReadOnlyCollection<QuizQuestionSpecificationData> data) =>
         !data.Select(q => q.OrdinalNumber)
