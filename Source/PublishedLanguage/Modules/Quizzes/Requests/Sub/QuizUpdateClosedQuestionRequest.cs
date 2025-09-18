@@ -2,8 +2,8 @@
 
 namespace PublishedLanguage.Modules.Quizzes.Requests.Sub;
 
-public record QuizClosedQuestionUpdateRequest(
+public record QuizUpdateClosedQuestionRequest(
     int OrdinalNumber,
     string Text,
-    IReadOnlyCollection<EntityPersistRequest<QuizClosedQuestionAnswerPersistRequest>> Answers
+    IReadOnlyCollection<EntityPersistRequest<QuizPersistClosedQuestionAnswerRequest>> Answers
 );

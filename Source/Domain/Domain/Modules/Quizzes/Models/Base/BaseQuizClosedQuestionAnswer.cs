@@ -10,7 +10,7 @@ public class BaseQuizClosedQuestionAnswer : BaseSubEntity
         AggregateId id,
         EntityNo no,
         EntityNo subNo,
-        QuizClosedQuestionAnswerPersistData data
+        QuizPersistClosedQuestionAnswerData data
     ) : base(id, no, subNo)
     {
         OrdinalNumber = data.OrdinalNumber;
@@ -26,7 +26,7 @@ public class BaseQuizClosedQuestionAnswer : BaseSubEntity
     public string Text { get; private set; } = null!;
     public bool IsCorrect { get; private set; }
 
-    internal void Update(QuizClosedQuestionAnswerPersistData data)
+    internal void Update(QuizPersistClosedQuestionAnswerData data)
     {
         OrdinalNumber = data.OrdinalNumber;
         Text = data.Text;

@@ -12,7 +12,7 @@ namespace Infrastructure.Endpoints.Modules.QuizzesVerification;
 public class QuizVerificationController(IGate gate) : BaseController(gate)
 {
     [HttpGet("quiz-to-run/{id}")]
-    public async Task<IActionResult> GetQuizToRun(string id, CancellationToken cancellationToken)
+    public async Task<ActionResult<QuizToRunResponse>> GetQuizToRun(string id, CancellationToken cancellationToken)
     {
         if (!AggregateId.TryParse(id, out var aggregateId))
             return BadRequest();

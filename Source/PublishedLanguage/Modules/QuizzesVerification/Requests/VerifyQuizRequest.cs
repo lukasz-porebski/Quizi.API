@@ -5,7 +5,7 @@ namespace PublishedLanguage.Modules.QuizzesVerification.Requests;
 
 public record VerifyQuizRequest(
     string QuizId,
-    PeriodRequest QuizRunningPeriod,
+    PeriodRequest<DateTime> QuizRunningPeriod,
     IReadOnlyCollection<VerifyQuizOpenQuestionRequest> OpenQuestions,
     IReadOnlyCollection<VerifyQuizSingleChoiceQuestionRequest> SingleChoiceQuestions,
     IReadOnlyCollection<VerifyQuizMultipleChoiceQuestionRequest> MultipleChoiceQuestions

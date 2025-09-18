@@ -30,7 +30,7 @@ public class QuizSingleChoiceQuestion : BaseEntity
     public IReadOnlyCollection<QuizSingleChoiceQuestionAnswer> GetWrongAnswers() =>
         Answers.Where(a => !a.IsCorrect).ToArray();
 
-    internal void Update(QuizClosedQuestionUpdateData data)
+    internal void Update(QuizUpdateClosedQuestionData data)
     {
         OrdinalNumber = data.OrdinalNumber;
         Text = data.Text;

@@ -6,7 +6,7 @@ namespace Domain.Modules.Quizzes.Data.Models;
 public record QuizAddNewQuestionsData(
     AggregateId UserId,
     int QuestionsCountInRunningQuiz,
-    IReadOnlyCollection<QuizOpenQuestionPersistData> OpenQuestions,
+    IReadOnlyCollection<QuizPersistOpenQuestionData> OpenQuestions,
     IReadOnlyCollection<QuizClosedQuestionCreateData> SingleChoiceQuestions,
     IReadOnlyCollection<QuizClosedQuestionCreateData> MultipleChoiceQuestions
 );

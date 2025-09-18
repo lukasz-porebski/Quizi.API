@@ -1,6 +1,6 @@
 namespace PublishedLanguage.Modules.Quizzes.Requests.Sub;
 
-public record QuizClosedQuestionAnswerPersistRequest(
+public record QuizPersistClosedQuestionAnswerRequest(
     int OrdinalNumber,
     string Text,
     bool IsCorrect

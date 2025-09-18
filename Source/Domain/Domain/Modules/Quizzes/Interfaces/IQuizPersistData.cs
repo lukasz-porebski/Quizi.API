@@ -10,7 +10,7 @@ public interface IQuizPersistData
     string Title { get; }
     string? Description { get; }
     QuizSettings Settings { get; }
-    IReadOnlyCollection<QuizOpenQuestionPersistData> OpenQuestions { get; }
+    IReadOnlyCollection<QuizPersistOpenQuestionData> OpenQuestions { get; }
     IReadOnlyCollection<QuizClosedQuestionCreateData> SingleChoiceQuestions { get; }
     IReadOnlyCollection<QuizClosedQuestionCreateData> MultipleChoiceQuestions { get; }
 }

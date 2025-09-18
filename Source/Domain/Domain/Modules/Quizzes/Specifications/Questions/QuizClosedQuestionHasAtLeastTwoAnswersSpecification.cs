@@ -5,10 +5,10 @@ using Domain.Modules.Quizzes.Data.Models.Sub;
 namespace Domain.Modules.Quizzes.Specifications.Questions;
 
 internal class QuizClosedQuestionHasAtLeastTwoAnswersSpecification
-    : ISpecification<IReadOnlyCollection<QuizClosedQuestionAnswerPersistData>>
+    : ISpecification<IReadOnlyCollection<QuizPersistClosedQuestionAnswerData>>
 {
     public string FailureMessageCode => QuizMessageCodes.ClosedQuestionHasToHasAtLeastTwoAnswers;
 
-    public bool IsValid(IReadOnlyCollection<QuizClosedQuestionAnswerPersistData> data) =>
+    public bool IsValid(IReadOnlyCollection<QuizPersistClosedQuestionAnswerData> data) =>
         data.Count >= 2;
 }

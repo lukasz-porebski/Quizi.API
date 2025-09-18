@@ -6,7 +6,7 @@ public record CreateQuizRequest(
     string Title,
     string? Description,
     QuizSettingsPersistRequest Settings,
-    IReadOnlyCollection<QuizOpenQuestionPersistRequest> OpenQuestions,
+    IReadOnlyCollection<QuizPersistOpenQuestionRequest> OpenQuestions,
     IReadOnlyCollection<QuizClosedQuestionCreateRequest> SingleChoiceQuestions,
     IReadOnlyCollection<QuizClosedQuestionCreateRequest> MultipleChoiceQuestions
 );

@@ -22,11 +22,11 @@ public class QuizProfile : Profile
         CreateMap<QuizClosedQuestionCreateRequest, QuizClosedQuestionCreateData>();
 
         CreateMap<QuizSettingsPersistRequest, QuizSettings>();
-        CreateMap<QuizClosedQuestionAnswerPersistRequest, QuizClosedQuestionAnswerPersistData>();
-        CreateMap<QuizOpenQuestionPersistRequest, QuizOpenQuestionPersistData>();
+        CreateMap<QuizPersistClosedQuestionAnswerRequest, QuizPersistClosedQuestionAnswerData>();
+        CreateMap<QuizPersistOpenQuestionRequest, QuizPersistOpenQuestionData>();
 
         CreateMap<UpdateQuizRequest, UpdateQuizCommand>();
-        CreateMap<QuizClosedQuestionUpdateRequest, QuizClosedQuestionUpdateData>();
+        CreateMap<QuizUpdateClosedQuestionRequest, QuizUpdateClosedQuestionData>();
 
         CreateMap<AddQuizUserRequest, AddQuizUserCommand>();
 

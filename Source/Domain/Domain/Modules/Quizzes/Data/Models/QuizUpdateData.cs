@@ -11,12 +11,12 @@ public record QuizUpdateData(
     string Title,
     string? Description,
     QuizSettings Settings,
-    IReadOnlyCollection<EntityPersistData<QuizOpenQuestionPersistData>> OpenQuestions,
-    IReadOnlyCollection<EntityPersistData<QuizClosedQuestionUpdateData>> SingleChoiceQuestions,
-    IReadOnlyCollection<EntityPersistData<QuizClosedQuestionUpdateData>> MultipleChoiceQuestions
+    IReadOnlyCollection<EntityPersistData<QuizPersistOpenQuestionData>> OpenQuestions,
+    IReadOnlyCollection<EntityPersistData<QuizUpdateClosedQuestionData>> SingleChoiceQuestions,
+    IReadOnlyCollection<EntityPersistData<QuizUpdateClosedQuestionData>> MultipleChoiceQuestions
 ) : IQuizPersistData
 {
-    IReadOnlyCollection<QuizOpenQuestionPersistData> IQuizPersistData.OpenQuestions =>
+    IReadOnlyCollection<QuizPersistOpenQuestionData> IQuizPersistData.OpenQuestions =>
         OpenQuestions.Select(o => o.Data).ToArray();
 
     IReadOnlyCollection<QuizClosedQuestionCreateData> IQuizPersistData.SingleChoiceQuestions =>

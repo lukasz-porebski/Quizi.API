@@ -6,7 +6,7 @@ namespace Domain.Modules.Quizzes.Models;
 
 public class QuizOpenQuestion : BaseEntity
 {
-    internal QuizOpenQuestion(AggregateId id, EntityNo no, QuizOpenQuestionPersistData data) : base(id, no)
+    internal QuizOpenQuestion(AggregateId id, EntityNo no, QuizPersistOpenQuestionData data) : base(id, no)
     {
         OrdinalNumber = data.OrdinalNumber;
         Text = data.Text;
@@ -21,7 +21,7 @@ public class QuizOpenQuestion : BaseEntity
     public string Text { get; private set; } = null!;
     public string Answer { get; private set; } = null!;
 
-    internal void Update(QuizOpenQuestionPersistData data)
+    internal void Update(QuizPersistOpenQuestionData data)
     {
         if (OrdinalNumber.Equals(data.OrdinalNumber)
             && Text.Equals(data.Text)

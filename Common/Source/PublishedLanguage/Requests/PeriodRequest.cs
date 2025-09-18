@@ -1,3 +1,3 @@
 namespace Common.PublishedLanguage.Requests;
 
-public record PeriodRequest(DateTime Start, DateTime End);
+public record PeriodRequest<T>(T Start, T End);

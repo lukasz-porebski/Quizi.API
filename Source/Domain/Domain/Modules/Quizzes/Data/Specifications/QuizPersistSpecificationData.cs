@@ -14,7 +14,7 @@ public class QuizPersistSpecificationData : IOwnerSpecification, IQuizQuestionsC
         string title,
         string? description,
         TimeSpan duration,
-        IReadOnlyCollection<QuizOpenQuestionPersistData> openQuestions,
+        IReadOnlyCollection<QuizPersistOpenQuestionData> openQuestions,
         IReadOnlyCollection<QuizClosedQuestionCreateData> singleChoiceQuestions,
         IReadOnlyCollection<QuizClosedQuestionCreateData> multipleChoiceQuestions,
         AggregateId owner,

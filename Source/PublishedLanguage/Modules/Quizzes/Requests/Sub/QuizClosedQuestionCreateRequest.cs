@@ -3,5 +3,5 @@
 public record QuizClosedQuestionCreateRequest(
     int OrdinalNumber,
     string Text,
-    IReadOnlyCollection<QuizClosedQuestionAnswerPersistRequest> Answers
+    IReadOnlyCollection<QuizPersistClosedQuestionAnswerRequest> Answers
 );

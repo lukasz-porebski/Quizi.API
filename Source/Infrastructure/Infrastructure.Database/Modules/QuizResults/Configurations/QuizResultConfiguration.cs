@@ -17,7 +17,7 @@ public class QuizResultConfiguration : BaseAggregateRootConfiguration<QuizResult
         builder.Property(e => e.Title)
             .HasMaxLength(QuizConstants.MaxTitleLength);
 
-        builder.ConfigurePeriod(e => e.QuizRunningPeriod, "QuizRunning");
+        builder.ConfigureDateTimePeriod(e => e.QuizRunningPeriod, "QuizRunning");
 
         builder.ConfigureOneToMany<QuizResult, Quiz>(e => e.QuizId);
         builder.ConfigureOneToMany<QuizResult, User>(e => e.UserId);

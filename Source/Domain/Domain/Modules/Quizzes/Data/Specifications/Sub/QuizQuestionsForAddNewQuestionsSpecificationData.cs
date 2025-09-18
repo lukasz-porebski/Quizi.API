@@ -7,15 +7,17 @@ namespace Domain.Modules.Quizzes.Data.Specifications.Sub;
 public record QuizQuestionsForAddNewQuestionsSpecificationData
 {
     public QuizQuestionsForAddNewQuestionsSpecificationData(
-        IReadOnlyCollection<QuizOpenQuestionPersistData> newOpenQuestions,
+        IReadOnlyCollection<QuizPersistOpenQuestionData> newOpenQuestions,
         IReadOnlyCollection<QuizClosedQuestionCreateData> newSingleChoiceQuestions,
         IReadOnlyCollection<QuizClosedQuestionCreateData> newMultipleChoiceQuestions,
         IReadOnlyCollection<QuizOpenQuestion> oldOpenQuestions,
         IReadOnlyCollection<QuizSingleChoiceQuestion> oldSingleChoiceQuestions,
         IReadOnlyCollection<QuizMultipleChoiceQuestion> oldMultipleChoiceQuestions)
     {
-        NewQuestions = QuizSpecificationHelper.GetQuestions(newOpenQuestions, newSingleChoiceQuestions, newMultipleChoiceQuestions);
-        OldQuestions = QuizSpecificationHelper.GetQuestions(oldOpenQuestions, oldSingleChoiceQuestions, oldMultipleChoiceQuestions);
+        NewQuestions =
+            QuizSpecificationHelper.GetQuestions(newOpenQuestions, newSingleChoiceQuestions, newMultipleChoiceQuestions);
+        OldQuestions =
+            QuizSpecificationHelper.GetQuestions(oldOpenQuestions, oldSingleChoiceQuestions, oldMultipleChoiceQuestions);
         NewClosedQuestions = newSingleChoiceQuestions.Concat(newMultipleChoiceQuestions).ToArray();
     }
 

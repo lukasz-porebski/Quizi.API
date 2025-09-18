@@ -4,7 +4,6 @@ using Common.Domain.Data;
 using Common.Domain.ValueObjects;
 using Common.PublishedLanguage.Requests;
 using Common.PublishedLanguage.Responses;
-using Common.Shared.DataStructures;
 
 namespace Common.Infrastructure.Endpoints;
 
@@ -26,7 +25,8 @@ public class SharedProfile : Profile
 
         CreateMap(typeof(EntityPersistRequest<>), typeof(EntityPersistData<>));
 
-        CreateMap<PeriodRequest, Period<DateTime>>();
+        CreateMap<PeriodRequest<DateTime>, DateTimePeriod>()
+            .ConstructUsing(request => new DateTimePeriod(request.Start, request.End));
 
         CreateMap<PaginationRequest, PaginationData>();
 

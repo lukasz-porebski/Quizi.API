@@ -8,7 +8,7 @@ public record UpdateQuizRequest(
     string Title,
     string? Description,
     QuizSettingsPersistRequest Settings,
-    IReadOnlyCollection<EntityPersistRequest<QuizOpenQuestionPersistRequest>> OpenQuestions,
-    IReadOnlyCollection<EntityPersistRequest<QuizClosedQuestionUpdateRequest>> SingleChoiceQuestions,
-    IReadOnlyCollection<EntityPersistRequest<QuizClosedQuestionUpdateRequest>> MultipleChoiceQuestions
+    IReadOnlyCollection<EntityPersistRequest<QuizPersistOpenQuestionRequest>> OpenQuestions,
+    IReadOnlyCollection<EntityPersistRequest<QuizUpdateClosedQuestionRequest>> SingleChoiceQuestions,
+    IReadOnlyCollection<EntityPersistRequest<QuizUpdateClosedQuestionRequest>> MultipleChoiceQuestions
 );

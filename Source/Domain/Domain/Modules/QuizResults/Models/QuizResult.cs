@@ -1,7 +1,6 @@
 ﻿using Common.Domain.Entities;
 using Common.Domain.Extensions;
 using Common.Domain.ValueObjects;
-using Common.Shared.DataStructures;
 using Domain.Modules.QuizResults.Data;
 
 namespace Domain.Modules.QuizResults.Models;
@@ -26,7 +25,8 @@ public class QuizResult : BaseAggregateRoot
         RandomAnswers = data.RandomAnswers;
         _openQuestions.ApplyNew(data.OpenQuestions, (no, a) => new QuizResultOpenQuestion(id, no, a));
         _singleChoiceQuestions.ApplyNew(data.SingleChoiceQuestions, (no, a) => new QuizResultSingleChoiceQuestion(id, no, a));
-        _multipleChoiceQuestions.ApplyNew(data.MultipleChoiceQuestions, (no, a) => new QuizResultMultipleChoiceQuestion(id, no, a));
+        _multipleChoiceQuestions.ApplyNew(data.MultipleChoiceQuestions,
+            (no, a) => new QuizResultMultipleChoiceQuestion(id, no, a));
     }
 
     private QuizResult()
@@ -36,7 +36,7 @@ public class QuizResult : BaseAggregateRoot
     public AggregateId QuizId { get; private set; } = null!;
     public AggregateId UserId { get; private set; } = null!;
     public string Title { get; private set; } = null!;
-    public Period<DateTime> QuizRunningPeriod { get; private set; } = null!;
+    public DateTimePeriod QuizRunningPeriod { get; private set; } = null!;
     public TimeSpan MaxDuration { get; private set; }
     public bool NegativePoints { get; private set; }
     public bool RandomQuestions { get; private set; }

@@ -13,7 +13,7 @@ internal static class QuizSpecificationHelper
         IReadOnlyCollection<QuizMultipleChoiceQuestion> oldMultipleChoiceQuestions)
     {
         var openQuestions = oldOpenQuestions
-            .Select(q => new QuizOpenQuestionPersistData(q.OrdinalNumber, q.Text, q.Answer))
+            .Select(q => new QuizPersistOpenQuestionData(q.OrdinalNumber, q.Text, q.Answer))
             .ToArray();
 
         var singleChoiceQuestions = oldSingleChoiceQuestions
@@ -30,7 +30,7 @@ internal static class QuizSpecificationHelper
     }
 
     public static IReadOnlyCollection<QuizQuestionSpecificationData> GetQuestions(
-        IReadOnlyCollection<QuizOpenQuestionPersistData> openQuestions,
+        IReadOnlyCollection<QuizPersistOpenQuestionData> openQuestions,
         IReadOnlyCollection<QuizClosedQuestionCreateData> singleChoiceQuestions,
         IReadOnlyCollection<QuizClosedQuestionCreateData> multipleChoiceQuestions) =>
         openQuestions

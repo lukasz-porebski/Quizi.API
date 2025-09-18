@@ -57,7 +57,7 @@ public class CopyQuizCommandHandler(
             quiz.Title,
             quiz.Description,
             quiz.Settings,
-            quiz.OpenQuestions.Select(q => new QuizOpenQuestionPersistData(q.OrdinalNumber, q.Text, q.Answer)).ToArray(),
+            quiz.OpenQuestions.Select(q => new QuizPersistOpenQuestionData(q.OrdinalNumber, q.Text, q.Answer)).ToArray(),
             quiz.SingleChoiceQuestions
                 .Select(q => new QuizClosedQuestionCreateData(
                     q.OrdinalNumber,

@@ -1,5 +1,4 @@
 ﻿using Common.Domain.ValueObjects;
-using Common.Shared.DataStructures;
 using Domain.Modules.QuizResults.Data.Sub;
 using Domain.Modules.Quizzes.Models;
 
@@ -9,7 +8,7 @@ public record QuizResultCreateData(
     Quiz Quiz,
     AggregateId UserId,
     string Title,
-    Period<DateTime> QuizRunningPeriod,
+    DateTimePeriod QuizRunningPeriod,
     TimeSpan MaxDuration,
     bool NegativePoints,
     bool RandomQuestions,

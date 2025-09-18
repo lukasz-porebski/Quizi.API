@@ -10,7 +10,7 @@ public class QuizSingleChoiceQuestionAnswer : BaseQuizClosedQuestionAnswer
         AggregateId id,
         EntityNo no,
         EntityNo subNo,
-        QuizClosedQuestionAnswerPersistData data
+        QuizPersistClosedQuestionAnswerData data
     ) : base(id, no, subNo, data)
     {
     }

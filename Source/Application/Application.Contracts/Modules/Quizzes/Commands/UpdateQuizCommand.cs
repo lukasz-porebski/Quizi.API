@@ -11,7 +11,7 @@ public record UpdateQuizCommand(
     string Title,
     string? Description,
     QuizSettings Settings,
-    IReadOnlyCollection<EntityPersistData<QuizOpenQuestionPersistData>> OpenQuestions,
-    IReadOnlyCollection<EntityPersistData<QuizClosedQuestionUpdateData>> SingleChoiceQuestions,
-    IReadOnlyCollection<EntityPersistData<QuizClosedQuestionUpdateData>> MultipleChoiceQuestions
+    IReadOnlyCollection<EntityPersistData<QuizPersistOpenQuestionData>> OpenQuestions,
+    IReadOnlyCollection<EntityPersistData<QuizUpdateClosedQuestionData>> SingleChoiceQuestions,
+    IReadOnlyCollection<EntityPersistData<QuizUpdateClosedQuestionData>> MultipleChoiceQuestions
 ) : ICommand;

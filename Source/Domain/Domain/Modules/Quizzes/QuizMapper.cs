@@ -11,11 +11,11 @@ namespace Domain.Modules.Quizzes;
 
 public static class QuizMapper
 {
-    public static QuizClosedQuestionAnswerPersistData ToPersistData(this BaseQuizClosedQuestionAnswer source) =>
+    public static QuizPersistClosedQuestionAnswerData ToPersistData(this BaseQuizClosedQuestionAnswer source) =>
         new(source.OrdinalNumber, source.Text, source.IsCorrect);
 
     public static QuizClosedQuestionCreateData ToCreateData(
-        this QuizClosedQuestionUpdateData source, int? ordinalNumber = null) =>
+        this QuizUpdateClosedQuestionData source, int? ordinalNumber = null) =>
         new(ordinalNumber ?? source.OrdinalNumber, source.Text, source.Answers.Select(a => a.Data).ToArray());
 
     internal static QuizPersistSpecificationData ToSpecificationData(this IQuizPersistData source, AggregateId ownerId) =>
