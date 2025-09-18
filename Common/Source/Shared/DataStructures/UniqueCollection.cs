@@ -15,7 +15,11 @@ public class UniqueCollection<TKey, TValue> : IReadOnlyUniqueCollection<TKey, TV
         KeyPointer = keyPointer;
 
         foreach (var value in values)
-            _values.Add(KeyPointer.Invoke(value), value);
+        {
+            var key = KeyPointer.Invoke(value);
+            if (!_values.TryAdd(key, value))
+                throw new ArgumentException($"Key {key} is already added");
+        }
     }
 
     public UniqueCollection(Func<TValue, TKey> keyPointer)

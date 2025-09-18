@@ -23,11 +23,11 @@ public record AggregateId
             throw new Exception("Invalid aggregate id");
     }
 
-    public static bool TryParse(string aggregateId, out AggregateId? result)
+    public static bool TryParse(string aggregateId, out AggregateId result)
     {
         if (!Guid.TryParse(aggregateId, out var guid))
         {
-            result = null;
+            result = Empty;
             return false;
         }
 

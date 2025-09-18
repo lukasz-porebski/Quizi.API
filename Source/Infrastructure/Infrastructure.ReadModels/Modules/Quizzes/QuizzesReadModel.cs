@@ -20,14 +20,15 @@ SELECT
     (SELECT COUNT(Id) FROM QuizOpenQuestions QO WHERE QO.Id = Q.Id) +
         (SELECT COUNT(Id) FROM QuizSingleChoiceQuestions QS WHERE QS.Id = Q.Id) +
         (SELECT COUNT(Id) FROM QuizMultipleChoiceQuestions QM WHERE QM.Id = Q.Id) AS {nameof(QuizzesListItemDto.QuestionsCount)},
-    Q.QuestionsCountInRunningQuiz AS {nameof(QuizzesListItemDto.QuestionsCountInRunningQuiz)}
+    Q.QuestionsCountInRunningQuiz AS {nameof(QuizzesListItemDto.QuestionsCountInRunningQuiz)},
+    Q.CreatedAt AS {nameof(QuizzesListItemDto.CreatedAt)}
 FROM Quizzes Q
 ";
 
         return GetPaginatedList<QuizzesListItemDto>(
             query.Pagination,
             sqlQuery,
-            orderByQuery: nameof(QuizzesListItemDto.Id),
+            orderByQuery: $"{nameof(QuizzesListItemDto.CreatedAt)} DESC",
             readItems: async reader => (await reader.ReadAsync<QuizzesListItemDto>()).ToArray(),
             cancellationToken,
             searchColumns: [nameof(QuizzesListItemDto.Title)]

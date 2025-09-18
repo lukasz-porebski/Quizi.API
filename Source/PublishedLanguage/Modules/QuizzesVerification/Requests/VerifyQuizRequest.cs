@@ -1,7 +1,7 @@
 using Common.PublishedLanguage.Requests;
-using PublishedLanguage.Modules.QuizResults.Requests.Sub;
+using PublishedLanguage.Modules.QuizzesVerification.Requests.Sub;
 
-namespace PublishedLanguage.Modules.QuizResults.Requests;
+namespace PublishedLanguage.Modules.QuizzesVerification.Requests;
 
 public record VerifyQuizRequest(
     string QuizId,

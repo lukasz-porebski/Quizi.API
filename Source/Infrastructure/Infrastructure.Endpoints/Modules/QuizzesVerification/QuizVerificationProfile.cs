@@ -2,14 +2,14 @@ using Application.Contracts.Modules.QuizzesVerification.Commands;
 using Application.Contracts.Modules.QuizzesVerification.Commands.Data;
 using AutoMapper;
 using Common.Domain.ValueObjects;
-using PublishedLanguage.Modules.QuizResults.Requests;
-using PublishedLanguage.Modules.QuizResults.Requests.Sub;
+using PublishedLanguage.Modules.QuizzesVerification.Requests;
+using PublishedLanguage.Modules.QuizzesVerification.Requests.Sub;
 
-namespace Infrastructure.Endpoints.Modules.QuizResults;
+namespace Infrastructure.Endpoints.Modules.QuizzesVerification;
 
-public class QuizResultProfile : Profile
+public class QuizVerificationProfile : Profile
 {
-    public QuizResultProfile()
+    public QuizVerificationProfile()
     {
         CreateMap<VerifyQuizRequest, VerifyQuizCommand>()
             .ForCtorParam(nameof(VerifyQuizCommand.QuizResulId), e => e.MapFrom(request => AggregateId.Generate()));

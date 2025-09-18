@@ -75,7 +75,7 @@ public class QuizController(IGate gate) : BaseController(gate)
             GetQuizDetailsQuery,
             QuizDetailsDto,
             QuizDetailsViewModel>(
-            new GetQuizDetailsQuery(aggregateId!), cancellationToken);
+            new GetQuizDetailsQuery(aggregateId), cancellationToken);
         return Ok(result);
     }
 }

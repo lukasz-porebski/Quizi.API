@@ -18,7 +18,7 @@ public class UserContextProvider(IHttpContextAccessor httpContextAccessor, IHost
 
         var isUser = TryGetUserId(httpContextAccessor.HttpContext, out var id);
         if (isUser)
-            return new UserContextData(id!);
+            return new UserContextData(id);
 
         return env.IsDevelopment()
             ? new UserContextData(new AggregateId("c4b75a69-cf84-4840-9dde-2bdc073e4a02"))
@@ -28,7 +28,7 @@ public class UserContextProvider(IHttpContextAccessor httpContextAccessor, IHost
     public UserContextData GetOrThrow() =>
         Get() ?? throw new BusinessLogicException("Failed to provide user context.");
 
-    private static bool TryGetUserId(HttpContext httpContext, out AggregateId? result)
+    private static bool TryGetUserId(HttpContext httpContext, out AggregateId result)
     {
         var claims = httpContext.User.Claims.ToArray();
 

@@ -10,4 +10,5 @@ public class QuizzesListItemDto
     public QuizCopyMode CopyMode { get; set; }
     public int QuestionsCount { get; set; }
     public int QuestionsCountInRunningQuiz { get; set; }
+    public DateTime CreatedAt { get; set; }
 }

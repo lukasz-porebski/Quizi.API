@@ -1,4 +1,4 @@
-namespace PublishedLanguage.Modules.QuizResults.Requests.Sub;
+namespace PublishedLanguage.Modules.QuizzesVerification.Requests.Sub;
 
 public record VerifyQuizMultipleChoiceQuestionRequest(
     int No,
