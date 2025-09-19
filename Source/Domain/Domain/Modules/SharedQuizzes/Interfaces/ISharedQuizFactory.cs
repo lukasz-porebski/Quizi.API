@@ -5,5 +5,5 @@ namespace Domain.Modules.SharedQuizzes.Interfaces;
 
 public interface ISharedQuizFactory
 {
-    SharedQuiz Create(AggregateId id, AggregateId ownerId, AggregateId userId);
+    SharedQuiz Create(AggregateId id, AggregateId quizId, AggregateId userId);
 }

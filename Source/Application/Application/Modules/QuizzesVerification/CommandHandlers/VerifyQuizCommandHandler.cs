@@ -24,9 +24,10 @@ public class VerifyQuizCommandHandler(
     public async Task Handle(VerifyQuizCommand command, CancellationToken cancellationToken)
     {
         var userId = userContextProvider.GetOrThrow().UserId;
-        await sharedQuizRepository.ExistsOrThrowAsync(command.QuizId, userId, cancellationToken);
-
         var quiz = await quizRepository.GetOrThrowAsync(command.QuizId, cancellationToken);
+        if (quiz.OwnerId != userId)
+            await sharedQuizRepository.ExistsOrThrowAsync(command.QuizId, userId, cancellationToken);
+
         var verificationResult = verifyQuizDomainService.Verify(command.ToVerificationData(quiz));
 
         var quizResult = quizResultFactory.Create(command.QuizResulId, verificationResult.ToResultData(command, quiz, userId));

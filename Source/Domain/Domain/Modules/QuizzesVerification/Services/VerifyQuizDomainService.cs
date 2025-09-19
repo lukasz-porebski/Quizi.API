@@ -1,4 +1,5 @@
 ﻿using Common.Domain.Exceptions;
+using Common.Shared.Attributes;
 using Domain.Modules.Quizzes.Models;
 using Domain.Modules.QuizzesVerification.Constants;
 using Domain.Modules.QuizzesVerification.Data;
@@ -7,6 +8,7 @@ using Domain.Modules.QuizzesVerification.Interfaces;
 
 namespace Domain.Modules.QuizzesVerification.Services;
 
+[Service]
 public class VerifyQuizDomainService(IQuizVerificationPolicyFactory policyFactory) : IVerifyQuizDomainService
 {
     public QuizVerificationResultData Verify(QuizVerificationData data)
@@ -53,15 +55,15 @@ public class VerifyQuizDomainService(IQuizVerificationPolicyFactory policyFactor
     private static bool VerifiedQuizHasDeclaredOpenQuestions(
         IReadOnlyCollection<QuizOpenQuestion> questions,
         IReadOnlyCollection<QuizOpenQuestionVerificationData> verifiedQuestions) =>
-        !verifiedQuestions.Any(verifiedQuestion => questions.Any(q => q.No.Equals(verifiedQuestion.No)));
+        verifiedQuestions.All(verifiedQuestion => questions.Any(q => q.No.Equals(verifiedQuestion.No)));
 
     private static bool VerifiedQuizHasDeclaredSingleChoiceQuestions(
         IReadOnlyCollection<QuizSingleChoiceQuestion> questions,
         IReadOnlyCollection<QuizSingleChoiceQuestionVerificationData> verifiedQuestions) =>
-        !verifiedQuestions.Any(verifiedQuestion => questions.Any(q => q.No.Equals(verifiedQuestion.No)));
+        verifiedQuestions.All(verifiedQuestion => questions.Any(q => q.No.Equals(verifiedQuestion.No)));
 
     private static bool VerifiedQuizHasDeclaredMultipleChoiceQuestions(
         IReadOnlyCollection<QuizMultipleChoiceQuestion> questions,
         IReadOnlyCollection<QuizMultipleChoiceQuestionVerificationData> verifiedQuestions) =>
-        !verifiedQuestions.Any(verifiedQuestion => questions.Any(q => q.No.Equals(verifiedQuestion.No)));
+        verifiedQuestions.All(verifiedQuestion => questions.Any(q => q.No.Equals(verifiedQuestion.No)));
 }

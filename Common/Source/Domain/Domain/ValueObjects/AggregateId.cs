@@ -11,8 +11,13 @@ public record AggregateId
         _aggregateId = aggregateId;
     }
 
+    private AggregateId()
+    {
+        _aggregateId = Guid.Empty.ToString();
+    }
+
     public static AggregateId Empty =>
-        new(Guid.Empty.ToString());
+        new();
 
     public static AggregateId Generate() =>
         new(Guid.NewGuid().ToString());

@@ -3,7 +3,6 @@ using Common.Shared.Attributes;
 using Domain.Modules.SharedQuizzes.Data;
 using Domain.Modules.SharedQuizzes.Interfaces;
 using Domain.Modules.SharedQuizzes.Specifications;
-using Domain.Shared.Specifications;
 
 namespace Domain.Modules.SharedQuizzes.Factories;
 
