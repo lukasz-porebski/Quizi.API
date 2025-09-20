@@ -1,5 +1,5 @@
-﻿using Application.Contracts.Modules.Quizzes.Dtos;
-using Application.Contracts.Modules.Quizzes.Enums;
+﻿using Application.Contracts.Modules.Quizzes.Enums;
+using Application.Contracts.Modules.QuizzesVerification.Dtos;
 using Application.Contracts.Modules.QuizzesVerification.Interfaces;
 using Application.Contracts.Modules.QuizzesVerification.Queries;
 using Common.Application.CQRS;

@@ -1,4 +1,4 @@
-﻿namespace Application.Contracts.Modules.Quizzes.Dtos;
+﻿namespace Application.Contracts.Modules.QuizzesVerification.Dtos;
 
 public class QuizToRunDto
 {

@@ -1,4 +1,4 @@
-﻿using Application.Contracts.Modules.Quizzes.Dtos;
+﻿using Application.Contracts.Modules.QuizzesVerification.Dtos;
 using Application.Contracts.Modules.QuizzesVerification.Queries;
 
 namespace Application.Contracts.Modules.QuizzesVerification.Interfaces;

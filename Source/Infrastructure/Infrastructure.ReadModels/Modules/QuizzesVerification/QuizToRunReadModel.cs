@@ -1,10 +1,10 @@
-﻿using Application.Contracts.Modules.Quizzes.Dtos;
-using Application.Contracts.Modules.Quizzes.Enums;
+﻿using Application.Contracts.Modules.Quizzes.Enums;
+using Application.Contracts.Modules.QuizzesVerification.Dtos;
 using Application.Contracts.Modules.QuizzesVerification.Interfaces;
 using Application.Contracts.Modules.QuizzesVerification.Queries;
 using Common.Infrastructure.ReadModels.Dapper;
 
-namespace Infrastructure.ReadModels.Modules.Quizzes;
+namespace Infrastructure.ReadModels.Modules.QuizzesVerification;
 
 public class QuizToRunReadModel(IDatabaseConnectionStringProvider connectionStringProvider)
     : BaseReadModel(connectionStringProvider), IQuizToRunReadModel

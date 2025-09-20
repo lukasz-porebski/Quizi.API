@@ -1,6 +1,6 @@
 using Application.Contracts.Modules.Quizzes.Enums;
 
-namespace Application.Contracts.Modules.Quizzes.Dtos;
+namespace Application.Contracts.Modules.QuizzesVerification.Dtos;
 
 public class QuizToRunQuestionAnswerDto
 {
