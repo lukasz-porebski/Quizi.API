@@ -78,4 +78,21 @@ public abstract class BaseReadModel(IDatabaseConnectionStringProvider connection
 
         return details;
     }
+
+    protected async Task<IReadOnlyCollection<T>> GetList<T>(
+        string sqlQuery,
+        CancellationToken cancellationToken,
+        object? parameters = null)
+        where T : notnull
+    {
+        var builder = new SqlBuilder();
+        var selector = builder.AddTemplate(sqlQuery, parameters);
+
+        await using var connection = new SqlConnection(_connectionString);
+        await connection.OpenAsync(cancellationToken);
+
+        var result = await connection.QueryAsync<T>(selector.RawSql, selector.Parameters);
+
+        return result.ToArray();
+    }
 }

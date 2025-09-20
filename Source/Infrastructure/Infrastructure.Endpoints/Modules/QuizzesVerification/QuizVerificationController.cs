@@ -22,6 +22,20 @@ public class QuizVerificationController(IGate gate) : BaseController(gate)
         return Ok(result);
     }
 
+    [HttpGet("open-questions-answer/{quizId}")]
+    public async Task<ActionResult<QuizOpenQuestionAnswerForVerificationResponse>> GetOpenQuestionsAnswer(
+        string quizId, CancellationToken cancellationToken)
+    {
+        if (!AggregateId.TryParse(quizId, out var aggregateId))
+            return BadRequest();
+
+        var result = await Gate.DispatchQueryAsync<
+            GetQuizOpenQuestionsAnswerForVerificationQuery,
+            IReadOnlyCollection<QuizOpenQuestionAnswerForVerificationResponse>>(
+            new GetQuizOpenQuestionsAnswerForVerificationQuery(aggregateId), cancellationToken);
+        return Ok(result);
+    }
+
     [HttpPost("verify")]
     public async Task<IActionResult> Verify([FromBody] VerifyQuizRequest request, CancellationToken cancellationToken)
     {
