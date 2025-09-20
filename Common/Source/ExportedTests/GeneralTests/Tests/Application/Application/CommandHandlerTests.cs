@@ -14,7 +14,7 @@ public partial class BaseGeneralTests
     [Fact]
     public void CommandHandler_Should_ExistsOnlyInApplicationProject()
     {
-        AssertInvalid(_assemblies.GetAllTypes(excludeApplication: true), t => t.IsCommandHandler());
+        AssertInvalid(assemblies.GetAllTypes(excludeApplication: true), t => t.IsCommandHandler());
     }
 
     [Fact]
@@ -30,5 +30,5 @@ public partial class BaseGeneralTests
     }
 
     private IEnumerable<Type> GetCommandHandlerTypes() =>
-        _assemblies.Application.GetTypes().Where(t => t.IsCommandHandler());
+        assemblies.Application.GetTypes().Where(t => t.IsCommandHandler());
 }

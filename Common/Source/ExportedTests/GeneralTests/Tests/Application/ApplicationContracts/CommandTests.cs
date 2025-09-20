@@ -15,7 +15,7 @@ public partial class BaseGeneralTests
     [Fact]
     public void Command_Should_ExistsOnlyInApplicationContractsProject()
     {
-        AssertInvalid(_assemblies.GetAllTypes(excludeApplicationContracts: true), t => t.IsCommand());
+        AssertInvalid(assemblies.GetAllTypes(excludeApplicationContracts: true), t => t.IsCommand());
     }
 
     [Fact]
@@ -43,5 +43,5 @@ public partial class BaseGeneralTests
     }
 
     private IEnumerable<Type> GetCommandTypes() =>
-        _assemblies.ApplicationContracts.GetTypes().Where(t => t.IsCommand());
+        assemblies.ApplicationContracts.GetTypes().Where(t => t.IsCommand());
 }

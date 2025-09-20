@@ -15,7 +15,7 @@ public partial class BaseGeneralTests
     [Fact]
     public void Query_Should_ExistsOnlyInApplicationContractsProject()
     {
-        AssertInvalid(_assemblies.GetAllTypes(excludeApplicationContracts: true), t => t.IsQuery());
+        AssertInvalid(assemblies.GetAllTypes(excludeApplicationContracts: true), t => t.IsQuery());
     }
 
     [Fact]
@@ -43,5 +43,5 @@ public partial class BaseGeneralTests
     }
 
     private IEnumerable<Type> GetQueryTypes() =>
-        _assemblies.ApplicationContracts.GetTypes().Where(t => t.IsQuery());
+        assemblies.ApplicationContracts.GetTypes().Where(t => t.IsQuery());
 }

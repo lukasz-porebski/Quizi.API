@@ -1,11 +1,7 @@
 using Application.Contracts.Modules.QuizResults.Dtos;
-using Application.Contracts.Modules.QuizzesVerification.Commands;
-using Application.Contracts.Modules.QuizzesVerification.Commands.Data;
 using AutoMapper;
-using Common.Domain.ValueObjects;
+using Common.PublishedLanguage.Requests;
 using PublishedLanguage.Modules.QuizResults.Responses;
-using PublishedLanguage.Modules.QuizzesVerification.Requests;
-using PublishedLanguage.Modules.QuizzesVerification.Requests.Sub;
 
 namespace Infrastructure.Endpoints.Modules.QuizResults;
 
@@ -13,14 +9,9 @@ public class QuizResultProfile : Profile
 {
     public QuizResultProfile()
     {
-        CreateMap<VerifyQuizRequest, VerifyQuizCommand>()
-            .ForCtorParam(nameof(VerifyQuizCommand.QuizResulId), e => e.MapFrom(request => AggregateId.Generate()));
-        CreateMap<VerifyQuizOpenQuestionRequest, VerifyQuizOpenQuestionCommandData>();
-        CreateMap<VerifyQuizSingleChoiceQuestionRequest, VerifyQuizSingleChoiceQuestionCommandData>();
-        CreateMap<VerifyQuizMultipleChoiceQuestionRequest, VerifyQuizMultipleChoiceQuestionCommandData>();
-        CreateMap<VerifyQuizClosedQuestionAnswerRequest, VerifyQuizClosedQuestionAnswerCommandData>();
-
-        CreateMap<QuizResultDetailsDto, QuizResultDetailsResponse>();
+        CreateMap<QuizResultDetailsDto, QuizResultDetailsResponse>()
+            .ForMember(r => r.QuizRunningPeriod, o => o.MapFrom(d =>
+                new PeriodRequest<DateTime>(d.QuizRunningPeriodStart, d.QuizRunningPeriodEnd)));
         CreateMap<QuizResultDetailsOpenQuestionDto, QuizResultDetailsOpenQuestionResponse>();
         CreateMap<QuizResultDetailsClosedQuestionDto, QuizResultDetailsSingleChoiceQuestionResponse>()
             .ForMember(r => r.SelectedAnswerOrdinalNumber, o => o.MapFrom(d =>

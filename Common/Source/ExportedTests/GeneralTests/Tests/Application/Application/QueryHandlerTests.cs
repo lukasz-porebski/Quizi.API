@@ -14,7 +14,7 @@ public partial class BaseGeneralTests
     [Fact]
     public void QueryHandler_Should_ExistsOnlyInApplicationProject()
     {
-        AssertInvalid(_assemblies.GetAllTypes(excludeApplication: true), t => t.IsQueryHandler());
+        AssertInvalid(assemblies.GetAllTypes(excludeApplication: true), t => t.IsQueryHandler());
     }
 
     [Fact]
@@ -30,5 +30,5 @@ public partial class BaseGeneralTests
     }
 
     private IEnumerable<Type> GetQueryHandlerTypes() =>
-        _assemblies.Application.GetTypes().Where(t => t.IsQueryHandler());
+        assemblies.Application.GetTypes().Where(t => t.IsQueryHandler());
 }
