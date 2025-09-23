@@ -15,14 +15,12 @@ public static class MapperConfig
             assemblies.InfrastructureEndpoints
         };
 
-        var x = assembliesWithProfiles
+        return assembliesWithProfiles
             .Select(a => a.ExportedTypes)
             .SelectMany(a => a)
             .Where(t => t.IsSubclassOf(typeof(Profile)))
             .Distinct()
             .ToArray();
-
-        return x;
     }
 
     internal static IServiceCollection AddMapper(this IServiceCollection services, BaseAssemblies assemblies)

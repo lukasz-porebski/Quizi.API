@@ -17,7 +17,7 @@ public class QuizOpenQuestionsAnswerForVerificationReadModel(IDatabaseConnection
         const string sqlQuery = @$"
 SELECT
     No AS {nameof(QuizOpenQuestionAnswerForVerificationResponse.No)},
-    Answer AS {nameof(QuizOpenQuestionAnswerForVerificationResponse.Answer)}
+    Answer AS {nameof(QuizOpenQuestionAnswerForVerificationResponse.Text)}
 FROM QuizOpenQuestions
 WHERE Id = @{nameof(parameters.Id)};
 ";
