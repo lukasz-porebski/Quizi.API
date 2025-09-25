@@ -21,9 +21,13 @@ public class QuizResultController(IGate gate) : BaseController(gate)
 
         var result = await Gate.DispatchQueryAsync<
             GetQuizResultDetailsQuery,
-            QuizResultDetailsDto,
-            QuizResultDetailsResponse>(
+            QuizResultDetailsDto?,
+            QuizResultDetailsResponse?>(
             new GetQuizResultDetailsQuery(aggregateId), cancellationToken);
+
+        if (result is null)
+            return NotFound();
+
         return Ok(result);
     }
 

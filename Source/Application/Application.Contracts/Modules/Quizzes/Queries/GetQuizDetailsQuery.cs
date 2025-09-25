@@ -4,4 +4,4 @@ using Common.Domain.ValueObjects;
 
 namespace Application.Contracts.Modules.Quizzes.Queries;
 
-public record GetQuizDetailsQuery(AggregateId Id) : IQuery<QuizDetailsDto>;
+public record GetQuizDetailsQuery(AggregateId Id) : IQuery<QuizDetailsDto?>;

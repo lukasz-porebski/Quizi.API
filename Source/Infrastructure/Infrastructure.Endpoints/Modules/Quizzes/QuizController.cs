@@ -73,9 +73,13 @@ public class QuizController(IGate gate) : BaseController(gate)
 
         var result = await Gate.DispatchQueryAsync<
             GetQuizDetailsQuery,
-            QuizDetailsDto,
-            QuizDetailsViewModel>(
+            QuizDetailsDto?,
+            QuizDetailsViewModel?>(
             new GetQuizDetailsQuery(aggregateId), cancellationToken);
+
+        if (result is null)
+            return NotFound();
+
         return Ok(result);
     }
 }

@@ -2,6 +2,7 @@
 using Application.Contracts.Modules.QuizzesVerification.Dtos;
 using Application.Contracts.Modules.QuizzesVerification.Interfaces;
 using Application.Contracts.Modules.QuizzesVerification.Queries;
+using Common.Domain.ValueObjects;
 using Common.Infrastructure.ReadModels.Dapper;
 
 namespace Infrastructure.ReadModels.Modules.QuizzesVerification;
@@ -9,11 +10,12 @@ namespace Infrastructure.ReadModels.Modules.QuizzesVerification;
 public class QuizToRunReadModel(IDatabaseConnectionStringProvider connectionStringProvider)
     : BaseReadModel(connectionStringProvider), IQuizToRunReadModel
 {
-    public Task<QuizToRunDto> Get(GetQuizToRunQuery query, CancellationToken cancellationToken)
+    public Task<QuizToRunDto?> Get(GetQuizToRunQuery query, AggregateId userId, CancellationToken cancellationToken)
     {
         var parameters = new
         {
             Id = query.Id.ToString(),
+            UserId = userId.ToString(),
             OpenQuestionType = (int)QuizQuestionType.Open,
             SingleChoiceQuestionType = (int)QuizQuestionType.SingleChoice,
             MultipleChoiceQuestionType = (int)QuizQuestionType.MultipleChoice
@@ -21,13 +23,19 @@ public class QuizToRunReadModel(IDatabaseConnectionStringProvider connectionStri
 
         const string sqlQuery = @$"
 SELECT
-    Id AS {nameof(QuizToRunDto.Id)},
-    Title AS {nameof(QuizToRunDto.Title)},
-    Duration AS {nameof(QuizToRunDto.Duration)},
-	RandomQuestions AS {nameof(QuizToRunDto.RandomQuestions)},
-	RandomAnswers AS {nameof(QuizToRunDto.RandomAnswers)}
-FROM Quizzes
-WHERE Id = @{nameof(parameters.Id)};
+    Q.Id AS {nameof(QuizToRunDto.Id)},
+    Q.Title AS {nameof(QuizToRunDto.Title)},
+    Q.Duration AS {nameof(QuizToRunDto.Duration)},
+	Q.RandomQuestions AS {nameof(QuizToRunDto.RandomQuestions)},
+	Q.RandomAnswers AS {nameof(QuizToRunDto.RandomAnswers)}
+FROM Quizzes Q
+WHERE Id = @{nameof(parameters.Id)}
+    AND (OwnerId = @{nameof(parameters.UserId)}
+         OR EXISTS(SELECT *
+                   FROM SharedQuizzes SQ
+                   JOIN SharedQuizUsers SQU ON SQU.Id = SQ.Id
+                   WHERE SQ.QuizId = Q.Id 
+                      AND SQU.UserId = @{nameof(parameters.UserId)}));
 
 WITH Questions AS (
 	SELECT 

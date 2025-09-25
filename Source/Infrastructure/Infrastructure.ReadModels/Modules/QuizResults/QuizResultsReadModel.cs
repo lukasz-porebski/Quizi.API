@@ -2,16 +2,24 @@
 using Application.Contracts.Modules.QuizResults.Interfaces;
 using Application.Contracts.Modules.QuizResults.Queries;
 using Common.Application.Contracts.ReadModel;
+using Common.Domain.ValueObjects;
 using Common.Infrastructure.ReadModels.Dapper;
 using Common.Infrastructure.ReadModels.Dapper.Utils;
+using Dapper;
 
 namespace Infrastructure.ReadModels.Modules.QuizResults;
 
 public class QuizResultsReadModel(IDatabaseConnectionStringProvider connectionStringProvider)
     : BaseReadModel(connectionStringProvider), IQuizResultsReadModel
 {
-    public Task<PaginatedListDto<QuizResultsListItemDto>> Get(GetQuizResultsQuery query, CancellationToken cancellationToken)
+    public Task<PaginatedListDto<QuizResultsListItemDto>> Get(
+        GetQuizResultsQuery query, AggregateId userId, CancellationToken cancellationToken)
     {
+        var parameters = new
+        {
+            UserId = userId.ToString()
+        };
+
         var sqlQuery = @$"
 SELECT
     R.Id AS {nameof(QuizResultsListItemDto.Id)},
@@ -30,6 +38,7 @@ SELECT
     R.MaxDuration AS {nameof(QuizResultsListItemDto.MaxDuration)},
     R.CreatedAt AS {nameof(QuizResultsListItemDto.CreatedAt)}
 FROM QuizResults R
+WHERE R.UserId = @{nameof(parameters.UserId)}
 ";
 
         return GetPaginatedList<QuizResultsListItemDto>(
@@ -38,7 +47,8 @@ FROM QuizResults R
             orderByQuery: $"{nameof(QuizResultsListItemDto.CreatedAt)} DESC",
             readItems: async reader => (await reader.ReadAsync<QuizResultsListItemDto>()).ToArray(),
             cancellationToken,
-            searchColumns: [nameof(QuizResultsListItemDto.Title)]
+            searchColumns: [nameof(QuizResultsListItemDto.Title)],
+            parameters: new DynamicParameters(parameters)
         );
     }
 }

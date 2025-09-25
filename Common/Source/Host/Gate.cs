@@ -26,7 +26,7 @@ public class Gate(IMediator mediator, IMapper mapper) : IGate
         where TQuery : IQuery<TDto>
     {
         var dto = await mediator.Send(query, cancellationToken);
-        return mapper.Map<TDto, TResult>(dto);
+        return dto is null ? default! : mapper.Map<TDto, TResult>(dto);
     }
 
     public Task<TResult> DispatchQueryAsync<TRequest, TQuery, TDto, TResult>(

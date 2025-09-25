@@ -1,6 +1,7 @@
 ﻿using Application.Contracts.Modules.QuizResults.Dtos;
 using Application.Contracts.Modules.QuizResults.Interfaces;
 using Application.Contracts.Modules.QuizResults.Queries;
+using Common.Domain.ValueObjects;
 using Common.Infrastructure.ReadModels.Dapper;
 using Common.Infrastructure.ReadModels.Dapper.Data;
 
@@ -9,9 +10,10 @@ namespace Infrastructure.ReadModels.Modules.QuizResults;
 public class QuizResultDetailsReadModel(IDatabaseConnectionStringProvider connectionStringProvider)
     : BaseReadModel(connectionStringProvider), IQuizResultDetailsReadModel
 {
-    public Task<QuizResultDetailsDto> Get(GetQuizResultDetailsQuery query, CancellationToken cancellationToken)
+    public Task<QuizResultDetailsDto?> Get(
+        GetQuizResultDetailsQuery query, AggregateId userId, CancellationToken cancellationToken)
     {
-        var parameters = new GetByIdData(query.Id);
+        var parameters = new GetByIdData(query.Id, userId);
 
         const string sqlQuery = @$"
 SELECT
@@ -24,7 +26,8 @@ SELECT
     RandomQuestions AS {nameof(QuizResultDetailsDto.RandomQuestions)},
     RandomAnswers AS {nameof(QuizResultDetailsDto.RandomAnswers)}
 FROM QuizResults
-WHERE Id = @{nameof(parameters.Id)};
+WHERE Id = @{nameof(parameters.Id)} 
+    AND UserId = @{nameof(parameters.UserId)};
 
 SELECT
     No AS {nameof(QuizResultDetailsOpenQuestionDto.No)},

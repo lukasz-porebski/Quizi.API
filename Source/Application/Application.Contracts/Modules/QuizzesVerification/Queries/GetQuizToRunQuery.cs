@@ -4,4 +4,4 @@ using PublishedLanguage.Modules.QuizzesVerification.Responses;
 
 namespace Application.Contracts.Modules.QuizzesVerification.Queries;
 
-public record GetQuizToRunQuery(AggregateId Id) : IQuery<QuizToRunResponse>;
+public record GetQuizToRunQuery(AggregateId Id) : IQuery<QuizToRunResponse?>;

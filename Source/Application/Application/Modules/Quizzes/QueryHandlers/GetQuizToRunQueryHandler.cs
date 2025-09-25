@@ -2,17 +2,21 @@
 using Application.Contracts.Modules.QuizzesVerification.Dtos;
 using Application.Contracts.Modules.QuizzesVerification.Interfaces;
 using Application.Contracts.Modules.QuizzesVerification.Queries;
+using Common.Application.Contracts.User;
 using Common.Application.CQRS;
 using MoreLinq;
 using PublishedLanguage.Modules.QuizzesVerification.Responses;
 
 namespace Application.Modules.Quizzes.QueryHandlers;
 
-public class GetQuizToRunQueryHandler(IQuizToRunReadModel readModel) : IQueryHandler<GetQuizToRunQuery, QuizToRunResponse>
+public class GetQuizToRunQueryHandler(IQuizToRunReadModel readModel, IUserContextProvider userContextProvider)
+    : IQueryHandler<GetQuizToRunQuery, QuizToRunResponse?>
 {
-    public async Task<QuizToRunResponse> Handle(GetQuizToRunQuery query, CancellationToken cancellationToken)
+    public async Task<QuizToRunResponse?> Handle(GetQuizToRunQuery query, CancellationToken cancellationToken)
     {
-        var dto = await readModel.Get(query, cancellationToken);
+        var dto = await readModel.Get(query, userContextProvider.GetOrThrow().UserId, cancellationToken);
+        if (dto is null)
+            return null;
 
         if (dto.RandomQuestions)
             dto.Questions = dto.Questions.Shuffle().ToArray();

@@ -2,15 +2,23 @@
 using Application.Contracts.Modules.Quizzes.Interfaces;
 using Application.Contracts.Modules.Quizzes.Queries;
 using Common.Application.Contracts.ReadModel;
+using Common.Domain.ValueObjects;
 using Common.Infrastructure.ReadModels.Dapper;
+using Dapper;
 
 namespace Infrastructure.ReadModels.Modules.Quizzes;
 
 public class QuizzesReadModel(IDatabaseConnectionStringProvider connectionStringProvider)
     : BaseReadModel(connectionStringProvider), IQuizzesReadModel
 {
-    public Task<PaginatedListDto<QuizzesListItemDto>> Get(GetQuizzesQuery query, CancellationToken cancellationToken)
+    public Task<PaginatedListDto<QuizzesListItemDto>> Get(
+        GetQuizzesQuery query, AggregateId userId, CancellationToken cancellationToken)
     {
+        var parameters = new
+        {
+            UserId = userId.ToString()
+        };
+
         const string sqlQuery = @$"
 SELECT
     Q.Id AS {nameof(QuizzesListItemDto.Id)},
@@ -23,6 +31,12 @@ SELECT
     Q.QuestionsCountInRunningQuiz AS {nameof(QuizzesListItemDto.QuestionsCountInRunningQuiz)},
     Q.CreatedAt AS {nameof(QuizzesListItemDto.CreatedAt)}
 FROM Quizzes Q
+    WHERE (OwnerId = @{nameof(parameters.UserId)}
+           OR EXISTS(SELECT *
+                     FROM SharedQuizzes SQ
+                     JOIN SharedQuizUsers SQU ON SQU.Id = SQ.Id
+                     WHERE SQ.QuizId = Q.Id 
+                        AND SQU.UserId = @{nameof(parameters.UserId)}))
 ";
 
         return GetPaginatedList<QuizzesListItemDto>(
@@ -31,7 +45,8 @@ FROM Quizzes Q
             orderByQuery: $"{nameof(QuizzesListItemDto.CreatedAt)} DESC",
             readItems: async reader => (await reader.ReadAsync<QuizzesListItemDto>()).ToArray(),
             cancellationToken,
-            searchColumns: [nameof(QuizzesListItemDto.Title)]
+            searchColumns: [nameof(QuizzesListItemDto.Title)],
+            parameters: new DynamicParameters(parameters)
         );
     }
 }

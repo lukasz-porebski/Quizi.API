@@ -2,6 +2,7 @@ using Application.Contracts.Modules.QuizzesVerification.Commands;
 using Application.Contracts.Modules.QuizzesVerification.Queries;
 using Common.Domain.ValueObjects;
 using Common.Infrastructure.Endpoints;
+using Common.Shared.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using PublishedLanguage.Modules.QuizzesVerification.Requests;
 using PublishedLanguage.Modules.QuizzesVerification.Responses;
@@ -17,8 +18,12 @@ public class QuizVerificationController(IGate gate) : BaseController(gate)
         if (!AggregateId.TryParse(id, out var aggregateId))
             return BadRequest();
 
-        var result = await Gate.DispatchQueryAsync<GetQuizToRunQuery, QuizToRunResponse>(
+        var result = await Gate.DispatchQueryAsync<GetQuizToRunQuery, QuizToRunResponse?>(
             new GetQuizToRunQuery(aggregateId), cancellationToken);
+
+        if (result is null)
+            return NotFound();
+
         return Ok(result);
     }
 
@@ -33,6 +38,10 @@ public class QuizVerificationController(IGate gate) : BaseController(gate)
             GetQuizOpenQuestionsAnswerForVerificationQuery,
             IReadOnlyCollection<QuizOpenQuestionAnswerForVerificationResponse>>(
             new GetQuizOpenQuestionsAnswerForVerificationQuery(aggregateId), cancellationToken);
+
+        if (result.IsEmpty())
+            return NotFound();
+
         return Ok(result);
     }
 

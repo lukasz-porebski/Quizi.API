@@ -1,6 +1,7 @@
 ﻿using Application.Contracts.Modules.Quizzes.Dtos;
 using Application.Contracts.Modules.Quizzes.Interfaces;
 using Application.Contracts.Modules.Quizzes.Queries;
+using Common.Domain.ValueObjects;
 using Common.Infrastructure.ReadModels.Dapper;
 using Common.Infrastructure.ReadModels.Dapper.Data;
 
@@ -9,9 +10,9 @@ namespace Infrastructure.ReadModels.Modules.Quizzes;
 public class QuizDetailsReadModel(IDatabaseConnectionStringProvider connectionStringProvider)
     : BaseReadModel(connectionStringProvider), IQuizDetailsReadModel
 {
-    public Task<QuizDetailsDto> Get(GetQuizDetailsQuery query, CancellationToken cancellationToken)
+    public Task<QuizDetailsDto?> Get(GetQuizDetailsQuery query, AggregateId userId, CancellationToken cancellationToken)
     {
-        var parameters = new GetByIdData(query.Id);
+        var parameters = new GetByIdData(query.Id, userId);
 
         const string sqlQuery = @$"
 SELECT
@@ -26,7 +27,13 @@ SELECT
     CopyMode AS {nameof(QuizDetailsDto.CopyMode)},
     CopyMode AS {nameof(QuizDetailsDto.CopyMode)}
 FROM Quizzes
-WHERE Id = @{nameof(parameters.Id)};
+WHERE Id = @{nameof(parameters.Id)}
+    AND (OwnerId = @{nameof(parameters.UserId)}
+         OR EXISTS(SELECT *
+                   FROM SharedQuizzes SQ
+                   JOIN SharedQuizUsers SQU ON SQU.Id = SQ.Id
+                   WHERE SQ.QuizId = @{nameof(parameters.Id)} 
+                      AND SQU.UserId = @{nameof(parameters.UserId)}));
 
 SELECT
     No AS {nameof(QuizDetailsOpenQuestionDto.No)},
