@@ -15,14 +15,14 @@ public class QuizResultDetailsReadModel(IDatabaseConnectionStringProvider connec
 
         const string sqlQuery = @$"
 SELECT
-    Id AS ${nameof(QuizResultDetailsDto.Id)},
-    Title AS ${nameof(QuizResultDetailsDto.Title)},
-    QuizRunningPeriodStart AS ${nameof(QuizResultDetailsDto.QuizRunningPeriodStart)},
-    QuizRunningPeriodEnd AS ${nameof(QuizResultDetailsDto.QuizRunningPeriodEnd)},
-    MaxDuration AS ${nameof(QuizResultDetailsDto.MaxDuration)},
-    NegativePoints AS ${nameof(QuizResultDetailsDto.NegativePoints)},
-    RandomQuestions AS ${nameof(QuizResultDetailsDto.RandomQuestions)},
-    RandomAnswers AS ${nameof(QuizResultDetailsDto.RandomAnswers)}
+    Id AS {nameof(QuizResultDetailsDto.Id)},
+    Title AS {nameof(QuizResultDetailsDto.Title)},
+    QuizRunningPeriodStart AS {nameof(QuizResultDetailsDto.QuizRunningPeriodStart)},
+    QuizRunningPeriodEnd AS {nameof(QuizResultDetailsDto.QuizRunningPeriodEnd)},
+    MaxDuration AS {nameof(QuizResultDetailsDto.MaxDuration)},
+    NegativePoints AS {nameof(QuizResultDetailsDto.NegativePoints)},
+    RandomQuestions AS {nameof(QuizResultDetailsDto.RandomQuestions)},
+    RandomAnswers AS {nameof(QuizResultDetailsDto.RandomAnswers)}
 FROM QuizResults
 WHERE Id = @{nameof(parameters.Id)};
 

@@ -1,7 +1,10 @@
 using Application.Contracts.Modules.QuizResults.Dtos;
 using Application.Contracts.Modules.QuizResults.Queries;
+using Common.Application.Contracts.ReadModel;
 using Common.Domain.ValueObjects;
 using Common.Infrastructure.Endpoints;
+using Common.PublishedLanguage.Requests;
+using Common.PublishedLanguage.Responses;
 using Microsoft.AspNetCore.Mvc;
 using PublishedLanguage.Modules.QuizResults.Responses;
 
@@ -21,6 +24,19 @@ public class QuizResultController(IGate gate) : BaseController(gate)
             QuizResultDetailsDto,
             QuizResultDetailsResponse>(
             new GetQuizResultDetailsQuery(aggregateId), cancellationToken);
+        return Ok(result);
+    }
+
+    [HttpGet("list")]
+    public async Task<ActionResult<PaginatedListDto<QuizResultsListItemResponse>>> GetList(
+        [FromQuery] PaginationRequest request, CancellationToken cancellationToken)
+    {
+        var result = await Gate.DispatchQueryAsync<
+            PaginationRequest,
+            GetQuizResultsQuery,
+            PaginatedListDto<QuizResultsListItemDto>,
+            PaginatedListResponse<QuizResultsListItemResponse>>(
+            request, cancellationToken);
         return Ok(result);
     }
 }
