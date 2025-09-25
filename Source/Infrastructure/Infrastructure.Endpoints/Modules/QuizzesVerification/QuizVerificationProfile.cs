@@ -12,7 +12,7 @@ public class QuizVerificationProfile : Profile
     public QuizVerificationProfile()
     {
         CreateMap<VerifyQuizRequest, VerifyQuizCommand>()
-            .ForCtorParam(nameof(VerifyQuizCommand.QuizResulId), e => e.MapFrom(request => AggregateId.Generate()));
+            .ForCtorParam(nameof(VerifyQuizCommand.QuizResultId), e => e.MapFrom(request => AggregateId.Generate()));
         CreateMap<VerifyQuizOpenQuestionRequest, VerifyQuizOpenQuestionCommandData>();
         CreateMap<VerifyQuizSingleChoiceQuestionRequest, VerifyQuizSingleChoiceQuestionCommandData>();
         CreateMap<VerifyQuizMultipleChoiceQuestionRequest, VerifyQuizMultipleChoiceQuestionCommandData>();

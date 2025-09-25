@@ -30,7 +30,7 @@ public class VerifyQuizCommandHandler(
 
         var verificationResult = verifyQuizDomainService.Verify(command.ToVerificationData(quiz));
 
-        var quizResult = quizResultFactory.Create(command.QuizResulId, verificationResult.ToResultData(command, quiz, userId));
+        var quizResult = quizResultFactory.Create(command.QuizResultId, verificationResult.ToResultData(command, quiz, userId));
         await quizResultRepository.PersistAsync(quizResult, cancellationToken);
     }
 }

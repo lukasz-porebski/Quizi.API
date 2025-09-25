@@ -32,7 +32,7 @@ public class QuizController(IGate gate) : BaseController(gate)
     }
 
     [HttpDelete("remove/{id}")]
-    public async Task<IActionResult> Delete([FromQuery] string id, CancellationToken cancellationToken)
+    public async Task<IActionResult> Remove(string id, CancellationToken cancellationToken)
     {
         await Gate.DispatchCommandAsync(new RemoveQuizCommand(id.ToAggregateId()), cancellationToken);
         return Ok();

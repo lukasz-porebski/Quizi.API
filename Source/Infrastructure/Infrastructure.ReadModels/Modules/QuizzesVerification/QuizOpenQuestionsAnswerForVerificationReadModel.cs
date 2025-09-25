@@ -21,12 +21,12 @@ SELECT
     O.Answer AS {nameof(QuizOpenQuestionAnswerForVerificationResponse.Text)}
 FROM QuizOpenQuestions O
     JOIN Quizzes Q ON Q.Id = O.Id
-WHERE Id = @{nameof(parameters.Id)}
+WHERE O.Id = @{nameof(parameters.Id)}
     AND (OwnerId = @{nameof(parameters.UserId)}
          OR EXISTS(SELECT *
                    FROM SharedQuizzes SQ
                    JOIN SharedQuizUsers SQU ON SQU.Id = SQ.Id
-                   WHERE SQ.QuizId = Q.Id 
+                   WHERE SQ.QuizId = O.Id 
                       AND SQU.UserId = @{nameof(parameters.UserId)}));
 ";
 

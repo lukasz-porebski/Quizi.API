@@ -70,7 +70,7 @@ internal static class QuizVerificationResultDataExtensions
                             var quizAnswer = quizQuestion.Answers.First(x => x.SubNo == verifiedAnswer.No);
 
                             return new QuizResultClosedQuestionAnswerCreateData(
-                                questionToVerify.OrdinalNumber,
+                                verifiedAnswer.OrdinalNumber,
                                 quizQuestion.Text,
                                 quizAnswer.IsCorrect,
                                 answerToVerify.No == questionToVerify.SelectedAnswer?.No
@@ -103,7 +103,7 @@ internal static class QuizVerificationResultDataExtensions
                             var quizAnswer = quizQuestion.Answers.First(x => x.SubNo == verifiedAnswer.No);
 
                             return new QuizResultClosedQuestionAnswerCreateData(
-                                questionToVerify.OrdinalNumber,
+                                verifiedAnswer.OrdinalNumber,
                                 quizQuestion.Text,
                                 quizAnswer.IsCorrect,
                                 questionToVerify.SelectedAnswers.Any(s => s.No == answerToVerify.No)

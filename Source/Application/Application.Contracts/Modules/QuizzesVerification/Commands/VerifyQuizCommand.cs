@@ -6,7 +6,7 @@ namespace Application.Contracts.Modules.QuizzesVerification.Commands;
 
 public record VerifyQuizCommand(
     AggregateId QuizId,
-    AggregateId QuizResulId,
+    AggregateId QuizResultId,
     DateTimePeriod QuizRunningPeriod,
     IReadOnlyCollection<VerifyQuizOpenQuestionCommandData> OpenQuestions,
     IReadOnlyCollection<VerifyQuizSingleChoiceQuestionCommandData> SingleChoiceQuestions,

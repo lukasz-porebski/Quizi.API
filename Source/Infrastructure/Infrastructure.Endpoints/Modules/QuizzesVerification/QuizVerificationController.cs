@@ -1,5 +1,6 @@
 using Application.Contracts.Modules.QuizzesVerification.Commands;
 using Application.Contracts.Modules.QuizzesVerification.Queries;
+using AutoMapper;
 using Common.Domain.ValueObjects;
 using Common.Infrastructure.Endpoints;
 using Common.Shared.Extensions;
@@ -10,7 +11,7 @@ using PublishedLanguage.Modules.QuizzesVerification.Responses;
 namespace Infrastructure.Endpoints.Modules.QuizzesVerification;
 
 [Route("quizzes-verification")]
-public class QuizVerificationController(IGate gate) : BaseController(gate)
+public class QuizVerificationController(IGate gate, IMapper mapper) : BaseController(gate)
 {
     [HttpGet("quiz-to-run/{id}")]
     public async Task<ActionResult<QuizToRunResponse>> GetQuizToRun(string id, CancellationToken cancellationToken)
@@ -46,9 +47,10 @@ public class QuizVerificationController(IGate gate) : BaseController(gate)
     }
 
     [HttpPost("verify")]
-    public async Task<IActionResult> Verify([FromBody] VerifyQuizRequest request, CancellationToken cancellationToken)
+    public async Task<ActionResult<string>> Verify([FromBody] VerifyQuizRequest request, CancellationToken cancellationToken)
     {
-        await Gate.DispatchCommandAsync<VerifyQuizRequest, VerifyQuizCommand>(request, cancellationToken);
-        return Ok();
+        var command = mapper.Map<VerifyQuizRequest, VerifyQuizCommand>(request);
+        await Gate.DispatchCommandAsync(command, cancellationToken);
+        return Ok(command.QuizResultId.ToString());
     }
 }
