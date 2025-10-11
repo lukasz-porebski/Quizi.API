@@ -20,5 +20,6 @@ public class CreateUserCommandHandler(IUserRepository repository, IUserFactory f
         repository.NotExistsOrThrowAsync(
             e => e.Email == command.Data.Email,
             UserMessageCodes.UserWithGivenEmailAlreadyExists,
-            cancellationToken);
+            cancellationToken
+        );
 }
