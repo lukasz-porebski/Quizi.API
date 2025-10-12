@@ -19,7 +19,8 @@ internal static class CorsConfig
             {
                 builder.WithOrigins(settings.CorsOrigin)
                     .AllowAnyHeader()
-                    .AllowAnyMethod();
+                    .AllowAnyMethod()
+                    .AllowCredentials();
             });
         });
 

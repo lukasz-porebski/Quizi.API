@@ -5,12 +5,13 @@ using Common.Domain.ValueObjects;
 using Common.Infrastructure.Endpoints;
 using Common.PublishedLanguage.Requests;
 using Common.PublishedLanguage.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PublishedLanguage.Modules.QuizResults.Responses;
 
 namespace Infrastructure.Endpoints.Modules.QuizResults;
 
-[Route("quiz-results")]
+[Route("quiz-results"), Authorize]
 public class QuizResultController(IGate gate) : BaseController(gate)
 {
     [HttpGet("details/{id}")]

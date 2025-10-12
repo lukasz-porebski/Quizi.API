@@ -22,7 +22,8 @@ public class IdentityService<TDbContext>(
 ) : IIdentityService
     where TDbContext : DbContext
 {
-    public async Task<AuthenticateResponse> AuthenticateByCredentialsAsync(LoginRequest request, CancellationToken cancellationToken)
+    public async Task<AuthenticateResponse> AuthenticateByCredentialsAsync(LoginRequest request,
+        CancellationToken cancellationToken)
     {
         var userId = await validateUserCredentialsService.ValidateAndThrow(request.Email, request.Password, cancellationToken);
         return await AuthenticateAsync(userId, cancellationToken);
@@ -75,7 +76,7 @@ public class IdentityService<TDbContext>(
 
     private RefreshToken CreateRefreshTokenEntity(AggregateId userId, string refreshToken)
     {
-        var hashedRefreshToken = hasher.Hash(refreshToken);
+        var hashedRefreshToken = hasher.Hash(refreshToken, identityConfiguration.RefreshTokenSalt);
         return new RefreshToken(
             AggregateId.Generate(),
             hashedRefreshToken,

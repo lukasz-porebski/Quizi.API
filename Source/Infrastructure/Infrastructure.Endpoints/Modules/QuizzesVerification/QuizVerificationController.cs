@@ -4,13 +4,14 @@ using AutoMapper;
 using Common.Domain.ValueObjects;
 using Common.Infrastructure.Endpoints;
 using Common.Shared.Extensions;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PublishedLanguage.Modules.QuizzesVerification.Requests;
 using PublishedLanguage.Modules.QuizzesVerification.Responses;
 
 namespace Infrastructure.Endpoints.Modules.QuizzesVerification;
 
-[Route("quizzes-verification")]
+[Route("quizzes-verification"), Authorize]
 public class QuizVerificationController(IGate gate, IMapper mapper) : BaseController(gate)
 {
     [HttpGet("quiz-to-run/{id}")]

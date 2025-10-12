@@ -8,13 +8,14 @@ using Common.Domain.ValueObjects;
 using Common.Infrastructure.Endpoints;
 using Common.PublishedLanguage.Requests;
 using Common.PublishedLanguage.Responses;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PublishedLanguage.Modules.Quizzes.Requests;
 using PublishedLanguage.Modules.Quizzes.Responses;
 
 namespace Infrastructure.Endpoints.Modules.Quizzes;
 
-[Route("quizzes")]
+[Route("quizzes"), Authorize]
 public class QuizController(IGate gate) : BaseController(gate)
 {
     [HttpPost("create")]
