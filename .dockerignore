@@ -1,0 +1,73 @@
+# IDE i ustawienia użytkownika
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.userprefs
+*.rsuser
+*.sln.docstates
+*.DotSettings.user
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+artifacts/
+publish/
+out/
+TestResults/
+BenchmarkDotNet.Artifacts/
+
+# System i narzędzia
+Thumbs.db
+.DS_Store
+*.tmp
+*.log
+*.cache
+*.swp
+
+# Git
+.git/
+.gitignore
+
+# Node.js / frontend
+node_modules/
+bower_components/
+
+# Coverage / test / CI
+coverage*.xml
+coverage*.json
+*.coverage
+*.trx
+*.binlog
+
+# Sekrety i konfiguracje lokalne
+*.env
+appsettings.Development.json
+appsettings.Secrets.json
+*.publishsettings
+*.pfx
+*.snk
+
+# Tooling / pakiety
+.paket/
+paket-files/
+.fake/
+tools/
+__pycache__/
+*.pyc
+
+# Backup / migracje / raporty
+MigrationBackup/
+UpgradeLog*.*
+_Backup*/
+*.bak
+
+# Inne
+*.nupkg
+*.snupkg
+*.dbmdl
+*.dbproj.schemaview
+publish/

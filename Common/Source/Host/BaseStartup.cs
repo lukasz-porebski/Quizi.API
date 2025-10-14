@@ -60,7 +60,8 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
             .UseCustomCors()
             .UseMiddleware<ErrorHandlerMiddleware>()
             .UseIdentity()
-            .UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            .UseEndpoints(endpoints => { endpoints.MapControllers(); })
+            .UseAutoMigration<TDbContext>();
     }
 
     public virtual void ConfigureContainer(ContainerBuilder builder)
