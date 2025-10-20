@@ -48,7 +48,7 @@ public class IdentityService<TDbContext>(
 
     private async Task<AuthenticateResponse> AuthenticateAsync(AggregateId userId, CancellationToken cancellationToken)
     {
-        var accessToken = GenerateAccessToken([]);
+        var accessToken = GenerateAccessToken(userId);
         var refreshToken = GenerateRefreshToken();
 
         var refreshTokenEntity = CreateRefreshTokenEntity(userId, refreshToken);
@@ -59,7 +59,7 @@ public class IdentityService<TDbContext>(
         return new AuthenticateResponse(userId.ToString(), accessToken, refreshToken, refreshTokenEntity.ExpiredAt);
     }
 
-    private string GenerateAccessToken(IEnumerable<Claim> claims)
+    private string GenerateAccessToken(AggregateId userId)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(identityConfiguration.AccessTokenSecretKey));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
@@ -67,7 +67,10 @@ public class IdentityService<TDbContext>(
         var token = new JwtSecurityToken(
             issuer: identityConfiguration.Issuer,
             audience: identityConfiguration.Audience,
-            claims: claims,
+            claims:
+            [
+                new Claim(JwtRegisteredClaimNames.Sub, userId.ToString())
+            ],
             expires: dateTimeProvider.Now().AddMinutes(identityConfiguration.AccessTokenExpirationMinutes),
             signingCredentials: credentials);
 
