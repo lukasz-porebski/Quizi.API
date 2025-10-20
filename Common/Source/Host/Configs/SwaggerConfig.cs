@@ -22,6 +22,7 @@ internal static class SwaggerConfig
         return services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc(settings.Name, new OpenApiInfo { Title = settings.Title, Version = settings.Version });
+            c.AddServer(new OpenApiServer { Url = "/api" });
 
             if (!settings.IncludeSecurity)
                 return;
@@ -56,7 +57,7 @@ internal static class SwaggerConfig
         var options = configuration.GetOptions(BaseAppSettingsSections.Swagger);
         if (!options.Enabled)
             return builder;
-        
+
         var routePrefix = options.RoutePrefix.IsEmpty()
             ? BaseAppSettingsSections.Swagger.Name
             : options.RoutePrefix;

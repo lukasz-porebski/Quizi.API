@@ -56,6 +56,7 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
             .UseLogger()
             .UseLocalization()
             .UseCustomSwagger(Configuration)
+            .UsePathBase("/api")
             .UseRouting()
             .UseCustomCors()
             .UseMiddleware<ErrorHandlerMiddleware>()
