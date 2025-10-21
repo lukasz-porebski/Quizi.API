@@ -46,7 +46,7 @@ coverage*.json
 # Sekrety i konfiguracje lokalne
 *.env
 appsettings.Development.json
-appsettings.Secrets.json
+appsettings.Development.Secrets.json
 *.publishsettings
 *.pfx
 *.snk

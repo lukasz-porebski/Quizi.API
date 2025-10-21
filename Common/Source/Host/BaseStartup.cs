@@ -16,15 +16,21 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
 {
     protected BaseStartup(IHostEnvironment env, TAssemblies assemblies)
     {
-        Configuration = new ConfigurationBuilder()
+        var configurationBuilder = new ConfigurationBuilder()
             .SetBasePath(env.ContentRootPath)
             .AddEnvironmentVariables()
             .AddJsonFile(
                 env.IsDevelopment() ? $"Configs/appsettings.{env.EnvironmentName}.json" : "Configs/appsettings.json",
                 optional: false,
-                reloadOnChange: true)
-            .AddJsonFile("Configs/appsettings.Secrets.json", optional: false, reloadOnChange: true)
-            .Build();
+                reloadOnChange: true);
+
+        if (env.IsDevelopment())
+        {
+            configurationBuilder = configurationBuilder
+                .AddJsonFile("Configs/appsettings.Development.Secrets.json", optional: false, reloadOnChange: true);
+        }
+
+        Configuration = configurationBuilder.Build();
 
         Assemblies = assemblies;
     }

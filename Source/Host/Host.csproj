@@ -8,20 +8,6 @@
         <ProjectReference Include="..\Infrastructure\Infrastructure\Infrastructure.csproj"/>
     </ItemGroup>
     <ItemGroup>
-        <!-- Ensure secrets file is not copied to publish; copy to output only for Debug (local dev) -->
-        <None Include="Configs\appsettings.Secrets.json">
-            <!-- copy to bin only in Debug so local dev can use it -->
-            <CopyToOutputDirectory Condition="'$(Configuration)' == 'Debug'">PreserveNewest</CopyToOutputDirectory>
-            <!-- never include in publish output -->
-            <CopyToPublishDirectory>Never</CopyToPublishDirectory>
-        </None>
-    </ItemGroup>
-    <!-- Safety: remove secrets file from publish output if it was included by other projects -->
-    <Target Name="RemoveSecretsFromPublish" AfterTargets="Publish">
-        <Message Importance="high" Text="Removing appsettings.Secrets.json from publish directory if present..." />
-        <Delete Files="$(PublishDir)\Configs\appsettings.Secrets.json" ContinueOnError="true" />
-    </Target>
-    <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
