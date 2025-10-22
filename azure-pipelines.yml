@@ -37,7 +37,7 @@ stages:
       displayName: Build project
 
     # 4️⃣ Run unit tests
-    - script: dotnet test --configuration Release --collect:"XPlat Code Coverage" --logger "trx;LogFileName=test_results.trx;LogFailedTestsOnly=true"
+    - script: dotnet test --configuration Release --logger "trx;LogFileName=test_results.trx;LogFailedTestsOnly=true"
       displayName: Run unit tests
 
     # 5️⃣ Publish test results
