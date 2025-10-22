@@ -8,7 +8,6 @@ variables:
   githubUser: 'lukasz-porebski'
   repoName: 'quizi-api'
   imageName: 'ghcr.io/$(githubUser)/$(repoName)'
-  tag: '$(Build.BuildId)-$(Date:yyyyMMddHHmm)'
 
 stages:
 # ===== Etap 1: Build & Test =====
@@ -75,8 +74,13 @@ stages:
         tags: |
           $(imageName):$(Build.BuildId)
           $(imageName):latest
+        buildContext: '$(Build.SourcesDirectory)'
 
-    # 3️⃣ Push Docker image
+    # 3️⃣ Show local images
+    - script: docker images
+      displayName: Show Docker images
+
+    # 4️⃣ Push Docker image
     - task: Docker@2
       displayName: Push Docker image to GHCR
       inputs:
