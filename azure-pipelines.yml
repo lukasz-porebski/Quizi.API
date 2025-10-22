@@ -8,7 +8,8 @@ variables:
   githubUser: 'lukasz-porebski'
   repoName: 'quizi-api'
   imageName: 'ghcr.io/$(githubUser)/$(repoName)'
-  tag: '$(Build.BuildId)'
+  buildTag: '$(Build.BuildId)'
+  latestTag: 'latest'
 
 stages:
 # ===== Etap 1: Build & Test =====
@@ -71,10 +72,11 @@ stages:
       displayName: Build Docker image
       inputs:
         command: build
-        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        repository: $(imageName)
         tags: |
-          $(imageName):$(tag)
-          $(imageName):latest
+          $(buildTag)
+          $(latestTag)
+        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
 
     # 3️⃣ Show local images
     - script: docker images
@@ -85,6 +87,7 @@ stages:
       displayName: Push Docker image to GHCR
       inputs:
         command: push
+        repository: $(imageName)
         tags: |
-          $(imageName):$(tag)
-          $(imageName):latest
+          $(buildTag)
+          $(latestTag)
