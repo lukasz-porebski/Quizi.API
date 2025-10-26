@@ -11,7 +11,7 @@ WORKDIR /app
 COPY --from=build /app/publish .
 
 ENV ASPNETCORE_ENVIRONMENT=Production
-ENV ASPNETCORE_URLS=http://+:${PORT}
+ENV ASPNETCORE_URLS=http://+:8080
 
 ENV Main__Name=api
 ENV Main__CorsOrigin=${Main__CorsOrigin}
