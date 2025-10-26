@@ -57,7 +57,14 @@ steps:
         '--platform', 'managed',
         '--allow-unauthenticated',
         '--service-account', '${_SERVICE_ACCOUNT}',
-        '--set-env-vars', 'ASPNETCORE_ENVIRONMENT=Production,Main__Name=${_MAIN_NAME},Main__CorsOrigin=${_MAIN_CORSORIGIN},Database__ConnectionString=${_DATABASE_CONNECTIONSTRING},Identity__Issuer=${_IDENTITY_ISSUER},Identity__Audience=${_IDENTITY_AUDIENCE},Identity__AccessTokenSecretKey=${_IDENTITY_ACCESSTOKENSECRETKEY},Identity__RefreshTokenSalt=${_IDENTITY_REFRESHTOKENSALT}',
+        '--set-env-vars', 'ASPNETCORE_ENVIRONMENT=Production',
+        '--set-env-vars', 'Main__Name=${_MAIN_NAME}',
+        '--set-env-vars', 'Main__CorsOrigin=${_MAIN_CORSORIGIN}',
+        '--set-env-vars', 'Database__ConnectionString=${_DATABASE_CONNECTIONSTRING}',
+        '--set-env-vars', 'Identity__Issuer=${_IDENTITY_ISSUER}',
+        '--set-env-vars', 'Identity__Audience=${_IDENTITY_AUDIENCE}',
+        '--set-env-vars', 'Identity__AccessTokenSecretKey=${_IDENTITY_ACCESSTOKENSECRETKEY}',
+        '--set-env-vars', 'Identity__RefreshTokenSalt=${_IDENTITY_REFRESHTOKENSALT}',
         '--port', '8080',
         '--timeout', '20m'
       ]
