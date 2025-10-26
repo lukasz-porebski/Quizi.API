@@ -1,0 +1,77 @@
+steps:
+  # ===== Etap 1: Restore dependencies =====
+  - name: 'mcr.microsoft.com/dotnet/sdk:9.0'
+    id: 'Restore dependencies'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        dotnet restore "Quizi.sln"
+
+  # ===== Etap 2: Build project =====
+  - name: 'mcr.microsoft.com/dotnet/sdk:9.0'
+    id: 'Build project'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        dotnet build --configuration Release
+
+  # ===== Etap 3: Run unit tests =====
+  - name: 'mcr.microsoft.com/dotnet/sdk:9.0'
+    id: 'Run unit tests'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        dotnet test --configuration Release
+
+  # ===== Etap 4: Build Docker image =====
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build Docker image'
+    args:
+      [
+        'build',
+        '-t', 'gcr.io/$PROJECT_ID/quizi-api',
+        '.'
+      ]
+
+  # ===== Etap 5: Push Docker image =====
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push Docker image'
+    args:
+      [
+        'push',
+        'gcr.io/$PROJECT_ID/quizi-api'
+      ]
+
+  # ===== Etap 6: Deploy do Cloud Run =====
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'Deploy to Cloud Run'
+    entrypoint: 'gcloud'
+    args:
+      [
+        'run', 'deploy', 'quizi-api',
+        '--image', 'gcr.io/$PROJECT_ID/quizi-api',
+        '--region', 'europe-central2',
+        '--platform', 'managed',
+        '--allow-unauthenticated',
+        '--service-account', '${_SERVICE_ACCOUNT}',
+        '--set-env-vars', 'ASPNETCORE_ENVIRONMENT=Production,Main__Name=${_Main__Name},Main__CorsOrigin=${_Main__CorsOrigin},Database__ConnectionString=${_Database__ConnectionString},Identity__Issuer=${_Identity__Issuer},Identity__Audience=${_Identity__Audience},Identity__AccessTokenSecretKey=${_Identity__AccessTokenSecretKey},Identity__RefreshTokenSalt=${_Identity__RefreshTokenSalt}'
+      ]
+
+images:
+  - 'gcr.io/$PROJECT_ID/quizi-api'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  _SERVICE_ACCOUNT: ''
+  _Main__Name: ''
+  _Main__CorsOrigin: ''
+  _Database__ConnectionString: ''
+  _Identity__Issuer: ''
+  _Identity__Audience: ''
+  _Identity__AccessTokenSecretKey: ''
+  _Identity__RefreshTokenSalt: ''
