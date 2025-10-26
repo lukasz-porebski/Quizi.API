@@ -26,7 +26,12 @@ internal static class EfConfig
     {
         using var scope = builder.ApplicationServices.CreateScope();
 
+        Console.WriteLine("✅ Starting app migration initialization...");
+
         var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
+
+        Console.WriteLine($"🔗 ConnectionString: {dbContext.Database.GetDbConnection().ConnectionString})");
+
         var retry = 5;
         while (retry > 0)
         {
@@ -35,8 +40,9 @@ internal static class EfConfig
                 dbContext.Database.Migrate();
                 break;
             }
-            catch
+            catch (Exception ex)
             {
+                Console.WriteLine(ex);
                 retry--;
                 if (retry == 0)
                     throw;
@@ -45,6 +51,7 @@ internal static class EfConfig
             }
         }
 
+        Console.WriteLine($"End migration initialization");
         return builder;
     }
 }
