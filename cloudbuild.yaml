@@ -57,7 +57,7 @@ steps:
         '--platform', 'managed',
         '--allow-unauthenticated',
         '--service-account', '${_SERVICE_ACCOUNT}',
-        '--set-env-vars', 'ASPNETCORE_ENVIRONMENT=Production,Main__Name=${_Main__Name},Main__CorsOrigin=${_Main__CorsOrigin},Database__ConnectionString=${_Database__ConnectionString},Identity__Issuer=${_Identity__Issuer},Identity__Audience=${_Identity__Audience},Identity__AccessTokenSecretKey=${_Identity__AccessTokenSecretKey},Identity__RefreshTokenSalt=${_Identity__RefreshTokenSalt}'
+        --set-env-vars ASPNETCORE_ENVIRONMENT=Production,ASPNETCORE_URLS=${_ASPNETCORE_URLS},Main__Name=${_MAIN_NAME},Main__CorsOrigin=${_MAIN_CORSORIGIN},Database__ConnectionString=${_DATABASE_CONNECTIONSTRING},Identity__Issuer=${_IDENTITY_ISSUER},Identity__Audience=${_IDENTITY_AUDIENCE},Identity__AccessTokenSecretKey=${_IDENTITY_ACCESSTOKENSECRETKEY},Identity__RefreshTokenSalt=${_IDENTITY_REFRESHTOKENSALT}
       ]
 
 images:
@@ -68,10 +68,11 @@ options:
 
 substitutions:
   _SERVICE_ACCOUNT: ''
-  _Main__Name: ''
-  _Main__CorsOrigin: ''
-  _Database__ConnectionString: ''
-  _Identity__Issuer: ''
-  _Identity__Audience: ''
-  _Identity__AccessTokenSecretKey: ''
-  _Identity__RefreshTokenSalt: ''
+  _ASPNETCORE_URLS: ''
+  _MAIN_NAME: ''
+  _MAIN_CORSORIGIN: ''
+  _DATABASE_CONNECTIONSTRING: ''
+  _IDENTITY_ISSUER: ''
+  _IDENTITY_AUDIENCE: ''
+  _IDENTITY_ACCESSTOKENSECRETKEY: ''
+  _IDENTITY_REFRESHTOKENSALT: ''
