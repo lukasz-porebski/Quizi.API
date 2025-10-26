@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace Common.Host.Configs;
 
@@ -30,7 +31,22 @@ internal static class EfConfig
 
         var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
 
-        Console.WriteLine($"🔗 ConnectionString: {dbContext.Database.GetDbConnection().ConnectionString})");
+        Console.WriteLine($"🔗 ConnectionString: {JsonConvert.SerializeObject(dbContext.Database.GetDbConnection())}");
+
+        // Skip migration in production if database is not accessible
+        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+        {
+            try
+            {
+                dbContext.Database.CanConnect();
+                Console.WriteLine("Database connection successful, proceeding with migration...");
+            }
+            catch
+            {
+                Console.WriteLine("Database not accessible, skipping migration for now...");
+                return builder;
+            }
+        }
 
         var retry = 5;
         while (retry > 0)

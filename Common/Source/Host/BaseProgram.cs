@@ -21,7 +21,9 @@ public abstract class BaseProgram<TStartup, TAssemblies, TDbContext>
         try
         {
             Log.Information("Starting up");
-            CreateHostBuilder(args).Build().Run();
+            var host = CreateHostBuilder(args).Build();
+            Log.Information("Host built successfully");
+            host.Run();
             Log.Information("Started");
         }
         catch (Exception ex)
