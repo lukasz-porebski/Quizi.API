@@ -71,10 +71,7 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
             .UseIdentity()
             .UseEndpoints(endpoints =>
             {
-                if (env.IsProduction())
-                {
-                    endpoints.MapGet("/", () => "OK");
-                }
+                endpoints.MapGet("/", () => "OK");
                 endpoints.MapControllers();
             })
             .UseAutoMigration<TDbContext>();
