@@ -11,8 +11,8 @@ WORKDIR /app
 COPY --from=build /app/publish .
 
 ENV ASPNETCORE_ENVIRONMENT=Production
-ENV ASPNETCORE_URLS=http://+:${PORT:-8080}
+ENV ASPNETCORE_URLS=http://*:${PORT}
 
 EXPOSE 8080
 
-ENTRYPOINT ["dotnet", "Host.dll"]
+ENTRYPOINT ["dotnet", "Source/Host/Host.dll"]
