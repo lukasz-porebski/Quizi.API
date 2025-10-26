@@ -57,6 +57,7 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
         {
             app.UseDeveloperExceptionPage();
             app.UseHttpsRedirection();
+            app.UsePathBase("/api");
         }
         else
             app.UseHsts();
@@ -64,12 +65,18 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
         app.UseLogger()
             .UseLocalization()
             .UseCustomSwagger(Configuration)
-            .UsePathBase("/api")
             .UseRouting()
             .UseCustomCors()
             .UseMiddleware<ErrorHandlerMiddleware>()
             .UseIdentity()
-            .UseEndpoints(endpoints => { endpoints.MapControllers(); })
+            .UseEndpoints(endpoints =>
+            {
+                if (env.IsProduction())
+                {
+                    endpoints.MapGet("/", () => "OK");
+                }
+                endpoints.MapControllers();
+            })
             .UseAutoMigration<TDbContext>();
     }
 
