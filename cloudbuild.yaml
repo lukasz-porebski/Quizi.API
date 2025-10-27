@@ -61,7 +61,7 @@ steps:
         '--set-env-vars', '^:^Database__ConnectionString=${_DATABASE_CONNECTIONSTRING}',
         '--port', '8080',
         '--timeout', '20m',
-        '--add-cloudsql-instances', '${_SQL_INSTANCES}'
+        '--set-cloudsql-instances', '${_SQL_INSTANCES}'
       ]
 
 images:
