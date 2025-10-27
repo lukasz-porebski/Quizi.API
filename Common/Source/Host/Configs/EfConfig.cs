@@ -1,4 +1,5 @@
-﻿using Common.Host.AppSettings;
+﻿using System.Net.Sockets;
+using Common.Host.AppSettings;
 using Common.Host.Extensions;
 using Common.Infrastructure.Database.EF;
 using Microsoft.AspNetCore.Builder;
@@ -38,25 +39,33 @@ internal static class EfConfig
 
             var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
 
-            dbContext.Database.Migrate();
-            // var retry = 1;
-            // while (retry > 0)
-            // {
-            //     try
-            //     {
-            //         dbContext.Database.Migrate();
-            //         break;
-            //     }
-            //     catch (Exception ex)
-            //     {
-            //         Console.WriteLine(ex);
-            //         retry--;
-            //         if (retry == 0)
-            //             throw;
-            //
-            //         Thread.Sleep(5000);
-            //     }
-            // }
+            try
+            {
+                using var c = new TcpClient();
+                c.Connect("127.0.0.1", 1433);
+                Console.WriteLine("[TCP] 127.0.0.1:1433 reachable");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"[TCP] 127.0.0.1:1433 NOT reachable: {e.Message}");
+            }
+
+            var delaysSeconds = new[] { 5, 10, 20, 30, 30 };
+            for (var i = 0; i < delaysSeconds.Length; i++)
+            {
+                try
+                {
+                    dbContext.Database.Migrate();
+                    Console.WriteLine("[EF MIGRATION] Success");
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[EF MIGRATION] Attempt {i + 1} failed: {ex.Message}");
+                    if (i == delaysSeconds.Length - 1) throw;
+                    Thread.Sleep(TimeSpan.FromSeconds(delaysSeconds[i]));
+                }
+            }
 
             Console.WriteLine($"End migration initialization");
         }
