@@ -74,7 +74,7 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
                 endpoints.MapGet("/", () => "OK");
                 endpoints.MapControllers();
             })
-            .UseAutoMigration<TDbContext>();
+            .UseAutoMigration<TDbContext>(Configuration);
     }
 
     public virtual void ConfigureContainer(ContainerBuilder builder)

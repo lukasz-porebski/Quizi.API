@@ -22,7 +22,8 @@ internal static class EfConfig
         return services;
     }
 
-    public static IApplicationBuilder UseAutoMigration<TDbContext>(this IApplicationBuilder builder)
+    public static IApplicationBuilder UseAutoMigration<TDbContext>(
+        this IApplicationBuilder builder, IConfiguration configuration)
         where TDbContext : BaseDbContext
     {
         using var scope = builder.ApplicationServices.CreateScope();
@@ -30,6 +31,10 @@ internal static class EfConfig
         try
         {
             Console.WriteLine("✅ Starting app migration initialization...");
+
+            var settings = configuration.GetOptions(BaseAppSettingsSections.Database);
+            Console.WriteLine("✅ Settings");
+            Console.WriteLine(settings);
 
             var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
 
