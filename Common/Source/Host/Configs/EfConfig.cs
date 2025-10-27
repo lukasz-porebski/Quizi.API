@@ -27,47 +27,41 @@ internal static class EfConfig
     {
         using var scope = builder.ApplicationServices.CreateScope();
 
-        Console.WriteLine("✅ Starting app migration initialization...");
-
-        var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
-
-        Console.WriteLine($"🔗 ConnectionString: {JsonConvert.SerializeObject(dbContext.Database.GetDbConnection())}");
-
-        // Skip migration in production if database is not accessible
-        if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
+        try
         {
-            try
+            Console.WriteLine("✅ Starting app migration initialization...");
+
+            var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
+
+            Console.WriteLine($"🔗 ConnectionString: {JsonConvert.SerializeObject(dbContext.Database.GetDbConnection())}");
+
+            var retry = 1;
+            while (retry > 0)
             {
-                dbContext.Database.CanConnect();
-                Console.WriteLine("Database connection successful, proceeding with migration...");
+                try
+                {
+                    dbContext.Database.Migrate();
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex);
+                    retry--;
+                    if (retry == 0)
+                        throw;
+
+                    Thread.Sleep(5000);
+                }
             }
-            catch
-            {
-                Console.WriteLine("Database not accessible, skipping migration for now...");
-                return builder;
-            }
+
+            Console.WriteLine($"End migration initialization");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
         }
 
-        var retry = 1;
-        while (retry > 0)
-        {
-            try
-            {
-                dbContext.Database.Migrate();
-                break;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                retry--;
-                if (retry == 0)
-                    throw;
-
-                Thread.Sleep(5000);
-            }
-        }
-
-        Console.WriteLine($"End migration initialization");
         return builder;
     }
 }
