@@ -25,6 +25,8 @@ internal static class EfConfig
     public static IApplicationBuilder UseAutoMigration<TDbContext>(this IApplicationBuilder builder)
         where TDbContext : BaseDbContext
     {
+        return builder;
+
         using var scope = builder.ApplicationServices.CreateScope();
 
         Console.WriteLine("✅ Starting app migration initialization...");
