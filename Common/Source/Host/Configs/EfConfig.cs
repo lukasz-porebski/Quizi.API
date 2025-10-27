@@ -34,7 +34,7 @@ internal static class EfConfig
 
             var settings = configuration.GetOptions(BaseAppSettingsSections.Database);
             Console.WriteLine("✅ Settings");
-            Console.WriteLine(settings);
+            Console.WriteLine(JsonConvert.SerializeObject(settings));
 
             var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
 
