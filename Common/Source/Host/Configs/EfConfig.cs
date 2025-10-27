@@ -38,33 +38,31 @@ internal static class EfConfig
 
             var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
 
-            Console.WriteLine($"🔗 ConnectionString: {JsonConvert.SerializeObject(dbContext.Database.GetDbConnection())}");
-
-            var retry = 1;
-            while (retry > 0)
-            {
-                try
-                {
-                    dbContext.Database.Migrate();
-                    break;
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex);
-                    retry--;
-                    if (retry == 0)
-                        throw;
-
-                    Thread.Sleep(5000);
-                }
-            }
+            dbContext.Database.Migrate();
+            // var retry = 1;
+            // while (retry > 0)
+            // {
+            //     try
+            //     {
+            //         dbContext.Database.Migrate();
+            //         break;
+            //     }
+            //     catch (Exception ex)
+            //     {
+            //         Console.WriteLine(ex);
+            //         retry--;
+            //         if (retry == 0)
+            //             throw;
+            //
+            //         Thread.Sleep(5000);
+            //     }
+            // }
 
             Console.WriteLine($"End migration initialization");
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+            Console.WriteLine(JsonConvert.SerializeObject(e));
         }
 
         return builder;
