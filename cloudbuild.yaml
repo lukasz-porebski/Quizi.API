@@ -61,7 +61,7 @@ steps:
         '--set-env-vars', '^:^Database__ConnectionString=${_DATABASE_CONNECTIONSTRING}',
         '--port', '8080',
         '--timeout', '20m',
-        '--set-cloudsql-instances', '${_SQL_INSTANCES}'
+        '--add-cloudsql-instances', 'project-a565315b-6859-490c-b96:europe-central2:quizi-sql2019'
       ]
 
 images:
@@ -79,4 +79,3 @@ substitutions:
   _IDENTITY_AUDIENCE: ''
   _IDENTITY_ACCESSTOKENSECRETKEY: ''
   _IDENTITY_REFRESHTOKENSALT: ''
-  _SQL_INSTANCES: ''
