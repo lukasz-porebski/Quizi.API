@@ -60,8 +60,7 @@ steps:
         '--set-env-vars', 'ASPNETCORE_ENVIRONMENT=Production,Main__Name=${_MAIN_NAME},Main__CorsOrigin=${_MAIN_CORSORIGIN},Identity__Issuer=${_IDENTITY_ISSUER},Identity__Audience=${_IDENTITY_AUDIENCE},Identity__AccessTokenSecretKey=${_IDENTITY_ACCESSTOKENSECRETKEY},Identity__RefreshTokenSalt=${_IDENTITY_REFRESHTOKENSALT}',
         '--set-env-vars', '^:^Database__ConnectionString=${_DATABASE_CONNECTIONSTRING}',
         '--port', '8080',
-        '--timeout', '20m',
-        '--add-cloudsql-instances', 'project-a565315b-6859-490c-b96:europe-central2:quizi-sql2019'
+        '--timeout', '20m'
       ]
 
 images:
