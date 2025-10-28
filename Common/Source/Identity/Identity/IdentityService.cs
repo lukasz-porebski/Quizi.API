@@ -25,14 +25,13 @@ public class IdentityService<TDbContext>(
     public async Task<AuthenticateResponse> AuthenticateByCredentialsAsync(LoginRequest request,
         CancellationToken cancellationToken)
     {
-        Console.WriteLine($"SALT: {identityConfiguration.RefreshTokenSalt}");
         var userId = await validateUserCredentialsService.ValidateAndThrow(request.Email, request.Password, cancellationToken);
         return await AuthenticateAsync(userId, cancellationToken);
     }
 
     public async Task<AuthenticateResponse> AuthenticateByRefreshTokenAsync(string token, CancellationToken cancellationToken)
     {
-        var hashedRefreshToken = hasher.Hash(token, identityConfiguration.RefreshTokenSalt);
+        var hashedRefreshToken = hasher.Hash(token, GetRefreshTokenSalt());
         var dbSet = dbContext.Set<RefreshToken>();
         var now = dateTimeProvider.Now();
 
@@ -80,7 +79,7 @@ public class IdentityService<TDbContext>(
 
     private RefreshToken CreateRefreshTokenEntity(AggregateId userId, string refreshToken)
     {
-        var hashedRefreshToken = hasher.Hash(refreshToken, identityConfiguration.RefreshTokenSalt);
+        var hashedRefreshToken = hasher.Hash(refreshToken, GetRefreshTokenSalt());
         return new RefreshToken(
             AggregateId.Generate(),
             hashedRefreshToken,
@@ -96,5 +95,10 @@ public class IdentityService<TDbContext>(
         randomNumberGenerator.GetBytes(randomNumber);
 
         return Convert.ToBase64String(randomNumber);
+    }
+
+    private string GetRefreshTokenSalt()
+    {
+        return identityConfiguration.RefreshTokenSalt.Replace("$$", "$");
     }
 }
