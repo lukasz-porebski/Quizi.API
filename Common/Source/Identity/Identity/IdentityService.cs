@@ -25,13 +25,13 @@ public class IdentityService<TDbContext>(
     public async Task<AuthenticateResponse> AuthenticateByCredentialsAsync(LoginRequest request,
         CancellationToken cancellationToken)
     {
+        Console.WriteLine($"SALT: {identityConfiguration.RefreshTokenSalt}");
         var userId = await validateUserCredentialsService.ValidateAndThrow(request.Email, request.Password, cancellationToken);
         return await AuthenticateAsync(userId, cancellationToken);
     }
 
     public async Task<AuthenticateResponse> AuthenticateByRefreshTokenAsync(string token, CancellationToken cancellationToken)
     {
-        Console.WriteLine($"SALT: {identityConfiguration.RefreshTokenSalt}");
         var hashedRefreshToken = hasher.Hash(token, identityConfiguration.RefreshTokenSalt);
         var dbSet = dbContext.Set<RefreshToken>();
         var now = dateTimeProvider.Now();
