@@ -39,18 +39,26 @@ internal static class EfConfig
 
             var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
 
+            // DEBUG: Sprawdź czy port 1433 jest dostępny
             try
             {
-                using var c = new TcpClient();
-                c.Connect("127.0.0.1", 1433);
-                Console.WriteLine("[TCP] 127.0.0.1:1433 reachable");
+                using var tcpClient = new TcpClient();
+                var task = tcpClient.ConnectAsync("localhost", 1433);
+                if (task.Wait(TimeSpan.FromSeconds(5)))
+                {
+                    Console.WriteLine("✅ Port 1433 is reachable");
+                }
+                else
+                {
+                    Console.WriteLine("❌ Port 1433 is NOT reachable");
+                }
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                Console.WriteLine($"[TCP] 127.0.0.1:1433 NOT reachable: {e.Message}");
+                Console.WriteLine($"❌ TCP test failed: {ex.Message}");
             }
 
-            var delaysSeconds = new[] { 5, 10, 20 };
+            var delaysSeconds = new[] { 5, 10 };
             for (var i = 0; i < delaysSeconds.Length; i++)
             {
                 try
