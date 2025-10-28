@@ -50,7 +50,7 @@ internal static class EfConfig
                 Console.WriteLine($"[TCP] 127.0.0.1:1433 NOT reachable: {e.Message}");
             }
 
-            var delaysSeconds = new[] { 5, 10, 20, 30, 30 };
+            var delaysSeconds = new[] { 5, 10, 20 };
             for (var i = 0; i < delaysSeconds.Length; i++)
             {
                 try
