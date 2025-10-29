@@ -40,7 +40,7 @@ internal static class EfConfig
 
             var settings = configuration.GetOptions(BaseAppSettingsSections.Database);
             WaitForSqlEndpoint(settings);
-            // Test(settings);
+            Test(settings);
 
             var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
 
