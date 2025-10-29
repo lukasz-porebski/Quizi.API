@@ -29,7 +29,7 @@ internal static class EfConfig
     }
 
     public static IApplicationBuilder UseAutoMigration<TDbContext>(
-        this IApplicationBuilder builder, IConfiguration configuration)
+        this IApplicationBuilder builder, IConfiguration configuration) 
         where TDbContext : BaseDbContext
     {
         using var scope = builder.ApplicationServices.CreateScope();
@@ -43,7 +43,7 @@ internal static class EfConfig
 
             var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
 
-            var delaysSeconds = new[] { 5 };
+            var delaysSeconds = new[] { 5, 10 };
             for (var i = 0; i < delaysSeconds.Length; i++)
             {
                 try

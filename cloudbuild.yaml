@@ -57,8 +57,10 @@ steps:
         '--platform', 'managed',
         '--allow-unauthenticated',
         '--service-account', '${_SERVICE_ACCOUNT}',
+        '--add-cloudsql-instances', '${_CLOUDSQL_INSTANCE}',
         '--set-env-vars', 'ASPNETCORE_ENVIRONMENT=Production,Main__Name=${_MAIN_NAME},Main__CorsOrigin=${_MAIN_CORSORIGIN},Identity__Issuer=${_IDENTITY_ISSUER},Identity__Audience=${_IDENTITY_AUDIENCE},Identity__AccessTokenSecretKey=${_IDENTITY_ACCESSTOKENSECRETKEY},Identity__RefreshTokenSalt=${_IDENTITY_REFRESHTOKENSALT}',
         '--set-env-vars', '^:^Database__ConnectionString=${_DATABASE_CONNECTIONSTRING}',
+        '--set-env-vars', 'CLOUDSQL_INSTANCE=${_CLOUDSQL_INSTANCE},INSTANCE_CONNECTION_NAME=${_CLOUDSQL_INSTANCE}',
         '--port', '8080',
         '--timeout', '20m'
       ]
@@ -78,3 +80,4 @@ substitutions:
   _IDENTITY_AUDIENCE: ''
   _IDENTITY_ACCESSTOKENSECRETKEY: ''
   _IDENTITY_REFRESHTOKENSALT: ''
+  _CLOUDSQL_INSTANCE: ''
