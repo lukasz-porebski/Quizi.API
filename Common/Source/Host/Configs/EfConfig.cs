@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Net.Sockets;
@@ -29,7 +29,7 @@ internal static class EfConfig
     }
 
     public static IApplicationBuilder UseAutoMigration<TDbContext>(
-        this IApplicationBuilder builder, IConfiguration configuration) 
+        this IApplicationBuilder builder, IConfiguration configuration)
         where TDbContext : BaseDbContext
     {
         using var scope = builder.ApplicationServices.CreateScope();
@@ -39,11 +39,12 @@ internal static class EfConfig
             Console.WriteLine("✅ Starting app migration initialization...");
 
             var settings = configuration.GetOptions(BaseAppSettingsSections.Database);
-            Test(settings);
+            WaitForSqlEndpoint(settings);
+            // Test(settings);
 
             var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
 
-            var delaysSeconds = new[] { 5, 10 };
+            var delaysSeconds = new[] { 5 };
             for (var i = 0; i < delaysSeconds.Length; i++)
             {
                 try
@@ -60,7 +61,7 @@ internal static class EfConfig
                 }
             }
 
-            Console.WriteLine($"End migration initialization");
+            Console.WriteLine("End migration initialization");
         }
         catch (Exception e)
         {
@@ -70,6 +71,86 @@ internal static class EfConfig
         return builder;
     }
 
+    private static void WaitForSqlEndpoint(DatabaseSettings settings)
+    {
+        try
+        {
+            var connectionString = settings.ConnectionString;
+            if (string.IsNullOrWhiteSpace(connectionString))
+            {
+                Console.WriteLine("⚠️ No connection string provided; skipping SQL endpoint readiness wait.");
+                return;
+            }
+
+            var builder = new SqlConnectionStringBuilder(connectionString);
+            var dataSource = builder.DataSource;
+
+            if (string.IsNullOrWhiteSpace(dataSource))
+            {
+                Console.WriteLine("⚠️ SQL endpoint unknown - `DataSource` missing in connection string.");
+                return;
+            }
+
+            dataSource = dataSource.Replace("tcp:", string.Empty, StringComparison.OrdinalIgnoreCase);
+
+            var host = dataSource;
+            var port = 1433;
+
+            if (dataSource.Contains(','))
+            {
+                var parts = dataSource.Split(',', 2, StringSplitOptions.TrimEntries);
+                host = parts[0];
+                if (parts.Length == 2 && int.TryParse(parts[1], out var parsedPort))
+                {
+                    port = parsedPort;
+                }
+            }
+
+            if (host.StartsWith("np:", StringComparison.OrdinalIgnoreCase))
+            {
+                Console.WriteLine($"ℹ️ SQL endpoint uses named pipe: {host}. Skipping TCP readiness wait.");
+                return;
+            }
+
+            const int maxAttempts = 12;
+            const int delaySeconds = 5;
+
+            for (var attempt = 1; attempt <= maxAttempts; attempt++)
+            {
+                if (TryReachTcpEndpoint(host, port))
+                {
+                    Console.WriteLine($"✅ SQL endpoint reachable at {host}:{port} (attempt {attempt}).");
+                    return;
+                }
+
+                Console.WriteLine($"⌛ Waiting for SQL endpoint {host}:{port} (attempt {attempt} of {maxAttempts})...");
+                Thread.Sleep(TimeSpan.FromSeconds(delaySeconds));
+            }
+
+            Console.WriteLine(
+                $"⚠️ SQL endpoint {host}:{port} not reachable after {maxAttempts} attempts. Continuing, migration may still fail.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"❌ Failed to evaluate SQL endpoint readiness: {ex.Message}");
+        }
+
+        static bool TryReachTcpEndpoint(string host, int port)
+        {
+            try
+            {
+                using var client = new TcpClient();
+                var connectTask = client.ConnectAsync(host, port);
+                return connectTask.Wait(TimeSpan.FromSeconds(2)) && client.Connected;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ TCP probe to {host}:{port} failed: {ex.Message}");
+                return false;
+            }
+        }
+    }
+
     private static void Test(DatabaseSettings settings)
     {
         Console.WriteLine("✅ Settings");
@@ -77,20 +158,19 @@ internal static class EfConfig
 
         Console.WriteLine("=== CLOUD SQL EXTENDED DIAGNOSTICS ===");
 
-// 1. Sprawdź wszystkie zmienne środowiskowe związane z Cloud SQL
+        // 1. Sprawdź wszystkie zmienne środowiskowe związane z Cloud SQL
         var envVars = new[] { "CLOUDSQL_INSTANCE", "INSTANCE_CONNECTION_NAME", "DB_HOST", "DB_PORT" };
         foreach (var envVar in envVars)
         {
             Console.WriteLine($"{envVar}: {Environment.GetEnvironmentVariable(envVar) ?? "NOT SET"}");
         }
 
-// 2. Sprawdź informacje o instancji Cloud SQL
+        // 2. Sprawdź informacje o instancji Cloud SQL
         var instanceName = Environment.GetEnvironmentVariable("CLOUDSQL_INSTANCE");
         if (!string.IsNullOrEmpty(instanceName))
         {
             Console.WriteLine($"Cloud SQL Instance: {instanceName}");
 
-            // Sprawdź czy socket directory exists
             var socketPath = $"/cloudsql/{instanceName}";
             Console.WriteLine($"Socket path: {socketPath}");
             Console.WriteLine($"Socket directory exists: {Directory.Exists(socketPath)}");
@@ -106,7 +186,7 @@ internal static class EfConfig
             }
         }
 
-// 3. Testy dostępności portów
+        // 3. Testy dostępności portów
         var portsToTest = new[] { 1433, 5432, 3306 };
         foreach (var port in portsToTest)
         {
@@ -114,7 +194,7 @@ internal static class EfConfig
             TestPort("127.0.0.1", port);
         }
 
-// 4. Sprawdź aktywnych połączeń sieciowych
+        // 4. Sprawdź aktywnych połączeń sieciowych
         Console.WriteLine("=== ACTIVE TCP CONNECTIONS ===");
         try
         {
@@ -122,7 +202,7 @@ internal static class EfConfig
             var connections = properties.GetActiveTcpConnections();
             Console.WriteLine($"Active TCP connections: {connections.Length}");
 
-            foreach (var conn in connections.Take(10)) // Pierwsze 10
+            foreach (var conn in connections.Take(10))
             {
                 Console.WriteLine($"  {conn.LocalEndPoint} -> {conn.RemoteEndPoint} : {conn.State}");
             }
@@ -132,7 +212,7 @@ internal static class EfConfig
             Console.WriteLine($"❌ TCP connections check failed: {ex.Message}");
         }
 
-// 5. Sprawdź czy możemy rozwiązać localhost
+        // 5. Sprawdź czy możemy rozwiązać localhost
         try
         {
             var hostEntry = Dns.GetHostEntry("localhost");
@@ -143,7 +223,7 @@ internal static class EfConfig
             Console.WriteLine($"❌ localhost resolution failed: {ex.Message}");
         }
 
-// 6. Sprawdź procesy nasłuchujące (jeśli dostępne)
+        // 6. Sprawdź procesy nasłuchujące (jeśli dostępne)
         try
         {
             Console.WriteLine("=== NETSTAT (if available) ===");
@@ -168,7 +248,7 @@ internal static class EfConfig
             Console.WriteLine($"❌ Netstat check failed: {ex.Message}");
         }
 
-// 7. Sprawdź czy Cloud SQL Proxy process jest uruchomiony
+        // 7. Sprawdź czy Cloud SQL Proxy process jest uruchomiony
         try
         {
             var process = new Process
@@ -193,7 +273,7 @@ internal static class EfConfig
             Console.WriteLine($"❌ Process check failed: {ex.Message}");
         }
 
-// 8. Test połączenia z bazą danych z pełnym stack trace
+        // 8. Test połączenia z bazą danych z pełnym stack trace
         Console.WriteLine("=== DATABASE CONNECTION TEST ===");
         try
         {
@@ -206,7 +286,6 @@ internal static class EfConfig
                 connection.Open();
                 Console.WriteLine("✅ DATABASE CONNECTION - SUCCESS");
 
-                // Sprawdź wersję SQL Server
                 using var command = new SqlCommand("SELECT @@VERSION", connection);
                 var version = command.ExecuteScalar();
                 Console.WriteLine($"SQL Server version: {version}");
@@ -221,7 +300,6 @@ internal static class EfConfig
             Console.WriteLine($"❌ DATABASE CONNECTION - FAILED: {ex.Message}");
             Console.WriteLine($"Stack trace: {ex.StackTrace}");
 
-            // Deep dive into inner exception
             var inner = ex.InnerException;
             while (inner != null)
             {
@@ -243,14 +321,9 @@ internal static class EfConfig
                     Console.WriteLine($"✅ {host}:{port} - REACHABLE");
                     client.Close();
                 }
-                else
-                {
-                    Console.WriteLine($"❌ {host}:{port} - TIMEOUT");
-                }
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine($"❌ {host}:{port} - ERROR: {ex.Message}");
             }
         }
     }
