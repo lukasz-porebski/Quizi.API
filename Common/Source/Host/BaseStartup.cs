@@ -67,7 +67,11 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
             .UseCustomCors()
             .UseMiddleware<ErrorHandlerMiddleware>()
             .UseIdentity()
-            .UseEndpoints(endpoints => { endpoints.MapControllers(); })
+            .UseEndpoints(endpoints =>
+            {
+                endpoints.MapGet("/", () => "OK");
+                endpoints.MapControllers();
+            })
             .UseAutoMigration<TDbContext>();
     }
 

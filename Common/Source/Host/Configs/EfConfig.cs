@@ -1,10 +1,11 @@
-﻿using Common.Host.AppSettings;
+using Common.Host.AppSettings;
 using Common.Host.Extensions;
 using Common.Infrastructure.Database.EF;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace Common.Host.Configs;
 
@@ -26,23 +27,36 @@ internal static class EfConfig
     {
         using var scope = builder.ApplicationServices.CreateScope();
 
-        var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
-        var retry = 5;
-        while (retry > 0)
+        try
         {
-            try
-            {
-                dbContext.Database.Migrate();
-                break;
-            }
-            catch
-            {
-                retry--;
-                if (retry == 0)
-                    throw;
+            Console.WriteLine("✅ Starting app migration initialization...");
 
-                Thread.Sleep(5000);
+            var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
+
+            var delaysSeconds = new[] { 5, 10, 15 };
+            for (var i = 0; i < delaysSeconds.Length; i++)
+            {
+                try
+                {
+                    dbContext.Database.Migrate();
+                    Console.WriteLine("[EF MIGRATION] Success");
+                    break;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[EF MIGRATION] Attempt {i + 1} failed: {ex.Message}");
+                    if (i == delaysSeconds.Length - 1)
+                        throw;
+
+                    Thread.Sleep(TimeSpan.FromSeconds(delaysSeconds[i]));
+                }
             }
+
+            Console.WriteLine("✅ End migration initialization");
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(JsonConvert.SerializeObject(e));
         }
 
         return builder;

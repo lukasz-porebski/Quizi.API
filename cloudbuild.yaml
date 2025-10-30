@@ -1,0 +1,78 @@
+steps:
+  # ===== Etap 1: Restore dependencies =====
+  - name: 'mcr.microsoft.com/dotnet/sdk:9.0'
+    id: 'Restore dependencies'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        dotnet restore "Quizi.sln"
+
+  # ===== Etap 2: Build project =====
+  - name: 'mcr.microsoft.com/dotnet/sdk:9.0'
+    id: 'Build project'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        dotnet build --configuration Release
+
+  # ===== Etap 3: Run unit tests =====
+  - name: 'mcr.microsoft.com/dotnet/sdk:9.0'
+    id: 'Run unit tests'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        dotnet test --configuration Release
+
+  # ===== Etap 4: Build Docker image =====
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Build Docker image'
+    args:
+      [
+        'build',
+        '-t', 'gcr.io/$PROJECT_ID/quizi-api',
+        '.'
+      ]
+
+  # ===== Etap 5: Push Docker image =====
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push Docker image'
+    args:
+      [
+        'push',
+        'gcr.io/$PROJECT_ID/quizi-api'
+      ]
+
+  # ===== Etap 6: Deploy do Cloud Run =====
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    id: 'Deploy to Cloud Run'
+    entrypoint: 'gcloud'
+    args:
+      [
+        'run', 'deploy', 'quizi-api',
+        '--image', 'gcr.io/$PROJECT_ID/quizi-api',
+        '--region', 'europe-central2',
+        '--platform', 'managed',
+        '--allow-unauthenticated',
+        '--service-account', '${_SERVICE_ACCOUNT}',
+        '--set-env-vars', 'ASPNETCORE_ENVIRONMENT=Production,Main__Name=${_MAIN_NAME},Main__CorsOrigin=${_MAIN_CORSORIGIN},Identity__Issuer=${_IDENTITY_ISSUER},Identity__Audience=${_IDENTITY_AUDIENCE},Identity__AccessTokenSecretKey=${_IDENTITY_ACCESSTOKENSECRETKEY},Identity__RefreshTokenSalt=${_IDENTITY_REFRESHTOKENSALT}',
+        '--set-env-vars', '^:^Database__ConnectionString=${_DATABASE_CONNECTIONSTRING}'
+      ]
+
+images:
+  - 'gcr.io/$PROJECT_ID/quizi-api'
+
+options:
+  logging: CLOUD_LOGGING_ONLY
+
+substitutions:
+  _SERVICE_ACCOUNT: ''
+  _MAIN_NAME: ''
+  _MAIN_CORSORIGIN: ''
+  _DATABASE_CONNECTIONSTRING: ''
+  _IDENTITY_ISSUER: ''
+  _IDENTITY_AUDIENCE: ''
+  _IDENTITY_ACCESSTOKENSECRETKEY: ''
+  _IDENTITY_REFRESHTOKENSALT: ''
