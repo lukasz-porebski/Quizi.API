@@ -54,17 +54,15 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
     public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())
-        {
             app.UseDeveloperExceptionPage();
-            app.UseHttpsRedirection();
-            app.UsePathBase("/api");
-        }
         else
             app.UseHsts();
 
-        app.UseLogger()
+        app.UseHttpsRedirection()
+            .UseLogger()
             .UseLocalization()
             .UseCustomSwagger(Configuration)
+            .UsePathBase("/api")
             .UseRouting()
             .UseCustomCors()
             .UseMiddleware<ErrorHandlerMiddleware>()

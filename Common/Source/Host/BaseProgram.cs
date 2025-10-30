@@ -20,15 +20,15 @@ public abstract class BaseProgram<TStartup, TAssemblies, TDbContext>
 
         try
         {
-            Log.Information("Starting up");
+            Log.Information("ℹ️ Starting up");
             var host = CreateHostBuilder(args).Build();
-            Log.Information("Host built successfully");
+            Log.Information("ℹ️ Host built");
             host.Run();
-            Log.Information("Started");
+            Log.Information("✅ Started");
         }
         catch (Exception ex)
         {
-            Log.Fatal(ex, "Application start-up failed");
+            Log.Fatal(ex, "❌ Application start-up failed");
         }
         finally
         {

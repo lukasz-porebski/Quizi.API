@@ -97,8 +97,6 @@ public class IdentityService<TDbContext>(
         return Convert.ToBase64String(randomNumber);
     }
 
-    private string GetRefreshTokenSalt()
-    {
-        return identityConfiguration.RefreshTokenSalt.Replace("$$", "$");
-    }
+    private string GetRefreshTokenSalt() =>
+        identityConfiguration.RefreshTokenSalt.Replace("$$", "$");
 }
