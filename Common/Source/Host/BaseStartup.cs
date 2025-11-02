@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 using Common.Host.Configs;
 using Common.Host.Middlewares;
 using Common.Infrastructure.Database.EF;
@@ -31,11 +31,12 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
         }
 
         Configuration = configurationBuilder.Build();
-
+        Environment = env;
         Assemblies = assemblies;
     }
 
     protected IConfiguration Configuration { get; }
+    protected IHostEnvironment Environment { get; }
     protected TAssemblies Assemblies { get; }
 
     public virtual void ConfigureServices(IServiceCollection services)
@@ -54,12 +55,16 @@ public abstract class BaseStartup<TAssemblies, TDbContext>
     public virtual void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
         if (env.IsDevelopment())
+        {
             app.UseDeveloperExceptionPage();
+        }
         else
+        {
             app.UseHsts();
+        }
 
-        app.UseHttpsRedirection()
-            .UseLogger()
+        app.UseLogging()
+            .UseHttpsRedirection()
             .UseLocalization()
             .UseCustomSwagger(Configuration)
             .UsePathBase("/api")

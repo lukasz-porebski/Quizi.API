@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net;
 using Common.Application.Exceptions;
 using Common.Domain.Exceptions;
 using Common.Domain.Specification;
@@ -20,7 +20,13 @@ public class ErrorHandlerMiddleware(ILogger<ErrorHandlerMiddleware> logger, IMes
         }
         catch (Exception exception)
         {
-            logger.LogError(exception, exception.Message);
+            logger.LogError(exception,
+                "Unhandled exception: {Message}. Method: {RequestMethod}, Path: {RequestPath}, StatusCode: {StatusCode}",
+                exception.Message,
+                context.Request.Method,
+                context.Request.Path.Value,
+                context.Response.StatusCode);
+
             await HandleErrorAsync(context, exception);
         }
     }
