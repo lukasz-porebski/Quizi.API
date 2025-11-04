@@ -50,19 +50,20 @@ WITH Questions AS (
 		Id, No, OrdinalNumber, Text, @{nameof(parameters.MultipleChoiceQuestionType)} AS Type
 	FROM QuizMultipleChoiceQuestions
 )
-
-SELECT TOP (SELECT QuestionsCountInRunningQuiz FROM Quizzes WHERE Id = @{nameof(parameters.Id)}) *
-INTO #RandomlySelectedQuestions
+	
+SELECT *
+INTO TEMP RandomlySelectedQuestions
 FROM Questions
 WHERE Id = @{nameof(parameters.Id)}
-ORDER BY NEWID();
+ORDER BY RANDOM()
+LIMIT (SELECT QuestionsCountInRunningQuiz FROM Quizzes WHERE Id = @{nameof(parameters.Id)});
 
 SELECT 
     Q.No AS {nameof(QuizToRunQuestionDto.No)},
     Q.OrdinalNumber AS {nameof(QuizToRunQuestionDto.OrdinalNumber)},
     Q.Text AS {nameof(QuizToRunQuestionDto.Text)},
     Q.Type AS {nameof(QuizToRunQuestionDto.Type)}
-FROM #RandomlySelectedQuestions Q;
+FROM RandomlySelectedQuestions Q;
 	
 WITH QuestionAnswers AS (
 	SELECT 
@@ -85,7 +86,7 @@ SELECT
     QA.Text AS {nameof(QuizToRunQuestionAnswerDto.Text)},
     QA.Type AS {nameof(QuizToRunQuestionAnswerDto.Type)}
 FROM QuestionAnswers QA
-JOIN #RandomlySelectedQuestions Q ON Q.Id = QA.Id AND Q.No= QA.No AND Q.Type= QA.Type;
+JOIN RandomlySelectedQuestions Q ON Q.Id = QA.Id AND Q.No= QA.No AND Q.Type= QA.Type;
 ";
 
         return GetDetailsWithElements<QuizToRunDto>(

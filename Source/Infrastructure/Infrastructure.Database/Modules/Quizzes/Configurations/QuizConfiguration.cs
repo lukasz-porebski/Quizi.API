@@ -25,12 +25,18 @@ public class QuizConfiguration : BaseAggregateRootConfiguration<Quiz>
             e => e.Settings,
             o =>
             {
-                o.Property(p => p.Duration).HasColumnName(nameof(QuizSettings.Duration));
-                o.Property(p => p.QuestionsCountInRunningQuiz).HasColumnName(nameof(QuizSettings.QuestionsCountInRunningQuiz));
-                o.Property(p => p.RandomQuestions).HasColumnName(nameof(QuizSettings.RandomQuestions));
-                o.Property(p => p.RandomAnswers).HasColumnName(nameof(QuizSettings.RandomAnswers));
-                o.Property(p => p.NegativePoints).HasColumnName(nameof(QuizSettings.NegativePoints));
-                o.Property(p => p.CopyMode).HasColumnName(nameof(QuizSettings.CopyMode));
+                o.Property(p => p.Duration)
+                    .HasColumnName(nameof(QuizSettings.Duration).ToLowerInvariant());
+                o.Property(p => p.QuestionsCountInRunningQuiz)
+                    .HasColumnName(nameof(QuizSettings.QuestionsCountInRunningQuiz).ToLowerInvariant());
+                o.Property(p => p.RandomQuestions)
+                    .HasColumnName(nameof(QuizSettings.RandomQuestions).ToLowerInvariant());
+                o.Property(p => p.RandomAnswers)
+                    .HasColumnName(nameof(QuizSettings.RandomAnswers).ToLowerInvariant());
+                o.Property(p => p.NegativePoints)
+                    .HasColumnName(nameof(QuizSettings.NegativePoints).ToLowerInvariant());
+                o.Property(p => p.CopyMode)
+                    .HasColumnName(nameof(QuizSettings.CopyMode).ToLowerInvariant());
             });
 
         builder.ConfigureOneToMany<Quiz, User>(e => e.OwnerId);

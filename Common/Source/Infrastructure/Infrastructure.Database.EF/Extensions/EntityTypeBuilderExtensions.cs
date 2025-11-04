@@ -12,7 +12,7 @@ public static class EntityTypeBuilderExtensions
     public static PropertyBuilder<AggregateId> ConfigureAggregateRootId<T>(this EntityTypeBuilder<T> builder)
         where T : class =>
         builder.ConfigureAggregateId(nameof(BaseAggregateRoot.Id))
-            .HasColumnName(nameof(BaseAggregateRoot.Id))
+            .HasColumnName(nameof(BaseAggregateRoot.Id).ToLowerInvariant())
             .ValueGeneratedNever()!;
 
     public static PropertyBuilder<AggregateId?> ConfigureAggregateId<T>(
@@ -45,16 +45,14 @@ public static class EntityTypeBuilderExtensions
             {
                 o.Property(p => p.UserId)
                     .ConfigureAggregateId()
-                    .HasColumnName($"{prefix}ByUserId")
+                    .HasColumnName($"{prefix}ByUserId".ToLowerInvariant())
                     .IsRequired(false)
                     .HasDefaultValue(null);
 
-                const string ownerIdColumnName = "OwnerId";
-                o.Property<AggregateId>(ownerIdColumnName);
-                o.HasKey(ownerIdColumnName);
-                o.WithOwner().HasForeignKey(ownerIdColumnName);
+                o.WithOwner()
+                    .HasForeignKey(nameof(BaseAggregateRoot.Id));
 
-                o.Property(p => p.At).HasColumnName($"{prefix}At");
+                o.Property(p => p.At).HasColumnName($"{prefix}At".ToLowerInvariant());
             });
 
     public static EntityTypeBuilder<T> ConfigureDateTimePeriod<T>(
@@ -65,8 +63,11 @@ public static class EntityTypeBuilderExtensions
             o =>
             {
                 var namePrefix = prefix ?? "";
-                o.Property(p => p.Start).HasColumnName($"{namePrefix}PeriodStart");
-                o.Property(p => p.End).HasColumnName($"{namePrefix}PeriodEnd");
+                o.Property(p => p.Start).HasColumnName($"{namePrefix}PeriodStart".ToLowerInvariant());
+                o.Property(p => p.End).HasColumnName($"{namePrefix}PeriodEnd".ToLowerInvariant());
+
+                o.WithOwner()
+                    .HasForeignKey(nameof(BaseAggregateRoot.Id));
             });
 
     public static void ConfigureEntities<T, TChild>(

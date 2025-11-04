@@ -9,20 +9,26 @@ using Newtonsoft.Json;
 
 namespace Common.Host.Configs;
 
-internal static class EfConfig
+public static class EfConfig
 {
-    public static IServiceCollection AddEf<TDbContext>(this IServiceCollection services, IConfiguration configuration)
+    public static DbContextOptionsBuilder UsePostgreSql(this DbContextOptionsBuilder builder, string connectionString)
+    {
+        builder.UseNpgsql(connectionString).UseLowerCaseNamingConvention();
+        return builder;
+    }
+
+    internal static IServiceCollection AddEf<TDbContext>(this IServiceCollection services, IConfiguration configuration)
         where TDbContext : BaseDbContext
     {
         services.AddDbContext<TDbContext>(options =>
         {
             var settings = configuration.GetOptions(BaseAppSettingsSections.Database);
-            options.UseSqlServer(settings.ConnectionString);
+            options.UsePostgreSql(settings.ConnectionString);
         });
         return services;
     }
 
-    public static IApplicationBuilder UseAutoMigration<TDbContext>(this IApplicationBuilder builder)
+    internal static IApplicationBuilder UseAutoMigration<TDbContext>(this IApplicationBuilder builder)
         where TDbContext : BaseDbContext
     {
         using var scope = builder.ApplicationServices.CreateScope();

@@ -1,7 +1,7 @@
 ﻿using Common.Application.Contracts.ReadModel;
 using Common.Shared.Extensions;
 using Dapper;
-using Microsoft.Data.SqlClient;
+using Npgsql;
 
 namespace Common.Infrastructure.ReadModels.Dapper;
 
@@ -47,7 +47,7 @@ public abstract class BaseReadModel(IDatabaseConnectionStringProvider connection
         else
             builder.OrderBy(orderByQuery);
 
-        await using var connection = new SqlConnection(_connectionString);
+        await using var connection = new NpgsqlConnection(_connectionString);
         await connection.OpenAsync(cancellationToken);
 
         await using var multi = await connection.QueryMultipleAsync(selector.RawSql, selector.Parameters);
@@ -68,7 +68,7 @@ public abstract class BaseReadModel(IDatabaseConnectionStringProvider connection
         var builder = new SqlBuilder();
         var selector = builder.AddTemplate(sqlQuery, parameters);
 
-        await using var connection = new SqlConnection(_connectionString);
+        await using var connection = new NpgsqlConnection(_connectionString);
         await connection.OpenAsync(cancellationToken);
 
         await using var multi = await connection.QueryMultipleAsync(selector.RawSql, selector.Parameters);
@@ -91,7 +91,7 @@ public abstract class BaseReadModel(IDatabaseConnectionStringProvider connection
         var builder = new SqlBuilder();
         var selector = builder.AddTemplate(sqlQuery, parameters);
 
-        await using var connection = new SqlConnection(_connectionString);
+        await using var connection = new NpgsqlConnection(_connectionString);
         await connection.OpenAsync(cancellationToken);
 
         var result = await connection.QueryAsync<T>(selector.RawSql, selector.Parameters);

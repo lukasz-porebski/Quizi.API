@@ -13,7 +13,7 @@ public static class ModelBuilderExtensions
 
     private static ModelBuilder AddRefreshTokens(this ModelBuilder modelBuilder)
     {
-        var entityTypeBuilder = modelBuilder.Entity<RefreshToken>().ToTable("RefreshTokens");
+        var entityTypeBuilder = modelBuilder.Entity<RefreshToken>().ToTable("RefreshTokens".ToLowerInvariant());
 
         entityTypeBuilder.HasKey(e => e.Id);
 

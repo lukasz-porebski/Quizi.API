@@ -1,4 +1,5 @@
-﻿using Infrastructure.Database;
+﻿using Common.Host.Configs;
+using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 
@@ -18,7 +19,7 @@ public class AppDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
             throw new InvalidOperationException("Cannot find connection string 'ConnectionString'.");
 
         var builder = new DbContextOptionsBuilder<AppDbContext>();
-        builder.UseSqlServer(connectionString);
+        builder.UsePostgreSql(connectionString);
         return new AppDbContext(builder.Options);
     }
 }

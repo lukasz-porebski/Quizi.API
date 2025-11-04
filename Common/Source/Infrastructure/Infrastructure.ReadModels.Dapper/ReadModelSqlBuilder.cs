@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using Common.Application.Contracts.ReadModel;
 using Common.Shared.Extensions;
 
@@ -26,16 +26,16 @@ internal class ReadModelSqlBuilder
 SearchList AS (SELECT * {search} FROM List)
 
 SELECT *
-INTO #FinalList
+INTO TEMP TABLE FinalList
 FROM SearchList
-/**where**/
+/**where**/;
 
-SELECT COUNT(*) FROM #FinalList;
+SELECT COUNT(*) FROM FinalList;
 
-SELECT * FROM #FinalList
+SELECT * FROM FinalList
 /**orderby**/
-OFFSET {offset} ROWS
-FETCH NEXT {pagination.PageSize} ROWS ONLY;
+LIMIT {pagination.PageSize}
+OFFSET {offset};
 ");
 
         return this;
