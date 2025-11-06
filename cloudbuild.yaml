@@ -53,12 +53,10 @@ steps:
       [
         'run', 'deploy', 'quizi-api',
         '--image', 'gcr.io/$PROJECT_ID/quizi-api',
-        '--region', 'europe-central2',
-        '--platform', 'managed',
-        '--allow-unauthenticated',
+        '--region', '${_REGION}',
         '--service-account', '${_SERVICE_ACCOUNT}',
-        '--set-env-vars', 'ASPNETCORE_ENVIRONMENT=Production,Main__Name=${_MAIN_NAME},Main__CorsOrigin=${_MAIN_CORSORIGIN},Identity__Issuer=${_IDENTITY_ISSUER},Identity__Audience=${_IDENTITY_AUDIENCE},Identity__AccessTokenSecretKey=${_IDENTITY_ACCESSTOKENSECRETKEY},Identity__RefreshTokenSalt=${_IDENTITY_REFRESHTOKENSALT}',
-        '--set-env-vars', '^:^Database__ConnectionString=${_DATABASE_CONNECTIONSTRING}'
+        '--set-env-vars', 'ASPNETCORE_ENVIRONMENT=Production,Main__Name=${_MAIN_NAME},Main__CorsOrigin=${_MAIN_CORSORIGIN},Identity__Issuer=${_IDENTITY_ISSUER},Identity__Audience=${_IDENTITY_AUDIENCE}',
+        '--set-secrets', 'Identity__AccessTokenSecretKey=quizi-access-token-secret-key:latest,Identity__RefreshTokenSalt=quizi-refresh-token-salt:latest,Database__ConnectionString=quizi-database-connection-string:latest'
       ]
 
 images:
@@ -68,11 +66,9 @@ options:
   logging: CLOUD_LOGGING_ONLY
 
 substitutions:
+  _REGION: ''
   _SERVICE_ACCOUNT: ''
   _MAIN_NAME: ''
   _MAIN_CORSORIGIN: ''
-  _DATABASE_CONNECTIONSTRING: ''
   _IDENTITY_ISSUER: ''
   _IDENTITY_AUDIENCE: ''
-  _IDENTITY_ACCESSTOKENSECRETKEY: ''
-  _IDENTITY_REFRESHTOKENSALT: ''
