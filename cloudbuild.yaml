@@ -1,6 +1,6 @@
 steps:
   # ===== Etap 1: Restore dependencies =====
-  - name: 'mcr.microsoft.com/dotnet/sdk:9.0'
+  - name: 'mcr.microsoft.com/dotnet/sdk:10.0'
     id: 'Restore dependencies'
     entrypoint: 'bash'
     args:
@@ -9,7 +9,7 @@ steps:
         dotnet restore "Quizi.sln"
 
   # ===== Etap 2: Build project =====
-  - name: 'mcr.microsoft.com/dotnet/sdk:9.0'
+  - name: 'mcr.microsoft.com/dotnet/sdk:10.0'
     id: 'Build project'
     entrypoint: 'bash'
     args:
@@ -18,7 +18,7 @@ steps:
         dotnet build --configuration Release
 
   # ===== Etap 3: Run unit tests =====
-  - name: 'mcr.microsoft.com/dotnet/sdk:9.0'
+  - name: 'mcr.microsoft.com/dotnet/sdk:10.0'
     id: 'Run unit tests'
     entrypoint: 'bash'
     args:
