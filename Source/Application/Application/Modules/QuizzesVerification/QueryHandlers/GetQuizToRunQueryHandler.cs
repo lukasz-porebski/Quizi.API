@@ -4,7 +4,7 @@ using Application.Contracts.Modules.QuizzesVerification.Interfaces;
 using Application.Contracts.Modules.QuizzesVerification.Queries;
 using Common.Application.Contracts.User;
 using Common.Application.CQRS;
-using MoreLinq;
+using MoreLinq.Extensions;
 using PublishedLanguage.Modules.QuizzesVerification.Responses;
 
 namespace Application.Modules.QuizzesVerification.QueryHandlers;
@@ -19,10 +19,10 @@ public class GetQuizToRunQueryHandler(IQuizToRunReadModel readModel, IUserContex
             return null;
 
         if (dto.RandomQuestions)
-            dto.Questions = dto.Questions.Shuffle().ToArray();
+            dto.Questions = Enumerable.Shuffle(dto.Questions).ToArray();
 
         if (dto.RandomAnswers)
-            dto.Questions.ForEach(q => q.Answers = q.Answers.Shuffle().ToArray());
+            dto.Questions.ForEach(q => q.Answers = Enumerable.Shuffle(q.Answers).ToArray());
 
         return ToResponse(dto);
     }
