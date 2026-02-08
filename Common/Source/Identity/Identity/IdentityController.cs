@@ -44,8 +44,9 @@ public class IdentityController(IIdentityService service, IHostEnvironment env) 
         var cookieOptions = new CookieOptions
         {
             HttpOnly = true,
-            Secure = !isDevelopment,
-            SameSite = isDevelopment ? SameSiteMode.Strict : SameSiteMode.None,
+            Secure = Request.IsHttps || !isDevelopment,
+            SameSite = isDevelopment ? SameSiteMode.Lax : SameSiteMode.None,
+            Path = "/",
             Expires = response.RefreshTokenExpiredAt,
         };
         Response.Cookies.Append(RefreshTokenCookieKey, response.RefreshToken, cookieOptions);
