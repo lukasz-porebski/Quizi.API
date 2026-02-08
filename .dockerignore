@@ -1,3 +1,15 @@
+bin/
+obj/
+**/bin/
+**/obj/
+.git/
+.vs/
+**/*.user
+**/*.suo
+**/*.cache
+**/*.log
+Dockerfile.old
+*.md
 # IDE i ustawienia użytkownika
 .vs/
 .idea/
@@ -15,7 +27,6 @@
 [Ll]og/
 [Ll]ogs/
 artifacts/
-publish/
 out/
 TestResults/
 BenchmarkDotNet.Artifacts/
@@ -70,4 +81,4 @@ _Backup*/
 *.snupkg
 *.dbmdl
 *.dbproj.schemaview
-publish/
+ 

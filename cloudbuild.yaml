@@ -1,5 +1,5 @@
 steps:
-  # ===== Etap 1: Restore dependencies =====
+  # ===== Etap 1: Restore dependencies (workspace cache) =====
   - name: 'mcr.microsoft.com/dotnet/sdk:10.0'
     id: 'Restore dependencies'
     entrypoint: 'bash'
@@ -8,16 +8,7 @@ steps:
       - |
         dotnet restore "Quizi.sln"
 
-  # ===== Etap 2: Build project =====
-  - name: 'mcr.microsoft.com/dotnet/sdk:10.0'
-    id: 'Build project'
-    entrypoint: 'bash'
-    args:
-      - '-c'
-      - |
-        dotnet build --configuration Release
-
-  # ===== Etap 3: Run unit tests =====
+  # ===== Etap 2: Run unit tests =====
   - name: 'mcr.microsoft.com/dotnet/sdk:10.0'
     id: 'Run unit tests'
     entrypoint: 'bash'
@@ -26,33 +17,51 @@ steps:
       - |
         dotnet test --configuration Release
 
+  # ===== Etap 3: Publish app to `publish/` (used by Docker build) =====
+  - name: 'mcr.microsoft.com/dotnet/sdk:10.0'
+    id: 'Publish app'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        dotnet publish "Source/Host/Host.csproj" -c Release -o publish --no-restore
+
   # ===== Etap 4: Build Docker image =====
   - name: 'gcr.io/cloud-builders/docker'
     id: 'Build Docker image'
     args:
       [
         'build',
-        '-t', 'gcr.io/$PROJECT_ID/quizi-api',
+        '-t', 'gcr.io/$PROJECT_ID/quizi-api:$SHORT_SHA',
+        '-t', 'gcr.io/$PROJECT_ID/quizi-api:latest',
         '.'
       ]
 
-  # ===== Etap 5: Push Docker image =====
+  # ===== Etap 5: Push Docker images =====
   - name: 'gcr.io/cloud-builders/docker'
-    id: 'Push Docker image'
+    id: 'Push Docker images'
     args:
       [
         'push',
-        'gcr.io/$PROJECT_ID/quizi-api'
+        'gcr.io/$PROJECT_ID/quizi-api:$SHORT_SHA'
       ]
 
-  # ===== Etap 6: Deploy do Cloud Run =====
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'Push Docker images - latest'
+    args:
+      [
+        'push',
+        'gcr.io/$PROJECT_ID/quizi-api:latest'
+      ]
+
+  # ===== Etap 6: Deploy to Cloud Run =====
   - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
     id: 'Deploy to Cloud Run'
     entrypoint: 'gcloud'
     args:
       [
         'run', 'deploy', 'quizi-api',
-        '--image', 'gcr.io/$PROJECT_ID/quizi-api',
+        '--image', 'gcr.io/$PROJECT_ID/quizi-api:$SHORT_SHA',
         '--region', '${_REGION}',
         '--service-account', '${_SERVICE_ACCOUNT}',
         '--set-env-vars', 'ASPNETCORE_ENVIRONMENT=Production,Main__Name=${_MAIN_NAME},Main__CorsOrigin=${_MAIN_CORSORIGIN},Identity__Issuer=${_IDENTITY_ISSUER},Identity__Audience=${_IDENTITY_AUDIENCE}',
@@ -60,7 +69,8 @@ steps:
       ]
 
 images:
-  - 'gcr.io/$PROJECT_ID/quizi-api'
+  - 'gcr.io/$PROJECT_ID/quizi-api:$SHORT_SHA'
+  - 'gcr.io/$PROJECT_ID/quizi-api:latest'
 
 options:
   logging: CLOUD_LOGGING_ONLY
