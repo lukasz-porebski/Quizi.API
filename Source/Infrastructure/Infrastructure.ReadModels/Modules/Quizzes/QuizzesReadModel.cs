@@ -24,6 +24,7 @@ SELECT
     Q.Id AS {nameof(QuizzesListItemDto.Id)},
     Q.Title AS {nameof(QuizzesListItemDto.Title)},
     Q.Duration AS {nameof(QuizzesListItemDto.Duration)},
+    Code AS {nameof(QuizzesListItemDto.Code)},
     Q.CopyMode AS {nameof(QuizzesListItemDto.CopyMode)},
     (SELECT COUNT(Id) FROM QuizOpenQuestions QO WHERE QO.Id = Q.Id) +
         (SELECT COUNT(Id) FROM QuizSingleChoiceQuestions QS WHERE QS.Id = Q.Id) +

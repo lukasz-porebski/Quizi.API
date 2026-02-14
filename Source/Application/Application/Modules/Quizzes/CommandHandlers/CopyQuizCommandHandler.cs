@@ -13,6 +13,7 @@ using Domain.Modules.Quizzes.Data.Models;
 using Domain.Modules.Quizzes.Data.Models.Sub;
 using Domain.Modules.Quizzes.Interfaces;
 using Domain.Modules.Quizzes.Models;
+using Domain.Modules.Quizzes.ValueObjects;
 
 namespace Application.Modules.Quizzes.CommandHandlers;
 
@@ -56,7 +57,13 @@ public class CopyQuizCommandHandler(
         new(OwnerId: userId,
             quiz.Title,
             quiz.Description,
-            quiz.Settings,
+            new QuizSettings(
+                quiz.Settings.Duration,
+                quiz.Settings.QuestionsCountInRunningQuiz,
+                quiz.Settings.RandomQuestions,
+                quiz.Settings.RandomAnswers,
+                quiz.Settings.NegativePoints,
+                quiz.Settings.CopyMode),
             quiz.OpenQuestions.Select(q => new QuizPersistOpenQuestionData(q.OrdinalNumber, q.Text, q.Answer)).ToArray(),
             quiz.SingleChoiceQuestions
                 .Select(q => new QuizClosedQuestionCreateData(

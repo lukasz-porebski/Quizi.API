@@ -6,6 +6,7 @@ public record QuizzesListItemResponse(
     string Id,
     string Title,
     TimeSpan Duration,
+    Guid Code,
     QuizCopyMode CopyMode,
     int QuestionsCount,
     int QuestionsCountInRunningQuiz

@@ -24,7 +24,6 @@ SELECT
     RandomQuestions AS {nameof(QuizDetailsDto.RandomQuestions)},
     RandomAnswers AS {nameof(QuizDetailsDto.RandomAnswers)},
     NegativePoints AS {nameof(QuizDetailsDto.NegativePoints)},
-    CopyMode AS {nameof(QuizDetailsDto.CopyMode)},
     CopyMode AS {nameof(QuizDetailsDto.CopyMode)}
 FROM Quizzes
 WHERE Id = @{nameof(parameters.Id)}

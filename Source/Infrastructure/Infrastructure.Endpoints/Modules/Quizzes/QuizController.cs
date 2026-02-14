@@ -25,6 +25,13 @@ public class QuizController(IGate gate) : BaseController(gate)
         return Ok();
     }
 
+    [HttpPost("copy/{code}")]
+    public async Task<IActionResult> Copy(Guid code, CancellationToken cancellationToken)
+    {
+        await Gate.DispatchCommandAsync(new CopyQuizCommand(code), cancellationToken);
+        return Ok();
+    }
+
     [HttpPatch("update")]
     public async Task<IActionResult> Update([FromBody] UpdateQuizRequest request, CancellationToken cancellationToken)
     {
