@@ -3,11 +3,14 @@ using Autofac;
 using Common.Host.AppSettings;
 using Common.Host.Extensions;
 using Common.Identity;
+using Common.Identity.EF.Interfaces;
 using Common.Identity.Interfaces;
+using Common.Identity.Providers;
 using Common.Infrastructure.Database.EF;
 using Common.Shared.Providers;
 using Common.Shared.Utils;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -72,9 +75,12 @@ internal static class IdentityConfig
                 context.Resolve<IDateTimeProvider>(),
                 context.Resolve<IValidateUserCredentialsService>(),
                 context.Resolve<TDbContext>(),
-                context.Resolve<IHasher>()
+                context.Resolve<IHasher>(),
+                context.Resolve<IPermissionService>()
             ))
             .AsImplementedInterfaces();
+
+        builder.RegisterType<PermissionPolicyProvider>().As<IAuthorizationPolicyProvider>();
 
         return builder;
     }

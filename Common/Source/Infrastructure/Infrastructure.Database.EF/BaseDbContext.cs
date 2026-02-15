@@ -9,6 +9,7 @@ public abstract class BaseDbContext(DbContextOptions options, Assembly efProject
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
+
         modelBuilder.ApplyConfigurationsFromAssembly(efProjectAssembly);
         modelBuilder.AddIdentity();
     }

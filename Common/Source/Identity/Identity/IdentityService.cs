@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Common.Domain.ValueObjects;
 using Common.Identity.EF.Entities;
+using Common.Identity.EF.Interfaces;
 using Common.Identity.Interfaces;
 using Common.Identity.Models;
 using Common.Shared.Providers;
@@ -18,7 +19,8 @@ public class IdentityService<TDbContext>(
     IDateTimeProvider dateTimeProvider,
     IValidateUserCredentialsService validateUserCredentialsService,
     TDbContext dbContext,
-    IHasher hasher
+    IHasher hasher,
+    IPermissionService permissionService
 ) : IIdentityService
     where TDbContext : DbContext
 {
@@ -48,7 +50,7 @@ public class IdentityService<TDbContext>(
 
     private async Task<AuthenticateResponse> AuthenticateAsync(AggregateId userId, CancellationToken cancellationToken)
     {
-        var accessToken = GenerateAccessToken(userId);
+        var accessToken = await GenerateAccessToken(userId);
         var refreshToken = GenerateRefreshToken();
 
         var refreshTokenEntity = CreateRefreshTokenEntity(userId, refreshToken);
@@ -59,18 +61,23 @@ public class IdentityService<TDbContext>(
         return new AuthenticateResponse(userId.ToString(), accessToken, refreshToken, refreshTokenEntity.ExpiredAt);
     }
 
-    private string GenerateAccessToken(AggregateId userId)
+    private async Task<string> GenerateAccessToken(AggregateId userId)
     {
+        var permissions = await permissionService.GetUserPermissions(userId);
+        var claims = new List<Claim>
+        {
+            new(JwtRegisteredClaimNames.Sub, userId.ToString())
+        };
+        claims.AddRange(permissions.Select(p => new Claim(IdentityConstants.PermissionClaimType, p)));
+
+
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(identityConfiguration.AccessTokenSecretKey));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha512);
 
         var token = new JwtSecurityToken(
             issuer: identityConfiguration.Issuer,
             audience: identityConfiguration.Audience,
-            claims:
-            [
-                new Claim(JwtRegisteredClaimNames.Sub, userId.ToString())
-            ],
+            claims,
             expires: dateTimeProvider.Now().AddMinutes(identityConfiguration.AccessTokenExpirationMinutes),
             signingCredentials: credentials);
 
