@@ -1,6 +1,5 @@
 ﻿using Common.Domain.Entities;
 using Common.Shared.Utils;
-using Domain.Contracts.Modules.Users.Enums;
 using Domain.Modules.Users.Data;
 using Domain.Modules.Users.Interfaces;
 
@@ -8,6 +7,8 @@ namespace Domain.Modules.Users.Models;
 
 public class User : BaseAggregateRoot
 {
+    private readonly List<UserRole> _roles = [];
+
     internal User(
         UserCreationData data,
         IUserSpecificationFactory specificationFactory,
@@ -17,8 +18,11 @@ public class User : BaseAggregateRoot
         specificationFactory.CreateForCreation(data).ValidateAndThrow();
 
         Email = data.Email;
-        Role = data.Role;
         HashedPassword = hasher.Hash(data.Password);
+
+        _roles = data.RoleIds
+            .Select(roleId => new UserRole(Id, roleId))
+            .ToList();
     }
 
     private User() : base(null!)
@@ -26,6 +30,7 @@ public class User : BaseAggregateRoot
     }
 
     public string Email { get; private set; } = null!;
-    public UserRole Role { get; private set; }
     public string HashedPassword { get; private set; } = null!;
+
+    public IReadOnlyList<UserRole> Roles => _roles;
 }

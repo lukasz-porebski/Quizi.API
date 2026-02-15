@@ -2,7 +2,6 @@ using System.Reflection;
 using Application.Contracts.Modules.Users.Commands;
 using Application.Modules.Users.CommandHandlers;
 using Common.Host;
-using Domain.Contracts.Modules.Users.Enums;
 using Domain.Modules.Users.Models;
 using Infrastructure;
 using Infrastructure.Database;

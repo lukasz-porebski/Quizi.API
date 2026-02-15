@@ -1,6 +1,8 @@
 using Common.Infrastructure.Database.EF;
+using Domain.Modules.Permissions.Models;
 using Domain.Modules.QuizResults.Models;
 using Domain.Modules.Quizzes.Models;
+using Domain.Modules.Roles.Models;
 using Domain.Modules.SharedQuizzes.Models;
 using Domain.Modules.Users.Models;
 using Microsoft.EntityFrameworkCore;
@@ -11,6 +13,12 @@ public class AppDbContext(DbContextOptions<AppDbContext> options)
     : BaseDbContext(options, typeof(AppDbContext).Assembly)
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<UserRole> UserRoles { get; set; }
+
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<RolePermission> RolePermissions { get; set; }
+
+    public DbSet<Permission> Permissions { get; set; }
 
     public DbSet<Quiz> Quizzes { get; set; }
     public DbSet<QuizOpenQuestion> QuizOpenQuestions { get; set; }
