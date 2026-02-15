@@ -8,7 +8,7 @@ namespace Infrastructure.Database.Identity;
 [Service]
 public class PermissionService(AppDbContext context) : IPermissionService
 {
-    public async Task<IReadOnlySet<string>> GetUserPermissions(AggregateId id) =>
+    public async Task<IReadOnlySet<string>> GetUserPermissionsAsync(AggregateId id, CancellationToken cancellationToken) =>
         await (
                 from ur in context.UserRoles
                 join rp in context.RolePermissions on ur.RoleId equals rp.Id
@@ -17,5 +17,5 @@ public class PermissionService(AppDbContext context) : IPermissionService
                 select p.Name
             )
             .Distinct()
-            .ToHashSetAsync();
+            .ToHashSetAsync(cancellationToken: cancellationToken);
 }

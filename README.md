@@ -15,7 +15,7 @@ Aplikacja jest modularnym monolitem. Zbudowana jest w oparciu o
 - Command Query Responsibility Segregation (CQRS)
 
 ## Technologie
-* Środowisko uruchomieniowe - **.NET 9**
+* Środowisko uruchomieniowe - **.NET 10**
 * CQRS - **MediatR**
     - ORM (przetwarzanie komend) - **Entity Framework Core**
     - Odczyt danych z bazy (przetwarzania zapytań) - **Dapper**

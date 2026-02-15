@@ -35,8 +35,6 @@ public static class EfConfig
 
         try
         {
-            Console.WriteLine("✅ Starting app migration initialization...");
-
             var dbContext = scope.ServiceProvider.GetRequiredService<TDbContext>();
 
             var delaysSeconds = new[] { 5, 10, 15 };
@@ -45,20 +43,16 @@ public static class EfConfig
                 try
                 {
                     dbContext.Database.Migrate();
-                    Console.WriteLine("[EF MIGRATION] Success");
                     break;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
-                    Console.WriteLine($"[EF MIGRATION] Attempt {i + 1} failed: {ex.Message}");
                     if (i == delaysSeconds.Length - 1)
                         throw;
 
                     Thread.Sleep(TimeSpan.FromSeconds(delaysSeconds[i]));
                 }
             }
-
-            Console.WriteLine("✅ End migration initialization");
         }
         catch (Exception e)
         {

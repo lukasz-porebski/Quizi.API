@@ -1,6 +1,7 @@
 using Common.Application.Contracts.CQRS;
 using Common.Application.Contracts.Interfaces;
 using Common.Application.CQRS;
+using Common.Host.Attributes;
 using Common.Host.Extensions;
 using Common.Infrastructure.ReadModels.Dapper;
 using Common.Shared.Attributes;
@@ -39,4 +40,7 @@ public static class TypeRecognizer
 
     public static bool IsReadModel(this Type source) =>
         source.IsSubclassOf(typeof(BaseReadModel));
+
+    public static bool IsSeeder(this Type source) =>
+        source.IsRegistrable() && source.GetAttribute<SeederAttribute>() != null;
 }

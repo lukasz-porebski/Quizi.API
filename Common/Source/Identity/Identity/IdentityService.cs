@@ -50,7 +50,7 @@ public class IdentityService<TDbContext>(
 
     private async Task<AuthenticateResponse> AuthenticateAsync(AggregateId userId, CancellationToken cancellationToken)
     {
-        var accessToken = await GenerateAccessToken(userId);
+        var accessToken = await GenerateAccessToken(userId, cancellationToken);
         var refreshToken = GenerateRefreshToken();
 
         var refreshTokenEntity = CreateRefreshTokenEntity(userId, refreshToken);
@@ -61,9 +61,9 @@ public class IdentityService<TDbContext>(
         return new AuthenticateResponse(userId.ToString(), accessToken, refreshToken, refreshTokenEntity.ExpiredAt);
     }
 
-    private async Task<string> GenerateAccessToken(AggregateId userId)
+    private async Task<string> GenerateAccessToken(AggregateId userId, CancellationToken cancellationToken)
     {
-        var permissions = await permissionService.GetUserPermissions(userId);
+        var permissions = await permissionService.GetUserPermissionsAsync(userId, cancellationToken);
         var claims = new List<Claim>
         {
             new(JwtRegisteredClaimNames.Sub, userId.ToString())

@@ -72,4 +72,14 @@ internal static class SimpleContainerBuilderConfig
         builder.RegisterTypes(types).AsImplementedInterfaces();
         return builder;
     }
+
+    public static ContainerBuilder RegisterSeeders(this ContainerBuilder builder, BaseAssemblies assemblies)
+    {
+        var types = assemblies.Host
+            .GetExportedTypes()
+            .Where(t => t.IsSeeder())
+            .ToArray();
+        builder.RegisterTypes(types);
+        return builder;
+    }
 }

@@ -1,9 +1,21 @@
 ﻿using Common.Domain.Entities;
+using Domain.Modules.Permissions.Data;
+using Domain.Modules.Permissions.Interfaces;
 
 namespace Domain.Modules.Permissions.Models;
 
 public class Permission : BaseAggregateRoot
 {
+    internal Permission(
+        PermissionCreationData data,
+        IPermissionSpecificationFactory specificationFactory)
+        : base(data.Id)
+    {
+        specificationFactory.CreateForCreation(data).ValidateAndThrow();
+
+        Name = data.Name;
+    }
+
     private Permission() : base(null!)
     {
     }
