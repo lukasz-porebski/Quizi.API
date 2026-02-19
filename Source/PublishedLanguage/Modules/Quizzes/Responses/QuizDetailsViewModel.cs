@@ -12,7 +12,6 @@ public class QuizDetailsViewModel
     public bool RandomQuestions { get; init; }
     public bool RandomAnswers { get; init; }
     public bool NegativePoints { get; init; }
-    public Guid Code { get; init; }
     public QuizCopyMode CopyMode { get; init; }
     public required IReadOnlyCollection<QuizDetailsOpenQuestionViewModel> OpenQuestions { get; set; }
     public required IReadOnlyCollection<QuizDetailsClosedQuestionViewModel> SingleChoiceQuestions { get; set; }

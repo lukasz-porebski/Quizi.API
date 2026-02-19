@@ -32,7 +32,7 @@ internal static class SwaggerConfig
                 Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
                 Name = "Authorization",
                 In = ParameterLocation.Header,
-                Type = SecuritySchemeType.ApiKey,
+                Type = SecuritySchemeType.Http,
                 Scheme = "Bearer"
             });
             c.AddSecurityRequirement(doc => new OpenApiSecurityRequirement

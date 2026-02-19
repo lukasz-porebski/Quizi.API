@@ -1,4 +1,6 @@
 ﻿using Common.Domain.Entities;
+using Common.Domain.ValueObjects;
+using Common.Shared.Extensions;
 using Domain.Modules.Roles.Data;
 using Domain.Modules.Roles.Interfaces;
 
@@ -29,4 +31,14 @@ public class Role : BaseAggregateRoot
     public string Name { get; private set; } = null!;
 
     public IReadOnlyList<RolePermission> Permissions => _permissions;
+
+    public void UpdatePermissions(IReadOnlySet<AggregateId> ids) =>
+        _permissions.ApplyChanges(
+            ids,
+            k => k.PermissionId,
+            k => k,
+            a => new RolePermission(Id, a),
+            (_, _) => { },
+            (_, _) => false
+        );
 }

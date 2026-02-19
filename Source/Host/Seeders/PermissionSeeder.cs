@@ -14,10 +14,10 @@ namespace Host.Seeders;
 public class PermissionSeeder(
     AppDbContext context,
     IPermissionFactory factory,
-    IPermissionRepository permissionRepository
+    IPermissionRepository repository
 )
 {
-    public async Task SeedAsync()
+    public async Task SeedAsync() //TODO: Przerobić Startup by był asynchroniczny
     {
         var existing = await context.Permissions
             .Select(p => p.Name)
@@ -31,7 +31,7 @@ public class PermissionSeeder(
         if (toAdd.IsEmpty())
             return;
 
-        await permissionRepository.PersistAsync(toAdd, CancellationToken.None);
-        await permissionRepository.SaveAsync(CancellationToken.None);
+        await repository.PersistAsync(toAdd, CancellationToken.None);
+        await repository.SaveAsync(CancellationToken.None);
     }
 }

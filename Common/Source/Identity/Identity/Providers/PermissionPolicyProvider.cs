@@ -19,8 +19,7 @@ public class PermissionPolicyProvider(IOptions<AuthorizationOptions> options) : 
         var permissions = PermissionAttribute.DecodePermissions(policyName);
 
         var policy = new AuthorizationPolicyBuilder()
-            .RequireAssertion(ctx =>
-                permissions.Any(p => ctx.User.HasClaim(IdentityConstants.PermissionClaimType, p)))
+            .RequireAssertion(ctx => permissions.Any(p => ctx.User.HasClaim(IdentityConstants.PermissionClaimType, p)))
             .Build();
 
         return Task.FromResult<AuthorizationPolicy?>(policy);

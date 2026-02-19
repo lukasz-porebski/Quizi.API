@@ -10,5 +10,8 @@ internal static class ApplicationBuilderConfig
 
         var permissionSeeder = scope.ServiceProvider.GetRequiredService<PermissionSeeder>();
         await permissionSeeder.SeedAsync();
+
+        var roleSeeder = scope.ServiceProvider.GetRequiredService<RoleSeeder>();
+        await roleSeeder.SeedAsync();
     }
 }
