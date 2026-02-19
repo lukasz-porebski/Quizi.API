@@ -1,10 +1,19 @@
 using Common.Host;
+using Host.StartupConfigs;
 using Infrastructure.Database;
 
 namespace Host;
 
-public class Program : BaseProgram<Startup, Assemblies, AppDbContext>
+public class Program : BaseProgram<Assemblies, AppDbContext>
 {
-    public static void Main(string[] args) =>
-        MainCore(args);
+    protected override Assemblies Assemblies => new();
+
+    public static async Task Main(string[] args) =>
+        await MainCore<Program>(args);
+
+    protected override async Task ConfigureAppAsync(WebApplication app)
+    {
+        await base.ConfigureAppAsync(app);
+        await app.UseSeeders();
+    }
 }
