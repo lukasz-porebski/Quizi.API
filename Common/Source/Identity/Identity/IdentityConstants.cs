@@ -2,5 +2,5 @@
 
 internal static class IdentityConstants
 {
-    public const string PermissionClaimType = "permission";
+    public const string PermissionClaimType = "permissions";
 }
