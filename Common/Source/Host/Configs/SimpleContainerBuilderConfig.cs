@@ -1,7 +1,9 @@
 using Autofac;
+using Common.Host.Extensions;
 using Common.Host.Middlewares;
 using Common.Host.Providers;
 using Common.Host.Utils;
+using Common.Infrastructure.Database.EF;
 using Microsoft.Extensions.Configuration;
 
 namespace Common.Host.Configs;
@@ -80,6 +82,20 @@ internal static class SimpleContainerBuilderConfig
             .Where(t => t.IsSeeder())
             .ToArray();
         builder.RegisterTypes(types);
+        return builder;
+    }
+
+    public static ContainerBuilder RegisterReadonlyDbContext<AppDbContext>(
+        this ContainerBuilder builder, BaseAssemblies assemblies)
+        where AppDbContext : BaseDbContext
+    {
+        var type = assemblies.InfrastructureDatabaseEf
+            .GetExportedTypes()
+            .FirstOrDefault(t => t.IsRegistrable() && t.IsSubclassOf(typeof(BaseReadonlyDbContext<AppDbContext>)));
+
+        if (type != null)
+            builder.RegisterTypes(type).AsImplementedInterfaces();
+
         return builder;
     }
 }

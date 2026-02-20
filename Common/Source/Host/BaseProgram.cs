@@ -108,7 +108,8 @@ public abstract class BaseProgram<TAssemblies, TDbContext>
             .RegisterIdentity<TDbContext>()
             .RegisterUtils()
             .RegisterReadModels(Assemblies)
-            .RegisterSeeders(Assemblies);
+            .RegisterSeeders(Assemblies)
+            .RegisterReadonlyDbContext<TDbContext>(Assemblies);
 
     private async Task<WebApplication> BuildAsync(string[] args)
     {
