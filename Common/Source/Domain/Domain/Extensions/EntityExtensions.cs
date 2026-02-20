@@ -42,7 +42,7 @@ public static class EntityExtensions
         current.AddRange(newData.Select(q => adding(nextNo++, q)));
     }
 
-    private static EntityNo NextNo<TEntity>(this IEnumerable<TEntity> source)
+    public static EntityNo NextNo<TEntity>(this IEnumerable<TEntity> source)
         where TEntity : IUpdateableEntity
     {
         var array = source.ToArray();

@@ -11,6 +11,11 @@ public record AggregateId
         _aggregateId = aggregateId;
     }
 
+    public AggregateId(Guid aggregateId)
+        : this(aggregateId.ToString())
+    {
+    }
+
     private AggregateId()
     {
         _aggregateId = Guid.Empty.ToString();
@@ -45,4 +50,7 @@ public record AggregateId
 
     public override int GetHashCode() =>
         HashCode.Combine(_aggregateId);
+
+    public Guid ToGuid() =>
+        Guid.Parse(_aggregateId);
 }
