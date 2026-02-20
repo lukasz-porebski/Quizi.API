@@ -1,5 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="2.3.0"/>
+        <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="10.0.3"/>
     </ItemGroup>
 </Project>
