@@ -64,6 +64,7 @@ steps:
         '--image', 'gcr.io/$PROJECT_ID/quizi-api:$SHORT_SHA',
         '--region', '${_REGION}',
         '--service-account', '${_SERVICE_ACCOUNT}',
+        '--allow-unauthenticated',
         '--set-env-vars', 'ASPNETCORE_ENVIRONMENT=Production,Main__Name=${_MAIN_NAME},Main__CorsOrigin=${_MAIN_CORSORIGIN},Identity__Issuer=${_IDENTITY_ISSUER},Identity__Audience=${_IDENTITY_AUDIENCE}',
         '--set-secrets', 'Identity__AccessTokenSecretKey=quizi-access-token-secret-key:latest,Identity__RefreshTokenSalt=quizi-refresh-token-salt:latest,Database__ConnectionString=quizi-database-connection-string:latest'
       ]
