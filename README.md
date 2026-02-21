@@ -30,8 +30,8 @@ Aplikacja jest modularnym monolitem. Zbudowana jest w oparciu o
 
 ## Narzędzia
 * IDE - **Rider**
-* Zarządzanie bazą - **SQL Server Management Studio**
-* Baza danych - **SQL Server Express LocalDB**
+* Zarządzanie bazą - **Database Tools and SQL** (plugin do Ridera)
+* Baza danych - **PostgreSQL**
 * System kontroli wersji - **Git**
   
 ## Dostępne funkcje
@@ -40,9 +40,10 @@ Aplikacja jest modularnym monolitem. Zbudowana jest w oparciu o
 - Edytowanie quizu
 - Usuwanie quizu
 - Uruchamianie quizu
+- Historia wyników quizów
+- Lista użytkowników
 
 ## Planowane funkcje
-- Podgląd quizów
+- Podgląd quizu
 - Dzielenie się quizami
 - Statystyki quizów
-- Historia wyników quizów

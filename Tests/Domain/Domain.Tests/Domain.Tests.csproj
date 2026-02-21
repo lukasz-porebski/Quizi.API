@@ -1,2 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\Common\Source\ExportedTests\TestsCore\Common.TestsCore.csproj"/>
+        <ProjectReference Include="..\..\..\Source\Domain\Domain\Domain.csproj"/>
+    </ItemGroup>
 </Project>
