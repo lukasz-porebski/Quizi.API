@@ -3,11 +3,11 @@ using Application.Contracts.Modules.QuizResults.Queries;
 using Common.Application.Contracts.ReadModel;
 using Common.Domain.ValueObjects;
 using Common.Infrastructure.Endpoints;
-using Common.PublishedLanguage.Requests;
-using Common.PublishedLanguage.Responses;
+using Common.Infrastructure.Endpoints.Requests;
+using Common.Infrastructure.Endpoints.Responses;
+using Infrastructure.Endpoints.Modules.QuizResults.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PublishedLanguage.Modules.QuizResults.Responses;
 
 namespace Infrastructure.Endpoints.Modules.QuizResults;
 

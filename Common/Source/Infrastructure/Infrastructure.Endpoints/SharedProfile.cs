@@ -2,9 +2,9 @@ using AutoMapper;
 using Common.Application.Contracts.ReadModel;
 using Common.Domain.Data;
 using Common.Domain.ValueObjects;
-using Common.PublishedLanguage.Requests;
-using Common.PublishedLanguage.Responses;
-using Common.PublishedLanguage.ViewModels;
+using Common.Infrastructure.Endpoints.Requests;
+using Common.Infrastructure.Endpoints.Responses;
+using Common.Infrastructure.Endpoints.ViewModels;
 
 namespace Common.Infrastructure.Endpoints;
 

@@ -6,12 +6,12 @@ using Common.Application.Contracts.ReadModel;
 using Common.Domain.Extensions;
 using Common.Domain.ValueObjects;
 using Common.Infrastructure.Endpoints;
-using Common.PublishedLanguage.Requests;
-using Common.PublishedLanguage.Responses;
+using Common.Infrastructure.Endpoints.Requests;
+using Common.Infrastructure.Endpoints.Responses;
+using Infrastructure.Endpoints.Modules.Quizzes.Requests;
+using Infrastructure.Endpoints.Modules.Quizzes.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PublishedLanguage.Modules.Quizzes.Requests;
-using PublishedLanguage.Modules.Quizzes.Responses;
 
 namespace Infrastructure.Endpoints.Modules.Quizzes;
 

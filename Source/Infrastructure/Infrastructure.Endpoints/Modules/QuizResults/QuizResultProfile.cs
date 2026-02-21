@@ -1,9 +1,9 @@
 using Application.Contracts.Modules.QuizResults.Dtos;
 using Application.Contracts.Modules.QuizResults.Queries;
 using AutoMapper;
-using Common.PublishedLanguage.Requests;
-using Common.PublishedLanguage.ViewModels;
-using PublishedLanguage.Modules.QuizResults.Responses;
+using Common.Infrastructure.Endpoints.Requests;
+using Common.Infrastructure.Endpoints.ViewModels;
+using Infrastructure.Endpoints.Modules.QuizResults.Responses;
 
 namespace Infrastructure.Endpoints.Modules.QuizResults;
 

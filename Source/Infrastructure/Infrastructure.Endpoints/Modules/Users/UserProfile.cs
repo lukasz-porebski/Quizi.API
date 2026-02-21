@@ -3,10 +3,10 @@ using Application.Contracts.Modules.Users.Dtos;
 using Application.Contracts.Modules.Users.Queries;
 using AutoMapper;
 using Common.Domain.ValueObjects;
-using Common.PublishedLanguage.Requests;
+using Common.Infrastructure.Endpoints.Requests;
 using Domain.Modules.Users.Data;
-using PublishedLanguage.Modules.Users.Requests;
-using PublishedLanguage.Modules.Users.Responses;
+using Infrastructure.Endpoints.Modules.Users.Requests;
+using Infrastructure.Endpoints.Modules.Users.Responses;
 
 namespace Infrastructure.Endpoints.Modules.Users;
 

@@ -1,18 +1,18 @@
 ﻿using Application.Contracts.Modules.Quizzes.Enums;
+using Application.Contracts.Modules.QuizzesVerification.Data;
 using Application.Contracts.Modules.QuizzesVerification.Dtos;
 using Application.Contracts.Modules.QuizzesVerification.Interfaces;
 using Application.Contracts.Modules.QuizzesVerification.Queries;
 using Common.Application.Contracts.User;
 using Common.Application.CQRS;
 using MoreLinq.Extensions;
-using PublishedLanguage.Modules.QuizzesVerification.Responses;
 
 namespace Application.Modules.QuizzesVerification.QueryHandlers;
 
 public class GetQuizToRunQueryHandler(IQuizToRunReadModel readModel, IUserContextProvider userContextProvider)
-    : IQueryHandler<GetQuizToRunQuery, QuizToRunResponse?>
+    : IQueryHandler<GetQuizToRunQuery, QuizToRunData?>
 {
-    public async Task<QuizToRunResponse?> Handle(GetQuizToRunQuery query, CancellationToken cancellationToken)
+    public async Task<QuizToRunData?> Handle(GetQuizToRunQuery query, CancellationToken cancellationToken)
     {
         var dto = await readModel.Get(query, userContextProvider.GetOrThrow().UserId, cancellationToken);
         if (dto is null)
@@ -27,47 +27,31 @@ public class GetQuizToRunQueryHandler(IQuizToRunReadModel readModel, IUserContex
         return ToResponse(dto);
     }
 
-    private static QuizToRunResponse ToResponse(QuizToRunDto dto) =>
-        new()
-        {
-            Id = dto.Id,
-            Title = dto.Title,
-            Duration = dto.Duration,
-            OpenQuestions = dto.Questions
+    private static QuizToRunData ToResponse(QuizToRunDto dto) =>
+        new(dto.Id,
+            dto.Title,
+            dto.Duration,
+            dto.Questions
                 .Where(q => q.Type == QuizQuestionType.Open)
                 .Select(ToOpenQuestionResponse)
                 .ToArray(),
-            SingleChoiceQuestions = dto.Questions
+            dto.Questions
                 .Where(q => q.Type == QuizQuestionType.SingleChoice)
                 .Select(ToClosedQuestionResponse)
                 .ToArray(),
-            MultipleChoiceQuestions = dto.Questions
+            dto.Questions
                 .Where(q => q.Type == QuizQuestionType.MultipleChoice)
                 .Select(ToClosedQuestionResponse)
-                .ToArray()
-        };
+                .ToArray());
 
-    private static QuizToRunOpenQuestionResponse ToOpenQuestionResponse(QuizToRunQuestionDto dto) =>
-        new()
-        {
-            No = dto.No,
-            OrdinalNumber = dto.OrdinalNumber,
-            Text = dto.Text
-        };
+    private static QuizToRunOpenQuestionData ToOpenQuestionResponse(QuizToRunQuestionDto dto) =>
+        new(dto.No, dto.OrdinalNumber, dto.Text);
 
-    private static QuizToRunClosedQuestionResponse ToClosedQuestionResponse(QuizToRunQuestionDto dto) =>
-        new()
-        {
-            No = dto.No,
-            OrdinalNumber = dto.OrdinalNumber,
-            Text = dto.Text,
-            Answers = dto.Answers
-                .Select(a => new QuizToRunClosedQuestionAnswerResponse
-                {
-                    No = a.No,
-                    OrdinalNumber = a.OrdinalNumber,
-                    Text = a.Text
-                })
-                .ToArray()
-        };
+    private static QuizToRunClosedQuestionData ToClosedQuestionResponse(QuizToRunQuestionDto dto) =>
+        new(dto.No,
+            dto.OrdinalNumber,
+            dto.Text,
+            dto.Answers
+                .Select(a => new QuizToRunClosedQuestionAnswerData(a.No, a.OrdinalNumber, a.Text))
+                .ToArray());
 }

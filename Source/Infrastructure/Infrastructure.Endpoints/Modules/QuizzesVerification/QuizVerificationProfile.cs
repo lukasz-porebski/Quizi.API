@@ -1,9 +1,12 @@
 using Application.Contracts.Modules.QuizzesVerification.Commands;
 using Application.Contracts.Modules.QuizzesVerification.Commands.Data;
+using Application.Contracts.Modules.QuizzesVerification.Data;
+using Application.Contracts.Modules.QuizzesVerification.Dtos;
 using AutoMapper;
 using Common.Domain.ValueObjects;
-using PublishedLanguage.Modules.QuizzesVerification.Requests;
-using PublishedLanguage.Modules.QuizzesVerification.Requests.Sub;
+using Infrastructure.Endpoints.Modules.QuizzesVerification.Requests;
+using Infrastructure.Endpoints.Modules.QuizzesVerification.Requests.Sub;
+using Infrastructure.Endpoints.Modules.QuizzesVerification.Responses;
 
 namespace Infrastructure.Endpoints.Modules.QuizzesVerification;
 
@@ -17,5 +20,12 @@ public class QuizVerificationProfile : Profile
         CreateMap<VerifyQuizSingleChoiceQuestionRequest, VerifyQuizSingleChoiceQuestionCommandData>();
         CreateMap<VerifyQuizMultipleChoiceQuestionRequest, VerifyQuizMultipleChoiceQuestionCommandData>();
         CreateMap<VerifyQuizClosedQuestionAnswerRequest, VerifyQuizClosedQuestionAnswerCommandData>();
+
+        CreateMap<QuizOpenQuestionAnswerForVerificationDto, QuizOpenQuestionAnswerForVerificationResponse>();
+
+        CreateMap<QuizToRunData, QuizToRunResponse>();
+        CreateMap<QuizToRunOpenQuestionData, QuizToRunOpenQuestionResponse>();
+        CreateMap<QuizToRunClosedQuestionData, QuizToRunClosedQuestionResponse>();
+        CreateMap<QuizToRunClosedQuestionAnswerData, QuizToRunClosedQuestionAnswerResponse>();
     }
 }

@@ -4,12 +4,12 @@ using Application.Contracts.Modules.Users.Queries;
 using Common.Application.Contracts.ReadModel;
 using Common.Identity.Contracts.Attributes;
 using Common.Infrastructure.Endpoints;
-using Common.PublishedLanguage.Requests;
-using Common.PublishedLanguage.Responses;
+using Common.Infrastructure.Endpoints.Requests;
+using Common.Infrastructure.Endpoints.Responses;
+using Infrastructure.Endpoints.Modules.Users.Requests;
+using Infrastructure.Endpoints.Modules.Users.Responses;
 using Infrastructure.Endpoints.Shared;
 using Microsoft.AspNetCore.Mvc;
-using PublishedLanguage.Modules.Users.Requests;
-using PublishedLanguage.Modules.Users.Responses;
 
 namespace Infrastructure.Endpoints.Modules.Users;
 

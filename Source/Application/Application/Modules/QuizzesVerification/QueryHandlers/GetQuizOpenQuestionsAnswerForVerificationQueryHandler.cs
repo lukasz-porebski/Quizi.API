@@ -1,8 +1,8 @@
-﻿using Application.Contracts.Modules.QuizzesVerification.Interfaces;
+﻿using Application.Contracts.Modules.QuizzesVerification.Dtos;
+using Application.Contracts.Modules.QuizzesVerification.Interfaces;
 using Application.Contracts.Modules.QuizzesVerification.Queries;
 using Common.Application.Contracts.User;
 using Common.Application.CQRS;
-using PublishedLanguage.Modules.QuizzesVerification.Responses;
 
 namespace Application.Modules.QuizzesVerification.QueryHandlers;
 
@@ -11,9 +11,9 @@ public class GetQuizOpenQuestionsAnswerForVerificationQueryHandler(
     IUserContextProvider userContextProvider)
     : IQueryHandler<
         GetQuizOpenQuestionsAnswerForVerificationQuery,
-        IReadOnlyCollection<QuizOpenQuestionAnswerForVerificationResponse>>
+        IReadOnlyCollection<QuizOpenQuestionAnswerForVerificationDto>>
 {
-    public Task<IReadOnlyCollection<QuizOpenQuestionAnswerForVerificationResponse>> Handle(
+    public Task<IReadOnlyCollection<QuizOpenQuestionAnswerForVerificationDto>> Handle(
         GetQuizOpenQuestionsAnswerForVerificationQuery query, CancellationToken cancellationToken) =>
         readModel.Get(query, userContextProvider.GetOrThrow().UserId, cancellationToken);
 }

@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
         <ProjectReference Include="..\..\Application\Application.Contracts\Common.Application.Contracts.csproj"/>
-        <ProjectReference Include="..\..\PublishedLanguage\Common.PublishedLanguage.csproj"/>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="AutoMapper" Version="16.0.0"/>

@@ -1,13 +1,15 @@
 using Application.Contracts.Modules.QuizzesVerification.Commands;
+using Application.Contracts.Modules.QuizzesVerification.Data;
+using Application.Contracts.Modules.QuizzesVerification.Dtos;
 using Application.Contracts.Modules.QuizzesVerification.Queries;
 using AutoMapper;
 using Common.Domain.ValueObjects;
 using Common.Infrastructure.Endpoints;
 using Common.Shared.Extensions;
+using Infrastructure.Endpoints.Modules.QuizzesVerification.Requests;
+using Infrastructure.Endpoints.Modules.QuizzesVerification.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using PublishedLanguage.Modules.QuizzesVerification.Requests;
-using PublishedLanguage.Modules.QuizzesVerification.Responses;
 
 namespace Infrastructure.Endpoints.Modules.QuizzesVerification;
 
@@ -20,7 +22,7 @@ public class QuizVerificationController(IGate gate, IMapper mapper) : BaseContro
         if (!AggregateId.TryParse(id, out var aggregateId))
             return BadRequest();
 
-        var result = await Gate.DispatchQueryAsync<GetQuizToRunQuery, QuizToRunResponse?>(
+        var result = await Gate.DispatchQueryAsync<GetQuizToRunQuery, QuizToRunData?, QuizToRunResponse?>(
             new GetQuizToRunQuery(aggregateId), cancellationToken);
 
         if (result is null)
@@ -38,6 +40,7 @@ public class QuizVerificationController(IGate gate, IMapper mapper) : BaseContro
 
         var result = await Gate.DispatchQueryAsync<
             GetQuizOpenQuestionsAnswerForVerificationQuery,
+            IReadOnlyCollection<QuizOpenQuestionAnswerForVerificationDto>,
             IReadOnlyCollection<QuizOpenQuestionAnswerForVerificationResponse>>(
             new GetQuizOpenQuestionsAnswerForVerificationQuery(aggregateId), cancellationToken);
 
