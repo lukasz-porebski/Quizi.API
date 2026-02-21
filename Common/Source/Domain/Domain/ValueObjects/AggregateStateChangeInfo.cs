@@ -1,7 +1,9 @@
+using Common.Domain.Attributes;
+
 namespace Common.Domain.ValueObjects;
 
 [ValueObject]
-public record AggregateStateChangeInfo(AggregateId? UserId, DateTime At) 
+public record AggregateStateChangeInfo(AggregateId? UserId, DateTime At)
 {
     public static AggregateStateChangeInfo Empty =>
         new(null, new DateTime());

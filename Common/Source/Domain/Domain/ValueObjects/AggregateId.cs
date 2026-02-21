@@ -1,4 +1,6 @@
-﻿namespace Common.Domain.ValueObjects;
+﻿using Common.Domain.Attributes;
+
+namespace Common.Domain.ValueObjects;
 
 [ValueObject]
 public record AggregateId

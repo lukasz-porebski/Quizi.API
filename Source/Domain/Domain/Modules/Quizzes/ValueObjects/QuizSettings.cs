@@ -1,4 +1,4 @@
-﻿using Common.Domain.ValueObjects;
+﻿using Common.Domain.Attributes;
 using Domain.Contracts.Modules.Quizzes.Enums;
 
 namespace Domain.Modules.Quizzes.ValueObjects;

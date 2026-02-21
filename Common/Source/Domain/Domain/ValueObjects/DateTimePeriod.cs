@@ -1,3 +1,5 @@
+using Common.Domain.Attributes;
+
 namespace Common.Domain.ValueObjects;
 
 [ValueObject]
