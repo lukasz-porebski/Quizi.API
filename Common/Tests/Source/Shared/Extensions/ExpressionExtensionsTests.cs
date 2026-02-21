@@ -22,11 +22,11 @@ public class ExpressionExtensionsTests
                 Expression.Constant(20)),
             param);
 
-        var combinedExpression = left.And(right);
+        var result = left.And(right);
 
-        combinedExpression.Body.Should().BeAssignableTo<BinaryExpression>();
-        ((BinaryExpression)combinedExpression.Body).NodeType.Should().Be(ExpressionType.AndAlso);
-        AssertCombined(combinedExpression.Compile());
+        result.Body.Should().BeAssignableTo<BinaryExpression>();
+        ((BinaryExpression)result.Body).NodeType.Should().Be(ExpressionType.AndAlso);
+        AssertCombined(result.Compile());
     }
 
     [Fact]
@@ -35,11 +35,11 @@ public class ExpressionExtensionsTests
         Expression<Func<TestEntity, bool>> left = e => e.Value > 10;
         Expression<Func<TestEntity, bool>> right = e => e.Value < 20;
 
-        var combinedExpression = left.And(right);
+        var result = left.And(right);
 
-        combinedExpression.Body.Should().BeAssignableTo<BinaryExpression>();
-        ((BinaryExpression)combinedExpression.Body).Right.Should().BeAssignableTo<InvocationExpression>();
-        AssertCombined(combinedExpression.Compile());
+        result.Body.Should().BeAssignableTo<BinaryExpression>();
+        ((BinaryExpression)result.Body).Right.Should().BeAssignableTo<InvocationExpression>();
+        AssertCombined(result.Compile());
     }
 
     private static void AssertCombined(Func<TestEntity, bool> combined)

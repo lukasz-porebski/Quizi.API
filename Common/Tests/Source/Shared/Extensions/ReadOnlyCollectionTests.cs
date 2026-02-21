@@ -23,20 +23,20 @@ public class ReadOnlyCollectionTests
             new TargetEntity(4, "Four")
         };
 
-        var diffs = current.GetDifferences(c => c.Id, target, t => t.Id);
+        var result = current.GetDifferences(c => c.Id, target, t => t.Id);
 
-        diffs.ToRemove.Values.Select(e => e.Id).Should().Equal(1);
-        diffs.ToAdd.Values.Select(e => e.Id).Should().Equal(4);
+        result.ToRemove.Values.Select(e => e.Id).Should().Equal(1);
+        result.ToAdd.Values.Select(e => e.Id).Should().Equal(4);
 
-        diffs.Existing.Keys.Should().BeEquivalentTo([2, 3]);
-        diffs.Existing[2].Current.Id.Should().Be(2);
-        diffs.Existing[2].Current.Name.Should().Be("Two");
-        diffs.Existing[2].Target.Id.Should().Be(2);
-        diffs.Existing[2].Target.Name.Should().Be("Two New");
-        diffs.Existing[3].Current.Id.Should().Be(3);
-        diffs.Existing[3].Current.Name.Should().Be("Three");
-        diffs.Existing[3].Target.Id.Should().Be(3);
-        diffs.Existing[3].Target.Name.Should().Be("Three");
+        result.Existing.Keys.Should().BeEquivalentTo([2, 3]);
+        result.Existing[2].Current.Id.Should().Be(2);
+        result.Existing[2].Current.Name.Should().Be("Two");
+        result.Existing[2].Target.Id.Should().Be(2);
+        result.Existing[2].Target.Name.Should().Be("Two New");
+        result.Existing[3].Current.Id.Should().Be(3);
+        result.Existing[3].Current.Name.Should().Be("Three");
+        result.Existing[3].Target.Id.Should().Be(3);
+        result.Existing[3].Target.Name.Should().Be("Three");
     }
 
     [Fact]
@@ -49,9 +49,9 @@ public class ReadOnlyCollectionTests
         };
         var target = new[] { new TargetEntity(1, "One") };
 
-        var act = () => current.GetDifferences(c => c.Id, target, t => t.Id);
+        var action = () => current.GetDifferences(c => c.Id, target, t => t.Id);
 
-        act.Should().Throw<ArgumentException>();
+        action.Should().Throw<ArgumentException>();
     }
 
     [Fact]
@@ -64,9 +64,9 @@ public class ReadOnlyCollectionTests
             new TargetEntity(1, "One Duplicate")
         };
 
-        var act = () => current.GetDifferences(c => c.Id, target, t => t.Id);
+        var action = () => current.GetDifferences(c => c.Id, target, t => t.Id);
 
-        act.Should().Throw<ArgumentException>();
+        action.Should().Throw<ArgumentException>();
     }
 
     private record CurrentEntity(int Id, string Name);
