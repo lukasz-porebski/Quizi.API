@@ -177,11 +177,11 @@ public class AggregateIdTests
         result.Should().NotBeNull();
     }
 
-    public static List<object[]> InvalidStrings() =>
+    public static TheoryData<string> InvalidStrings() =>
     [
-        [""],
-        [" "],
-        ["text"],
-        [Guid.Empty.ToString()]
+        "",
+        " ",
+        "text",
+        Guid.Empty.ToString()
     ];
 }
