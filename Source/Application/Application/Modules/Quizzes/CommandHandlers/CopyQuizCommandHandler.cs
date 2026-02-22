@@ -49,7 +49,8 @@ public class CopyQuizCommandHandler(
             case QuizCopyMode.ForAll:
                 break;
             default:
-                throw new ArgumentOutOfRangeException();
+                throw new ArgumentOutOfRangeException(
+                    nameof(quiz), quiz.Settings.CopyMode, $"Unexpected CopyMode: {quiz.Settings.CopyMode}");
         }
     }
 

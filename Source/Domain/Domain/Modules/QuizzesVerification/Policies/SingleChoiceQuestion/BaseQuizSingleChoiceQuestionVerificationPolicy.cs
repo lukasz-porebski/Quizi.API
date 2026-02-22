@@ -6,7 +6,7 @@ namespace Domain.Modules.QuizzesVerification.Policies.SingleChoiceQuestion;
 
 public abstract class BaseQuizSingleChoiceQuestionVerificationPolicy
 {
-    protected QuizSingleChoiceQuestionVerificationResultType GetVerifiedQuestion(
+    protected static QuizSingleChoiceQuestionVerificationResultType GetVerifiedQuestion(
         QuizSingleChoiceQuestionVerificationData givenAnswer, QuizSingleChoiceQuestion question)
     {
         if (givenAnswer.SelectedAnswerNo == null)

@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Net;
 using Common.Application.Exceptions;
 using Common.Domain.Exceptions;
@@ -57,7 +58,8 @@ public class ErrorHandlerMiddleware(ILogger<ErrorHandlerMiddleware> logger, IMes
         var errors = exception.Messages.Select(message =>
         {
             var dirtyMessage = messageProvider.GetMessage(message.Code);
-            return new ErrorResponse(message.Code, string.Format(dirtyMessage, args: message.Parameters ?? []));
+            return new ErrorResponse(message.Code,
+                string.Format(CultureInfo.InvariantCulture, dirtyMessage, args: message.Parameters ?? []));
         }).ToArray();
         return Serializer.ToJson(errors);
     }

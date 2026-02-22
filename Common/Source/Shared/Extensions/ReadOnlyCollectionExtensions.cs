@@ -2,7 +2,7 @@ using Common.Shared.DataStructures;
 
 namespace Common.Shared.Extensions;
 
-public static class ReadOnlyCollection
+public static class ReadOnlyCollectionExtensions
 {
     public static CollectionDifferences<TCurrent, TTarget, TKey> GetDifferences<TCurrent, TTarget, TKey>(
         this IReadOnlyCollection<TCurrent> current,

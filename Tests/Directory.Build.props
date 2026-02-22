@@ -6,6 +6,8 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
+        <AnalysisLevel>latest-all</AnalysisLevel>
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     </PropertyGroup>
 
     <ItemGroup>

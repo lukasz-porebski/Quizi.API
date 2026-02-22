@@ -4,7 +4,7 @@ using Xunit;
 
 namespace Common.Shared.Tests.Extensions;
 
-public class ReadOnlyCollectionTests
+public class ReadOnlyCollectionExtensionsTests
 {
     [Fact]
     public void GetDifferencesMethod_Should_ReturnToRemoveToAddAndExisting()
