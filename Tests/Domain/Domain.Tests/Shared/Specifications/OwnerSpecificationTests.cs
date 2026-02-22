@@ -15,7 +15,7 @@ public class OwnerSpecificationTests : BaseTest
     public void IsValid_Should_ReturnTrue_When_OwnerId_Equals_UserId()
     {
         var id = new AggregateId(Guid.NewGuid());
-        
+
         var result = _specification.IsValid(new TestObject(id, id));
 
         result.Should().BeTrue();
@@ -26,11 +26,11 @@ public class OwnerSpecificationTests : BaseTest
     {
         var ownerId = new AggregateId(Guid.NewGuid());
         var userId = new AggregateId(Guid.NewGuid());
-        
+
         var result = _specification.IsValid(new TestObject(ownerId, userId));
 
         result.Should().BeFalse();
     }
 
-    private record TestObject(AggregateId OwnerId, AggregateId UserId) : IOwnerSpecification;
+    private sealed record TestObject(AggregateId OwnerId, AggregateId UserId) : IOwnerSpecification;
 }

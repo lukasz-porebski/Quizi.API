@@ -30,5 +30,5 @@ public class QuizQuestionsCountInRunningQuizSpecificationTests : BaseTest
         result.Should().BeFalse();
     }
 
-    private record TestObject(int QuestionsCountInRunningQuiz, int QuestionsCount) : IQuizQuestionsCountSpecification;
+    private sealed record TestObject(int QuestionsCountInRunningQuiz, int QuestionsCount) : IQuizQuestionsCountSpecification;
 }

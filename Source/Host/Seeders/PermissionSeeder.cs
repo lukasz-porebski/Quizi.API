@@ -23,7 +23,7 @@ public class PermissionSeeder(
             .Select(p => p.Name)
             .ToHashSetAsync();
 
-        var toAdd = Permissions.All
+        var toAdd = AppPermissions.All
             .Where(p => !existing.Contains(p))
             .Select(p => factory.Create(new PermissionCreationData(AggregateId.Generate(), p)))
             .ToArray();

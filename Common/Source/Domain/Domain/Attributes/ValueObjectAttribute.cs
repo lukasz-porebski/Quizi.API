@@ -1,4 +1,4 @@
 ﻿namespace Common.Domain.Attributes;
 
 [AttributeUsage(AttributeTargets.Class)]
-public class ValueObjectAttribute : Attribute;
+public sealed class ValueObjectAttribute : Attribute;

@@ -23,7 +23,7 @@ public class UserController(IGate gate) : BaseController(gate)
         return Ok();
     }
 
-    [HttpGet("list"), Permission(Permissions.UsersList)]
+    [HttpGet("list"), Permission(AppPermissions.UsersList)]
     public async Task<ActionResult<PaginatedListDto<UsersListItemDto>>> GetList(
         [FromQuery] PaginationRequest request, CancellationToken cancellationToken)
     {

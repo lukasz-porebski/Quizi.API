@@ -1,4 +1,5 @@
-﻿using Common.Domain.ValueObjects;
+﻿using Common.Domain.Exceptions;
+using Common.Domain.ValueObjects;
 
 namespace Common.Domain.Entities;
 
@@ -24,7 +25,7 @@ public abstract class BaseAggregateRoot : IEquatable<BaseAggregateRoot>
     internal void Init(AggregateStateChangeInfo info)
     {
         if (!CreationInto.IsEmpty || Version != InitialVersion)
-            throw new Exception("Aggregate is already initialized.");
+            throw new DomainLogicException("Aggregate is already initialized.");
 
         CreationInto = info;
     }
@@ -32,7 +33,7 @@ public abstract class BaseAggregateRoot : IEquatable<BaseAggregateRoot>
     internal void Update(AggregateStateChangeInfo info)
     {
         if (CreationInto.IsEmpty)
-            throw new Exception("Aggregate must be initialized.");
+            throw new DomainLogicException("Aggregate must be initialized.");
 
         UpdateInfo = info;
         Version += 1;
@@ -41,7 +42,7 @@ public abstract class BaseAggregateRoot : IEquatable<BaseAggregateRoot>
     internal void Remove(AggregateStateChangeInfo info)
     {
         if (RemovalInfo is not null)
-            throw new Exception("Aggregate is already removed.");
+            throw new DomainLogicException("Aggregate is already removed.");
 
         RemovalInfo = info;
     }

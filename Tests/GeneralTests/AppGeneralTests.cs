@@ -3,4 +3,4 @@ using Host;
 
 namespace GeneralTests;
 
-public class GeneralTests() : BaseGeneralTests(new Assemblies());
+public class AppGeneralTests() : BaseGeneralTests(new AppAssemblies());

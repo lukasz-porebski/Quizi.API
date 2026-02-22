@@ -1,6 +1,6 @@
 ﻿namespace Infrastructure.Endpoints.Shared;
 
-public static class Permissions
+public static class AppPermissions
 {
     public const string UsersList = "Users:List";
 

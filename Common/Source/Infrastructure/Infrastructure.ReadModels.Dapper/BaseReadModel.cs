@@ -1,4 +1,5 @@
-﻿using Common.Application.Contracts.ReadModel;
+﻿using System.Globalization;
+using Common.Application.Contracts.ReadModel;
 using Common.Shared.Extensions;
 using Dapper;
 using Npgsql;
@@ -37,8 +38,11 @@ public abstract class BaseReadModel(IDatabaseConnectionStringProvider connection
 
         if (pagination.Sort is not null)
         {
-            var allowedSortColumns = sortColumns ?? typeof(T).GetProperties().Select(p => p.Name.ToLower()).ToArray();
-            if (!allowedSortColumns.Contains(pagination.Sort.ColumnName.ToLower()))
+            var allowedSortColumns = sortColumns ?? typeof(T)
+                .GetProperties()
+                .Select(p => p.Name.ToLower(CultureInfo.InvariantCulture))
+                .ToArray();
+            if (!allowedSortColumns.Contains(pagination.Sort.ColumnName.ToLower(CultureInfo.InvariantCulture)))
                 throw new ArgumentException($"{pagination.Sort.ColumnName} column is not allowed.");
 
             var orderBy = $"{pagination.Sort.ColumnName} {(pagination.Sort.IsAscending ? "ASC" : "DESC")}";

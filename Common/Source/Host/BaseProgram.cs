@@ -1,3 +1,4 @@
+using System.Globalization;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Common.Host.Configs;
@@ -21,7 +22,7 @@ public abstract class BaseProgram<TAssemblies, TDbContext>
         where TProgram : BaseProgram<TAssemblies, TDbContext>, new()
     {
         Log.Logger = new LoggerConfiguration()
-            .WriteTo.Console()
+            .WriteTo.Console(formatProvider: CultureInfo.InvariantCulture)
             .CreateBootstrapLogger();
 
         try

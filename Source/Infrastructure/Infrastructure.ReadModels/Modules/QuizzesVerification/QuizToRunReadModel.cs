@@ -109,5 +109,5 @@ JOIN RandomlySelectedQuestions Q ON Q.Id = QA.Id AND Q.No= QA.No AND Q.Type= QA.
         );
     }
 
-    private record AnswerKey(int No, QuizQuestionType Type);
+    private sealed record AnswerKey(int No, QuizQuestionType Type);
 }

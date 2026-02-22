@@ -7,6 +7,8 @@ public sealed class PermissionAttribute(params string[] permissions)
 {
     private const string Separator = "|";
 
+    public string[] Permissions { get; } = permissions;
+
     public static string[] DecodePermissions(string policyName) =>
         policyName.Split(Separator);
 }

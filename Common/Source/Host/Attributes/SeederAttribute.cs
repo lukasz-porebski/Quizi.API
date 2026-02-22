@@ -1,4 +1,4 @@
 ﻿namespace Common.Host.Attributes;
 
 [AttributeUsage(AttributeTargets.Class)]
-public class SeederAttribute : Attribute;
+public sealed class SeederAttribute : Attribute;

@@ -7,6 +7,25 @@ dotnet_diagnostic.CA1062.severity = none
 dotnet_diagnostic.CA1031.severity = none
 dotnet_diagnostic.CA1860.severity = none
 dotnet_diagnostic.CA1859.severity = none
+dotnet_diagnostic.CA1716.severity = none
+dotnet_diagnostic.CA1054.severity = none
+dotnet_diagnostic.CA1008.severity = none
+dotnet_diagnostic.CA1849.severity = none
+dotnet_diagnostic.CA1307.severity = none
+dotnet_diagnostic.CA1309.severity = none
+dotnet_diagnostic.CA1000.severity = none
+dotnet_diagnostic.CA2225.severity = none
+dotnet_diagnostic.CA1308.severity = none
+dotnet_diagnostic.CA1711.severity = none
+dotnet_diagnostic.CA1515.severity = none
+dotnet_diagnostic.CA1032.severity = none
+dotnet_diagnostic.RCS1194.severity = none
+dotnet_diagnostic.CA1040.severity = none
+dotnet_diagnostic.CA1303.severity = none
+
 
 [Tests/**/*.cs]
 dotnet_diagnostic.CA1707.severity = none
+
+[**/Migrations/*.cs]
+dotnet_diagnostic.CA1861.severity = none

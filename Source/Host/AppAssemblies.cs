@@ -10,7 +10,7 @@ using Infrastructure.ReadModels.Modules.Quizzes;
 
 namespace Host;
 
-public class Assemblies : BaseAssemblies
+public class AppAssemblies : BaseAssemblies
 {
     public override Assembly Application => typeof(CreateUserCommandHandler).Assembly;
     public override Assembly ApplicationContracts => typeof(CreateUserCommand).Assembly;

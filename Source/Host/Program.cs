@@ -4,9 +4,9 @@ using Infrastructure.Database;
 
 namespace Host;
 
-public class Program : BaseProgram<Assemblies, AppDbContext>
+public class Program : BaseProgram<AppAssemblies, AppDbContext>
 {
-    protected override Assemblies Assemblies => new();
+    protected override AppAssemblies Assemblies => new();
 
     public static async Task Main(string[] args) =>
         await MainCore<Program>(args);

@@ -1,10 +1,11 @@
+using System.Globalization;
 using System.Text;
 using Common.Application.Contracts.ReadModel;
 using Common.Shared.Extensions;
 
 namespace Common.Infrastructure.ReadModels.Dapper;
 
-internal class ReadModelSqlBuilder
+internal sealed class ReadModelSqlBuilder
 {
     public const string SearchColumnName = "SearchColumn";
 
@@ -21,7 +22,7 @@ internal class ReadModelSqlBuilder
                 ? $", {searchColumns.ElementAt(0)} AS {SearchColumnName}"
                 : $", CONCAT_WS(' ', {string.Join(", ", searchColumns)}) AS {SearchColumnName}";
 
-        _builder.Append(@$"
+        _builder.Append(CultureInfo.InvariantCulture, @$"
 ;WITH List AS ({selectQuery}), 
 SearchList AS (SELECT * {search} FROM List)
 

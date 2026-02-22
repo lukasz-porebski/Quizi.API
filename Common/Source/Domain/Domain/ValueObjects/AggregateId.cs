@@ -1,4 +1,5 @@
 ﻿using Common.Domain.Attributes;
+using Common.Domain.Exceptions;
 
 namespace Common.Domain.ValueObjects;
 
@@ -32,7 +33,7 @@ public record AggregateId
     public static void ValidateAndThrow(string aggregateId)
     {
         if (!Guid.TryParse(aggregateId, out var guid) || guid.Equals(Guid.Empty))
-            throw new Exception("Invalid aggregate id");
+            throw new DomainLogicException("Invalid aggregate id");
     }
 
     public static bool TryParse(string aggregateId, out AggregateId result)

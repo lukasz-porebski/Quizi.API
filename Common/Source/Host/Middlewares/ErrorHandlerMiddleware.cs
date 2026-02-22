@@ -64,5 +64,5 @@ public class ErrorHandlerMiddleware(ILogger<ErrorHandlerMiddleware> logger, IMes
         return Serializer.ToJson(errors);
     }
 
-    private record ErrorResponse(string Code, string Message);
+    private sealed record ErrorResponse(string Code, string Message);
 }

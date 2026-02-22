@@ -1,4 +1,5 @@
 ﻿using Common.Domain.Attributes;
+using Common.Domain.Exceptions;
 
 namespace Common.Domain.ValueObjects;
 
@@ -11,7 +12,7 @@ public record EntityNo : IComparable<EntityNo>, IComparable
     public EntityNo(int entityNo)
     {
         if (entityNo < MinValue)
-            throw new Exception();
+            throw new DomainLogicException("Entity no must be greater than zero");
 
         _entityNo = entityNo;
     }
@@ -33,6 +34,18 @@ public record EntityNo : IComparable<EntityNo>, IComparable
     public static EntityNo operator ++(EntityNo? left) =>
         new((left ?? new EntityNo(0))._entityNo + 1);
 
+    public static bool operator <(EntityNo? left, EntityNo? right) =>
+        left?._entityNo < right?._entityNo;
+
+    public static bool operator >(EntityNo? left, EntityNo? right) =>
+        left?._entityNo > right?._entityNo;
+
+    public static bool operator <=(EntityNo? left, EntityNo? right) =>
+        left?._entityNo <= right?._entityNo;
+
+    public static bool operator >=(EntityNo? left, EntityNo? right) =>
+        left?._entityNo >= right?._entityNo;
+
     public int CompareTo(EntityNo? other)
     {
         if (other == null)
@@ -46,7 +59,9 @@ public record EntityNo : IComparable<EntityNo>, IComparable
         if (ReferenceEquals(null, obj))
             return 1;
 
-        return obj is EntityNo other ? CompareTo(other) : throw new Exception();
+        return obj is EntityNo other
+            ? CompareTo(other)
+            : throw new DomainLogicException("Cannot compare objects of different types");
     }
 
     public override int GetHashCode() =>
