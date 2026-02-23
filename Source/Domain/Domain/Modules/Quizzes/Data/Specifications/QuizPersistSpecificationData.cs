@@ -26,7 +26,8 @@ public class QuizPersistSpecificationData : IOwnerSpecification, IQuizQuestionsC
         Title = title;
         Description = description;
         Duration = duration;
-        ClosedQuestions = singleChoiceQuestions.Concat(multipleChoiceQuestions).ToArray();
+        SingleChoiceQuestions = singleChoiceQuestions;
+        MultipleChoiceQuestions = multipleChoiceQuestions;
         Questions = QuizSpecificationHelper.GetQuestions(openQuestions, singleChoiceQuestions, multipleChoiceQuestions);
         QuestionsCount = Questions.Count;
     }
@@ -38,6 +39,9 @@ public class QuizPersistSpecificationData : IOwnerSpecification, IQuizQuestionsC
     public string Title { get; }
     public string? Description { get; }
     public TimeSpan Duration { get; }
-    public IReadOnlyCollection<QuizClosedQuestionCreateData> ClosedQuestions { get; }
+    public IReadOnlyCollection<QuizClosedQuestionCreateData> SingleChoiceQuestions { get; }
+    public IReadOnlyCollection<QuizClosedQuestionCreateData> MultipleChoiceQuestions { get; }
+    public IReadOnlyCollection<QuizClosedQuestionCreateData> ClosedQuestions =>
+        SingleChoiceQuestions.Concat(MultipleChoiceQuestions).ToArray();
     public IReadOnlyCollection<QuizQuestionSpecificationData> Questions { get; }
 }

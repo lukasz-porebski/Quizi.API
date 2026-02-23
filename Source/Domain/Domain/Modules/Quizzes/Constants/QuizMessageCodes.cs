@@ -13,15 +13,16 @@ internal static class QuizMessageCodes
     public const string QuizDurationIsOutOfRange = nameof(QuizDurationIsOutOfRange);
     public const string IncorrectQuestionAnswerTextLength = nameof(IncorrectQuestionAnswerTextLength);
     public const string QuestionMinOrdinalNumberHasToBeOne = nameof(QuestionMinOrdinalNumberHasToBeOne);
-
     public const string QuestionMaxOrdinalNumberHasToBeQuestionsCount =
         nameof(QuestionMaxOrdinalNumberHasToBeQuestionsCount);
-
     public const string QuestionOrdinalNumberHasToBeUnique = nameof(QuestionOrdinalNumberHasToBeUnique);
     public const string QuestionAnswerMinOrdinalNumberHasToBeOne = nameof(QuestionAnswerMinOrdinalNumberHasToBeOne);
     public const string QuestionAnswerOrdinalNumberHasToBeUnique = nameof(QuestionAnswerOrdinalNumberHasToBeUnique);
     public const string OneOfNewQuestionsIsAlreadyAdded = nameof(OneOfNewQuestionsIsAlreadyAdded);
-
     public const string QuestionAnswerMaxOrdinalNumberHasToBeQuestionsCount =
         nameof(QuestionAnswerMaxOrdinalNumberHasToBeQuestionsCount);
+    public const string QuizSingleChoiceQuestionHasExactlyOneCorrectAnswer =
+        nameof(QuizSingleChoiceQuestionHasExactlyOneCorrectAnswer);
+    public const string QuizMultipleChoiceQuestionHasAtLeastOneCorrectAnswer =
+        nameof(QuizMultipleChoiceQuestionHasAtLeastOneCorrectAnswer);
 }

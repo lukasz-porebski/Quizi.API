@@ -192,4 +192,10 @@
     <data name="OneOfNewQuestionsIsAlreadyAdded" xml:space="preserve">
         <value>Quiz już posiada pytanie, które jest deklarowane jako nowe</value>
     </data>
+    <data name="QuizMultipleChoiceQuestionHasAtLeastOneCorrectAnswer" xml:space="preserve">
+        <value>Pytanie wielokrotnego wyboru musi mieć co najmniej jedną dobrą odpowiedź</value>
+    </data>
+    <data name="QuizSingleChoiceQuestionHasExactlyOneCorrectAnswerSpecification" xml:space="preserve">
+        <value>Pytanie jednokrotnego wyboru musi mieć dokładnie jedną dobrą odpowiedź</value>
+    </data>
 </root>

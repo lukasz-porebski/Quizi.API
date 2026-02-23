@@ -33,6 +33,9 @@ public class QuizSpecificationFactory : IQuizSpecificationFactory
             .AndCollection(new QuizClosedQuestionHasAtLeastTwoAnswersSpecification(),
                 v => v.ClosedQuestions.Select(q => q.Answers))
             .AndCollection(new QuizQuestionAnswerTextSpecification(), v => v.Questions.SelectMany(q => q.Answers))
+            .AndCollection(new QuizSingleChoiceQuestionHasExactlyOneCorrectAnswerSpecification(), v => v.SingleChoiceQuestions)
+            .AndCollection(new QuizMultipleChoiceQuestionHasAtLeastOneCorrectAnswerSpecification(),
+                v => v.MultipleChoiceQuestions)
             .Build();
 
     public SpecificationBuilderDirector AddNewQuestions(QuizAddNewQuestionsSpecificationData data) =>
