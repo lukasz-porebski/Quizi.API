@@ -8,4 +8,5 @@ public abstract class BaseAppSettingsSections
     public static SettingsSection<DatabaseSettings> Database => new(nameof(Database));
     public static SettingsSection<SwaggerSettings> Swagger => new(nameof(Swagger));
     public static SettingsSection<IdentitySettings> Identity => new(nameof(Identity));
+    public static SettingsSection<RateLimiterSettings> AuthRateLimiter => new(nameof(AuthRateLimiter));
 }

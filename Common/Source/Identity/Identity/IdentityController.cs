@@ -2,6 +2,7 @@ using Common.Identity.Interfaces;
 using Common.Identity.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.Hosting;
 
 namespace Common.Identity;
@@ -12,6 +13,7 @@ public class IdentityController(IIdentityService service, IHostEnvironment env) 
     private const string RefreshTokenCookieKey = "refreshToken";
 
     [HttpPost("login")]
+    [EnableRateLimiting(IdentityConstants.RateLimiterPolicy)]
     public async Task<ActionResult<AuthenticateResponse>> Login(
         [FromBody] LoginRequest request, CancellationToken cancellationToken)
     {
@@ -21,6 +23,7 @@ public class IdentityController(IIdentityService service, IHostEnvironment env) 
     }
 
     [HttpPost("refresh-token")]
+    [EnableRateLimiting(IdentityConstants.RateLimiterPolicy)]
     public async Task<ActionResult<AuthenticateResponse>> RefreshToken(CancellationToken cancellationToken)
     {
         if (!Request.Cookies.TryGetValue(RefreshTokenCookieKey, out var refreshToken))

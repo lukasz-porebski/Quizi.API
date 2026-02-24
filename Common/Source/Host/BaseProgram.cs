@@ -69,7 +69,8 @@ public abstract class BaseProgram<TAssemblies, TDbContext>
             .AddMapper(Assemblies)
             .AddCqrs(Assemblies)
             .AddIdentity(configuration)
-            .AddEf<TDbContext>(configuration);
+            .AddEf<TDbContext>(configuration)
+            .AddRateLimiting(configuration);
     }
 
     protected virtual Task ConfigureAppAsync(WebApplication app)
@@ -87,7 +88,8 @@ public abstract class BaseProgram<TAssemblies, TDbContext>
             .UseRouting()
             .UseCustomCors()
             .UseMiddleware<ErrorHandlerMiddleware>()
-            .UseIdentity();
+            .UseIdentity()
+            .UseRateLimiter();
 
         app.MapHealthChecks("/health");
         app.MapControllers();

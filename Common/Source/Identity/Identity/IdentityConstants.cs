@@ -1,6 +1,8 @@
 ﻿namespace Common.Identity;
 
-internal static class IdentityConstants
+public static class IdentityConstants
 {
-    public const string PermissionClaimType = "permissions";
+    public const string RateLimiterPolicy = "authRateLimiter";
+
+    internal const string PermissionClaimType = "permissions";
 }
