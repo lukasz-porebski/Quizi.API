@@ -6,7 +6,7 @@ using Common.Application.CQRS;
 
 namespace Application.Modules.QuizResults.QueryHandlers;
 
-public class GetQuizDetailsQueryHandler(IQuizResultDetailsReadModel readModel, IUserContextProvider userContextProvider)
+public class GetQuizResultDetailsQueryHandler(IQuizResultDetailsReadModel readModel, IUserContextProvider userContextProvider)
     : IQueryHandler<GetQuizResultDetailsQuery, QuizResultDetailsDto?>
 {
     public Task<QuizResultDetailsDto?> Handle(GetQuizResultDetailsQuery query, CancellationToken cancellationToken) =>

@@ -18,40 +18,57 @@ public class GetQuizToRunQueryHandler(IQuizToRunReadModel readModel, IUserContex
         if (dto is null)
             return null;
 
-        if (dto.RandomQuestions)
-            dto.Questions = Enumerable.Shuffle(dto.Questions).ToArray();
+        dto.Questions = dto.RandomQuestions
+            ? Enumerable.Shuffle(dto.Questions).ToArray()
+            : dto.Questions.OrderBy(q => q.OrdinalNumber).ToArray();
+
+        var ordinalNumbersByQuestionKey = dto.Questions
+            .Select((q, i) => new
+            {
+                q.No,
+                q.Type,
+                OrdinalNumber = i + 1
+            })
+            .ToDictionary(k => new QuestionKey(k.No, k.Type), v => v.OrdinalNumber);
+
 
         if (dto.RandomAnswers)
             dto.Questions.ForEach(q => q.Answers = Enumerable.Shuffle(q.Answers).ToArray());
+        else
+            dto.Questions.ForEach(q => q.Answers = q.Answers.OrderBy(a => a.OrdinalNumber).ToArray());
 
-        return ToResponse(dto);
+        return ToResponse(dto, ordinalNumbersByQuestionKey);
     }
 
-    private static QuizToRunData ToResponse(QuizToRunDto dto) =>
+    private static QuizToRunData ToResponse(
+        QuizToRunDto dto, IReadOnlyDictionary<QuestionKey, int> ordinalNumbersByQuestionKey) =>
         new(dto.Id,
             dto.Title,
             dto.Duration,
             dto.Questions
                 .Where(q => q.Type == QuizQuestionType.Open)
-                .Select(ToOpenQuestionResponse)
+                .Select(q => ToOpenQuestionResponse(q, ordinalNumbersByQuestionKey[new QuestionKey(q.No, q.Type)]))
                 .ToArray(),
             dto.Questions
                 .Where(q => q.Type == QuizQuestionType.SingleChoice)
-                .Select(ToClosedQuestionResponse)
+                .Select(q => ToClosedQuestionResponse(q, ordinalNumbersByQuestionKey[new QuestionKey(q.No, q.Type)]))
                 .ToArray(),
             dto.Questions
                 .Where(q => q.Type == QuizQuestionType.MultipleChoice)
-                .Select(ToClosedQuestionResponse)
+                .Select(q => ToClosedQuestionResponse(q, ordinalNumbersByQuestionKey[new QuestionKey(q.No, q.Type)]))
                 .ToArray());
 
-    private static QuizToRunOpenQuestionData ToOpenQuestionResponse(QuizToRunQuestionDto dto) =>
-        new(dto.No, dto.OrdinalNumber, dto.Text);
+    private static QuizToRunOpenQuestionData ToOpenQuestionResponse(QuizToRunQuestionDto dto, int ordinalNumber) =>
+        new(dto.No, ordinalNumber, dto.Text);
 
-    private static QuizToRunClosedQuestionData ToClosedQuestionResponse(QuizToRunQuestionDto dto) =>
+    private static QuizToRunClosedQuestionData ToClosedQuestionResponse(QuizToRunQuestionDto dto, int ordinalNumber) =>
         new(dto.No,
-            dto.OrdinalNumber,
+            ordinalNumber,
             dto.Text,
             dto.Answers
-                .Select(a => new QuizToRunClosedQuestionAnswerData(a.No, a.OrdinalNumber, a.Text))
+                .Select((a, index) => new QuizToRunClosedQuestionAnswerData(a.SubNo, index + 1, a.Text))
+                .OrderBy(a => a.OrdinalNumber)
                 .ToArray());
+
+    private sealed record QuestionKey(int No, QuizQuestionType Type);
 }

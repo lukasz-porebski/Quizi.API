@@ -44,6 +44,7 @@ internal static class QuizVerificationResultDataExtensions
                     questionToVerify.IsCorrect
                 );
             })
+            .OrderBy(q => q.OrdinalNumber)
             .ToArray();
 
     private static IReadOnlyCollection<QuizResultSingleChoiceQuestionCreateDate> CreateSingleChoiceQuestions(
@@ -71,14 +72,16 @@ internal static class QuizVerificationResultDataExtensions
 
                             return new QuizResultClosedQuestionAnswerCreateData(
                                 verifiedAnswer.OrdinalNumber,
-                                quizQuestion.Text,
+                                quizAnswer.Text,
                                 quizAnswer.IsCorrect,
                                 answerToVerify.No == questionToVerify.SelectedAnswer?.No
                             );
                         })
+                        .OrderBy(q => q.OrdinalNumber)
                         .ToArray()
                 );
             })
+            .OrderBy(q => q.OrdinalNumber)
             .ToArray();
 
     private static IReadOnlyCollection<QuizResultMultipleChoiceQuestionCreateDate> CreateMultipleChoiceQuestions(
@@ -104,13 +107,15 @@ internal static class QuizVerificationResultDataExtensions
 
                             return new QuizResultClosedQuestionAnswerCreateData(
                                 verifiedAnswer.OrdinalNumber,
-                                quizQuestion.Text,
+                                quizAnswer.Text,
                                 quizAnswer.IsCorrect,
                                 questionToVerify.SelectedAnswers.Any(s => s.No == answerToVerify.No)
                             );
                         })
+                        .OrderBy(q => q.OrdinalNumber)
                         .ToArray()
                 );
             })
+            .OrderBy(q => q.OrdinalNumber)
             .ToArray();
 }

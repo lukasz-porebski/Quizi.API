@@ -102,11 +102,19 @@ WHERE Id = @{nameof(parameters.Id)};
 
                 var singleChoiceQuestionAnswers = singleChoiceQuestionAnswersTask.Result.ToLookup(k => k.No);
                 foreach (var question in dto.SingleChoiceQuestions)
-                    question.Answers = singleChoiceQuestionAnswers[question.No].ToArray();
+                {
+                    question.Answers = singleChoiceQuestionAnswers[question.No]
+                        .OrderBy(a => a.OrdinalNumber)
+                        .ToArray();
+                }
 
                 var multipleChoiceQuestionAnswers = multipleChoiceQuestionAnswersTask.Result.ToLookup(k => k.No);
                 foreach (var question in dto.MultipleChoiceQuestions)
-                    question.Answers = multipleChoiceQuestionAnswers[question.No].ToArray();
+                {
+                    question.Answers = multipleChoiceQuestionAnswers[question.No]
+                        .OrderBy(a => a.OrdinalNumber)
+                        .ToArray();
+                }
             },
             cancellationToken,
             parameters
