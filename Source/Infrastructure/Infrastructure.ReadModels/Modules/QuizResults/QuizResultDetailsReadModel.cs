@@ -82,25 +82,17 @@ WHERE Id = @{nameof(parameters.Id)};
             sqlQuery,
             setDetails: async (reader, dto) =>
             {
-                var openQuestionsTask = reader.ReadAsync<QuizResultDetailsOpenQuestionDto>();
-                var singleChoiceQuestionsTask = reader.ReadAsync<QuizResultDetailsClosedQuestionDto>();
-                var singleChoiceQuestionAnswersTask = reader.ReadAsync<QuizResultDetailsClosedQuestionAnswerDto>();
-                var multipleChoiceQuestionsTask = reader.ReadAsync<QuizResultDetailsClosedQuestionDto>();
-                var multipleChoiceQuestionAnswersTask = reader.ReadAsync<QuizResultDetailsClosedQuestionAnswerDto>();
+                var openQuestionsTask = await reader.ReadAsync<QuizResultDetailsOpenQuestionDto>();
+                var singleChoiceQuestionsTask = await reader.ReadAsync<QuizResultDetailsClosedQuestionDto>();
+                var singleChoiceQuestionAnswersTask = await reader.ReadAsync<QuizResultDetailsClosedQuestionAnswerDto>();
+                var multipleChoiceQuestionsTask = await reader.ReadAsync<QuizResultDetailsClosedQuestionDto>();
+                var multipleChoiceQuestionAnswersTask = await reader.ReadAsync<QuizResultDetailsClosedQuestionAnswerDto>();
 
-                await Task.WhenAll(
-                    openQuestionsTask,
-                    singleChoiceQuestionsTask,
-                    singleChoiceQuestionAnswersTask,
-                    multipleChoiceQuestionsTask,
-                    multipleChoiceQuestionAnswersTask
-                );
+                dto.OpenQuestions = openQuestionsTask.ToArray();
+                dto.SingleChoiceQuestions = singleChoiceQuestionsTask.ToArray();
+                dto.MultipleChoiceQuestions = multipleChoiceQuestionsTask.ToArray();
 
-                dto.OpenQuestions = openQuestionsTask.Result.ToArray();
-                dto.SingleChoiceQuestions = singleChoiceQuestionsTask.Result.ToArray();
-                dto.MultipleChoiceQuestions = multipleChoiceQuestionsTask.Result.ToArray();
-
-                var singleChoiceQuestionAnswers = singleChoiceQuestionAnswersTask.Result.ToLookup(k => k.No);
+                var singleChoiceQuestionAnswers = singleChoiceQuestionAnswersTask.ToLookup(k => k.No);
                 foreach (var question in dto.SingleChoiceQuestions)
                 {
                     question.Answers = singleChoiceQuestionAnswers[question.No]
@@ -108,7 +100,7 @@ WHERE Id = @{nameof(parameters.Id)};
                         .ToArray();
                 }
 
-                var multipleChoiceQuestionAnswers = multipleChoiceQuestionAnswersTask.Result.ToLookup(k => k.No);
+                var multipleChoiceQuestionAnswers = multipleChoiceQuestionAnswersTask.ToLookup(k => k.No);
                 foreach (var question in dto.MultipleChoiceQuestions)
                 {
                     question.Answers = multipleChoiceQuestionAnswers[question.No]

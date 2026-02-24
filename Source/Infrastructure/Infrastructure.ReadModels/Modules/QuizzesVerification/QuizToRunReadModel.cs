@@ -93,14 +93,12 @@ JOIN RandomlySelectedQuestions Q ON Q.Id = QA.Id AND Q.No= QA.No AND Q.Type= QA.
             sqlQuery,
             setDetails: async (reader, dto) =>
             {
-                var questionsTask = reader.ReadAsync<QuizToRunQuestionDto>();
-                var questionAnswersTask = reader.ReadAsync<QuizToRunQuestionAnswerDto>();
+                var questionsTask = await reader.ReadAsync<QuizToRunQuestionDto>();
+                var questionAnswersTask = await reader.ReadAsync<QuizToRunQuestionAnswerDto>();
 
-                await Task.WhenAll(questionsTask, questionAnswersTask);
+                dto.Questions = questionsTask.ToArray();
 
-                dto.Questions = questionsTask.Result.ToArray();
-
-                var questionAnswers = questionAnswersTask.Result.ToLookup(k => new AnswerKey(k.No, k.Type));
+                var questionAnswers = questionAnswersTask.ToLookup(k => new AnswerKey(k.No, k.Type));
                 foreach (var question in dto.Questions)
                     question.Answers = questionAnswers[new AnswerKey(question.No, question.Type)].ToArray();
             },
