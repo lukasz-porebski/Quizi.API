@@ -42,8 +42,8 @@ Aplikacja jest modularnym monolitem. Zbudowana jest w oparciu o
 - Uruchamianie quizu
 - Historia wyników quizów
 - Lista użytkowników
+- Podgląd quizu
 
 ## Planowane funkcje
-- Podgląd quizu
 - Dzielenie się quizami
 - Statystyki quizów

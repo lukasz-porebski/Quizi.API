@@ -5,7 +5,6 @@
         <ProjectReference Include="..\Infrastructure\Infrastructure.Database\Infrastructure.Database.csproj"/>
         <ProjectReference Include="..\Infrastructure\Infrastructure.Endpoints\Infrastructure.Endpoints.csproj"/>
         <ProjectReference Include="..\Infrastructure\Infrastructure.ReadModels\Infrastructure.ReadModels.csproj"/>
-        <ProjectReference Include="..\Infrastructure\Infrastructure\Infrastructure.csproj"/>
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="10.0.3">
