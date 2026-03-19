@@ -3,7 +3,7 @@
         <ProjectReference Include="..\..\Application\Application.Contracts\Common.Application.Contracts.csproj"/>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="AutoMapper" Version="16.0.0"/>
+        <PackageReference Include="AutoMapper" Version="16.1.1"/>
         <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.3.9"/>
     </ItemGroup>
 </Project>

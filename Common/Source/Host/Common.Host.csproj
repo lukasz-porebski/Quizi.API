@@ -8,20 +8,20 @@
         <ProjectReference Include="..\Infrastructure\Infrastructure.ReadModels.Dapper\Common.Infrastructure.ReadModels.Dapper.csproj"/>
     </ItemGroup>
     <ItemGroup>
-        <PackageReference Include="Autofac" Version="9.0.0"/>
+        <PackageReference Include="Autofac" Version="9.1.0"/>
         <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="10.0.0"/>
         <PackageReference Include="BCrypt.Net-Next" Version="4.1.0"/>
         <PackageReference Include="EFCore.NamingConventions" Version="10.0.1"/>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.3"/>
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="10.0.5"/>
         <PackageReference Include="Serilog.AspNetCore" Version="10.0.0"/>
         <PackageReference Include="Serilog.Enrichers.Environment" Version="3.0.1"/>
         <PackageReference Include="Serilog.Enrichers.Process" Version="3.0.0"/>
         <PackageReference Include="Serilog.Enrichers.Thread" Version="4.0.0"/>
         <PackageReference Include="Serilog.Settings.Configuration" Version="10.0.0"/>
         <PackageReference Include="Serilog.Sinks.GoogleCloudLogging" Version="5.0.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="10.1.4"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="10.1.4"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="10.1.4"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.1.4"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.ReDoc" Version="10.1.5"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="10.1.5"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="10.1.5"/>
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="10.1.5"/>
     </ItemGroup>
 </Project>
