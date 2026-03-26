@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-        <ProjectReference Include="..\..\..\Common\Source\Domain\Domain\Common.Domain.csproj"/>
         <ProjectReference Include="..\Domain.Contracts\Domain.Contracts.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="LP.Common.Domain" Version="$(CommonVersion)"/>
     </ItemGroup>
 </Project>

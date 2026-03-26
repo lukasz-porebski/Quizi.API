@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-        <ProjectReference Include="..\..\Common\Source\ExportedTests\GeneralTests\Common.GeneralTests.csproj"/>
         <ProjectReference Include="..\..\Source\Host\Host.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="LP.Common.GeneralTests" Version="$(CommonVersion)"/>
     </ItemGroup>
 </Project>

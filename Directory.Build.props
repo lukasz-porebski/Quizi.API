@@ -6,6 +6,7 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <AnalysisLevel>latest-all</AnalysisLevel>
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <CommonVersion>1.0.0</CommonVersion>
     </PropertyGroup>
 
     <ItemGroup>

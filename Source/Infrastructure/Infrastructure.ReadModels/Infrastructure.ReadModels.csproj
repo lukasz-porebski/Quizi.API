@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <ItemGroup>
-        <ProjectReference Include="..\..\..\Common\Source\Infrastructure\Infrastructure.ReadModels.Dapper\Common.Infrastructure.ReadModels.Dapper.csproj"/>
         <ProjectReference Include="..\..\Application\Application.Contracts\Application.Contracts.csproj"/>
     </ItemGroup>
-
+    <ItemGroup>
+        <PackageReference Include="LP.Common.Infrastructure.ReadModels.Dapper" Version="$(CommonVersion)"/>
+    </ItemGroup>
 </Project>

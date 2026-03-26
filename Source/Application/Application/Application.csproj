@@ -1,6 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-        <ProjectReference Include="..\..\..\Common\Source\Application\Application\Common.Application.csproj"/>
         <ProjectReference Include="..\Application.Contracts\Application.Contracts.csproj"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="LP.Common.Application" Version="$(CommonVersion)"/>
     </ItemGroup>
 </Project>

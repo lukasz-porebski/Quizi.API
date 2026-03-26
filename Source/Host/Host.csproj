@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
     <ItemGroup>
-        <ProjectReference Include="..\..\Common\Source\Host\Common.Host.csproj"/>
         <ProjectReference Include="..\Application\Application\Application.csproj"/>
         <ProjectReference Include="..\Infrastructure\Infrastructure.Database\Infrastructure.Database.csproj"/>
         <ProjectReference Include="..\Infrastructure\Infrastructure.Endpoints\Infrastructure.Endpoints.csproj"/>
@@ -11,5 +10,6 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
+        <PackageReference Include="LP.Common.Host" Version="$(CommonVersion)"/>
     </ItemGroup>
 </Project>

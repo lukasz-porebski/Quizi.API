@@ -1,6 +1,9 @@
 #Rider
 .idea/
 
+#Dev NuGet
+nuget.config
+
 # User-specific files
 *.rsuser
 *.suo
