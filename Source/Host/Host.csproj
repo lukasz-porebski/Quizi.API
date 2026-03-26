@@ -1,7 +1,4 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-    <PropertyGroup>
-        <InvariantGlobalization>false</InvariantGlobalization>
-    </PropertyGroup>
     <ItemGroup>
         <ProjectReference Include="..\..\Common\Source\Host\Common.Host.csproj"/>
         <ProjectReference Include="..\Application\Application\Application.csproj"/>
