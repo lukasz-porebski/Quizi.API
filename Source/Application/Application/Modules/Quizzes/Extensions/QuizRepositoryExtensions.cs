@@ -1,8 +1,8 @@
 using Application.Contracts.Modules.Quizzes.Interfaces;
 using Application.Modules.Quizzes.Constants;
-using Common.Application.Extensions;
-using Common.Domain.ValueObjects;
 using Domain.Modules.Quizzes.Models;
+using LP.Common.Application.Extensions;
+using LP.Common.Domain.ValueObjects;
 
 namespace Application.Modules.Quizzes.Extensions;
 

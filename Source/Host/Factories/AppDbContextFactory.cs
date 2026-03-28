@@ -1,5 +1,5 @@
-﻿using Common.Host.Configs;
-using Infrastructure.Database;
+﻿using Infrastructure.Database;
+using LP.Common.Host.Configs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 

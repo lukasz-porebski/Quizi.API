@@ -1,5 +1,5 @@
-using Common.Application.Contracts.Interfaces;
 using Domain.Modules.QuizResults.Models;
+using LP.Common.Application.Contracts.Interfaces;
 
 namespace Application.Contracts.Modules.QuizResults.Interfaces;
 

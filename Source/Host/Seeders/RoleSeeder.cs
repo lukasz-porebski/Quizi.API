@@ -1,9 +1,9 @@
 ﻿using Application.Contracts.Modules.Roles.Interfaces;
-using Common.Domain.ValueObjects;
-using Common.Host.Attributes;
 using Domain.Modules.Roles.Data;
 using Domain.Modules.Roles.Interfaces;
 using Infrastructure.Database;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.Host.Attributes;
 using Microsoft.EntityFrameworkCore;
 
 namespace Host.Seeders;

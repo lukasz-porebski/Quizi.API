@@ -1,6 +1,6 @@
-using Common.Domain.Specification;
 using Domain.Modules.Roles.Constants;
 using Domain.Modules.Roles.Data;
+using LP.Common.Domain.Specification;
 
 namespace Domain.Modules.Roles.Specifications;
 

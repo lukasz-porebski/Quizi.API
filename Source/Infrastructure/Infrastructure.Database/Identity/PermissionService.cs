@@ -1,6 +1,6 @@
-﻿using Common.Domain.ValueObjects;
-using Common.Identity.EF.Interfaces;
-using Common.Shared.Attributes;
+﻿using LP.Common.Domain.ValueObjects;
+using LP.Common.Identity.EF.Interfaces;
+using LP.Common.Shared.Attributes;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database.Identity;

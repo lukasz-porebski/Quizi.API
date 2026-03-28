@@ -1,4 +1,4 @@
-﻿using Common.Domain.ValueObjects;
+﻿using LP.Common.Domain.ValueObjects;
 
 namespace Domain.Modules.Permissions.Data;
 

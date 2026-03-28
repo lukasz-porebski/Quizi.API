@@ -1,7 +1,7 @@
-using Common.Infrastructure.Database.EF.Configurations;
-using Common.Infrastructure.Database.EF.Extensions;
 using Domain.Modules.Roles.Constants;
 using Domain.Modules.Roles.Models;
+using LP.Common.Infrastructure.Database.EF.Configurations;
+using LP.Common.Infrastructure.Database.EF.Extensions;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Database.Modules.Roles.Configurations;

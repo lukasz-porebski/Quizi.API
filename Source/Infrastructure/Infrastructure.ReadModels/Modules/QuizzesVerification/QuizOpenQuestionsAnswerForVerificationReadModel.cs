@@ -1,9 +1,9 @@
 ﻿using Application.Contracts.Modules.QuizzesVerification.Dtos;
 using Application.Contracts.Modules.QuizzesVerification.Interfaces;
 using Application.Contracts.Modules.QuizzesVerification.Queries;
-using Common.Domain.ValueObjects;
-using Common.Infrastructure.ReadModels.Dapper;
-using Common.Infrastructure.ReadModels.Dapper.Data;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.Infrastructure.ReadModels.Dapper;
+using LP.Common.Infrastructure.ReadModels.Dapper.Data;
 
 namespace Infrastructure.ReadModels.Modules.QuizzesVerification;
 

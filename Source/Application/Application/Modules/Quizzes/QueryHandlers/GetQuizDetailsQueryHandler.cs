@@ -1,8 +1,8 @@
 ﻿using Application.Contracts.Modules.Quizzes.Dtos;
 using Application.Contracts.Modules.Quizzes.Interfaces;
 using Application.Contracts.Modules.Quizzes.Queries;
-using Common.Application.Contracts.User;
-using Common.Application.CQRS;
+using LP.Common.Application.Contracts.User;
+using LP.Common.Application.CQRS;
 
 namespace Application.Modules.Quizzes.QueryHandlers;
 

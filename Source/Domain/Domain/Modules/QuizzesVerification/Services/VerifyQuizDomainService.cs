@@ -1,10 +1,10 @@
-﻿using Common.Domain.Exceptions;
-using Common.Shared.Attributes;
-using Domain.Modules.Quizzes.Models;
+﻿using Domain.Modules.Quizzes.Models;
 using Domain.Modules.QuizzesVerification.Constants;
 using Domain.Modules.QuizzesVerification.Data;
 using Domain.Modules.QuizzesVerification.Data.Sub;
 using Domain.Modules.QuizzesVerification.Interfaces;
+using LP.Common.Domain.Exceptions;
+using LP.Common.Shared.Attributes;
 
 namespace Domain.Modules.QuizzesVerification.Services;
 

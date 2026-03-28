@@ -3,11 +3,11 @@ using Application.Contracts.Modules.QuizzesVerification.Data;
 using Application.Contracts.Modules.QuizzesVerification.Dtos;
 using Application.Contracts.Modules.QuizzesVerification.Queries;
 using AutoMapper;
-using Common.Domain.ValueObjects;
-using Common.Infrastructure.Endpoints;
-using Common.Shared.Extensions;
 using Infrastructure.Endpoints.Modules.QuizzesVerification.Requests;
 using Infrastructure.Endpoints.Modules.QuizzesVerification.Responses;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.Infrastructure.Endpoints;
+using LP.Common.Shared.Extensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

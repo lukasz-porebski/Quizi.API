@@ -1,7 +1,7 @@
-﻿using Common.Domain.Entities;
-using Common.Domain.Extensions;
-using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Data.Models.Sub;
+﻿using Domain.Modules.Quizzes.Data.Models.Sub;
+using LP.Common.Domain.Entities;
+using LP.Common.Domain.Extensions;
+using LP.Common.Domain.ValueObjects;
 
 namespace Domain.Modules.Quizzes.Models;
 

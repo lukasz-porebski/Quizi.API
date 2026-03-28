@@ -1,6 +1,6 @@
-using Common.Host;
 using Host.StartupConfigs;
 using Infrastructure.Database;
+using LP.Common.Host;
 
 namespace Host;
 

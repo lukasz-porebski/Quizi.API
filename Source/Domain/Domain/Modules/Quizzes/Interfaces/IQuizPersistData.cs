@@ -1,6 +1,6 @@
-using Common.Domain.ValueObjects;
 using Domain.Modules.Quizzes.Data.Models.Sub;
 using Domain.Modules.Quizzes.ValueObjects;
+using LP.Common.Domain.ValueObjects;
 
 namespace Domain.Modules.Quizzes.Interfaces;
 

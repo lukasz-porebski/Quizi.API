@@ -1,9 +1,9 @@
-﻿using Common.Domain.ValueObjects;
-using Common.TestsCore;
-using Domain.Modules.Permissions.Constants;
+﻿using Domain.Modules.Permissions.Constants;
 using Domain.Modules.Permissions.Data;
 using Domain.Modules.Permissions.Specifications;
 using FluentAssertions;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.TestsCore;
 using Xunit;
 
 namespace Domain.Tests.Modules.Permissions.Specifications;

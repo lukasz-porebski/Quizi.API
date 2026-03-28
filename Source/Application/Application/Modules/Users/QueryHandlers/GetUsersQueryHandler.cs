@@ -1,9 +1,9 @@
 ﻿using Application.Contracts.Modules.Users.Dtos;
 using Application.Contracts.Modules.Users.Interfaces;
 using Application.Contracts.Modules.Users.Queries;
-using Common.Application.Contracts.ReadModel;
-using Common.Application.Contracts.User;
-using Common.Application.CQRS;
+using LP.Common.Application.Contracts.ReadModel;
+using LP.Common.Application.Contracts.User;
+using LP.Common.Application.CQRS;
 
 namespace Application.Modules.Users.QueryHandlers;
 

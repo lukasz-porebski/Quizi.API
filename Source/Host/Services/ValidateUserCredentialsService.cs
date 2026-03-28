@@ -1,11 +1,11 @@
 using Application.Contracts.Modules.Users.Interfaces;
-using Common.Application.Exceptions;
-using Common.Application.Extensions;
-using Common.Domain.ValueObjects;
-using Common.Identity.Interfaces;
-using Common.Shared.Attributes;
-using Common.Shared.Utils;
 using Host.Constants;
+using LP.Common.Application.Exceptions;
+using LP.Common.Application.Extensions;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.Identity.Interfaces;
+using LP.Common.Shared.Attributes;
+using LP.Common.Shared.Utils;
 
 namespace Host.Services;
 

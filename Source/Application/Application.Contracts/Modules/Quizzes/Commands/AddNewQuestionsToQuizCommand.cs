@@ -1,6 +1,6 @@
-﻿using Common.Application.Contracts.CQRS;
-using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Data.Models;
+﻿using Domain.Modules.Quizzes.Data.Models;
+using LP.Common.Application.Contracts.CQRS;
+using LP.Common.Domain.ValueObjects;
 
 namespace Application.Contracts.Modules.Quizzes.Commands;
 

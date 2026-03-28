@@ -1,5 +1,5 @@
-﻿using Common.Domain.Specification;
-using Domain.Modules.Permissions.Data;
+﻿using Domain.Modules.Permissions.Data;
+using LP.Common.Domain.Specification;
 
 namespace Domain.Modules.Permissions.Interfaces;
 

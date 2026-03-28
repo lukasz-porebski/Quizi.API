@@ -1,8 +1,8 @@
-using Common.Shared.Attributes;
 using Domain.Modules.QuizzesVerification.Interfaces;
 using Domain.Modules.QuizzesVerification.Policies.MultipleChoiceQuestion;
 using Domain.Modules.QuizzesVerification.Policies.OpenQuestion;
 using Domain.Modules.QuizzesVerification.Policies.SingleChoiceQuestion;
+using LP.Common.Shared.Attributes;
 
 namespace Domain.Modules.QuizzesVerification.Factories;
 

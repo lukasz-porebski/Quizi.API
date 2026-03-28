@@ -3,13 +3,13 @@ using Application.Contracts.Modules.Quizzes.Dtos;
 using Application.Contracts.Modules.Quizzes.Queries;
 using Application.Contracts.Modules.SharedQuizzes.Commands;
 using AutoMapper;
-using Common.Domain.ValueObjects;
-using Common.Infrastructure.Endpoints.Requests;
 using Domain.Modules.Quizzes.Data.Models.Sub;
 using Domain.Modules.Quizzes.ValueObjects;
 using Infrastructure.Endpoints.Modules.Quizzes.Requests;
 using Infrastructure.Endpoints.Modules.Quizzes.Requests.Sub;
 using Infrastructure.Endpoints.Modules.Quizzes.Responses;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.Infrastructure.Endpoints.Requests;
 
 namespace Infrastructure.Endpoints.Modules.Quizzes;
 

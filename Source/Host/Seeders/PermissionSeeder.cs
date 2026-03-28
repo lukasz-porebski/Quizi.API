@@ -1,11 +1,11 @@
 ﻿using Application.Contracts.Modules.Permissions.Interfaces;
-using Common.Domain.ValueObjects;
-using Common.Host.Attributes;
-using Common.Shared.Extensions;
 using Domain.Modules.Permissions.Data;
 using Domain.Modules.Permissions.Interfaces;
 using Infrastructure.Database;
 using Infrastructure.Endpoints.Shared;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.Host.Attributes;
+using LP.Common.Shared.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace Host.Seeders;

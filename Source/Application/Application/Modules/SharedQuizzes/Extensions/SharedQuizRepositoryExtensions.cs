@@ -1,8 +1,8 @@
 using Application.Contracts.Modules.SharedQuizzes.Interfaces;
 using Application.Modules.SharedQuizzes.Constants;
-using Common.Application.Extensions;
-using Common.Domain.ValueObjects;
 using Domain.Modules.SharedQuizzes.Models;
+using LP.Common.Application.Extensions;
+using LP.Common.Domain.ValueObjects;
 
 namespace Application.Modules.SharedQuizzes.Extensions;
 

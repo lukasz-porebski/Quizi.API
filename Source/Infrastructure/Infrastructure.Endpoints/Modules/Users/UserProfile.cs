@@ -2,11 +2,11 @@ using Application.Contracts.Modules.Users.Commands;
 using Application.Contracts.Modules.Users.Dtos;
 using Application.Contracts.Modules.Users.Queries;
 using AutoMapper;
-using Common.Domain.ValueObjects;
-using Common.Infrastructure.Endpoints.Requests;
 using Domain.Modules.Users.Data;
 using Infrastructure.Endpoints.Modules.Users.Requests;
 using Infrastructure.Endpoints.Modules.Users.Responses;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.Infrastructure.Endpoints.Requests;
 
 namespace Infrastructure.Endpoints.Modules.Users;
 

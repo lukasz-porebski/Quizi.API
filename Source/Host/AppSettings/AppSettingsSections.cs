@@ -1,4 +1,4 @@
-using Common.Host.AppSettings;
+using LP.Common.Host.AppSettings;
 
 namespace Host.AppSettings;
 

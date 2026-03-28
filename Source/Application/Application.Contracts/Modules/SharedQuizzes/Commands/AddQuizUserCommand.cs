@@ -1,5 +1,5 @@
-﻿using Common.Application.Contracts.CQRS;
-using Common.Domain.ValueObjects;
+﻿using LP.Common.Application.Contracts.CQRS;
+using LP.Common.Domain.ValueObjects;
 
 namespace Application.Contracts.Modules.SharedQuizzes.Commands;
 

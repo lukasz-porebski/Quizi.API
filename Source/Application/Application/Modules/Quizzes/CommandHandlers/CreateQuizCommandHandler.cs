@@ -1,9 +1,9 @@
 ﻿using Application.Contracts.Modules.Quizzes.Commands;
 using Application.Contracts.Modules.Quizzes.Interfaces;
 using Application.Modules.Quizzes.Extensions;
-using Common.Application.Contracts.User;
-using Common.Application.CQRS;
 using Domain.Modules.Quizzes.Interfaces;
+using LP.Common.Application.Contracts.User;
+using LP.Common.Application.CQRS;
 
 namespace Application.Modules.Quizzes.CommandHandlers;
 

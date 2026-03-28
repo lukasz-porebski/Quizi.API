@@ -1,7 +1,7 @@
 using Application.Contracts.Modules.Users.Interfaces;
-using Common.Application.Extensions;
-using Common.Domain.ValueObjects;
 using Domain.Modules.Users.Models;
+using LP.Common.Application.Extensions;
+using LP.Common.Domain.ValueObjects;
 
 namespace Application.Modules.Users.Extensions;
 

@@ -1,6 +1,6 @@
 using Application.Contracts.Modules.Quizzes.Commands;
-using Common.Domain.ValueObjects;
 using Domain.Modules.Quizzes.Data.Models;
+using LP.Common.Domain.ValueObjects;
 
 namespace Application.Modules.Quizzes.Extensions;
 

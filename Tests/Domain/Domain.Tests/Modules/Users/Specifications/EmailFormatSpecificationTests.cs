@@ -1,8 +1,8 @@
 ﻿using AutoFixture;
-using Common.TestsCore;
 using Domain.Modules.Users.Data;
 using Domain.Modules.Users.Specifications;
 using FluentAssertions;
+using LP.Common.TestsCore;
 using Xunit;
 
 namespace Domain.Tests.Modules.Users.Specifications;

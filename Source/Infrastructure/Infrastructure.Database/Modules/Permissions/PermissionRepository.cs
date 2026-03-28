@@ -1,8 +1,8 @@
 using Application.Contracts.Modules.Permissions.Interfaces;
-using Common.Application.Contracts.User;
-using Common.Infrastructure.Database.EF;
-using Common.Shared.Providers;
 using Domain.Modules.Permissions.Models;
+using LP.Common.Application.Contracts.User;
+using LP.Common.Infrastructure.Database.EF;
+using LP.Common.Shared.Providers;
 
 namespace Infrastructure.Database.Modules.Permissions;
 

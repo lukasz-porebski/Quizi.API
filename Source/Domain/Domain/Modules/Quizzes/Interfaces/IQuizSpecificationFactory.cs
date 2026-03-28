@@ -1,5 +1,5 @@
-﻿using Common.Domain.Specification;
-using Domain.Modules.Quizzes.Data.Specifications;
+﻿using Domain.Modules.Quizzes.Data.Specifications;
+using LP.Common.Domain.Specification;
 
 namespace Domain.Modules.Quizzes.Interfaces;
 

@@ -1,6 +1,6 @@
 ﻿using Application.Contracts.Modules.QuizResults.Dtos;
 using Application.Contracts.Modules.QuizResults.Queries;
-using Common.Domain.ValueObjects;
+using LP.Common.Domain.ValueObjects;
 
 namespace Application.Contracts.Modules.QuizResults.Interfaces;
 

@@ -1,10 +1,10 @@
 ﻿using Application.Contracts.Modules.Users.Dtos;
 using Application.Contracts.Modules.Users.Interfaces;
 using Application.Contracts.Modules.Users.Queries;
-using Common.Application.Contracts.ReadModel;
-using Common.Domain.ValueObjects;
-using Common.Infrastructure.ReadModels.Dapper;
 using Dapper;
+using LP.Common.Application.Contracts.ReadModel;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.Infrastructure.ReadModels.Dapper;
 
 namespace Infrastructure.ReadModels.Modules.Users;
 

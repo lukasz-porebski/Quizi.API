@@ -1,4 +1,4 @@
-﻿using Common.Infrastructure.Database.EF;
+﻿using LP.Common.Infrastructure.Database.EF;
 
 namespace Infrastructure.Database;
 

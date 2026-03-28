@@ -1,6 +1,6 @@
 ﻿using Application.Contracts.Modules.Quizzes.Dtos;
 using Application.Contracts.Modules.Quizzes.Queries;
-using Common.Domain.ValueObjects;
+using LP.Common.Domain.ValueObjects;
 
 namespace Application.Contracts.Modules.Quizzes.Interfaces;
 

@@ -1,12 +1,12 @@
-﻿using Common.Domain.Specification;
-using Common.Shared.Attributes;
-using Domain.Modules.Quizzes.Data.Specifications;
+﻿using Domain.Modules.Quizzes.Data.Specifications;
 using Domain.Modules.Quizzes.Interfaces;
 using Domain.Modules.Quizzes.Specifications;
 using Domain.Modules.Quizzes.Specifications.Questions;
 using Domain.Modules.Quizzes.Specifications.Questions.AnswerOrdinalNumber;
 using Domain.Modules.Quizzes.Specifications.Questions.OrdinalNumber;
 using Domain.Shared.Specifications;
+using LP.Common.Domain.Specification;
+using LP.Common.Shared.Attributes;
 
 namespace Domain.Modules.Quizzes.Factories;
 

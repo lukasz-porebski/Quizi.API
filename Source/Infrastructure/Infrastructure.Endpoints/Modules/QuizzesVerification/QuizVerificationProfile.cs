@@ -3,10 +3,10 @@ using Application.Contracts.Modules.QuizzesVerification.Commands.Data;
 using Application.Contracts.Modules.QuizzesVerification.Data;
 using Application.Contracts.Modules.QuizzesVerification.Dtos;
 using AutoMapper;
-using Common.Domain.ValueObjects;
 using Infrastructure.Endpoints.Modules.QuizzesVerification.Requests;
 using Infrastructure.Endpoints.Modules.QuizzesVerification.Requests.Sub;
 using Infrastructure.Endpoints.Modules.QuizzesVerification.Responses;
+using LP.Common.Domain.ValueObjects;
 
 namespace Infrastructure.Endpoints.Modules.QuizzesVerification;
 

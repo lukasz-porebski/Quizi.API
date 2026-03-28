@@ -1,7 +1,7 @@
-﻿using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Data.Specifications.Sub;
+﻿using Domain.Modules.Quizzes.Data.Specifications.Sub;
 using Domain.Modules.Quizzes.Interfaces;
 using Domain.Shared.Interfaces;
+using LP.Common.Domain.ValueObjects;
 
 namespace Domain.Modules.Quizzes.Data.Specifications;
 

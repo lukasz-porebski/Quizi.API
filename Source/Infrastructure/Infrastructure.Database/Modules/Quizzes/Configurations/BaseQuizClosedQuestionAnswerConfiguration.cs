@@ -1,6 +1,6 @@
-using Common.Infrastructure.Database.EF.Configurations;
 using Domain.Modules.Quizzes.Constants;
 using Domain.Modules.Quizzes.Models.Base;
+using LP.Common.Infrastructure.Database.EF.Configurations;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Database.Modules.Quizzes.Configurations;

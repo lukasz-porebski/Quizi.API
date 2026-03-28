@@ -1,8 +1,8 @@
-﻿using Common.Domain.Entities;
-using Common.Domain.ValueObjects;
-using Common.Shared.Extensions;
-using Domain.Modules.Roles.Data;
+﻿using Domain.Modules.Roles.Data;
 using Domain.Modules.Roles.Interfaces;
+using LP.Common.Domain.Entities;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.Shared.Extensions;
 
 namespace Domain.Modules.Roles.Models;
 

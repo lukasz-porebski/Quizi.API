@@ -1,6 +1,6 @@
 ﻿using Application.Contracts.Modules.Quizzes.Dtos;
-using Common.Application.Contracts.CQRS;
-using Common.Application.Contracts.ReadModel;
+using LP.Common.Application.Contracts.CQRS;
+using LP.Common.Application.Contracts.ReadModel;
 
 namespace Application.Contracts.Modules.Quizzes.Queries;
 

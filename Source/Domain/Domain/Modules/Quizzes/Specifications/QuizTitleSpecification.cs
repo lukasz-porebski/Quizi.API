@@ -1,5 +1,5 @@
-﻿using Common.Domain.Specification;
-using Domain.Modules.Quizzes.Constants;
+﻿using Domain.Modules.Quizzes.Constants;
+using LP.Common.Domain.Specification;
 
 namespace Domain.Modules.Quizzes.Specifications;
 

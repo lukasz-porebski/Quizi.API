@@ -1,8 +1,8 @@
-﻿using Common.Domain.ValueObjects;
-using Common.TestsCore;
-using Domain.Shared.Interfaces;
+﻿using Domain.Shared.Interfaces;
 using Domain.Shared.Specifications;
 using FluentAssertions;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.TestsCore;
 using Xunit;
 
 namespace Domain.Tests.Shared.Specifications;

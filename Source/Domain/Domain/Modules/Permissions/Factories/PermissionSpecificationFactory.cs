@@ -1,8 +1,8 @@
-﻿using Common.Domain.Specification;
-using Common.Shared.Attributes;
-using Domain.Modules.Permissions.Data;
+﻿using Domain.Modules.Permissions.Data;
 using Domain.Modules.Permissions.Interfaces;
 using Domain.Modules.Permissions.Specifications;
+using LP.Common.Domain.Specification;
+using LP.Common.Shared.Attributes;
 
 namespace Domain.Modules.Permissions.Factories;
 

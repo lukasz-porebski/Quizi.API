@@ -1,5 +1,5 @@
-﻿using Common.GeneralTests.Tests;
-using Host;
+﻿using Host;
+using LP.Common.GeneralTests.Tests;
 
 namespace GeneralTests;
 

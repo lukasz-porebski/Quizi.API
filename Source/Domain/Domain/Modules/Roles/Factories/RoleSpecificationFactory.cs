@@ -1,8 +1,8 @@
-﻿using Common.Domain.Specification;
-using Common.Shared.Attributes;
-using Domain.Modules.Roles.Data;
+﻿using Domain.Modules.Roles.Data;
 using Domain.Modules.Roles.Interfaces;
 using Domain.Modules.Roles.Specifications;
+using LP.Common.Domain.Specification;
+using LP.Common.Shared.Attributes;
 
 namespace Domain.Modules.Roles.Factories;
 

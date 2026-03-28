@@ -1,5 +1,5 @@
-using Common.Infrastructure.Endpoints.ViewModels;
 using Infrastructure.Endpoints.Modules.QuizzesVerification.Requests.Sub;
+using LP.Common.Infrastructure.Endpoints.ViewModels;
 
 namespace Infrastructure.Endpoints.Modules.QuizzesVerification.Requests;
 

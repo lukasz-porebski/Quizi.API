@@ -1,8 +1,8 @@
 ﻿using AutoFixture;
-using Common.TestsCore;
 using Domain.Modules.Quizzes.Data.Specifications.Sub;
 using Domain.Modules.Quizzes.Specifications.Questions.OrdinalNumber;
 using FluentAssertions;
+using LP.Common.TestsCore;
 using Xunit;
 
 namespace Domain.Tests.Modules.Quizzes.Specifications.Questions.OrdinalNumber;

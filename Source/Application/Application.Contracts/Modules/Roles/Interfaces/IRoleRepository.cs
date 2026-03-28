@@ -1,5 +1,5 @@
-using Common.Application.Contracts.Interfaces;
 using Domain.Modules.Roles.Models;
+using LP.Common.Application.Contracts.Interfaces;
 
 namespace Application.Contracts.Modules.Roles.Interfaces;
 

@@ -1,7 +1,7 @@
-﻿using Common.Domain.Entities;
-using Common.Shared.Utils;
-using Domain.Modules.Users.Data;
+﻿using Domain.Modules.Users.Data;
 using Domain.Modules.Users.Interfaces;
+using LP.Common.Domain.Entities;
+using LP.Common.Shared.Utils;
 
 namespace Domain.Modules.Users.Models;
 

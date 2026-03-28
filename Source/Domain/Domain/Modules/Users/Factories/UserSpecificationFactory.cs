@@ -1,8 +1,8 @@
-﻿using Common.Domain.Specification;
-using Common.Shared.Attributes;
-using Domain.Modules.Users.Data;
+﻿using Domain.Modules.Users.Data;
 using Domain.Modules.Users.Interfaces;
 using Domain.Modules.Users.Specifications;
+using LP.Common.Domain.Specification;
+using LP.Common.Shared.Attributes;
 
 namespace Domain.Modules.Users.Factories;
 

@@ -1,10 +1,10 @@
 using Application.Contracts.Modules.QuizzesVerification.Commands;
 using Application.Contracts.Modules.QuizzesVerification.Commands.Data;
-using Common.Domain.ValueObjects;
 using Domain.Modules.QuizResults.Data;
 using Domain.Modules.QuizResults.Data.Sub;
 using Domain.Modules.Quizzes.Models;
 using Domain.Modules.QuizzesVerification.Data;
+using LP.Common.Domain.ValueObjects;
 
 namespace Application.Modules.QuizzesVerification.Extensions;
 

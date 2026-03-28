@@ -1,11 +1,11 @@
-﻿using Common.Domain.ValueObjects;
-using Domain.Modules.Quizzes.Data.Models;
+﻿using Domain.Modules.Quizzes.Data.Models;
 using Domain.Modules.Quizzes.Data.Models.Sub;
 using Domain.Modules.Quizzes.Data.Specifications;
 using Domain.Modules.Quizzes.Data.Specifications.Sub;
 using Domain.Modules.Quizzes.Interfaces;
 using Domain.Modules.Quizzes.Models;
 using Domain.Modules.Quizzes.Models.Base;
+using LP.Common.Domain.ValueObjects;
 
 namespace Domain.Modules.Quizzes;
 

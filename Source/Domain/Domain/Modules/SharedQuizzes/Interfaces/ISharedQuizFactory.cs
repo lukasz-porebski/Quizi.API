@@ -1,5 +1,5 @@
-using Common.Domain.ValueObjects;
 using Domain.Modules.SharedQuizzes.Models;
+using LP.Common.Domain.ValueObjects;
 
 namespace Domain.Modules.SharedQuizzes.Interfaces;
 

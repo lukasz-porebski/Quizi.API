@@ -1,4 +1,5 @@
-﻿using Domain.Modules.QuizzesVerification.Data.Sub;
+﻿using System.Collections.Generic;
+using Domain.Modules.QuizzesVerification.Data.Sub;
 
 namespace Domain.Modules.QuizzesVerification.Data;
 

@@ -1,7 +1,7 @@
-﻿using Common.Domain.Specification;
-using Common.Shared.Extensions;
-using Domain.Modules.Quizzes.Constants;
+﻿using Domain.Modules.Quizzes.Constants;
 using Domain.Modules.Quizzes.Data.Specifications.Sub;
+using LP.Common.Domain.Specification;
+using LP.Common.Shared.Extensions;
 
 namespace Domain.Modules.Quizzes.Specifications.Questions.OrdinalNumber;
 

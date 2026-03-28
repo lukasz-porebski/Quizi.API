@@ -1,5 +1,5 @@
-﻿using Common.Domain.Specification;
-using Domain.Modules.Users.Data;
+﻿using Domain.Modules.Users.Data;
+using LP.Common.Domain.Specification;
 
 namespace Domain.Modules.Users.Interfaces;
 

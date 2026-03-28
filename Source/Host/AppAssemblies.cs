@@ -1,11 +1,11 @@
 using System.Reflection;
 using Application.Contracts.Modules.Users.Commands;
 using Application.Modules.Users.CommandHandlers;
-using Common.Host;
 using Domain.Modules.Users.Models;
 using Infrastructure.Database;
 using Infrastructure.Endpoints.Modules.Users;
 using Infrastructure.ReadModels.Modules.Quizzes;
+using LP.Common.Host;
 
 namespace Host;
 

@@ -1,4 +1,4 @@
-﻿using Common.Infrastructure.Endpoints.Requests;
+﻿using LP.Common.Infrastructure.Endpoints.Requests;
 
 namespace Infrastructure.Endpoints.Modules.Quizzes.Requests.Sub;
 

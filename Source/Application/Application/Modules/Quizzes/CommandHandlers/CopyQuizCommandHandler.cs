@@ -3,10 +3,6 @@ using Application.Contracts.Modules.Quizzes.Interfaces;
 using Application.Contracts.Modules.SharedQuizzes.Interfaces;
 using Application.Modules.Quizzes.Constants;
 using Application.Modules.Quizzes.Extensions;
-using Common.Application.Contracts.User;
-using Common.Application.CQRS;
-using Common.Application.Exceptions;
-using Common.Domain.ValueObjects;
 using Domain.Contracts.Modules.Quizzes.Enums;
 using Domain.Modules.Quizzes;
 using Domain.Modules.Quizzes.Data.Models;
@@ -14,6 +10,10 @@ using Domain.Modules.Quizzes.Data.Models.Sub;
 using Domain.Modules.Quizzes.Interfaces;
 using Domain.Modules.Quizzes.Models;
 using Domain.Modules.Quizzes.ValueObjects;
+using LP.Common.Application.Contracts.User;
+using LP.Common.Application.CQRS;
+using LP.Common.Application.Exceptions;
+using LP.Common.Domain.ValueObjects;
 
 namespace Application.Modules.Quizzes.CommandHandlers;
 

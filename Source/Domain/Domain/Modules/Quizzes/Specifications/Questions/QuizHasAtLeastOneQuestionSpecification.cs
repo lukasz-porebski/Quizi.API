@@ -1,6 +1,6 @@
-﻿using Common.Domain.Specification;
-using Domain.Modules.Quizzes.Constants;
+﻿using Domain.Modules.Quizzes.Constants;
 using Domain.Modules.Quizzes.Data.Specifications.Sub;
+using LP.Common.Domain.Specification;
 
 namespace Domain.Modules.Quizzes.Specifications.Questions;
 

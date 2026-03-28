@@ -5,8 +5,8 @@ using Application.Contracts.Modules.Users.Interfaces;
 using Application.Modules.Quizzes.Extensions;
 using Application.Modules.SharedQuizzes.Extensions;
 using Application.Modules.Users.Extensions;
-using Common.Application.Contracts.User;
-using Common.Application.CQRS;
+using LP.Common.Application.Contracts.User;
+using LP.Common.Application.CQRS;
 
 namespace Application.Modules.SharedQuizzes.CommandHandlers;
 

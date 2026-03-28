@@ -1,9 +1,12 @@
-﻿using Common.Domain.ValueObjects;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using Domain.Modules.Quizzes.Data.Models.Sub;
 using Domain.Modules.Quizzes.Data.Specifications.Sub;
 using Domain.Modules.Quizzes.Helpers;
 using Domain.Modules.Quizzes.Interfaces;
 using Domain.Shared.Interfaces;
+using LP.Common.Domain.ValueObjects;
 
 namespace Domain.Modules.Quizzes.Data.Specifications;
 
@@ -41,7 +44,9 @@ public class QuizPersistSpecificationData : IOwnerSpecification, IQuizQuestionsC
     public TimeSpan Duration { get; }
     public IReadOnlyCollection<QuizClosedQuestionCreateData> SingleChoiceQuestions { get; }
     public IReadOnlyCollection<QuizClosedQuestionCreateData> MultipleChoiceQuestions { get; }
+
     public IReadOnlyCollection<QuizClosedQuestionCreateData> ClosedQuestions =>
         SingleChoiceQuestions.Concat(MultipleChoiceQuestions).ToArray();
+
     public IReadOnlyCollection<QuizQuestionSpecificationData> Questions { get; }
 }

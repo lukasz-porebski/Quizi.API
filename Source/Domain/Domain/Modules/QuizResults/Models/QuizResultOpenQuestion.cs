@@ -1,6 +1,6 @@
-﻿using Common.Domain.Entities;
-using Common.Domain.ValueObjects;
-using Domain.Modules.QuizResults.Data.Sub;
+﻿using Domain.Modules.QuizResults.Data.Sub;
+using LP.Common.Domain.Entities;
+using LP.Common.Domain.ValueObjects;
 
 namespace Domain.Modules.QuizResults.Models;
 

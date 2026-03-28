@@ -1,6 +1,6 @@
-﻿using Common.Domain.Entities;
-using Domain.Modules.Permissions.Data;
+﻿using Domain.Modules.Permissions.Data;
 using Domain.Modules.Permissions.Interfaces;
+using LP.Common.Domain.Entities;
 
 namespace Domain.Modules.Permissions.Models;
 

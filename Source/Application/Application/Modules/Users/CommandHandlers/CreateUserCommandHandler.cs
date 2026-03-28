@@ -1,8 +1,8 @@
 using Application.Contracts.Modules.Users.Commands;
 using Application.Contracts.Modules.Users.Interfaces;
-using Common.Application.CQRS;
-using Common.Application.Extensions;
 using Domain.Modules.Users.Interfaces;
+using LP.Common.Application.CQRS;
+using LP.Common.Application.Extensions;
 
 namespace Application.Modules.Users.CommandHandlers;
 

@@ -1,10 +1,10 @@
-using Common.Infrastructure.Database.EF;
 using Domain.Modules.Permissions.Models;
 using Domain.Modules.QuizResults.Models;
 using Domain.Modules.Quizzes.Models;
 using Domain.Modules.Roles.Models;
 using Domain.Modules.SharedQuizzes.Models;
 using Domain.Modules.Users.Models;
+using LP.Common.Infrastructure.Database.EF;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Database;

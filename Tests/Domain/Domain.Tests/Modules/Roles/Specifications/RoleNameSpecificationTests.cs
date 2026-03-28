@@ -1,9 +1,9 @@
-﻿using Common.Domain.ValueObjects;
-using Common.TestsCore;
-using Domain.Modules.Roles.Constants;
+﻿using Domain.Modules.Roles.Constants;
 using Domain.Modules.Roles.Data;
 using Domain.Modules.Roles.Specifications;
 using FluentAssertions;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.TestsCore;
 using Xunit;
 
 namespace Domain.Tests.Modules.Roles.Specifications;

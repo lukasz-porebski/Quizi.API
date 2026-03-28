@@ -1,6 +1,6 @@
-﻿using Common.Domain.Specification;
-using Domain.Shared.Constants;
+﻿using Domain.Shared.Constants;
 using Domain.Shared.Interfaces;
+using LP.Common.Domain.Specification;
 
 namespace Domain.Shared.Specifications;
 

@@ -1,5 +1,5 @@
-﻿using Common.Domain.Entities;
-using Common.Domain.ValueObjects;
+﻿using LP.Common.Domain.Entities;
+using LP.Common.Domain.ValueObjects;
 
 namespace Domain.Modules.Roles.Models;
 

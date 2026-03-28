@@ -1,8 +1,8 @@
-﻿using Common.Domain.ValueObjects;
-using Common.TestsCore;
-using Domain.Modules.SharedQuizzes.Data;
+﻿using Domain.Modules.SharedQuizzes.Data;
 using Domain.Modules.SharedQuizzes.Specifications;
 using FluentAssertions;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.TestsCore;
 using Xunit;
 
 namespace Domain.Tests.Modules.SharedQuizzes.Specifications;

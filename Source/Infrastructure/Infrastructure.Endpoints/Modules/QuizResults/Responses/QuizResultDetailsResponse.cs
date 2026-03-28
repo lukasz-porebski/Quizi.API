@@ -1,4 +1,4 @@
-﻿using Common.Infrastructure.Endpoints.ViewModels;
+﻿using LP.Common.Infrastructure.Endpoints.ViewModels;
 
 namespace Infrastructure.Endpoints.Modules.QuizResults.Responses;
 

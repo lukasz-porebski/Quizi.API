@@ -1,8 +1,8 @@
-﻿using Common.Domain.ValueObjects;
-using Common.Shared.Attributes;
-using Domain.Modules.Quizzes.Data.Models;
+﻿using Domain.Modules.Quizzes.Data.Models;
 using Domain.Modules.Quizzes.Interfaces;
 using Domain.Modules.Quizzes.Models;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.Shared.Attributes;
 
 namespace Domain.Modules.Quizzes.Factories;
 

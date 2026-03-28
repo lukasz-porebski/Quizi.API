@@ -1,6 +1,6 @@
-using Common.Infrastructure.Database.EF.Configurations;
 using Domain.Modules.Permissions.Constants;
 using Domain.Modules.Permissions.Models;
+using LP.Common.Infrastructure.Database.EF.Configurations;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Database.Modules.Permissions.Configurations;

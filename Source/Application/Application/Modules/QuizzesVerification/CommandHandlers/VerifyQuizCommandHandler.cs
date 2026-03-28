@@ -5,10 +5,10 @@ using Application.Contracts.Modules.SharedQuizzes.Interfaces;
 using Application.Modules.Quizzes.Extensions;
 using Application.Modules.QuizzesVerification.Extensions;
 using Application.Modules.SharedQuizzes.Extensions;
-using Common.Application.Contracts.User;
-using Common.Application.CQRS;
 using Domain.Modules.QuizResults.Interfaces;
 using Domain.Modules.QuizzesVerification.Interfaces;
+using LP.Common.Application.Contracts.User;
+using LP.Common.Application.CQRS;
 
 namespace Application.Modules.QuizzesVerification.CommandHandlers;
 

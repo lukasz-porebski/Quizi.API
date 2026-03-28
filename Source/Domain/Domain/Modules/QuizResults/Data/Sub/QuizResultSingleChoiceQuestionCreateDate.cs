@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Domain.Modules.QuizResults.Data.Sub;
 
 public record QuizResultSingleChoiceQuestionCreateDate(

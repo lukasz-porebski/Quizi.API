@@ -1,14 +1,14 @@
 using Application.Contracts.Modules.Users.Commands;
 using Application.Contracts.Modules.Users.Dtos;
 using Application.Contracts.Modules.Users.Queries;
-using Common.Application.Contracts.ReadModel;
-using Common.Identity.Contracts.Attributes;
-using Common.Infrastructure.Endpoints;
-using Common.Infrastructure.Endpoints.Requests;
-using Common.Infrastructure.Endpoints.Responses;
 using Infrastructure.Endpoints.Modules.Users.Requests;
 using Infrastructure.Endpoints.Modules.Users.Responses;
 using Infrastructure.Endpoints.Shared;
+using LP.Common.Application.Contracts.ReadModel;
+using LP.Common.Identity.Contracts.Attributes;
+using LP.Common.Infrastructure.Endpoints;
+using LP.Common.Infrastructure.Endpoints.Requests;
+using LP.Common.Infrastructure.Endpoints.Responses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Infrastructure.Endpoints.Modules.Users;

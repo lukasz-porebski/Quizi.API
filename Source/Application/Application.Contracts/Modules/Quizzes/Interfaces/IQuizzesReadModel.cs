@@ -1,7 +1,7 @@
 ﻿using Application.Contracts.Modules.Quizzes.Dtos;
 using Application.Contracts.Modules.Quizzes.Queries;
-using Common.Application.Contracts.ReadModel;
-using Common.Domain.ValueObjects;
+using LP.Common.Application.Contracts.ReadModel;
+using LP.Common.Domain.ValueObjects;
 
 namespace Application.Contracts.Modules.Quizzes.Interfaces;
 

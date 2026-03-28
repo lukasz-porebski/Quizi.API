@@ -1,11 +1,11 @@
 ﻿using Application.Contracts.Modules.QuizResults.Dtos;
 using Application.Contracts.Modules.QuizResults.Interfaces;
 using Application.Contracts.Modules.QuizResults.Queries;
-using Common.Application.Contracts.ReadModel;
-using Common.Domain.ValueObjects;
-using Common.Infrastructure.ReadModels.Dapper;
-using Common.Infrastructure.ReadModels.Dapper.Utils;
 using Dapper;
+using LP.Common.Application.Contracts.ReadModel;
+using LP.Common.Domain.ValueObjects;
+using LP.Common.Infrastructure.ReadModels.Dapper;
+using LP.Common.Infrastructure.ReadModels.Dapper.Utils;
 
 namespace Infrastructure.ReadModels.Modules.QuizResults;
 

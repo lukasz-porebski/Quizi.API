@@ -1,7 +1,7 @@
-using Common.Domain.Entities;
-using Common.Domain.ValueObjects;
 using Domain.Modules.SharedQuizzes.Data;
 using Domain.Modules.SharedQuizzes.Interfaces;
+using LP.Common.Domain.Entities;
+using LP.Common.Domain.ValueObjects;
 
 namespace Domain.Modules.SharedQuizzes.Models;
 
