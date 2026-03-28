@@ -28,7 +28,6 @@ Quizi to samodzielnie rozwijany projekt portfolio, będący trzecią iteracją a
 - [🛠️ Narzędzia](#️-narzędzia)
 - [🚀 Planowane funkcje](#-planowane-funkcje)
 
-![Opis alternatywny](Assets/architecture_diagram.svg)
 ---
 
 ## 🏗️ Architektura i wzorce
@@ -38,6 +37,8 @@ Aplikacja jest **modularnym monolitem** zbudowanym w oparciu o sprawdzone wzorce
 - 🧅 **Onion Architecture** - separacja warstw i zależności
 - 🎨 **Domain-Driven Design (DDD)** - modelowanie domeny biznesowej
 - 🔀 **Command Query Responsibility Segregation (CQRS)** - rozdzielenie operacji odczytu i zapisu
+
+![Diagram architektury](Assets/architecture_diagram.svg)
 
 ---
 
