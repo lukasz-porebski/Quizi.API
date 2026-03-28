@@ -8,7 +8,7 @@
 [![Angular](https://img.shields.io/badge/Angular-21-DD0031?style=flat&logo=angular)](https://github.com/lukasz-porebski/Quizi.Web)
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-Database-336791?style=flat&logo=postgresql)](https://www.postgresql.org/)
 
-### 🌐 [Zobacz aplikację](https://quizi-web-228453964568.us-central1.run.app/login)
+### 🌐 [Zobacz aplikację](https://quizi-web-228453964568.us-central1.run.app)
 
 </div>
 
