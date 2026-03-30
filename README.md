@@ -14,7 +14,7 @@
 
 ---
 
-Quizi to samodzielnie rozwijany projekt portfolio, będący trzecią iteracją aplikacji do przeprowadzania quizów. Celem projektu było m.in. praktyczne zastosowanie wzorców DDD i CQRS, wdrożenie aplikacji w chmurze oraz budowa kompletnego pipeline'u CI/CD. Projekt jest rozwijany od stycznia 2025.
+Quizi to samodzielnie rozwijany projekt portfolio, będący trzecią iteracją aplikacji do przeprowadzania quizów. Celem projektu było m.in. praktyczne zastosowanie możliwości najnowszego .NET, wzorców DDD i CQRS, wdrożenie aplikacji w chmurze oraz budowa kompletnego pipeline'u CI/CD. Projekt jest rozwijany od stycznia 2025.
 
 ---
 

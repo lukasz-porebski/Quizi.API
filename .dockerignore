@@ -1,15 +1,3 @@
-bin/
-obj/
-**/bin/
-**/obj/
-.git/
-.vs/
-**/*.user
-**/*.suo
-**/*.cache
-**/*.log
-Dockerfile.old
-*.md
 # IDE i ustawienia użytkownika
 .vs/
 .idea/
@@ -20,6 +8,7 @@ Dockerfile.old
 *.rsuser
 *.sln.docstates
 *.DotSettings.user
+Dockerfile.old
 
 # Build output
 [Bb]in/
@@ -81,4 +70,4 @@ _Backup*/
 *.snupkg
 *.dbmdl
 *.dbproj.schemaview
- 
+*.md
