@@ -101,7 +101,7 @@ Restore NuGet → Testy jednostkowe → Publish → Build obrazu Docker → Push
 
 | Repozytorium | Opis |
 |---|---|
-| 📦 [LP.Common](https://github.com/lukasz-porebski/LP.Common) | Współdzielona biblioteka NuGet z komponentami wspólnymi |
+| 📦 [LP.Common](https://github.com/lukasz-porebski/LP.Common) | Moja biblioteka (paczka NuGet) ze wspólnymi komponentami |
 | 🖥️ [Quizi.Web](https://github.com/lukasz-porebski/Quizi.Web) | Warstwa UI aplikacji (Angular) |
 
 ---
